@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Jadwal;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -8,8 +9,14 @@ class HomeController extends Controller
   public function index()
   {
     $viewData = [];
-    $viewData["title"] = "Beranda - Penjadwalan Shift";
-    return view('home.index')->with("viewData", $viewData);
+    $viewData["title"] = "Home - Penjadwalan Shift";
+    $viewData["subtitle"] = "Halaman Home";
+    $viewData["jadwal"] = Jadwal::all();
+    return view('admin.jadwal.index')->with("viewData", $viewData);
+  
+    // $viewData = [];
+    // $viewData["title"] = "Beranda - Penjadwalan Shift";
+    // return view('operator.index')->with("viewData", $viewData);
   }
   public function about()
   {
