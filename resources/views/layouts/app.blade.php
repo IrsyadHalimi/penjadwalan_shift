@@ -10,19 +10,30 @@
   <!-- header -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-secondary py-4">
     <div class="container">
-      <a class="navbar-brand" href="#">Online Store</a>
+      <a class="navbar-brand" href="#">Penjadwalan Shift Kerja</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ms-auto">
-          <a class="nav-link active" href="#">Home</a>
-          <a class="nav-link active" href="#">Home</a>
-          <a class="nav-link active" href="#">Home</a>
-          <a class="nav-link active" href="#">Home</a>
-          <a class="nav-link active" href="#">Home</a>
-          <a class="nav-link active" href="#">Home</a>
+          <a class="nav-link active" href="#">Beranda</a>
+          <a class="nav-link active" href="#">Departemen</a>
+          <a class="nav-link active" href="{{ route('admin.jadwal.index') }}">Jadwal Kerja</a>
+          <a class="nav-link active" href="#">Pegawai</a>
+          <a class="nav-link active" href="#">Shift</a>
+          <a class="nav-link active" href="#">Cetak Jadwal</a>
+          <div class="vr bg-white mx-2 d-none d-lg-block"></div>
+          @guest
+          <a class="nav-link active" href="{{ route('login') }}">Masuk</a>
+          <a class="nav-link active" href="{{ route('register') }}">Register</a>
+          @else
+          <form id="logout" action="{{ route('logout') }}" method="POST">
+            <a role="button" class="nav-link active"
+            onclick="document.getElementById('logout').submit();">Logout</a>
+            @csrf
+          </form>
+          @endguest
         </div>
       </div>
     </div>
@@ -36,20 +47,10 @@
   <div class="container my-4">
     @yield('content')
   </div>
-  <!-- footer -->
-  <div class="copyright py-4 text-center text-white">
-    <div class="container">
-      <small>
-        Copyright - <a class="text-reset fw-bold text-decoration-none" target="_blank"
-        href="https://twitter.com/danielgarax">
-        Daniel Correa
-        </a> - <b>Paola Vallejo</b>
-      </small>
-    </div>
-  </div>
-  <!-- footer -->
-  <button type="button" class="btn btn-primary">Primary</button>
-  <h2>Hallo</h2>
+  <script>
+  var today = new Date().toISOString().split('T')[0];
+  document.getElementById("tanggal").setAttribute('min', today);
+</script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
   </script>
   <script src="{{ asset('js/bootstrap.js') }}"></script>

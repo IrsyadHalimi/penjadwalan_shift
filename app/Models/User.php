@@ -2,43 +2,85 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as AuthenticatableUser;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends AuthenticatableUser implements Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    protected $table = "user";
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    protected $primaryKey = "id_user";
+
     protected $fillable = [
-        'name',
-        'email',
+        'nama_lengkap', 
+        'nomor_pegawai',
+        'email', 
         'password',
+        'departemen',
+        'nomor_telepon',
+        'role',
     ];
+    
+    public function getId()
+    {
+        return $this->attributes['id_user'];
+    }
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    public function setId($id)
+    {
+        $this->attributes['id_user'] = $id;
+    }
+    
+    public function getName()
+    {
+        return $this->attributes['nama_lengkap'];
+    }
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function setUser($id_user)
+    {
+        $this->attributes['id_user'] = $id_user;
+    }
+    
+    public function getDepartment()
+    {
+        return $this->attributes['departemen'];
+    }
+
+    public function setEmail($email)
+    {
+        $this->attributes['email'] = $email;
+    }
+    
+    public function getRole()
+    {
+        return $this->attributes['role'];
+    }
+
+    public function setRole($role)
+    {
+        $this->attributes['role'] = $role;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->attributes['created_at'];
+    }
+
+    public function setCreatedAt($createdAt)
+    {
+        $this->attributes['created_at'] = $createdAt;
+    }
+
+    public function getUpdatedAt()
+    {
+        return $this->attributes['updated_at'];
+    }
+
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->attributes['updated_at'] = $updatedAt;
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Jadwal;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -12,7 +13,8 @@ class HomeController extends Controller
     $viewData["title"] = "Home - Penjadwalan Shift";
     $viewData["subtitle"] = "Halaman Home";
     $viewData["jadwal"] = Jadwal::all();
-    return view('admin.jadwal.index')->with("viewData", $viewData);
+    $viewData["user"] = User::all();
+    return view('auth.login')->with("viewData", $viewData);
   
     // $viewData = [];
     // $viewData["title"] = "Beranda - Penjadwalan Shift";

@@ -8,14 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Jadwal extends Model
 {
     protected $table = "jadwal";
+    
+    protected $primaryKey = "id_jadwal";
 
     public static function validate($request)
     {
         $request->validate([
-            "name" => "required|max:255",
-            "description" => "required",
-            "price" => "required|numeric|gt:0",
-            'image' => 'image',
+            "id_jadwal" => "required",
+            "id_shift" => "required",
+            "tanggal" => "required",
         ]);
     }
 
@@ -38,7 +39,7 @@ class Jadwal extends Model
         $this->attributes['id_jadwal'] = $id;
     }
     
-    public function getUser()
+    public function getUserId()
     {
         return $this->attributes['id_user'];
     }
@@ -48,7 +49,7 @@ class Jadwal extends Model
         $this->attributes['id_user'] = $id_user;
     }
     
-    public function getShift()
+    public function getShiftId()
     {
         return $this->attributes['id_shift'];
     }
@@ -60,7 +61,7 @@ class Jadwal extends Model
     
     public function getDate()
     {
-        $this->attributes['tanggal'];
+        return $this->attributes['tanggal'];
     }
 
     public function setDate($tanggal)
@@ -86,6 +87,16 @@ class Jadwal extends Model
     public function setUpdatedAt($updatedAt)
     {
         $this->attributes['updated_at'] = $updatedAt;
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function shift()
+    {
+        return $this->belongsTo(Shift::class);
     }
 
     // public function items()
