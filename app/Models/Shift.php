@@ -13,6 +13,15 @@ class Shift extends Model
     
     protected $primaryKey = "id_shift";
 
+    public static function validate($request)
+    {
+        $request->validate([
+            "nama_shift" => "required",
+            "jam_masuk" => "required",
+            "jam_keluar" => "required",
+        ]);
+    }
+
     public function getId()
     {
         return $this->attributes['id_shift'];
@@ -21,53 +30,43 @@ class Shift extends Model
     public function getShiftName()
     {
         return $this->attributes['nama_shift'];
-    } 
+    }
+
+    public function setShiftName($shiftName)
+    {
+        $this->attributes['nama_shift'] = $shiftName;
+    }
     
     public function getStartTime()
     {
         return $this->attributes['jam_masuk'];
-    } 
+    }
+    
+    public function setStartTime($startTime)
+    {
+        $this->attributes['jam_masuk'] = $startTime;
+    }
 
     public function getEndTime()
     {
         return $this->attributes['jam_keluar'];
     } 
     
+    public function setEndTime($endTime)
+    {
+        $this->attributes['jam_keluar'] = $endTime;
+    }
+
     public function getNote()
     {
         return $this->attributes['keterangan'];
     } 
-    
-    // public function getDescription()
-    // {
-    //     return $this->attributes['description'];
-    // } 
-    
-    // public function setDescription($description)
-    // {
-    //     $this->attributes['description'] = $description;
-    // } 
-    
-    // public function getImage()
-    // {
-    //     return $this->attributes['image'];
-    // } 
-    
-    // public function setImage($image)
-    // {
-    //     $this->attributes['image'] = $image;
-    // } 
-    
-    // public function getPrice()
-    // {
-    //     return $this->attributes['price'];
-    // } 
-    
-    // public function setPrice($price)
-    // {
-    //     $this->attributes['price'] = $price;
-    // } 
-    
+
+    public function setNote($note)
+    {
+        $this->attributes['keterangan'] = $note;
+    }
+
     public function getCreatedAt()
     {
         return $this->attributes['created_at'];

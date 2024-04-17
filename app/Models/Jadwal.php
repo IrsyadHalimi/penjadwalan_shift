@@ -14,7 +14,6 @@ class Jadwal extends Model
     public static function validate($request)
     {
         $request->validate([
-            "id_jadwal" => "required",
             "id_shift" => "required",
             "tanggal" => "required",
         ]);

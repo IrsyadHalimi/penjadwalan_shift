@@ -46,6 +46,7 @@ class AdminJadwalController extends Controller
   {
     $viewData = [];
     $viewData["title"] = "Admin - Edit Jadwal";
+    $viewData["subtitle"] = "Edit Jadwal Kerja";
     $viewData["jadwal"] = Jadwal::where('id_jadwal', $id_jadwal)->first();
     $viewData["user"] = User::all();
     $viewData["shift"] = Shift::all();

@@ -10,7 +10,7 @@
   <!-- header -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-secondary py-4">
     <div class="container">
-      <a class="navbar-brand" href="#">Penjadwalan Shift Kerja</a>
+      <a class="navbar-brand" href="#">Penjadwalan Shift Kerja Operator<br>PT. Sumber Makmur</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -21,7 +21,7 @@
           <a class="nav-link active" href="#">Departemen</a>
           <a class="nav-link active" href="{{ route('admin.jadwal.index') }}">Jadwal Kerja</a>
           <a class="nav-link active" href="#">Pegawai</a>
-          <a class="nav-link active" href="#">Shift</a>
+          <a class="nav-link active" href="{{ route('admin.shift.index') }}">Shift</a>
           <a class="nav-link active" href="#">Cetak Jadwal</a>
           <div class="vr bg-white mx-2 d-none d-lg-block"></div>
           @guest
