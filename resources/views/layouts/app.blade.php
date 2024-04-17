@@ -20,7 +20,7 @@
           <a class="nav-link active" href="#">Beranda</a>
           <a class="nav-link active" href="#">Departemen</a>
           <a class="nav-link active" href="{{ route('admin.jadwal.index') }}">Jadwal Kerja</a>
-          <a class="nav-link active" href="#">Pegawai</a>
+          <a class="nav-link active" href="{{ route('admin.operator.index') }}">Operator</a>
           <a class="nav-link active" href="{{ route('admin.shift.index') }}">Shift</a>
           <a class="nav-link active" href="#">Cetak Jadwal</a>
           <div class="vr bg-white mx-2 d-none d-lg-block"></div>

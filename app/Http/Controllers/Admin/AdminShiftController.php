@@ -15,15 +15,13 @@ class AdminShiftController extends Controller
     $viewData["shift"] = Shift::all();
     return view('admin.shift.index')->with("viewData", $viewData);
   }
-  
-  public function show($id)
+
+  public function create()
   {
     $viewData = [];
-    $jadwal = Shift::findOrFail($id);
-    $viewData["title"] = $jadwal["tanggal"]." - Penjadwalan Shift";
-    $viewData["subtitle"] = $jadwal["tanggal"]." - Informasi";
-    $viewData["jadwal"] = $jadwal;
-    return view('admin.jadwal.show')->with("viewData", $viewData);
+    $viewData["title"] = "Shift - Penjadwalan Shift";
+    $viewData["subtitle"] = "Tambah Shift Kerja";
+    return view('admin.shift.create')->with("viewData", $viewData);
   }
 
   public function store(Request $request)
@@ -36,7 +34,7 @@ class AdminShiftController extends Controller
     $newShift->setNote($request->input('keterangan'));
     $newShift->save();
 
-    return back();
+    return redirect()->route('admin.shift.index');
   }
 
   public function edit($id_shift)
@@ -59,5 +57,11 @@ class AdminShiftController extends Controller
     $shift->save();
 
     return redirect()->route('admin.shift.index');
+  }
+
+  public function delete($id_shift)
+  {
+    Shift::destroy($id_shift);
+    return back();
   }
 }

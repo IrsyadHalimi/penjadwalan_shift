@@ -23,6 +23,18 @@ class User extends AuthenticatableUser implements Authenticatable
         'nomor_telepon',
         'role',
     ];
+
+    public static function validate($request)
+    {
+        $request->validate([
+            "nama_lengkap" => "required",
+            "nomor_pegawai" => "required",
+            "email" => "required",
+            "departemen" => "required",
+            "nomor_telepon" => "required",
+            "role" => "required",
+        ]);
+    }
     
     public function getId()
     {
@@ -39,9 +51,29 @@ class User extends AuthenticatableUser implements Authenticatable
         return $this->attributes['nama_lengkap'];
     }
 
-    public function setUser($id_user)
+    public function setName($nama_lengkap)
     {
-        $this->attributes['id_user'] = $id_user;
+        $this->attributes['nama_lengkap'] = $nama_lengkap;
+    }
+
+    public function getEmployeeNumber()
+    {
+        return $this->attributes['nomor_pegawai'];
+    }
+
+    public function setEmployeeNumber($nomor_pegawai)
+    {
+        $this->attributes['nomor_pegawai'] = $nomor_pegawai;
+    }
+    
+    public function getEmail()
+    {
+        return $this->attributes['email'];
+    }
+
+    public function setEmail($email)
+    {
+        $this->attributes['email'] = $email;
     }
     
     public function getDepartment()
@@ -49,9 +81,19 @@ class User extends AuthenticatableUser implements Authenticatable
         return $this->attributes['departemen'];
     }
 
-    public function setEmail($email)
+    public function setDepartment($departemen)
     {
-        $this->attributes['email'] = $email;
+        $this->attributes['departemen'] = $departemen;
+    }
+
+    public function getPhoneNumber()
+    {
+        return $this->attributes['nomor_telepon'];
+    }
+
+    public function setPhoneNumber($nomor_telepon)
+    {
+        $this->attributes['nomor_telepon'] = $nomor_telepon;
     }
     
     public function getRole()
