@@ -54,27 +54,6 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="departemen" class="col-md-4 col-form-label text-md-end">{{ __('Departemen') }}</label>
-
-                            <div class="col-md-6">
-                                <select id="departemen" class="form-control @error('departemen') is-invalid @enderror" name="departemen" required>
-                                    <option value="">-- Pilih Departemen --</option>
-                                    <option value="operasional">Operasional</option>
-                                    <option value="keuangan">Keuangan</option>
-                                    <option value="personalia">Personalia</option>
-                                    <option value="riset_dan_pengembangan">Riset dan Pengembangan</option>
-                                    <option value="teknologi_informasi">Teknologi Informasi</option>
-                                </select>
-
-                                @error('role')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
                             <label for="nomor_telepon" class="col-md-4 col-form-label text-md-end">{{ __('Nomor Telepon') }}</label>
 
                             <div class="col-md-6">

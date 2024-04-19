@@ -30,3 +30,13 @@ Route::get('/admin/operator', 'App\Http\Controllers\Admin\AdminOperatorControlle
 Route::get('/admin/operator/{id_user}/edit', 'App\Http\Controllers\Admin\AdminOperatorController@edit')->name("admin.operator.edit");
 Route::put('/admin/operator/{id_user}/update', 'App\Http\Controllers\Admin\AdminOperatorController@update')->name("admin.operator.update");
 Route::delete('/admin/operator/{id_user}/delete', 'App\Http\Controllers\Admin\AdminOperatorController@delete')->name("admin.operator.delete");
+Route::get('/admin/supervisor', 'App\Http\Controllers\Admin\AdminSupervisorController@index')->name("admin.supervisor.index");
+Route::get('/admin/supervisor/{id_user}/edit', 'App\Http\Controllers\Admin\AdminSupervisorController@edit')->name("admin.supervisor.edit");
+Route::put('/admin/supervisor/{id_user}/update', 'App\Http\Controllers\Admin\AdminSupervisorController@update')->name("admin.supervisor.update");
+Route::delete('/admin/supervisor/{id_user}/delete', 'App\Http\Controllers\Admin\AdminSupervisorController@delete')->name("admin.supervisor.delete");
+Route::get('/admin/departemen', 'App\Http\Controllers\Admin\AdminDepartemenController@index')->name("admin.departemen.index");
+Route::get('/admin/departemen/create', 'App\Http\Controllers\Admin\AdminDepartemenController@create')->name("admin.departemen.create");
+Route::get('/admin/departemen/{id_departemen}/edit', 'App\Http\Controllers\Admin\AdminDepartemenController@edit')->name("admin.departemen.edit");
+Route::put('/admin/departemen/{id_departemen}/update', 'App\Http\Controllers\Admin\AdminDepartemenController@update')->name("admin.departemen.update");
+Route::post('/admin/departemen/store', 'App\Http\Controllers\Admin\AdminDepartemenController@store')->name("admin.departemen.store");
+Route::delete('/admin/departemen/{id_departemen}/delete', 'App\Http\Controllers\Admin\AdminDepartemenController@delete')->name("admin.departemen.delete");

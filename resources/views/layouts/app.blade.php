@@ -18,8 +18,9 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ms-auto">
           <a class="nav-link active" href="#">Beranda</a>
-          <a class="nav-link active" href="#">Departemen</a>
+          <a class="nav-link active" href="{{ route('admin.departemen.index') }}">Departemen</a>
           <a class="nav-link active" href="{{ route('admin.jadwal.index') }}">Jadwal Kerja</a>
+          <a class="nav-link active" href="{{ route('admin.supervisor.index') }}">Supervisor</a>
           <a class="nav-link active" href="{{ route('admin.operator.index') }}">Operator</a>
           <a class="nav-link active" href="{{ route('admin.shift.index') }}">Shift</a>
           <a class="nav-link active" href="#">Cetak Jadwal</a>

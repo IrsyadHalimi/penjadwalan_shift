@@ -78,12 +78,12 @@ class User extends AuthenticatableUser implements Authenticatable
     
     public function getDepartment()
     {
-        return $this->attributes['departemen'];
+        return $this->attributes['id_departemen'];
     }
 
     public function setDepartment($departemen)
     {
-        $this->attributes['departemen'] = $departemen;
+        $this->attributes['id_departemen'] = $departemen;
     }
 
     public function getPhoneNumber()
