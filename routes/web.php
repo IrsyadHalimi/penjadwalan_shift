@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FullCalenderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,3 +41,7 @@ Route::get('/admin/departemen/{id_departemen}/edit', 'App\Http\Controllers\Admin
 Route::put('/admin/departemen/{id_departemen}/update', 'App\Http\Controllers\Admin\AdminDepartemenController@update')->name("admin.departemen.update");
 Route::post('/admin/departemen/store', 'App\Http\Controllers\Admin\AdminDepartemenController@store')->name("admin.departemen.store");
 Route::delete('/admin/departemen/{id_departemen}/delete', 'App\Http\Controllers\Admin\AdminDepartemenController@delete')->name("admin.departemen.delete");
+Route::controller(FullCalenderController::class)->group(function(){
+  Route::get('fullcalender', 'index');
+  Route::post('fullcalenderAjax', 'ajax');
+});

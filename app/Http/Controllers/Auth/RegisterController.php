@@ -53,7 +53,6 @@ class RegisterController extends Controller
             'nomor_pegawai' => ['required', 'string', 'unique:user'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:user'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'departemen' => ['required', 'string'],
             'nomor_telepon' => ['required', 'string', 'max:15'],
             'role' => ['required', 'string'],
         ]);
@@ -72,7 +71,6 @@ class RegisterController extends Controller
             'nomor_pegawai' => $data['nomor_pegawai'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'departemen' => $data['departemen'],
             'nomor_telepon' => $data['nomor_telepon'],
             'role' => $data['role'],
         ]);
