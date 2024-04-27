@@ -3,9 +3,6 @@
 @section('subtitle', $viewData["subtitle"])
 @section('content')
 <div>
-  Create Shift
-</div>
-<div>
   @if($errors->any())
   <ul class="alert alert-danger list-unstyled">
     @foreach($errors->all() as $error)
@@ -15,14 +12,16 @@
   @endif
 </div>
 <div class="row">
-  @foreach ($viewData["operator"] as $operator)
-  ID: {{ $operator->getId() }}
-  Nama: {{ $operator->getName() }}
-  Departemen: {{ $operator->getDepartment() }}
-  Email: {{ $operator->getEmail() }}
-  Jabatan: {{ $operator->getRole() }}
-  <a href="{{route('admin.operator.edit', ['id_user'=> $operator->getId()])}}">Edit</a>
-  <form action="{{ route('admin.operator.delete', $operator->getId())}}" method="POST">
+<a href="{{ route('admin.operator.create') }}">Tambah Operator Baru</a>
+  @foreach ($viewData["operator"] as $operators)
+  ID: {{ $operators->getId() }}
+  Nama: {{ $operators->getName() }}
+  Perusahaan: {{ $operators->getCompanyId() }}
+  Departemen: {{ $operators->getDepartmentId() }}
+  Email: {{ $operators->getEmail() }}
+  Jabatan: {{ $operators->getRole() }}
+  <a href="{{route('admin.operator.edit', ['id'=> $operators->getId()])}}">Edit</a>
+  <form action="{{ route('admin.operator.delete', $operators->getId())}}" method="POST">
     @csrf
     @method('DELETE')
     <button class="btn btn-danger">

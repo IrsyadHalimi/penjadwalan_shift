@@ -11,7 +11,7 @@
   </ul>
   @endif
 
-  <form method="POST" action="{{ route('admin.operator.update', ['id_user'=> $viewData['operator']->getId()]) }}"
+  <form method="POST" action="{{ route('admin.operator.update', ['id'=> $viewData['operator']->getId()]) }}"
   enctype="multipart/form-data">
     @csrf
     @method('PUT')
@@ -20,7 +20,7 @@
         <div class="mb-3 row">
           <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Nama Lengkap</label>
           <div class="col-lg-10 col-md-6 col-sm-12">
-              <input name="nama_lengkap" value="{{ $viewData['operator']->getName() }}" type="text" class="form-control">
+              <input name="full_name" value="{{ $viewData['operator']->getName() }}" type="text" class="form-control">
           </div>
         </div>
       </div>
@@ -28,7 +28,7 @@
         <div class="mb-3 row">
           <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Nomor Pegawai</label>
           <div class="col-lg-10 col-md-6 col-sm-12">
-              <input name="nomor_pegawai" value="{{ $viewData['operator']->getEmployeeNumber() }}" type="text" class="form-control">
+              <input name="employee_id" value="{{ $viewData['operator']->getEmployeeId() }}" type="text" class="form-control">
           </div>
         </div>
       </div>
@@ -42,9 +42,17 @@
       </div>
       <div class="col">
         <div class="mb-3 row">
+          <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Perusahaan</label>
+          <div class="col-lg-10 col-md-6 col-sm-12">
+              <input name="company_id" value="{{ $viewData['operator']->getCompanyId() }}" type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="mb-3 row">
           <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Departemen</label>
           <div class="col-lg-10 col-md-6 col-sm-12">
-              <input name="departemen" value="{{ $viewData['operator']->getDepartment() }}" type="text" class="form-control">
+              <input name="department_id" value="{{ $viewData['operator']->getDepartmentId() }}" type="text" class="form-control">
           </div>
         </div>
       </div>
@@ -52,7 +60,7 @@
         <div class="mb-3 row">
           <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Nomor Telepon</label>
           <div class="col-lg-10 col-md-6 col-sm-12">
-              <input name="nomor_telepon" value="{{ $viewData['operator']->getPhoneNumber() }}" type="text" class="form-control">
+              <input name="phone_number" value="{{ $viewData['operator']->getPhoneNumber() }}" type="text" class="form-control">
           </div>
         </div>
       </div>
@@ -63,7 +71,7 @@
             <select id="role" class="form-control @error('role') is-invalid @enderror" name="role" required>
               <option value="">-- Pilih Role --</option>
               <option value="admin">Admin</option>
-              <option value="supervisor">Supervisor</option>
+              <option value="manager">Manager</option>
               <option value="operator" selected>Operator</option>
             </select>
           </div>

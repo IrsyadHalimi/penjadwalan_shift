@@ -28,40 +28,43 @@ class AdminShiftController extends Controller
   {
     Shift::validate($request); 
     $newShift = new Shift();
-    $newShift->setShiftName($request->input('nama_shift'));
-    $newShift->setStartTime($request->input('jam_masuk'));
-    $newShift->setEndTime($request->input('jam_keluar'));
-    $newShift->setNote($request->input('keterangan'));
+    $newShift->setShiftName($request->input('shift_name'));
+    $newShift->setDepartmentId($request->input('department_id'));
+    $newShift->setStartTime($request->input('start_time'));
+    $newShift->setEndTime($request->input('end_time'));
+    $newShift->setNotes($request->input('notes'));
+    $newShift->setLabelColor($request->input('label_color'));
     $newShift->save();
 
     return redirect()->route('admin.shift.index');
   }
 
-  public function edit($id_shift)
+  public function edit($id)
   {
     $viewData = [];
     $viewData["title"] = "Admin - Edit Shift";
     $viewData["subtitle"] = "Edit Shift Kerja";
-    $viewData["shift"] = Shift::where('id_shift', $id_shift)->first();
+    $viewData["shift"] = Shift::findOrFail($id);
     return view('admin.shift.edit')->with("viewData", $viewData);
   }
 
-  public function update(Request $request, $id_shift)
+  public function update(Request $request, $id)
   {
     Shift::validate($request); 
-    $shift = Shift::where('id_shift', $id_shift)->first();
-    $shift->setShiftName($request->input('nama_shift'));
-    $shift->setStartTime($request->input('jam_masuk'));
-    $shift->setEndTime($request->input('jam_keluar'));
-    $shift->setNote($request->input('keterangan'));
+    $shift = Shift::findOrFail($id);
+    $shift->setShiftName($request->input('shift_name'));
+    $shift->setDepartmentId($request->input('department_id'));
+    $shift->setStartTime($request->input('start_time'));
+    $shift->setEndTime($request->input('end_time'));
+    $shift->setNotes($request->input('notes'));
     $shift->save();
 
     return redirect()->route('admin.shift.index');
   }
 
-  public function delete($id_shift)
+  public function delete($id)
   {
-    Shift::destroy($id_shift);
+    Shift::destroy($id);
     return back();
   }
 }

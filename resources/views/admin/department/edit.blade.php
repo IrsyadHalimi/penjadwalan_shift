@@ -10,8 +10,7 @@
     @endforeach
   </ul>
   @endif
-
-  <form method="POST" action="{{ route('admin.departemen.update', ['id_departemen'=> $viewData['departemen']->getId()]) }}"
+  <form method="POST" action="{{ route('admin.department.update', ['id'=> $viewData['department']->getId()]) }}"
   enctype="multipart/form-data">
     @csrf
     @method('PUT')
@@ -20,19 +19,10 @@
         <div class="mb-3 row">
           <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Nama Departemen</label>
           <div class="col-lg-10 col-md-6 col-sm-12">
-              <input name="nama_departemen" value="{{ $viewData['departemen']->getDepartemenName() }}" type="text" class="form-control">
+              <input name="department_name" value="{{ $viewData['department']->getDepartmentName() }}" type="text" class="form-control">
           </div>
         </div>
       </div>
-      <div class="col">
-        <div class="mb-3 row">
-          <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Keterangan</label>
-          <div class="col-lg-10 col-md-6 col-sm-12">
-              <textarea id="keterangan" name="keterangan" class="form-control" rows="4">{{ $viewData['departemen']->getNote() }}</textarea>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="col">
       &nbsp;
     </div>

@@ -9,61 +9,57 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 
 class User extends AuthenticatableUser implements Authenticatable
-{
-    protected $table = "user";
-
-    protected $primaryKey = "id_user";
-
+{   
     protected $fillable = [
-        'nama_lengkap', 
-        'nomor_pegawai',
+        'company_id',
+        'department_id',
+        'full_name', 
+        'employee_id',
         'email', 
         'password',
-        'departemen',
-        'nomor_telepon',
+        'phone_number',
         'role',
     ];
 
     public static function validate($request)
     {
         $request->validate([
-            "nama_lengkap" => "required",
-            "nomor_pegawai" => "required",
+            "department_id" => "required",
+            "full_name" => "required",
+            "employee_id" => "required",
             "email" => "required",
-            "departemen" => "required",
-            "nomor_telepon" => "required",
-            "role" => "required",
+            "phone_number" => "required",
         ]);
     }
     
     public function getId()
     {
-        return $this->attributes['id_user'];
+        return $this->attributes['id'];
     }
 
     public function setId($id)
     {
-        $this->attributes['id_user'] = $id;
+        $this->attributes['id'] = $id;
     }
     
     public function getName()
     {
-        return $this->attributes['nama_lengkap'];
+        return $this->attributes['full_name'];
     }
 
-    public function setName($nama_lengkap)
+    public function setName($full_name)
     {
-        $this->attributes['nama_lengkap'] = $nama_lengkap;
+        $this->attributes['full_name'] = $full_name;
     }
 
-    public function getEmployeeNumber()
+    public function getEmployeeId()
     {
-        return $this->attributes['nomor_pegawai'];
+        return $this->attributes['employee_id'];
     }
 
-    public function setEmployeeNumber($nomor_pegawai)
+    public function setEmployeeId($employee_id)
     {
-        $this->attributes['nomor_pegawai'] = $nomor_pegawai;
+        $this->attributes['employee_id'] = $employee_id;
     }
     
     public function getEmail()
@@ -75,25 +71,40 @@ class User extends AuthenticatableUser implements Authenticatable
     {
         $this->attributes['email'] = $email;
     }
-    
-    public function getDepartment()
+
+    public function setPassword($password)
     {
-        return $this->attributes['id_departemen'];
+        $this->attributes['password'] = $password;
+    }
+    
+    public function getDepartmentId()
+    {
+        return $this->attributes['department_id'];
     }
 
-    public function setDepartment($departemen)
+    public function setDepartmentId($department_id)
     {
-        $this->attributes['id_departemen'] = $departemen;
+        $this->attributes['department_id'] = $department_id;
+    }
+
+    public function getCompanyId()
+    {
+        return $this->attributes['company_id'];
+    }
+
+    public function setCompanyId($company_id)
+    {
+        $this->attributes['company_id'] = $company_id;
     }
 
     public function getPhoneNumber()
     {
-        return $this->attributes['nomor_telepon'];
+        return $this->attributes['phone_number'];
     }
 
-    public function setPhoneNumber($nomor_telepon)
+    public function setPhoneNumber($phone_number)
     {
-        $this->attributes['nomor_telepon'] = $nomor_telepon;
+        $this->attributes['phone_number'] = $phone_number;
     }
     
     public function getRole()

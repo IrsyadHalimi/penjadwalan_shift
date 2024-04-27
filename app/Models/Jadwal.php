@@ -11,11 +11,14 @@ class Jadwal extends Model
     
     protected $primaryKey = "id_jadwal";
 
+    protected $fillable = [
+        'title', 'tanggal_mulai', 'tanggal_selesai'
+    ];
+
     public static function validate($request)
     {
         $request->validate([
             "id_shift" => "required",
-            "tanggal" => "required",
         ]);
     }
 
@@ -54,9 +57,14 @@ class Jadwal extends Model
         return $this->attributes['tanggal'];
     }
 
-    public function setDate($tanggal)
+    public function setStartDate($tanggal_mulai)
     {
-        $this->attributes['tanggal'] = $tanggal;
+        $this->attributes['tanggal_mulai'] = $tanggal_mulai;
+    }
+
+    public function setEndDate($tanggal_selesai)
+    {
+        $this->attributes['tanggal_selesai'] = $tanggal_selesai;
     }
 
     public function getCreatedAt()

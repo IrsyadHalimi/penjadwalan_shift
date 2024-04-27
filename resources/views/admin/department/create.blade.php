@@ -9,26 +9,17 @@
     @endforeach
   </ul>
   @endif
-  <form method="POST" action="{{ route('admin.departemen.store') }}">
+  <form method="POST" action="{{ route('admin.department.store') }}">
   @csrf
     <div class="row">
       <div class="col">
         <div class="mb-3 row">
         <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Nama Departemen</label>
           <div class="col-lg-10 col-md-6 col-sm-12">
-              <input name="nama_departemen" type="text" class="form-control">
+              <input name="department_name" type="text" class="form-control">
           </div>
         </div>
       </div>
-      <div class="col">
-        <div class="mb-3 row">
-        <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Keterangan</label>
-          <div class="col-lg-10 col-md-6 col-sm-12">
-              <input name="keterangan" type="text" class="form-control">
-          </div>
-        </div>
-      </div>
-    </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 @endsection

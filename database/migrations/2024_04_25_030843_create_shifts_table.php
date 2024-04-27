@@ -13,11 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('jadwal', function (Blueprint $table) {
-            $table->integer('id_jadwal', 11);
-            $table->foreignId('id_user', 11);
-            $table->foreignId('id_shift', 11);
-            $table->date('tanggal');
+        Schema::create('shifts', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('company_id');
+            $table->string('shift_name', 50);
+            $table->time('start_time');
+            $table->time('end_time');
+            $table->string('notes', 255);
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jadwal');
+        Schema::dropIfExists('shifts');
     }
 };

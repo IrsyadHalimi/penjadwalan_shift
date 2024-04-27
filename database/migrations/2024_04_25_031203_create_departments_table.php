@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('ketersediaan', function (Blueprint $table) {
-            $table->integer('id_ketersediaan', 11);
-            $table->foreignId('id_user', 11);
-            $table->date('tanggal');
-            $table->string('status', 50);
+        Schema::create('departments', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('company_id');
+            $table->string('department_name', 50);
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ketersediaan');
+        Schema::dropIfExists('departments');
     }
 };

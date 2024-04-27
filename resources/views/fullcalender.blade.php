@@ -62,7 +62,7 @@ $(document).ready(function () {
                     selectable: true,
                     selectHelper: true,
                     select: function (start, end, allDay) {
-                        var title = prompt('Event Title:');
+                        var title = prompt('title:');
                         if (title) {
                             var start = $.fullCalendar.formatDate(start, "Y-MM-DD");
                             var end = $.fullCalendar.formatDate(end, "Y-MM-DD");
@@ -70,8 +70,8 @@ $(document).ready(function () {
                                 url: SITEURL + "/fullcalenderAjax",
                                 data: {
                                     title: title,
-                                    start: start,
-                                    end: end,
+                                    tanggal_mulai: start,
+                                    tanggal_selesai: end,
                                     type: 'add'
                                 },
                                 type: "POST",
@@ -82,8 +82,8 @@ $(document).ready(function () {
                                         {
                                             id: data.id,
                                             title: title,
-                                            start: start,
-                                            end: end,
+                                            tanggal_mulai: start,
+                                            tanggal_selesai: end,
                                             allDay: allDay
                                         },true);
   

@@ -5,44 +5,40 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Departemen extends Model
+class Department extends Model
 {
     use HasFactory;
-
-    protected $table = "departemen";
-    
-    protected $primaryKey = "id_departemen";
 
     public static function validate($request)
     {
         $request->validate([
-            "nama_departemen" => "required",
+            "department_name" => "required",
         ]);
     }
 
     public function getId()
     {
-        return $this->attributes['id_departemen'];
+        return $this->attributes['id'];
     } 
     
-    public function getDepartemenName()
+    public function getDepartmentName()
     {
-        return $this->attributes['nama_departemen'];
+        return $this->attributes['department_name'];
     }
 
-    public function setDepartemenName($departemenName)
+    public function setDepartmentName($department_name)
     {
-        $this->attributes['nama_departemen'] = $departemenName;
+        $this->attributes['department_name'] = $department_name;
     }
 
-    public function getNote()
+    public function getCompanyId()
     {
-        return $this->attributes['keterangan'];
-    } 
+        return $this->attributes['company_id'];
+    }
 
-    public function setNote($note)
+    public function setCompanyId($company_id)
     {
-        $this->attributes['keterangan'] = $note;
+        $this->attributes['company_id'] = $company_id;
     }
 
     public function getCreatedAt()

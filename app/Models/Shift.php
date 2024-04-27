@@ -9,62 +9,68 @@ class Shift extends Model
 {
     use HasFactory;
 
-    protected $table = "shift";
-    
-    protected $primaryKey = "id_shift";
-
     public static function validate($request)
     {
         $request->validate([
-            "nama_shift" => "required",
-            "jam_masuk" => "required",
-            "jam_keluar" => "required",
+            "shift_name" => "required",
+            "start_time" => "required",
+            "end_time" => "required",
         ]);
     }
 
     public function getId()
     {
-        return $this->attributes['id_shift'];
+        return $this->attributes['id'];
     } 
     
     public function getShiftName()
     {
-        return $this->attributes['nama_shift'];
+        return $this->attributes['shift_name'];
     }
 
-    public function setShiftName($shiftName)
+    public function setShiftName($shift_name)
     {
-        $this->attributes['nama_shift'] = $shiftName;
+        $this->attributes['shift_name'] = $shift_name;
+    }
+
+    public function getDepartmentId()
+    {
+        return $this->attributes['department_id'];
+    }
+
+    public function setDepartmentId($department_id)
+    {
+        $this->attributes['department_id'] = $department_id;
     }
     
     public function getStartTime()
     {
-        return $this->attributes['jam_masuk'];
+        return $this->attributes['start_time'];
     }
     
-    public function setStartTime($startTime)
+    public function setStartTime($start_time)
     {
-        $this->attributes['jam_masuk'] = $startTime;
+        $this->attributes['start_time'] = $start_time;
     }
 
     public function getEndTime()
     {
-        return $this->attributes['jam_keluar'];
+        return $this->attributes['end_time'];
     } 
     
-    public function setEndTime($endTime)
+    public function setEndTime($end_time)
     {
-        $this->attributes['jam_keluar'] = $endTime;
+        $this->attributes['end_time'] = $end_time;
     }
 
-    public function getNote()
+    public function getNotes()
     {
-        return $this->attributes['keterangan'];
+        return $this->attributes['notes'];
     } 
 
-    public function setNote($note)
+    public function setNotes($notes)
     {
-        $this->attributes['keterangan'] = $note;
+        $this->attributes['notes'] = $notes;
     }
 
     public function getCreatedAt()
@@ -85,5 +91,15 @@ class Shift extends Model
     public function setUpdatedAt($updatedAt)
     {
         $this->attributes['updated_at'] = $updatedAt;
+    }
+
+    public function getLabelColor()
+    {
+        return $this->attributes['label_color'];
+    }
+
+    public function setLabelColor($label_color)
+    {
+        $this->attributes['label_color'] = $label_color;
     }
 }
