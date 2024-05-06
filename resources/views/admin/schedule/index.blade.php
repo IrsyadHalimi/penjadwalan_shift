@@ -11,11 +11,25 @@
   </ul>
   @endif
 </div>
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div id='calendar'></div>
+<div class="row" id="table-hover-row">
+  <div class="col-12">
+      <div class="card">
+          <div class="card-header">
+              <h4 class="card-title">Hoverable rows</h4>
+          </div>
+          <div class="card-content">
+              <div class="card-body">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div id='calendar'></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
     <div id="modal-action" class="modal" tabindex="-1">
     </div>

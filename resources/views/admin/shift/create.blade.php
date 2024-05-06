@@ -9,69 +9,62 @@
     @endforeach
   </ul>
   @endif
-  <form method="POST" action="{{ route('admin.shift.store') }}">
-  @csrf
-    <div class="row">
-      <div class="col">
-        <div class="mb-3 row">
-        <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Nama Shift</label>
-          <div class="col-lg-10 col-md-6 col-sm-12">
-              <input name="shift_name" type="text" class="form-control">
-          </div>
+  <section id="basic-horizontal-layouts">
+    <form method="POST" action="{{ route('admin.shift.store') }}">
+      @csrf
+        <div class="row match-height">
+            <div class="col-md-12 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Horizontal Form</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form class="form form-horizontal">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label for="shift-name-horizontal">Nama Shift</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <input type="text" name="shift_name" id="shift-name-horizontal" class="form-control">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="departmentId-horizontal">Departemen</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <input type="text" name="department_id" id="departmentId-horizontal" class="form-control">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="start-horizontal">Jam Masuk</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                          <input type="date" name="start_time" class="form-control flatpickr-time-picker-24h" placeholder="Select time..">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="start-horizontal">Jam Keluar</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                          <input type="date" name="end_time" class="form-control flatpickr-time-picker-24h" placeholder="Select time..">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="department-horizontal">Keterangan</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                          <textarea class="form-control" name="notes" id="exampleFormControlTextarea1" rows="5"></textarea>
+                                        </div>
+                                        <div class="col-sm-12 d-flex justify-content-end">
+                                            <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                            <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col">
-        <div class="mb-3 row">
-        <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Departemen</label>
-          <div class="col-lg-10 col-md-6 col-sm-12">
-              <input name="department_id" type="text" class="form-control">
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="mb-3 row">
-        <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Jam Masuk</label>
-          <div class="col-lg-10 col-md-6 col-sm-12">
-            <input class="form-control" type="time" name="start_time">
-          </div>
-      </div>
-      <div class="col">
-        <div class="mb-3 row">
-        <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Jam Keluar</label>
-        <div class="col-lg-10 col-md-6 col-sm-12">
-          <input class="form-control" type="time" name="end_time">
-        </div>
-      </div>
-      <div class="col">
-        <div class="mb-3 row">
-        <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Warna Label Shift</label>
-          <div>
-            <input class="form-check-input" type="radio" name="label_color" id="category-success" value="success">
-            <label class="form-check-label" for="category-success">Hijau</label>
-          </div>
-          <div>
-            <input class="form-check-input" type="radio" name="label_color" id="category-danger" value="danger">
-            <label class="form-check-label" for="category-danger">Merah</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="label_color" id="category-warning" value="warning">
-            <label class="form-check-label" for="category-warning">Kuning</label>
-          </div>
-          <div>
-            <input class="form-check-input" type="radio" name="label_color" id="category-primary" value="primary">
-            <label class="form-check-label" for="category-primary">Biru</label>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="mb-3 row">
-        <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Keterangan</label>
-          <div class="col-lg-10 col-md-6 col-sm-12">
-              <input name="notes" type="text" class="form-control">
-          </div>
-        </div>
-      </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+      </form>
+    </section>
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class AdminSupervisorController extends Controller
@@ -15,57 +16,60 @@ class AdminSupervisorController extends Controller
     $viewData["supervisor"] = User::where('role', 'supervisor')->get();
     return view('admin.supervisor.index')->with("viewData", $viewData);
   }
-  
-  // public function show($id)
-  // {
-  //   $viewData = [];
-  //   $jadwal = Shift::findOrFail($id);
-  //   $viewData["title"] = $jadwal["tanggal"]." - Penjadwalan Shift";
-  //   $viewData["subtitle"] = $jadwal["tanggal"]." - Informasi";
-  //   $viewData["jadwal"] = $jadwal;
-  //   return view('admin.jadwal.show')->with("viewData", $viewData);
-  // }
 
-  // public function store(Request $request)
-  // {
-  //   User::validate($request); 
-  //   $newUser = new Shift();
-  //   $newShift->setShiftName($request->input('nama_shift'));
-  //   $newShift->setStartTime($request->input('jam_masuk'));
-  //   $newShift->setEndTime($request->input('jam_keluar'));
-  //   $newShift->setNote($request->input('keterangan'));
-  //   $newShift->save();
+  public function create()
+  {
+    $viewData = [];
+    $viewData["title"] = " Tambah Supervisor- Penjadwalan Shift";
+    $viewData["subtitle"] = "Tambah Supervisor";
+    return view('admin.supervisor.create')->with("viewData", $viewData);
+  }
 
-  //   return back();
-  // }
+  public function store(Request $request)
+  {
+    User::validate($request); 
+    $newUser = new User();
+    $newUser->setName($request->input('full_name'));
+    $newUser->setEmployeeId($request->input('employee_id'));
+    $newUser->setEmail($request->input('email'));
+    $newUser->setPhoneNumber($request->input('phone_number'));
+    $newUser->setPassword(Hash::make($request->input('password')));
+    $newUser->setDepartmentId($request->input('department_id'));
+    $newUser->setCompanyId(1111);
+    $newUser->setRole('supervisor');
+    $newUser->save();
 
-  public function edit($id_user)
+    return redirect()->route('admin.supervisor.index');
+  }
+
+  public function edit($id)
   {
     $viewData = [];
     $viewData["title"] = "Admin - Edit Supervisor";
     $viewData["subtitle"] = "Edit Supervisor";
-    $viewData["supervisor"] = User::where('id_user', $id_user)->first();
+    $viewData["supervisor"] = User::findOrFail($id);
     return view('admin.supervisor.edit')->with("viewData", $viewData);
   }
 
-  public function update(Request $request, $id_user)
+  public function update(Request $request, $id)
   {
     User::validate($request); 
-    $user = User::where('id_user', $id_user)->first();
-    $user->setName($request->input('nama_lengkap'));
-    $user->setEmployeeNumber($request->input('nomor_pegawai'));
+    $user = User::findOrFail($id);
+    $user->setCompanyId($request->input('company_id'));
+    $user->setDepartmentId($request->input('department_id'));
+    $user->setName($request->input('full_name'));
+    $user->setEmployeeId($request->input('employee_id'));
     $user->setEmail($request->input('email'));
-    $user->setDepartment($request->input('departemen'));
-    $user->setPhoneNumber($request->input('nomor_telepon'));
+    $user->setPhoneNumber($request->input('phone_number'));
     $user->setRole($request->input('role'));
     $user->save();
 
     return redirect()->route('admin.supervisor.index');
   }
 
-  public function delete($id_user)
+  public function delete($id)
   {
-    User::destroy($id_user);
+    User::destroy($id);
     return back();
   }
 }

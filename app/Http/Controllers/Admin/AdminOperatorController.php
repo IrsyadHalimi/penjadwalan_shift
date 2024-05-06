@@ -67,9 +67,9 @@ class AdminOperatorController extends Controller
     return redirect()->route('admin.operator.index');
   }
 
-  public function delete($id_user)
+  public function delete($id)
   {
-    User::destroy($id_user);
+    User::destroy($id);
     return back();
   }
 }

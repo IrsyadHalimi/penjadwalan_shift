@@ -58,7 +58,7 @@ class AdminDepartmentController extends Controller
 
   public function delete($id)
   {
-    Shift::destroy($id);
+    Company::destroy($id);
     return back();
   }
 }
