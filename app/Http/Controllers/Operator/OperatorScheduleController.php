@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Operator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\EventRequest;
@@ -8,14 +8,14 @@ use App\Models\Schedule;
 use App\Models\Shift;
 use App\Models\User;
 
-class AdminScheduleController extends Controller
+class OperatorScheduleController extends Controller
 {
     public function index()
     {
         $viewData = [];
         $viewData["title"] = "Jadwal - Penjadwalan Shift";
         $viewData["subtitle"] = "Daftar Jadwal Kerja";
-        return view('admin.schedule.index')->with("viewData", $viewData);
+        return view('operator.schedule.index')->with("viewData", $viewData);
     }
 
     public function listSchedule(Request $request)
@@ -48,7 +48,7 @@ class AdminScheduleController extends Controller
     {
         $users = User::all();
         $shifts = Shift::all();
-        return view('admin.schedule.schedule-form', [
+        return view('operator.schedule.schedule-form', [
             'data' => $schedule,
             'shifts' => $shifts, 
             'users' => $users, 
@@ -59,17 +59,13 @@ class AdminScheduleController extends Controller
     public function store(EventRequest $request, Schedule $schedule)
     {
         return $this->update($request, $schedule);
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Save data store successfully'
-        ]);
     }
 
     public function edit(Schedule $schedule)
     {
         $users = User::all();
         $shifts = Shift::all();
-        return view('admin.schedule.schedule-form', [
+        return view('operator.schedule.schedule-form', [
             'data' => $schedule, 
             'shifts' => $shifts, 
             'users' => $users, 
@@ -91,7 +87,7 @@ class AdminScheduleController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Save data update successfully'
+            'message' => 'Save data successfully'
         ]);
     }
 

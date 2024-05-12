@@ -20,7 +20,8 @@ Auth::routes();
 
 Route::get('/', 'App\Http\Controllers\HomeController@index')->name("home.index");
 
-Route::get('schedule/list', [AdminScheduleController::class, 'listSchedule'])->name('schedule.list');
+Route::get('schedule/list', [AdminScheduleController::class, 'listSchedule'])->name('admin.schedule.list');
+Route::get('schedule/create', [AdminScheduleController::class, 'create'])->name('admin.schedule.create');
 Route::resource('schedule', AdminScheduleController::class);
 Route::get('/admin/schedule', 'App\Http\Controllers\Admin\AdminScheduleController@index')->name("admin.schedule.index");
 
@@ -64,8 +65,8 @@ Route::get('/admin/company/{id}/edit', 'App\Http\Controllers\Admin\AdminCompanyC
 Route::put('/admin/company/{id}/update', 'App\Http\Controllers\Admin\AdminCompanyController@update')->name("admin.company.update");
 Route::delete('/admin/company/{id}/delete', 'App\Http\Controllers\Admin\AdminCompanyController@delete')->name("admin.company.delete");
 
-Route::get('schedule/list', [AdminScheduleController::class, 'listSchedule'])->name('schedule.list');
-Route::resource('schedule', AdminScheduleController::class);
+// Route::get('schedule/list', [AdminScheduleController::class, 'listSchedule'])->name('schedule.list');
+// Route::resource('schedule', AdminScheduleController::class);
 Route::get('/superadmin/schedule', 'App\Http\Controllers\Admin\AdminScheduleController@index')->name("admin.schedule.index");
 
 Route::get('/superadmin/shift', 'App\Http\Controllers\SuperAdmin\SuperAdminShiftController@index')->name("superadmin.shift.index");
@@ -100,3 +101,7 @@ Route::get('/superadmin/company', 'App\Http\Controllers\SuperAdmin\SuperAdminCom
 Route::get('/superadmin/company/{id}/edit', 'App\Http\Controllers\SuperAdmin\SuperAdminCompanyController@edit')->name("superadmin.company.edit");
 Route::put('/superadmin/company/{id}/update', 'App\Http\Controllers\SuperAdmin\SuperAdminCompanyController@update')->name("superadmin.company.update");
 Route::delete('/superadmin/company/{id}/delete', 'App\Http\Controllers\SuperAdmin\SuperAdminCompanyController@delete')->name("superadmin.company.delete");
+
+// Route::get('operator/schedule/list', [OperatorScheduleController::class, 'listSchedule'])->name('schedule.list');
+// Route::resource('schedule', OperatorScheduleController::class);
+// Route::get('/operator/schedule', 'App\Http\Controllers\Operator\OperatorScheduleController@index')->name("operator.schedule.index");

@@ -176,6 +176,24 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Konfirmasi</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Apakah Anda yakin ingin menyimpan perubahan ini?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="cancelButton" data-bs-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-primary" id="confirmButton">Ya</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
                 <section class="section">
                     @yield('content')
                 </section>
@@ -208,157 +226,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
     integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+@hasSection('inline-script')
+    @yield('inline-script')
+@endif
 
-<script>
-    const modal = $('#modal-action')
-    const csrfToken = $('meta[name=csrf_token]').attr('content')
-
-    document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            themeSystem: 'bootstrap5',
-            events: `{{ route('schedule.list') }}`,
-            editable: true,
-            dateClick: function(info) {
-                $.ajax({
-                    url: `{{ route('schedule.create') }}`,
-                    data: {
-                        start_date: info.dateStr,
-                        end_date: info.dateStr
-                    },
-                    success: function(res) {
-                        modal.html(res).modal('show')
-                        $('.datepicker').datepicker({
-                            todayHighlight: true,
-                            format: 'yyyy-mm-dd'
-                        });
-
-                        $('#form-action').on('submit', function(e) {
-                            e.preventDefault()
-                            const form = this
-                            const formData = new FormData(form)
-                            $.ajax({
-                                url: form.action,
-                                method: form.method,
-                                data: formData,
-                                processData: false,
-                                contentType: false,
-                                success: function(res) {
-                                    modal.modal('hide')
-                                    calendar.refetchEvents()
-                                },
-                                error: function(res) {
-
-                                }
-                            })
-                        })
-                    }
-                })
-            },
-            eventClick: function({
-                event
-            }) {
-                $.ajax({
-                    url: `{{ url('schedule') }}/${event.id}/edit`,
-                    success: function(res) {
-                        modal.html(res).modal('show')
-
-                        $('#form-action').on('submit', function(e) {
-                            e.preventDefault()
-                            const form = this
-                            const formData = new FormData(form)
-                            $.ajax({
-                                url: form.action,
-                                method: form.method,
-                                data: formData,
-                                processData: false,
-                                contentType: false,
-                                success: function(res) {
-                                    modal.modal('hide')
-                                    calendar.refetchEvents()
-                                }
-                            })
-                        })
-                    }
-                })
-            },
-            eventDrop: function(info) {
-                const event = info.event
-                $.ajax({
-                    url: `{{ url('schedule') }}/${event.id}`,
-                    method: 'put',
-                    data: {
-                        id: event.id,
-                        start_date: event.startStr,
-                        end_date: event.end.toISOString().substring(0, 10),
-                        user_id: event.extendedProps.user_id,
-                        shift_id: event.extendedProps.shift_id
-                    },
-                    headers: {
-                        'X-CSRF-TOKEN': csrfToken,
-                        accept: 'application/json'
-                    },
-                    success: function(res) {
-                        iziToast.success({
-                            title: 'Success',
-                            message: res.message,
-                            position: 'topRight'
-                        });
-                    },
-                    error: function(res) {
-                        const message = res.responseJSON.message
-                        info.revert()
-                        iziToast.error({
-                            title: 'Error',
-                            message: message ?? 'Something wrong',
-                            position: 'topRight'
-                        });
-                    }
-                })
-            },
-            eventResize: function(info) {
-                const {
-                    event
-                } = info
-                $.ajax({
-                    url: `{{ url('schedule') }}/${event.id}`,
-                    method: 'put',
-                    data: {
-                        id: event.id,
-                        start_date: event.startStr,
-                        end_date: event.end.toISOString().substring(0, 10),
-                        user_id: event.extendedProps.user_id,
-                        shift_id: event.extendedProps.shift_id
-                    },
-                    headers: {
-                        'X-CSRF-TOKEN': csrfToken,
-                        accept: 'application/json'
-                    },
-                    success: function(res) {
-                        iziToast.success({
-                            title: 'Success',
-                            message: res.message,
-                            position: 'topRight'
-                        });
-                    },
-                    error: function(res) {
-                        const message = res.responseJSON.message
-                        info.revert()
-                        iziToast.error({
-                            title: 'Error',
-                            message: message ?? 'Something wrong',
-                            position: 'topRight'
-                        });
-                    }
-                })
-            }
-
-
-        });
-        calendar.render();
-    });
-</script>
 <script>
     var today = new Date().toISOString().split('T')[0];
     document.getElementById("tanggal").setAttribute('min', today);
