@@ -121,38 +121,51 @@
                 })
             },
             eventDrop: function(info) {
-                const event = info.event
-                $.ajax({
-                    url: `{{ url('schedule') }}/${event.id}`,
-                    method: 'put',
-                    data: {
-                        id: event.id,
-                        start_date: event.startStr,
-                        end_date: event.end.toISOString().substring(0, 10),
-                        user_id: event.extendedProps.user_id,
-                        shift_id: event.extendedProps.shift_id
-                    },
-                    headers: {
-                        'X-CSRF-TOKEN': csrfToken,
-                        accept: 'application/json'
-                    },
-                    success: function(res) {
-                        iziToast.success({
-                            title: 'Success',
-                            message: res.message,
-                            position: 'topRight'
-                        });
-                    },
-                    error: function(res) {
-                        const message = res.responseJSON.message
-                        info.revert()
-                        iziToast.error({
-                            title: 'Error',
-                            message: message ?? 'Something wrong',
-                            position: 'topRight'
-                        });
-                    }
+                // Menampilkan modal konfirmasi sebelum mengirim permintaan AJAX
+                $('#confirmationModal').modal('show');
+
+                // Menangani tombol "Ya" dalam modal konfirmasi
+                $('#confirmButton').off('click').on('click', function() {
+                    // Mengirim permintaan AJAX hanya jika pengguna mengonfirmasi
+                    const event = info.event
+                    $.ajax({
+                        url: `{{ url('schedule') }}/${event.id}`,
+                        method: 'put',
+                        data: {
+                            id: event.id,
+                            start_date: event.startStr,
+                            end_date: event.end.toISOString().substring(0, 10),
+                            user_id: event.extendedProps.user_id,
+                            shift_id: event.extendedProps.shift_id
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': csrfToken,
+                            accept: 'application/json'
+                        },
+                        success: function(res) {
+                            iziToast.success({
+                                title: 'Success',
+                                message: res.message,
+                                position: 'topRight'
+                            });
+                        },
+                        error: function(res) {
+                            const message = res.responseJSON.message
+                            info.revert()
+                            iziToast.error({
+                                title: 'Error',
+                                message: message ?? 'Something wrong',
+                                position: 'topRight'
+                            });
+                        }
+                    })
                 })
+                // Menangani tombol "Batal" dalam modal konfirmasi
+                $('#cancelButton').on('click', function() {
+                    // Mengembalikan event seperti semula jika pengguna membatalkan resize
+                    info.revert();
+                    $('#confirmationModal').modal('hide');
+                });
             },
             eventResize: function(info) {
                 const event = info.event;

@@ -62,7 +62,7 @@
                                         </div>
                                         <div class="col-md-8 form-group">  
                                           <select id="role" class="form-select @error('role') is-invalid @enderror" name="role"  id="basicSelect">
-                                            <option value="">-- Pilih Role --</option>
+                                            <option value="" hidden>-- Pilih Role --</option>
                                             <option value="admin">Admin</option>
                                             <option value="supervisor" selected>Supervisor</option>
                                             <option value="operator">Operator</option>

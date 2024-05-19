@@ -17,53 +17,56 @@ use App\Http\Controllers\Admin\AdminScheduleController;
 */
 
 Auth::routes();
+Route::middleware('admin')->group(function() {
+  Route::get('schedule/list', [AdminScheduleController::class, 'listSchedule'])->name('admin.schedule.list');
+  Route::get('schedule/create', [AdminScheduleController::class, 'create'])->name('admin.schedule.create');
+  Route::resource('schedule', AdminScheduleController::class);
+  Route::get('/admin/schedule', 'App\Http\Controllers\Admin\AdminScheduleController@index')->name("admin.schedule.index");
+
+  Route::get('/admin/shift', 'App\Http\Controllers\Admin\AdminShiftController@index')->name("admin.shift.index");
+  Route::get('/admin/shift/create', 'App\Http\Controllers\Admin\AdminShiftController@create')->name("admin.shift.create");
+  Route::get('/admin/shift/{id}/edit', 'App\Http\Controllers\Admin\AdminShiftController@edit')->name("admin.shift.edit");
+  Route::put('/admin/shift/{id}/update', 'App\Http\Controllers\Admin\AdminShiftController@update')->name("admin.shift.update");
+  Route::post('/admin/shift/store', 'App\Http\Controllers\Admin\AdminShiftController@store')->name("admin.shift.store");
+  Route::delete('/admin/shift/{id}/delete', 'App\Http\Controllers\Admin\AdminShiftController@delete')->name("admin.shift.delete");
+
+  Route::get('/admin/operator', 'App\Http\Controllers\Admin\AdminOperatorController@index')->name("admin.operator.index");
+  Route::get('/admin/operator/create', 'App\Http\Controllers\Admin\AdminOperatorController@create')->name("admin.operator.create");
+  Route::post('/admin/operator/store', 'App\Http\Controllers\Admin\AdminOperatorController@store')->name("admin.operator.store");
+  Route::get('/admin/operator/{id}/edit', 'App\Http\Controllers\Admin\AdminOperatorController@edit')->name("admin.operator.edit");
+  Route::put('/admin/operator/{id}/update', 'App\Http\Controllers\Admin\AdminOperatorController@update')->name("admin.operator.update");
+  Route::delete('/admin/operator/{id}/delete', 'App\Http\Controllers\Admin\AdminOperatorController@delete')->name("admin.operator.delete");
+
+  Route::get('/admin/supervisor', 'App\Http\Controllers\Admin\AdminSupervisorController@index')->name("admin.supervisor.index");
+  Route::get('/admin/supervisor/create', 'App\Http\Controllers\Admin\AdminSupervisorController@create')->name("admin.supervisor.create");
+  Route::post('/admin/supervisor/store', 'App\Http\Controllers\Admin\AdminSupervisorController@store')->name("admin.supervisor.store");
+  Route::get('/admin/supervisor/{id}/edit', 'App\Http\Controllers\Admin\AdminSupervisorController@edit')->name("admin.supervisor.edit");
+  Route::put('/admin/supervisor/{id}/update', 'App\Http\Controllers\Admin\AdminSupervisorController@update')->name("admin.supervisor.update");
+  Route::delete('/admin/supervisor/{id}/delete', 'App\Http\Controllers\Admin\AdminSupervisorController@delete')->name("admin.supervisor.delete");
+
+  Route::get('/admin/department', 'App\Http\Controllers\Admin\AdminDepartmentController@index')->name("admin.department.index");
+  Route::get('/admin/department/create', 'App\Http\Controllers\Admin\AdminDepartmentController@create')->name("admin.department.create");
+  Route::get('/admin/department/{id}/edit', 'App\Http\Controllers\Admin\AdminDepartmentController@edit')->name("admin.department.edit");
+  Route::put('/admin/department/{id}/update', 'App\Http\Controllers\Admin\AdminDepartmentController@update')->name("admin.department.update");
+  Route::post('/admin/department/store', 'App\Http\Controllers\Admin\AdminDepartmentController@store')->name("admin.department.store");
+  Route::delete('/admin/department/{id}/delete', 'App\Http\Controllers\Admin\AdminDepartmentController@delete')->name("admin.department.delete");
+
+  Route::get('/admin/operator_type', 'App\Http\Controllers\Admin\AdminOperatorTypeController@index')->name("admin.operator_type.index");
+  Route::get('/admin/operator_type/create', 'App\Http\Controllers\Admin\AdminOperatorTypeController@create')->name("admin.operator_type.create");
+  Route::get('/admin/operator_type/{id}/edit', 'App\Http\Controllers\Admin\AdminOperatorTypeController@edit')->name("admin.operator_type.edit");
+  Route::put('/admin/operator_type/{id}/update', 'App\Http\Controllers\Admin\AdminOperatorTypeController@update')->name("admin.operator_type.update");
+  Route::post('/admin/operator_type/store', 'App\Http\Controllers\Admin\AdminOperatorTypeController@store')->name("admin.operator_type.store");
+  Route::delete('/admin/operator_type/{id}/delete', 'App\Http\Controllers\Admin\AdminOperatorTypeController@delete')->name("admin.operator_type.delete");
+
+  Route::get('/admin/company', 'App\Http\Controllers\Admin\AdminCompanyController@index')->name("admin.company.index");
+  Route::get('/admin/company/{id}/edit', 'App\Http\Controllers\Admin\AdminCompanyController@edit')->name("admin.company.edit");
+  Route::put('/admin/company/{id}/update', 'App\Http\Controllers\Admin\AdminCompanyController@update')->name("admin.company.update");
+  Route::delete('/admin/company/{id}/delete', 'App\Http\Controllers\Admin\AdminCompanyController@delete')->name("admin.company.delete");
+
+});
 
 Route::get('/', 'App\Http\Controllers\HomeController@index')->name("home.index");
 
-Route::get('schedule/list', [AdminScheduleController::class, 'listSchedule'])->name('admin.schedule.list');
-Route::get('schedule/create', [AdminScheduleController::class, 'create'])->name('admin.schedule.create');
-Route::resource('schedule', AdminScheduleController::class);
-Route::get('/admin/schedule', 'App\Http\Controllers\Admin\AdminScheduleController@index')->name("admin.schedule.index");
-
-Route::get('/admin/shift', 'App\Http\Controllers\Admin\AdminShiftController@index')->name("admin.shift.index");
-Route::get('/admin/shift/create', 'App\Http\Controllers\Admin\AdminShiftController@create')->name("admin.shift.create");
-Route::get('/admin/shift/{id}/edit', 'App\Http\Controllers\Admin\AdminShiftController@edit')->name("admin.shift.edit");
-Route::put('/admin/shift/{id}/update', 'App\Http\Controllers\Admin\AdminShiftController@update')->name("admin.shift.update");
-Route::post('/admin/shift/store', 'App\Http\Controllers\Admin\AdminShiftController@store')->name("admin.shift.store");
-Route::delete('/admin/shift/{id}/delete', 'App\Http\Controllers\Admin\AdminShiftController@delete')->name("admin.shift.delete");
-
-Route::get('/admin/operator', 'App\Http\Controllers\Admin\AdminOperatorController@index')->name("admin.operator.index");
-Route::get('/admin/operator/create', 'App\Http\Controllers\Admin\AdminOperatorController@create')->name("admin.operator.create");
-Route::post('/admin/operator/store', 'App\Http\Controllers\Admin\AdminOperatorController@store')->name("admin.operator.store");
-Route::get('/admin/operator/{id}/edit', 'App\Http\Controllers\Admin\AdminOperatorController@edit')->name("admin.operator.edit");
-Route::put('/admin/operator/{id}/update', 'App\Http\Controllers\Admin\AdminOperatorController@update')->name("admin.operator.update");
-Route::delete('/admin/operator/{id}/delete', 'App\Http\Controllers\Admin\AdminOperatorController@delete')->name("admin.operator.delete");
-
-Route::get('/admin/supervisor', 'App\Http\Controllers\Admin\AdminSupervisorController@index')->name("admin.supervisor.index");
-Route::get('/admin/supervisor/create', 'App\Http\Controllers\Admin\AdminSupervisorController@create')->name("admin.supervisor.create");
-Route::post('/admin/supervisor/store', 'App\Http\Controllers\Admin\AdminSupervisorController@store')->name("admin.supervisor.store");
-Route::get('/admin/supervisor/{id}/edit', 'App\Http\Controllers\Admin\AdminSupervisorController@edit')->name("admin.supervisor.edit");
-Route::put('/admin/supervisor/{id}/update', 'App\Http\Controllers\Admin\AdminSupervisorController@update')->name("admin.supervisor.update");
-Route::delete('/admin/supervisor/{id}/delete', 'App\Http\Controllers\Admin\AdminSupervisorController@delete')->name("admin.supervisor.delete");
-
-Route::get('/admin/department', 'App\Http\Controllers\Admin\AdminDepartmentController@index')->name("admin.department.index");
-Route::get('/admin/department/create', 'App\Http\Controllers\Admin\AdminDepartmentController@create')->name("admin.department.create");
-Route::get('/admin/department/{id}/edit', 'App\Http\Controllers\Admin\AdminDepartmentController@edit')->name("admin.department.edit");
-Route::put('/admin/department/{id}/update', 'App\Http\Controllers\Admin\AdminDepartmentController@update')->name("admin.department.update");
-Route::post('/admin/department/store', 'App\Http\Controllers\Admin\AdminDepartmentController@store')->name("admin.department.store");
-Route::delete('/admin/department/{id}/delete', 'App\Http\Controllers\Admin\AdminDepartmentController@delete')->name("admin.department.delete");
-
-Route::get('/admin/operator_type', 'App\Http\Controllers\Admin\AdminOperatorTypeController@index')->name("admin.operator_type.index");
-Route::get('/admin/operator_type/create', 'App\Http\Controllers\Admin\AdminOperatorTypeController@create')->name("admin.operator_type.create");
-Route::get('/admin/operator_type/{id}/edit', 'App\Http\Controllers\Admin\AdminOperatorTypeController@edit')->name("admin.operator_type.edit");
-Route::put('/admin/operator_type/{id}/update', 'App\Http\Controllers\Admin\AdminOperatorTypeController@update')->name("admin.operator_type.update");
-Route::post('/admin/operator_type/store', 'App\Http\Controllers\Admin\AdminOperatorTypeController@store')->name("admin.operator_type.store");
-Route::delete('/admin/operator_type/{id}/delete', 'App\Http\Controllers\Admin\AdminOperatorTypeController@delete')->name("admin.operator_type.delete");
-
-Route::get('/admin/company', 'App\Http\Controllers\Admin\AdminCompanyController@index')->name("admin.company.index");
-Route::get('/admin/company/{id}/edit', 'App\Http\Controllers\Admin\AdminCompanyController@edit')->name("admin.company.edit");
-Route::put('/admin/company/{id}/update', 'App\Http\Controllers\Admin\AdminCompanyController@update')->name("admin.company.update");
-Route::delete('/admin/company/{id}/delete', 'App\Http\Controllers\Admin\AdminCompanyController@delete')->name("admin.company.delete");
 
 // Route::get('schedule/list', [AdminScheduleController::class, 'listSchedule'])->name('schedule.list');
 // Route::resource('schedule', AdminScheduleController::class);

@@ -48,6 +48,13 @@
                                           <input type="date" name="end_time" class="form-control flatpickr-time-picker-24h" placeholder="Select time..">
                                         </div>
                                         <div class="col-md-4">
+                                            <label for="label-color-horizontal">Warna Label</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <input type="text" name="label_color" id="label-color-horizontal" class="form-control">
+                                            
+                                        </div>
+                                        <div class="col-md-4">
                                             <label for="department-horizontal">Keterangan</label>
                                         </div>
                                         <div class="col-md-8 form-group">
