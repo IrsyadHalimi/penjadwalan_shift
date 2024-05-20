@@ -12,6 +12,6 @@ class HomeController extends Controller
         $viewData = [];
         $viewData["title"] = "Home - Penjadwalan Shift";
         $viewData["subtitle"] = "Home";
-        return view('home')->with("viewData", $viewData);
+        return view('auth.login')->with("viewData", $viewData);
     }
 }

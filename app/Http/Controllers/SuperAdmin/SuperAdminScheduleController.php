@@ -23,7 +23,7 @@ class SuperAdminScheduleController extends Controller
         $start_date = date('Y-m-d', strtotime($request->start));
         $end_date = date('Y-m-d', strtotime($request->end));
         $schedule = Schedule::where('start_date', '>=', $start_date)
-        ->where('end_date', '<=' , $end_date)->get()
+        ->where('end_date', '<=' , $end_date)->where('user_id', '=', 1)->get()
         ->map(function ($item) {
             $shift = Shift::find($item->shift_id);
             $user = User::find($item->user_id);
@@ -48,7 +48,7 @@ class SuperAdminScheduleController extends Controller
     {
         $users = User::all();
         $shifts = Shift::all();
-        return view('admin.schedule.schedule-form', [
+        return view('superadmin.schedule.schedule-form', [
             'data' => $schedule,
             'shifts' => $shifts, 
             'users' => $users, 
@@ -59,6 +59,10 @@ class SuperAdminScheduleController extends Controller
     public function store(EventRequest $request, Schedule $schedule)
     {
         return $this->update($request, $schedule);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Save data store successfully'
+        ]);
     }
 
     public function edit(Schedule $schedule)
@@ -87,7 +91,7 @@ class SuperAdminScheduleController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Save data successfully'
+            'message' => 'Save data update successfully'
         ]);
     }
 

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FullCalenderController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\Admin\AdminScheduleController;
+use App\Http\Controllers\SuperAdmin\SuperAdminScheduleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,7 @@ use App\Http\Controllers\Admin\AdminScheduleController;
 */
 
 Auth::routes();
-Route::middleware('admin')->group(function() {
+Route::middleware('admin')->prefix('admin')->group(function() {
   Route::get('schedule/list', [AdminScheduleController::class, 'listSchedule'])->name('admin.schedule.list');
   Route::get('schedule/create', [AdminScheduleController::class, 'create'])->name('admin.schedule.create');
   Route::resource('schedule', AdminScheduleController::class);
@@ -70,41 +71,45 @@ Route::get('/', 'App\Http\Controllers\HomeController@index')->name("home.index")
 
 // Route::get('schedule/list', [AdminScheduleController::class, 'listSchedule'])->name('schedule.list');
 // Route::resource('schedule', AdminScheduleController::class);
-Route::get('/superadmin/schedule', 'App\Http\Controllers\Admin\AdminScheduleController@index')->name("admin.schedule.index");
+Route::middleware('superadmin')->prefix('superadmin')->group(function() {
+  Route::get('schedule/list', [SuperAdminScheduleController::class, 'listSchedule'])->name('superadmin.schedule.list');
+  Route::get('schedule/create', [SuperAdminScheduleController::class, 'create'])->name('superadmin.schedule.create');
+  Route::resource('schedule', SuperAdminScheduleController::class);
+  Route::get('/superadmin/schedule', 'App\Http\Controllers\SuperAdmin\SuperAdminScheduleController@index')->name("superadmin.schedule.index");
+  
+  Route::get('/superadmin/shift', 'App\Http\Controllers\SuperAdmin\SuperAdminShiftController@index')->name("superadmin.shift.index");
+  Route::get('/superadmin/shift/create', 'App\Http\Controllers\SuperAdmin\SuperAdminShiftController@create')->name("superadmin.shift.create");
+  Route::get('/superadmin/shift/{id}/edit', 'App\Http\Controllers\SuperAdmin\SuperAdminShiftController@edit')->name("superadmin.shift.edit");
+  Route::put('/superadmin/shift/{id}/update', 'App\Http\Controllers\SuperAdmin\SuperAdminShiftController@update')->name("superadmin.shift.update");
+  Route::post('/superadmin/shift/store', 'App\Http\Controllers\SuperAdmin\SuperAdminShiftController@store')->name("superadmin.shift.store");
+  Route::delete('/superadmin/shift/{id}/delete', 'App\Http\Controllers\SuperAdmin\SuperAdminShiftController@delete')->name("superadmin.shift.delete");
 
-Route::get('/superadmin/shift', 'App\Http\Controllers\SuperAdmin\SuperAdminShiftController@index')->name("superadmin.shift.index");
-Route::get('/superadmin/shift/create', 'App\Http\Controllers\SuperAdmin\SuperAdminShiftController@create')->name("superadmin.shift.create");
-Route::get('/superadmin/shift/{id}/edit', 'App\Http\Controllers\SuperAdmin\SuperAdminShiftController@edit')->name("superadmin.shift.edit");
-Route::put('/superadmin/shift/{id}/update', 'App\Http\Controllers\SuperAdmin\SuperAdminShiftController@update')->name("superadmin.shift.update");
-Route::post('/superadmin/shift/store', 'App\Http\Controllers\SuperAdmin\SuperAdminShiftController@store')->name("superadmin.shift.store");
-Route::delete('/superadmin/shift/{id}/delete', 'App\Http\Controllers\SuperAdmin\SuperAdminShiftController@delete')->name("superadmin.shift.delete");
+  Route::get('/superadmin/operator', 'App\Http\Controllers\SuperAdmin\SuperAdminOperatorController@index')->name("superadmin.operator.index");
+  Route::get('/superadmin/operator/create', 'App\Http\Controllers\SuperAdmin\SuperAdminOperatorController@create')->name("superadmin.operator.create");
+  Route::post('/superadmin/operator/store', 'App\Http\Controllers\SuperAdmin\SuperAdminOperatorController@store')->name("superadmin.operator.store");
+  Route::get('/superadmin/operator/{id}/edit', 'App\Http\Controllers\SuperAdmin\SuperAdminOperatorController@edit')->name("superadmin.operator.edit");
+  Route::put('/superadmin/operator/{id}/update', 'App\Http\Controllers\SuperAdmin\SuperAdminOperatorController@update')->name("superadmin.operator.update");
+  Route::delete('/superadmin/operator/{id}/delete', 'App\Http\Controllers\SuperAdmin\SuperAdminOperatorController@delete')->name("superadmin.operator.delete");
 
-Route::get('/superadmin/operator', 'App\Http\Controllers\SuperAdmin\SuperAdminOperatorController@index')->name("superadmin.operator.index");
-Route::get('/superadmin/operator/create', 'App\Http\Controllers\SuperAdmin\SuperAdminOperatorController@create')->name("superadmin.operator.create");
-Route::post('/superadmin/operator/store', 'App\Http\Controllers\SuperAdmin\SuperAdminOperatorController@store')->name("superadmin.operator.store");
-Route::get('/superadmin/operator/{id}/edit', 'App\Http\Controllers\SuperAdmin\SuperAdminOperatorController@edit')->name("superadmin.operator.edit");
-Route::put('/superadmin/operator/{id}/update', 'App\Http\Controllers\SuperAdmin\SuperAdminOperatorController@update')->name("superadmin.operator.update");
-Route::delete('/superadmin/operator/{id}/delete', 'App\Http\Controllers\SuperAdmin\SuperAdminOperatorController@delete')->name("superadmin.operator.delete");
+  Route::get('/superadmin/supervisor', 'App\Http\Controllers\SuperAdmin\SuperAdminSupervisorController@index')->name("superadmin.supervisor.index");
+  Route::get('/superadmin/supervisor/create', 'App\Http\Controllers\SuperAdmin\SuperAdminSupervisorController@create')->name("superadmin.supervisor.create");
+  Route::post('/superadmin/supervisor/store', 'App\Http\Controllers\SuperAdmin\SuperAdminSupervisorController@store')->name("superadmin.supervisor.store");
+  Route::get('/superadmin/supervisor/{id}/edit', 'App\Http\Controllers\SuperAdmin\SuperAdminSupervisorController@edit')->name("superadmin.supervisor.edit");
+  Route::put('/superadmin/supervisor/{id}/update', 'App\Http\Controllers\SuperAdmin\SuperAdminSupervisorController@update')->name("superadmin.supervisor.update");
+  Route::delete('/superadmin/supervisor/{id}/delete', 'App\Http\Controllers\SuperAdmin\SuperAdminSupervisorController@delete')->name("superadmin.supervisor.delete");
 
-Route::get('/superadmin/supervisor', 'App\Http\Controllers\SuperAdmin\SuperAdminSupervisorController@index')->name("superadmin.supervisor.index");
-Route::get('/superadmin/supervisor/create', 'App\Http\Controllers\SuperAdmin\SuperAdminSupervisorController@create')->name("superadmin.supervisor.create");
-Route::post('/superadmin/supervisor/store', 'App\Http\Controllers\SuperAdmin\SuperAdminSupervisorController@store')->name("superadmin.supervisor.store");
-Route::get('/superadmin/supervisor/{id}/edit', 'App\Http\Controllers\SuperAdmin\SuperAdminSupervisorController@edit')->name("superadmin.supervisor.edit");
-Route::put('/superadmin/supervisor/{id}/update', 'App\Http\Controllers\SuperAdmin\SuperAdminSupervisorController@update')->name("superadmin.supervisor.update");
-Route::delete('/superadmin/supervisor/{id}/delete', 'App\Http\Controllers\SuperAdmin\SuperAdminSupervisorController@delete')->name("superadmin.supervisor.delete");
+  Route::get('/superadmin/department', 'App\Http\Controllers\SuperAdmin\SuperAdminDepartmentController@index')->name("superadmin.department.index");
+  Route::get('/superadmin/department/create', 'App\Http\Controllers\SuperAdmin\SuperAdminDepartmentController@create')->name("superadmin.department.create");
+  Route::get('/superadmin/department/{id}/edit', 'App\Http\Controllers\SuperAdmin\SuperAdminDepartmentController@edit')->name("superadmin.department.edit");
+  Route::put('/superadmin/department/{id}/update', 'App\Http\Controllers\SuperAdmin\SuperAdminDepartmentController@update')->name("superadmin.department.update");
+  Route::post('/superadmin/department/store', 'App\Http\Controllers\SuperAdmin\SuperAdminDepartmentController@store')->name("superadmin.department.store");
+  Route::delete('/superadmin/department/{id}/delete', 'App\Http\Controllers\SuperAdmin\SuperAdminDepartmentController@delete')->name("superadmin.department.delete");
 
-Route::get('/superadmin/department', 'App\Http\Controllers\SuperAdmin\SuperAdminDepartmentController@index')->name("superadmin.department.index");
-Route::get('/superadmin/department/create', 'App\Http\Controllers\SuperAdmin\SuperAdminDepartmentController@create')->name("superadmin.department.create");
-Route::get('/superadmin/department/{id}/edit', 'App\Http\Controllers\SuperAdmin\SuperAdminDepartmentController@edit')->name("superadmin.department.edit");
-Route::put('/superadmin/department/{id}/update', 'App\Http\Controllers\SuperAdmin\SuperAdminDepartmentController@update')->name("superadmin.department.update");
-Route::post('/superadmin/department/store', 'App\Http\Controllers\SuperAdmin\SuperAdminDepartmentController@store')->name("superadmin.department.store");
-Route::delete('/superadmin/department/{id}/delete', 'App\Http\Controllers\SuperAdmin\SuperAdminDepartmentController@delete')->name("superadmin.department.delete");
-
-Route::get('/superadmin/company', 'App\Http\Controllers\SuperAdmin\SuperAdminCompanyController@index')->name("superadmin.company.index");
-Route::get('/superadmin/company/{id}/edit', 'App\Http\Controllers\SuperAdmin\SuperAdminCompanyController@edit')->name("superadmin.company.edit");
-Route::put('/superadmin/company/{id}/update', 'App\Http\Controllers\SuperAdmin\SuperAdminCompanyController@update')->name("superadmin.company.update");
-Route::delete('/superadmin/company/{id}/delete', 'App\Http\Controllers\SuperAdmin\SuperAdminCompanyController@delete')->name("superadmin.company.delete");
-
+  Route::get('/superadmin/company', 'App\Http\Controllers\SuperAdmin\SuperAdminCompanyController@index')->name("superadmin.company.index");
+  Route::get('/superadmin/company/{id}/edit', 'App\Http\Controllers\SuperAdmin\SuperAdminCompanyController@edit')->name("superadmin.company.edit");
+  Route::put('/superadmin/company/{id}/update', 'App\Http\Controllers\SuperAdmin\SuperAdminCompanyController@update')->name("superadmin.company.update");
+  Route::delete('/superadmin/company/{id}/delete', 'App\Http\Controllers\SuperAdmin\SuperAdminCompanyController@delete')->name("superadmin.company.delete");
+});
 // Route::get('operator/schedule/list', [OperatorScheduleController::class, 'listSchedule'])->name('schedule.list');
 // Route::resource('schedule', OperatorScheduleController::class);
 // Route::get('/operator/schedule', 'App\Http\Controllers\Operator\OperatorScheduleController@index')->name("operator.schedule.index");
