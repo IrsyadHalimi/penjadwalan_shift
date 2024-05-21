@@ -10,6 +10,8 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends AuthenticatableUser implements Authenticatable
 {   
+    use HasApiTokens, HasFactory, Notifiable;
+
     protected $fillable = [
         'company_id',
         'department_id',

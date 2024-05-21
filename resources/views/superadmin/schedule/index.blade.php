@@ -49,7 +49,7 @@
             editable: true,
             dateClick: function(info) {
                 $.ajax({
-                    url: `{{ route('schedule.create') }}`,
+                    url: `{{ route('superadmin.schedule.create') }}`,
                     data: {
                         start_date: info.dateStr,
                         end_date: info.dateStr
@@ -92,7 +92,7 @@
                 event
             }) {
                 $.ajax({
-                    url: `{{ url('schedule') }}/${event.id}/edit`,
+                    url: `{{ url('superadmin/schedule') }}/${event.id}/edit`,
                     success: function(res) {
                         modal.html(res).modal('show')
 
@@ -129,7 +129,7 @@
                     // Mengirim permintaan AJAX hanya jika pengguna mengonfirmasi
                     const event = info.event
                     $.ajax({
-                        url: `{{ url('schedule') }}/${event.id}`,
+                        url: `{{ url('superadmin/schedule') }}/${event.id}/update`,
                         method: 'put',
                         data: {
                             id: event.id,
@@ -177,7 +177,7 @@
                 $('#confirmButton').off('click').on('click', function() {
                     // Mengirim permintaan AJAX hanya jika pengguna mengonfirmasi
                     $.ajax({
-                        url: `{{ url('schedule') }}/${event.id}`,
+                        url: `{{ url('superadmin/schedule') }}/${event.id}/update`,
                         method: 'put',
                         data: {
                             id: event.id,

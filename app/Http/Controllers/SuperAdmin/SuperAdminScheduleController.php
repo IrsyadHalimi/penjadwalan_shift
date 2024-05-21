@@ -52,13 +52,19 @@ class SuperAdminScheduleController extends Controller
             'data' => $schedule,
             'shifts' => $shifts, 
             'users' => $users, 
-            'action' => route('schedule.store')
+            'action' => route('superadmin.schedule.store')
         ]);
     }
 
-    public function store(EventRequest $request, Schedule $schedule)
+    public function store(EventRequest $request)
     {
-        return $this->update($request, $schedule);
+        $schedule = new Schedule();
+        $schedule->start_date = $request->start_date;
+        $schedule->end_date = $request->end_date;
+        $schedule->user_id = $request->user_id;
+        $schedule->shift_id = $request->shift_id;
+        $schedule->save();
+
         return response()->json([
             'status' => 'success',
             'message' => 'Save data store successfully'
@@ -73,7 +79,7 @@ class SuperAdminScheduleController extends Controller
             'data' => $schedule, 
             'shifts' => $shifts, 
             'users' => $users, 
-            'action' => route('schedule.update', $schedule->id)
+            'action' => route('superadmin.schedule.update', $schedule->id)
         ]);
     }
 

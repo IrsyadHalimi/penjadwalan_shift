@@ -74,14 +74,47 @@
                 <div class="sidebar-menu">
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
-
+                        @if (Auth::check())
+                            @php
+                                $role = Auth::user()->role;
+                            @endphp
+                            @if ($role === 'admin')
+                            <li class="sidebar-item  ">
+                                <a href="{{ route('admin.shift.index') }}" class='sidebar-link'>
+                                    <i class="bi bi-grid-fill"></i>
+                                    <span>Dasbor Admin</span>
+                                </a>
+                            </li>
+                            @elseif ($role === 'operator')
+                            <li class="sidebar-item  ">
+                                <a href="{{ route('admin.shift.index') }}" class='sidebar-link'>
+                                    <i class="bi bi-grid-fill"></i>
+                                    <span>Dasbor Operator</span>
+                                </a>
+                            </li>
+                            @elseif ($role === 'supervisor')
+                            <li class="sidebar-item  ">
+                                <a href="{{ route('admin.shift.index') }}" class='sidebar-link'>
+                                    <i class="bi bi-grid-fill"></i>
+                                    <span>Dasbor Supervisor</span>
+                                </a>
+                            </li> 
+                            @else
+                            <li class="sidebar-item  ">
+                                <a href="{{ route('admin.shift.index') }}" class='sidebar-link'>
+                                    <i class="bi bi-grid-fill"></i>
+                                    <span>Dasbor Superadmin</span>
+                                </a>
+                            </li>        
+                            @endif
+                        @endif
                         <li class="sidebar-item  ">
                             <a href="{{ route('admin.shift.index') }}" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dasbor</span>
                             </a>
                         </li>
-                        <li class="sidebar-item  ">
+                        <!-- <li class="sidebar-item  ">
                             <a href="{{ route('admin.schedule.index') }}" class='sidebar-link'>
                                 <i class="bi bi-calendar4-week"></i>
                                 <span>Jadwal</span>
@@ -134,7 +167,7 @@
                                 <i class="bi bi-book"></i>
                                 <span>Laporan</span>
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </div>
