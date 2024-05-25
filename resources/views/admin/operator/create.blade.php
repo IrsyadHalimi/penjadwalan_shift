@@ -15,8 +15,11 @@
         <div class="row match-height">
             <div class="col-md-12 col-12">
                 <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Horizontal Form</h4>
+                    <div class="card-header pb-0">
+                        <h4 class="card-title">Tambah Data Operator Baru</h4>
+                        <p>
+                            Formulir dibawah berfungsi untuk menambahkan data operator baru kedalam salah satu departemen di perusahaan
+                        </p>
                     </div>
                     <div class="card-content">
                         <div class="card-body">

@@ -60,4 +60,9 @@ class Department extends Model
     {
         $this->attributes['updated_at'] = $updatedAt;
     }
+
+    public function shifts()
+    {
+        return $this->hasMany(Shift::class);
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Shift;
+use App\Models\Department;
 use Illuminate\Http\Request;
 
 class AdminShiftController extends Controller
@@ -12,7 +13,7 @@ class AdminShiftController extends Controller
     $viewData = [];
     $viewData["title"] = "Shift - Penjadwalan Shift";
     $viewData["subtitle"] = "Daftar Shift Kerja";
-    $viewData["shift"] = Shift::all();
+    $viewData['shifts'] = Shift::with('department')->get();
     return view('admin.shift.index')->with("viewData", $viewData);
   }
 
@@ -21,6 +22,7 @@ class AdminShiftController extends Controller
     $viewData = [];
     $viewData["title"] = "Shift - Penjadwalan Shift";
     $viewData["subtitle"] = "Tambah Shift Kerja";
+    $viewData["department"] = Department::all();
     return view('admin.shift.create')->with("viewData", $viewData);
   }
 
@@ -45,6 +47,7 @@ class AdminShiftController extends Controller
     $viewData["title"] = "Admin - Edit Shift";
     $viewData["subtitle"] = "Edit Shift Kerja";
     $viewData["shift"] = Shift::findOrFail($id);
+    $viewData["department"] = Department::all();
     return view('admin.shift.edit')->with("viewData", $viewData);
   }
 

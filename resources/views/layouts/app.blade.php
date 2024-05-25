@@ -79,95 +79,136 @@
                                 $role = Auth::user()->role;
                             @endphp
                             @if ($role === 'admin')
-                            <li class="sidebar-item  ">
-                                <a href="{{ route('admin.shift.index') }}" class='sidebar-link'>
-                                    <i class="bi bi-grid-fill"></i>
-                                    <span>Dasbor Admin</span>
-                                </a>
-                            </li>
-                            @elseif ($role === 'operator')
-                            <li class="sidebar-item  ">
-                                <a href="{{ route('admin.shift.index') }}" class='sidebar-link'>
-                                    <i class="bi bi-grid-fill"></i>
-                                    <span>Dasbor Operator</span>
-                                </a>
-                            </li>
-                            @elseif ($role === 'supervisor')
-                            <li class="sidebar-item  ">
-                                <a href="{{ route('admin.shift.index') }}" class='sidebar-link'>
-                                    <i class="bi bi-grid-fill"></i>
-                                    <span>Dasbor Supervisor</span>
-                                </a>
-                            </li> 
-                            @else
-                            <li class="sidebar-item  ">
-                                <a href="{{ route('admin.shift.index') }}" class='sidebar-link'>
-                                    <i class="bi bi-grid-fill"></i>
-                                    <span>Dasbor Superadmin</span>
-                                </a>
-                            </li>        
+                                <li class="sidebar-item  ">
+                                    <a href="{{ route('admin.shift.index') }}" class='sidebar-link'>
+                                        <i class="bi bi-grid-fill"></i>
+                                        <span>Dasbor Admin</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item  ">
+                                    <a href="{{ route('admin.schedule.index') }}" class='sidebar-link'>
+                                        <i class="bi bi-calendar4-week"></i>
+                                        <span>Jadwal</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item  ">
+                                    <a href="{{ route('admin.shift.index') }}" class='sidebar-link'>
+                                        <i class="bi bi-shift"></i>
+                                        <span>Shift</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item  ">
+                                    <a href="{{ route('admin.operator.index') }}" class='sidebar-link'>
+                                        <i class="bi bi-people-fill"></i>
+                                        <span>Operator</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item  ">
+                                    <a href="{{ route('admin.supervisor.index') }}" class='sidebar-link'>
+                                        <i class="bi bi-person"></i>
+                                        <span>Supervisor</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item  ">
+                                    <a href="{{ route('admin.company.index') }}" class='sidebar-link'>
+                                        <i class="bi bi-building-fill"></i>
+                                        <span>Perusahaan</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item  ">
+                                    <a href="{{ route('admin.department.index') }}" class='sidebar-link'>
+                                        <i class="bi bi-list-nested"></i>
+                                        <span>Departemen</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item  ">
+                                    <a href="{{ route('admin.operator_type.index') }}" class='sidebar-link'>
+                                        <i class="bi bi-people"></i>
+                                        <span>Jenis Operator</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item  ">
+                                    <a href="{{ route('admin.department.index') }}" class='sidebar-link'>
+                                        <i class="bi bi-book"></i>
+                                        <span>Laporan</span>
+                                    </a>
+                                </li>
+                                @elseif ($role === 'operator')
+                                <li class="sidebar-item  ">
+                                    <a href="{{ route('admin.shift.index') }}" class='sidebar-link'>
+                                        <i class="bi bi-grid-fill"></i>
+                                        <span>Dasbor Operator</span>
+                                    </a>
+                                </li>
+                                @elseif ($role === 'supervisor')
+                                <li class="sidebar-item  ">
+                                    <a href="{{ route('admin.shift.index') }}" class='sidebar-link'>
+                                        <i class="bi bi-grid-fill"></i>
+                                        <span>Dasbor Supervisor</span>
+                                    </a>
+                                </li>        
+                                @endif
                             @endif
-                        @endif
                         <li class="sidebar-item  ">
-                            <a href="{{ route('admin.shift.index') }}" class='sidebar-link'>
+                            <a href="{{ route('superadmin.shift.index') }}" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
-                                <span>Dasbor</span>
+                                <span>Dasbor SuperAdmin</span>
                             </a>
                         </li>
-                        <!-- <li class="sidebar-item  ">
-                            <a href="{{ route('admin.schedule.index') }}" class='sidebar-link'>
+                        <li class="sidebar-item  ">
+                            <a href="{{ route('superadmin.schedule.index') }}" class='sidebar-link'>
                                 <i class="bi bi-calendar4-week"></i>
                                 <span>Jadwal</span>
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="{{ route('admin.shift.index') }}" class='sidebar-link'>
+                            <a href="{{ route('superadmin.shift.index') }}" class='sidebar-link'>
                                 <i class="bi bi-shift"></i>
                                 <span>Shift</span>
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="{{ route('admin.operator.index') }}" class='sidebar-link'>
+                            <a href="{{ route('superadmin.operator.index') }}" class='sidebar-link'>
                                 <i class="bi bi-people-fill"></i>
                                 <span>Operator</span>
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="{{ route('admin.supervisor.index') }}" class='sidebar-link'>
+                            <a href="{{ route('superadmin.supervisor.index') }}" class='sidebar-link'>
                                 <i class="bi bi-person"></i>
                                 <span>Supervisor</span>
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="{{ route('admin.company.index') }}" class='sidebar-link'>
-                                <i class="bi bi-person-workspace"></i>
-                                <span>Admin Perusahaan</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item  ">
-                            <a href="{{ route('admin.company.index') }}" class='sidebar-link'>
+                            <a href="{{ route('superadmin.company.index') }}" class='sidebar-link'>
                                 <i class="bi bi-building-fill"></i>
                                 <span>Perusahaan</span>
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="{{ route('admin.department.index') }}" class='sidebar-link'>
+                            <a href="{{ route('superadmin.department.index') }}" class='sidebar-link'>
                                 <i class="bi bi-list-nested"></i>
                                 <span>Departemen</span>
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="{{ route('admin.operator_type.index') }}" class='sidebar-link'>
+                            <a href="{{ route('superadmin.department.index') }}" class='sidebar-link'>
+                                <i class="bi bi-person-workspace"></i>
+                                <span>Admin Perusahaan</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item  ">
+                            <a href="{{ route('superadmin.operator_type.index') }}" class='sidebar-link'>
                                 <i class="bi bi-people"></i>
                                 <span>Jenis Operator</span>
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="{{ route('admin.department.index') }}" class='sidebar-link'>
+                            <a href="{{ route('superadmin.department.index') }}" class='sidebar-link'>
                                 <i class="bi bi-book"></i>
                                 <span>Laporan</span>
                             </a>
-                        </li> -->
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -182,29 +223,25 @@
             <div class="page-heading">
                 <div class="page-title">
                     <div class="row">
-                        <div class="col-8 col-md-4 order-md-1 order-last">
-                            <h3>Table</h3>
-                            <p class="text-subtitle text-muted">Who does not love tables?</p>
+                        <div class="col-8 col-md-10 order-md-1 order-last mb-3">
+                            <h3>{{ ucwords($role) }}</h3>
+                            <h3 class="text-muted">Penjadwalan Shift Kerja Operator</h3>
                         </div>
-                        <div class="col-8 col-md-4 order-md-2 order-first">
+                        <div class="col-8 col-md-2 order-md-2 order-first">
                             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Table</li>
+                                    <li class="breadcrumb-item">@guest
+                                    <a class="nav-link active" href="{{ route('login') }}">Login</a>
+                                    <a class="nav-link active" href="{{ route('register') }}">Register</a>
+                                    @else
+                                    <form id="logout" action="{{ route('logout') }}" method="POST">
+                                        <a role="button" class="nav-link active"
+                                        onclick="document.getElementById('logout').submit();">Logout</a>
+                                        @csrf
+                                    </form>
+                                    @endguest</li>
                                 </ol>
                             </nav>
-                        </div>
-                        <div class="col-8 col-md-4 order-md-3 order-first">
-                            @guest
-                            <a class="nav-link active" href="{{ route('login') }}">Login</a>
-                            <a class="nav-link active" href="{{ route('register') }}">Register</a>
-                            @else
-                            <form id="logout" action="{{ route('logout') }}" method="POST">
-                                <a role="button" class="nav-link active"
-                                onclick="document.getElementById('logout').submit();">Logout</a>
-                                @csrf
-                            </form>
-                            @endguest
                         </div>
                     </div>
                 </div>

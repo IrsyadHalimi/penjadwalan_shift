@@ -72,7 +72,7 @@ Route::middleware('admin')->prefix('admin')->group(function() {
 });
 
 Route::get('/', 'App\Http\Controllers\HomeController@index')->name("home.index");
-Route::get('/error', 'App\Http\Controllers\ErrorController@index')->name("error.index");
+Route::get('/error', 'App\Http\Controllers\HomeController@error')->name("home.error");
 
 Route::middleware('superadmin')->prefix('superadmin')->group(function() {
   Route::get('/schedule', [SuperAdminScheduleController::class, 'index'])->name('superadmin.schedule.index');
@@ -102,6 +102,13 @@ Route::middleware('superadmin')->prefix('superadmin')->group(function() {
   Route::get('/supervisor/{id}/edit', 'App\Http\Controllers\SuperAdmin\SuperAdminSupervisorController@edit')->name("superadmin.supervisor.edit");
   Route::put('/supervisor/{id}/update', 'App\Http\Controllers\SuperAdmin\SuperAdminSupervisorController@update')->name("superadmin.supervisor.update");
   Route::delete('/supervisor/{id}/delete', 'App\Http\Controllers\SuperAdmin\SuperAdminSupervisorController@delete')->name("superadmin.supervisor.delete");
+
+  Route::get('/operator_type', 'App\Http\Controllers\SuperAdmin\SuperAdminOperatorTypeController@index')->name("superadmin.operator_type.index");
+  Route::get('/operator_type/create', 'App\Http\Controllers\SuperAdmin\SuperAdminOperatorTypeController@create')->name("superadmin.operator_type.create");
+  Route::get('/operator_type/{id}/edit', 'App\Http\Controllers\SuperAdmin\SuperAdminOperatorTypeController@edit')->name("superadmin.operator_type.edit");
+  Route::put('/operator_type/{id}/update', 'App\Http\Controllers\SuperAdmin\SuperAdminOperatorTypeController@update')->name("superadmin.operator_type.update");
+  Route::post('/operator_type/store', 'App\Http\Controllers\SuperAdmin\SuperAdminOperatorTypeController@store')->name("superadmin.operator_type.store");
+  Route::delete('/operator_type/{id}/delete', 'App\Http\Controllers\SuperAdmin\SuperAdminOperatorTypeController@delete')->name("superadmin.operator_type.delete");
 
   Route::get('/department', 'App\Http\Controllers\SuperAdmin\SuperAdminDepartmentController@index')->name("superadmin.department.index");
   Route::get('/department/create', 'App\Http\Controllers\SuperAdmin\SuperAdminDepartmentController@create')->name("superadmin.department.create");

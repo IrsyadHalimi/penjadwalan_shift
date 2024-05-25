@@ -15,8 +15,11 @@
         <div class="row match-height">
             <div class="col-md-12 col-12">
                 <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Horizontal Form</h4>
+                    <div class="card-header pb-0">
+                        <h4 class="card-title">Tambah Data Shift Baru</h4>
+                        <p>
+                            Formulir dibawah berfungsi untuk menambahkan data shift baru kedalam salah satu departemen di perusahaan
+                        </p>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
@@ -30,29 +33,42 @@
                                             <input type="text" name="shift_name" id="shift-name-horizontal" class="form-control">
                                         </div>
                                         <div class="col-md-4">
-                                            <label for="departmentId-horizontal">Departemen</label>
+                                            <label for="department-horizontal">Departemen</label>
                                         </div>
-                                        <div class="col-md-8 form-group">
-                                            <input type="text" name="department_id" id="departmentId-horizontal" class="form-control">
+                                        <div class="col-md-8 form-group">  
+                                            <select id="department_id" class="form-select @error('department_id') is-invalid @enderror" name="department_id"  id="basicSelect">
+                                                <option value="" hidden>-- Pilih Departemen --</option>
+                                                @foreach($viewData['department'] as $departments)
+                                                <option value="{{ $departments->getId() }}">{{ $departments->getDepartmentName() }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="start-horizontal">Jam Masuk</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                          <input type="date" name="start_time" class="form-control flatpickr-time-picker-24h" placeholder="Select time..">
+                                          <input type="time" name="start_time" class="form-control flatpickr-time-picker-24h" placeholder="Pilih waktu">
                                         </div>
                                         <div class="col-md-4">
                                             <label for="start-horizontal">Jam Keluar</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                          <input type="date" name="end_time" class="form-control flatpickr-time-picker-24h" placeholder="Select time..">
+                                          <input type="time" name="end_time" class="form-control flatpickr-time-picker-24h" placeholder="Pilih waktu">
                                         </div>
                                         <div class="col-md-4">
-                                            <label for="label-color-horizontal">Warna Label</label>
+                                            <label for="label-color-horizontal">Warna Label Shift</label>
                                         </div>
-                                        <div class="col-md-8 form-group">
-                                            <input type="text" name="label_color" id="label-color-horizontal" class="form-control">
-                                            
+                                        <div class="col-md-8 form-group">  
+                                          <select id="label_color" class="form-select @error('label_color') is-invalid @enderror" name="label_color"  id="basicSelect">
+                                            <option value="" hidden>-- Pilih Warna Label --</option>
+                                            <option class="text-primary" value="primary">Biru</option>
+                                            <option class="text-success" value="success">Hijau</option>
+                                            <option class="text-warning" value="warning">Kuning</option>
+                                            <option class="text-dark" value="dark">Hitam</option>
+                                            <option class="text-danger" value="danger">Merah</option>
+                                            <option class="text-secondary" value="secondary">Abu-abu</option>
+                                            <option class="text-info" value="info">Biru Muda</option>
+                                          </select>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="department-horizontal">Keterangan</label>

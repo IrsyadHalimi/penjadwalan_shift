@@ -12,7 +12,7 @@
   @endif
 
   <section id="basic-horizontal-layouts">
-    <form method="POST" action="{{ route('superadmin.company.update', ['id'=> $viewData['company']->getId()]) }}"
+    <form method="POST" action="{{ route('admin.operator_type.update', ['id'=> $viewData['operator_type']->getId()]) }}"
     enctype="multipart/form-data">
       @csrf
       @method('PUT')
@@ -28,18 +28,18 @@
                                 <div class="form-body">
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <label for="company-name-horizontal">Nama Departemen</label>
+                                            <label for="operator_name_type-horizontal">Nama Jenis Operator</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" name="company_name" value="{{ $viewData['company']->getCompanyName() }}" id="company-name-horizontal" class="form-control">
+                                            <input type="text" name="operator_name_type" value="{{ $viewData['operator_type']->getOperatorNameType() }}" id="operator_name_type-horizontal" class="form-control">
                                         </div>
-                                        <div class="col-md-4">
-                                          <div class="mb-3 row">
-                                            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Alamat</label>
+                                        <div class="col">
+                                            <div class="mb-3 row">
+                                            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Keterangan</label>
                                             <div class="col-lg-10 col-md-6 col-sm-12">
-                                                <textarea id="company_address" name="company_address" class="form-control" rows="4">{{ $viewData['company']->getCompanyAddress() }}</textarea>
+                                                <textarea id="keterangan" name="notes" class="form-control" rows="4">{{ $viewData['operator_type']->getNotes() }}</textarea>
                                             </div>
-                                          </div>
+                                            </div>
                                         </div>
                                         <div class="col-sm-12 d-flex justify-content-end">
                                             <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>

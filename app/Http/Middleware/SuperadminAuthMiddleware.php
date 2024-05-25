@@ -20,7 +20,7 @@ class SuperadminAuthMiddleware
         if (Auth::user() && Auth::user()->getRole()=='superadmin') {
             return $next($request);
         } else {
-            return redirect()->route('home.index');
+            return response()->noContent();
         }
     }
 }

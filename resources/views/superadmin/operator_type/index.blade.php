@@ -25,7 +25,7 @@
                         <code class="highlighter-rouge">&lt;tbody&gt;</code>.
                     </p>
                     <div>
-                    <a href="{{ route('admin.department.create') }}"><button class="btn btn-primary">Tambah Departemen Baru</button></a>
+                    <a href="{{ route('admin.operator_type.create') }}"><button class="btn btn-primary">Tambah Jenis Operator Baru</button></a>
                     </div>
                 </div>
                 <!-- table hover -->
@@ -34,17 +34,19 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Nama Departemen</th>
+                                <th>Nama Jenis Operator</th>
+                                <th>Keterangan</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($viewData['department'] as $departments)
+                            @foreach ($viewData['operator_type'] as $operator_types)
                             <tr>
-                                <td class="text-bold-500">{{ $departments->getId() }}</td>
-                                <td>{{ $departments->getDepartmentName() }}</td>
+                                <td class="text-bold-500">{{ $operator_types->getId() }}</td>
+                                <td>{{ $operator_types->getOperatorNameType() }}</td>
+                                <td>{{ $operator_types->getNotes() }}</td>
                                 <td>
-                                    <a href="{{route('admin.department.edit', ['id'=> $departments->getId()])}}">Edit</a>
-                                    <form action="{{ route('admin.department.delete', $departments->getId())}}" method="POST">
+                                    <a href="{{route('admin.operator_type.edit', ['id'=> $operator_types->getId()])}}">Edit</a>
+                                    <form action="{{ route('admin.operator_type.delete', $operator_types->getId())}}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger">

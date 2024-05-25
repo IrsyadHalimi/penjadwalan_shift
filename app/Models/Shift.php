@@ -43,6 +43,11 @@ class Shift extends Model
         $this->attributes['department_id'] = $department_id;
     }
     
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+    
     public function getStartTime()
     {
         return $this->attributes['start_time'];
