@@ -26,20 +26,18 @@
 </head>
 <body>
     <div id="app">
-        <div class="text-center py-5">
+        <div class="text-center py-5 my-5 mb-0">
             <h3>Penjadwalan Shift Kerja Operator</h3>
             <p class="text-subtitle text-muted">Silahkan masuk</p>                    
         </div>
         <div class="container">
-            <div class="row justify-content-center my-3">
+            <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Login') }}</div>
-
+                    <div class="card-header"></div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
-
                             <div class="row mb-3">
                                 <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
 
@@ -94,12 +92,12 @@
                                 </div>
                             </div>
                         </form>
-                        <form id="logout" action="{{ route('logout') }}" method="POST">
-                                <a role="button" class="nav-link active"
-                                onclick="document.getElementById('logout').submit();">Logout</a>
-                                @csrf
-                            </form>
                     </div>
+                </div>
+            </div>
+            <div class="row mb-0 text-center py-2">
+                <div class="col-md-4 offset-md-4">
+                <a class="nav-link active" href="{{ route('register') }}"><p class='text-gray-600'>Daftarkan Perusahaan Anda <strong>Disini!</strong></p></a>
                 </div>
             </div>
         </div>

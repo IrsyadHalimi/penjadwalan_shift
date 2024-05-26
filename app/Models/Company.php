@@ -9,6 +9,11 @@ class Company extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'company_name',
+        'company_address',
+    ];
+
     public static function validate($request)
     {
         $request->validate([
@@ -59,5 +64,10 @@ class Company extends Model
     public function setUpdatedAt($updatedAt)
     {
         $this->attributes['updated_at'] = $updatedAt;
+    }
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
     }
 }

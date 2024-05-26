@@ -138,4 +138,9 @@ class User extends AuthenticatableUser implements Authenticatable
     {
         $this->attributes['updated_at'] = $updatedAt;
     }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
 }
