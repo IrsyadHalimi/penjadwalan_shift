@@ -27,6 +27,16 @@
             <a href="index.html" class="btn btn-lg btn-outline-primary mt-3">Go Home</a>
         </div>
     </div>
+    <li class="breadcrumb-item">@guest
+                                    <a class="nav-link active" href="{{ route('login') }}">Login</a>
+                                    <a class="nav-link active" href="{{ route('register') }}">Register</a>
+                                    @else
+                                    <form id="logout" action="{{ route('logout') }}" method="POST">
+                                        <a role="button" class="nav-link active"
+                                        onclick="document.getElementById('logout').submit();">Logout</a>
+                                        @csrf
+                                    </form>
+                                    @endguest</li>
 </div>
 
 

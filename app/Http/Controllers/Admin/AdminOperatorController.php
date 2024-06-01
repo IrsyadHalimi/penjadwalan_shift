@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Department;
+use App\Models\Shift;
+use App\Models\OperatorType;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminOperatorController extends Controller
 {
@@ -22,6 +26,8 @@ class AdminOperatorController extends Controller
     $viewData = [];
     $viewData["title"] = " Tambah Operator- Penjadwalan Shift";
     $viewData["subtitle"] = "Tambah Operator";
+    $viewData["department"] = Department::all();
+    $viewData["operator_type"] = OperatorType::all();
     return view('admin.operator.create')->with("viewData", $viewData);
   }
 
@@ -35,7 +41,8 @@ class AdminOperatorController extends Controller
     $newUser->setPhoneNumber($request->input('phone_number'));
     $newUser->setPassword(Hash::make($request->input('password')));
     $newUser->setDepartmentId($request->input('department_id'));
-    $newUser->setCompanyId(1111);
+    $newUser->setOperatorTypeId($request->input('operator_type_id'));
+    $newUser->setCompanyId(Auth::user()->company_id);
     $newUser->setRole('operator');
     $newUser->save();
 
@@ -48,6 +55,9 @@ class AdminOperatorController extends Controller
     $viewData["title"] = "Admin - Edit Operator";
     $viewData["subtitle"] = "Edit Operator";
     $viewData["operator"] = User::findOrFail($id);
+    $viewData["department"] = Department::all();
+    $viewData["shift"] = Shift::all();
+    $viewData["operator_type"] = OperatorType::all();
     return view('admin.operator.edit')->with("viewData", $viewData);
   }
 
@@ -61,6 +71,8 @@ class AdminOperatorController extends Controller
     $user->setEmployeeId($request->input('employee_id'));
     $user->setEmail($request->input('email'));
     $user->setPhoneNumber($request->input('phone_number'));
+    $user->setOperatorTypeId($request->input('operator_type_id'));
+    $user->setCompanyId(Auth::user()->company_id);
     $user->setRole($request->input('role'));
     $user->save();
 

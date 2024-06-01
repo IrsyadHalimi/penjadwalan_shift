@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -72,7 +72,11 @@ class RegisterController extends Controller
             'company_address' => $data['company_address'],
         ]);
 
+        $userCount = User::where('role', 'admin')->count();
+        $company_code = $company->id . 1 . str_pad($userCount + 1, 4, '0', STR_PAD_LEFT);
+
         return User::create([
+            'id' => $company_code,
             'full_name' => $data['full_name'],
             'employee_id' => $data['employee_id'],
             'email' => $data['email'],

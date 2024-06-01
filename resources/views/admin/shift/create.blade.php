@@ -44,13 +44,13 @@
                                             </select>
                                         </div>
                                         <div class="col-md-4">
-                                            <label for="start-horizontal">Jam Masuk</label>
+                                            <label for="start-horizontal">Waktu Masuk</label>
                                         </div>
                                         <div class="col-md-8 form-group">
                                           <input type="time" name="start_time" class="form-control flatpickr-time-picker-24h" placeholder="Pilih waktu">
                                         </div>
                                         <div class="col-md-4">
-                                            <label for="start-horizontal">Jam Keluar</label>
+                                            <label for="start-horizontal">Waktu Keluar</label>
                                         </div>
                                         <div class="col-md-8 form-group">
                                           <input type="time" name="end_time" class="form-control flatpickr-time-picker-24h" placeholder="Pilih waktu">

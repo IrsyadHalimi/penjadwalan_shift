@@ -34,8 +34,8 @@
                                 <th>ID</th>
                                 <th>Nama Shift</th>
                                 <th>Departemen</th>
-                                <th>Jam Masuk</th>
-                                <th>Jam Keluar</th>
+                                <th>Waktu Masuk</th>
+                                <th>Waktu Keluar</th>
                                 <th>Keterangan</th>
                                 <th>Warna Label</th>
                                 <th> </th>

@@ -13,6 +13,7 @@ class User extends AuthenticatableUser implements Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
+        'id',
         'company_id',
         'department_id',
         'full_name', 
@@ -79,6 +80,16 @@ class User extends AuthenticatableUser implements Authenticatable
         $this->attributes['password'] = $password;
     }
     
+    public function getOperatorTypeId()
+    {
+        return $this->attributes['operator_type_id'];
+    }
+
+    public function setOperatorTypeId($operator_type_id)
+    {
+        $this->attributes['operator_type_id'] = $operator_type_id;
+    }
+    
     public function getDepartmentId()
     {
         return $this->attributes['department_id'];
@@ -142,5 +153,10 @@ class User extends AuthenticatableUser implements Authenticatable
     public function company()
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function operatorType()
+    {
+        return $this->belongsTo(OperatorType::class);
     }
 }

@@ -70,4 +70,9 @@ class OperatorType extends Model
     {
         $this->attributes['updated_at'] = $updatedAt;
     }
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }
