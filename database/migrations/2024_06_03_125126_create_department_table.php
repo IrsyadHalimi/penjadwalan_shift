@@ -13,12 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('operator_types', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('department_id');
-            $table->string('operator_name_type', 50);
+        Schema::create('departments', function (Blueprint $table) {
+            $table->string('id', 20)->primary();
+            $table->string('company_id', 50);
+            $table->string('department_name', 50);
             $table->string('notes', 255);
             $table->timestamps();
+
+            $table->foreign('company_id')->references('id')->on('companies');
         });
     }
 
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('operator_types');
+        Schema::dropIfExists('departments');
     }
 };

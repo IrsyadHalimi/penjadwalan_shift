@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Department;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class AdminDepartmentController extends Controller
 {
@@ -27,11 +29,16 @@ class AdminDepartmentController extends Controller
   public function store(Request $request)
   {
     Department::validate($request); 
-    // $company_id = auth()->user()->company_id;
+    
+    $departmentName = $request->input('department_name');
+    $companyId = Auth::user()->company_id;
+    $departmentCount = Department::count();
+    $departmentId = $companyId . strtoupper(substr(preg_replace('/[^a-zA-Z]/', '', $departmentName), 0, 3)) . str_pad($departmentCount + 1, 3, '0', STR_PAD_LEFT);
+    
     $newDepartment = new Department();
-    $newDepartment->setDepartmentName($request->input('department_name'));
-    // $newDepartment->setCompanyId($company_id);
-    $newDepartment->setCompanyId(11111);
+    $newDepartment->setId($departmentId);
+    $newDepartment->setDepartmentName($departmentName);
+    $newDepartment->setCompanyId($companyId);
     $newDepartment->save();
 
     return redirect()->route('admin.department.index');
@@ -58,7 +65,7 @@ class AdminDepartmentController extends Controller
 
   public function delete($id)
   {
-    Company::destroy($id);
+    Department::destroy($id);
     return back();
   }
 }

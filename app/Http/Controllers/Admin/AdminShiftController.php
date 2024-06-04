@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Shift;
+use App\Models\User;
 use App\Models\Department;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminShiftController extends Controller
 {
@@ -28,8 +30,12 @@ class AdminShiftController extends Controller
 
   public function store(Request $request)
   {
+    $company_id = Auth::user()->company_id;
+    $shiftCount = Shift::count();
+    $id = $company_id . 'dep' . str_pad($shiftCount + 1, 3, '0', STR_PAD_LEFT);
     Shift::validate($request); 
     $newShift = new Shift();
+    $newShift->setId($id);
     $newShift->setShiftName($request->input('shift_name'));
     $newShift->setDepartmentId($request->input('department_id'));
     $newShift->setStartTime($request->input('start_time'));

@@ -42,8 +42,13 @@
                                         <div class="col-md-4">
                                             <label for="department-horizontal">Departemen</label>
                                         </div>
-                                        <div class="col-md-8 form-group">
-                                            <input type="text" name="department_id" value="{{ $viewData['supervisor']->getDepartmentId() }}" id="department-horizontal" class="form-control">
+                                        <div class="col-md-8 form-group">  
+                                            <select id="department_id" class="form-select @error('department_id') is-invalid @enderror" name="department_id"  id="basicSelect">
+                                                <option value="" hidden>-- Pilih Departemen --</option>
+                                                @foreach($viewData['department'] as $departments)
+                                                <option value="{{ $departments->getId() }}" {{ $departments->getId() == $viewData['supervisor']->getDepartmentId() ? 'selected' : null }}>{{ $departments->getDepartmentName() }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="email-horizontal">Email</label>
@@ -63,7 +68,6 @@
                                         <div class="col-md-8 form-group">  
                                           <select id="role" class="form-select @error('role') is-invalid @enderror" name="role"  id="basicSelect">
                                             <option value="" hidden>-- Pilih Role --</option>
-                                            <option value="admin">Admin</option>
                                             <option value="supervisor" selected>Supervisor</option>
                                             <option value="operator">Operator</option>
                                           </select>

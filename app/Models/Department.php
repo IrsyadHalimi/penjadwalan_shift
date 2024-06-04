@@ -19,7 +19,12 @@ class Department extends Model
     public function getId()
     {
         return $this->attributes['id'];
-    } 
+    }
+
+    public function setId($id)
+    {
+        $this->attributes['id'] = $id;
+    }
     
     public function getDepartmentName()
     {
@@ -64,5 +69,10 @@ class Department extends Model
     public function shifts()
     {
         return $this->hasMany(Shift::class);
+    }
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
     }
 }

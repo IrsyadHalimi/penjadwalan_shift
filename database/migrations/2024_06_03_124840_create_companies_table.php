@@ -13,11 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        {
-            Schema::table('shifts', function (Blueprint $table) {
-            $table->string('label_color');
-            });
-        }
+        Schema::create('companies', function (Blueprint $table) {
+            $table->string('id', 20)->primary();
+            $table->string('company_name', 50);
+            $table->string('company_address', 50);
+            $table->string('notes', 255);
+            $table->timestamps();
+        });
     }
 
     /**
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('companies');
     }
 };

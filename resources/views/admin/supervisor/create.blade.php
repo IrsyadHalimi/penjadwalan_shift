@@ -15,8 +15,11 @@
         <div class="row match-height">
             <div class="col-md-12 col-12">
                 <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Horizontal Form</h4>
+                    <div class="card-header pb-0">
+                        <h4 class="card-title">Tambah Data Supervisor Baru</h4>
+                        <p>
+                            Formulir dibawah berfungsi untuk menambahkan data supervisor baru kedalam salah satu departemen di perusahaan
+                        </p>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
@@ -24,10 +27,10 @@
                                 <div class="form-body">
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <label for="supervisor-name-horizontal">Nama Supervisor</label>
+                                            <label for="first-name-horizontal">Nama Lengkap</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" name="full_name" id="supervisor-name-horizontal" class="form-control">
+                                            <input type="text" name="full_name" id="first-name-horizontal" class="form-control" required autocomplete="full_name" autofocus>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="employeeId-horizontal">Nomor Pegawai</label>
@@ -38,8 +41,13 @@
                                         <div class="col-md-4">
                                             <label for="department-horizontal">Departemen</label>
                                         </div>
-                                        <div class="col-md-8 form-group">
-                                            <input type="text" name="department_id" id="department-horizontal" class="form-control">
+                                        <div class="col-md-8 form-group">  
+                                            <select id="department_id" class="form-select @error('department_id') is-invalid @enderror" name="department_id"  id="basicSelect">
+                                                <option value="" hidden>-- Pilih Departemen --</option>
+                                                @foreach($viewData['department'] as $departments)
+                                                <option value="{{ $departments->getId() }}">{{ $departments->getDepartmentName() }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="col-md-4">
                                           <label for="phone-horizontal">Nomor Telepon</label>

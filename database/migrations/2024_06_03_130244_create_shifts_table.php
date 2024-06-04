@@ -14,13 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('shifts', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('company_id');
+            $table->string('id', 20)->primary();
+            $table->string('department_id', 20);
             $table->string('shift_name', 50);
             $table->time('start_time');
             $table->time('end_time');
             $table->string('notes', 255);
             $table->timestamps();
+
+            $table->foreign('department_id')->references('id')->on('departments');
         });
     }
 

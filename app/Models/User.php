@@ -12,6 +12,10 @@ class User extends AuthenticatableUser implements Authenticatable
 {   
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+    protected $keyType = 'string';
+
     protected $fillable = [
         'id',
         'company_id',
@@ -152,11 +156,16 @@ class User extends AuthenticatableUser implements Authenticatable
 
     public function company()
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(Company::class, 'company_id', 'id');
     }
 
     public function operatorType()
     {
         return $this->belongsTo(OperatorType::class);
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
     }
 }

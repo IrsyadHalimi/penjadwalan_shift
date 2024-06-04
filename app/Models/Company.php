@@ -9,7 +9,12 @@ class Company extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+    protected $keyType = 'string';
+
     protected $fillable = [
+        'id',
         'company_name',
         'company_address',
     ];
@@ -68,6 +73,6 @@ class Company extends Model
 
     public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(User::class, 'company_id', 'id');
     }
 }

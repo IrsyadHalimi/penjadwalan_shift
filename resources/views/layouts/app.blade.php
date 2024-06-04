@@ -225,7 +225,7 @@
                     <div class="row">
                         <div class="col-8 col-md-10 order-md-1 order-last mb-3">
                             <h3 class="text-muted">Penjadwalan Shift Kerja Operator</h3>
-                            <h5>{{ ucwords($role) }} - {{ Auth::user()->company ? Auth::user()->company->company_name : 'N/A' }}</h5>
+                            <h5>{{ ucwords($role) }} - {{ optional(Auth::user()->company)->company_name ?? 'N/A' }}</h5>
                         </div>
                         <div class="col-8 col-md-2 order-md-2 order-first">
                             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">

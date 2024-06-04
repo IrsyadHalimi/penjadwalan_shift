@@ -50,7 +50,7 @@
                                 <td>{{ $operators->getName() }}</td>
                                 <td>{{ $operators->getEmployeeId() }}</td>
                                 <td>{{ $operators->company ? $operators->company->company_name : 'N/A' }}</td>
-                                <td>{{ $operators->getDepartmentId() }}</td>
+                                <td>{{ $operators->department ? $operators->department->department_name : 'N/A' }}</td>
                                 <td>{{ $operators->operatorType ? $operators->operatorType->operator_name_type : 'N/A' }}</td>
                                 <td>{{ $operators->getEmail() }}</td>
                                 <td>{{ $operators->getPhoneNumber() }}</td>

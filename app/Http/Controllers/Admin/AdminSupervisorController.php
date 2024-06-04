@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Department;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class AdminSupervisorController extends Controller
 {
@@ -22,6 +25,7 @@ class AdminSupervisorController extends Controller
     $viewData = [];
     $viewData["title"] = " Tambah Supervisor- Penjadwalan Shift";
     $viewData["subtitle"] = "Tambah Supervisor";
+    $viewData["department"] = Department::all();
     return view('admin.supervisor.create')->with("viewData", $viewData);
   }
 
@@ -48,6 +52,7 @@ class AdminSupervisorController extends Controller
     $viewData["title"] = "Admin - Edit Supervisor";
     $viewData["subtitle"] = "Edit Supervisor";
     $viewData["supervisor"] = User::findOrFail($id);
+    $viewData["department"] = Department::all();
     return view('admin.supervisor.edit')->with("viewData", $viewData);
   }
 
@@ -60,8 +65,9 @@ class AdminSupervisorController extends Controller
     $user->setName($request->input('full_name'));
     $user->setEmployeeId($request->input('employee_id'));
     $user->setEmail($request->input('email'));
+    $user->setCompanyId(Auth::user()->company_id);
     $user->setPhoneNumber($request->input('phone_number'));
-    $user->setRole($request->input('role'));
+    $user->setRole('supervisor');
     $user->save();
 
     return redirect()->route('admin.supervisor.index');
