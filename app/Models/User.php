@@ -13,7 +13,9 @@ class User extends AuthenticatableUser implements Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $primaryKey = 'id';
+
     public $incrementing = false;
+    
     protected $keyType = 'string';
 
     protected $fillable = [

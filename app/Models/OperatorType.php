@@ -19,7 +19,12 @@ class OperatorType extends Model
     public function getId()
     {
         return $this->attributes['id'];
-    } 
+    }
+    
+    public function setId($id)
+    {
+        $this->attributes['id'] = $id;
+    }
     
     public function getOperatorNameType()
     {

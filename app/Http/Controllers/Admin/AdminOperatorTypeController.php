@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\OperatorType;
+use App\Models\Department;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
 
 class AdminOperatorTypeController extends Controller
 {
@@ -21,18 +24,22 @@ class AdminOperatorTypeController extends Controller
     $viewData = [];
     $viewData["title"] = "Jenis Operator - Penjadwalan Shift";
     $viewData["subtitle"] = "Tambah Jenis Operator";
+    $viewData["department"] = Department::all();
     return view('admin.operator_type.create')->with("viewData", $viewData);
   }
 
   public function store(Request $request)
   {
+    $operatorNameType = $request->input('operator_name_type');
+    $departmentId = $request->input('department_id');
+    $operatorTypeId = $departmentId . strtoupper(substr(preg_replace('/[^a-zA-Z]/', '', $operatorNameType), 0, 2)) . Str::random(2);
+   
     OperatorType::validate($request); 
-    // $company_id = auth()->user()->company_id;
     $newOperatorType = new OperatorType();
-    $newOperatorType->setOperatorNameType($request->input('operator_name_type'));
+    $newOperatorType->setId($operatorTypeId);
+    $newOperatorType->setOperatorNameType($operatorNameType);
+    $newOperatorType->setDepartmentId($departmentId);
     $newOperatorType->setNotes($request->input('notes'));
-    // $newDepartment->setCompanyId($company_id);
-    $newOperatorType->setDepartmentId(11111);
     $newOperatorType->save();
 
     return redirect()->route('admin.operator_type.index');

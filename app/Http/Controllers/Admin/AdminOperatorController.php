@@ -9,6 +9,8 @@ use App\Models\OperatorType;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+
 
 class AdminOperatorController extends Controller
 {
@@ -33,8 +35,12 @@ class AdminOperatorController extends Controller
 
   public function store(Request $request)
   {
+    $companyId = Auth::user()->company_id;
+    $id = $companyId . 'OPR' . Str::random(3);
+
     User::validate($request); 
     $newUser = new User();
+    $newUser->setId($id);
     $newUser->setName($request->input('full_name'));
     $newUser->setEmployeeId($request->input('employee_id'));
     $newUser->setEmail($request->input('email'));
@@ -42,7 +48,7 @@ class AdminOperatorController extends Controller
     $newUser->setPassword(Hash::make($request->input('password')));
     $newUser->setDepartmentId($request->input('department_id'));
     $newUser->setOperatorTypeId($request->input('operator_type_id'));
-    $newUser->setCompanyId(Auth::user()->company_id);
+    $newUser->setCompanyId($companyId);
     $newUser->setRole('operator');
     $newUser->save();
 

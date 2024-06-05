@@ -9,6 +9,12 @@ class Shift extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id';
+
+    public $incrementing = false;
+    
+    protected $keyType = 'string';
+
     public static function validate($request)
     {
         $request->validate([
@@ -46,11 +52,6 @@ class Shift extends Model
     public function setDepartmentId($department_id)
     {
         $this->attributes['department_id'] = $department_id;
-    }
-    
-    public function department()
-    {
-        return $this->belongsTo(Department::class);
     }
     
     public function getStartTime()
@@ -111,5 +112,10 @@ class Shift extends Model
     public function setLabelColor($label_color)
     {
         $this->attributes['label_color'] = $label_color;
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
     }
 }

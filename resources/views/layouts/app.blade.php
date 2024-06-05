@@ -147,68 +147,69 @@
                                         <span>Dasbor Supervisor</span>
                                     </a>
                                 </li>        
-                                @endif
                             @endif
-                        <li class="sidebar-item  ">
+                        @else
+                            <li class="sidebar-item  ">
                             <a href="{{ route('superadmin.shift.index') }}" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dasbor SuperAdmin</span>
                             </a>
-                        </li>
-                        <li class="sidebar-item  ">
-                            <a href="{{ route('superadmin.schedule.index') }}" class='sidebar-link'>
-                                <i class="bi bi-calendar4-week"></i>
-                                <span>Jadwal</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item  ">
-                            <a href="{{ route('superadmin.shift.index') }}" class='sidebar-link'>
-                                <i class="bi bi-shift"></i>
-                                <span>Shift</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item  ">
-                            <a href="{{ route('superadmin.operator.index') }}" class='sidebar-link'>
-                                <i class="bi bi-people-fill"></i>
-                                <span>Operator</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item  ">
-                            <a href="{{ route('superadmin.supervisor.index') }}" class='sidebar-link'>
-                                <i class="bi bi-person"></i>
-                                <span>Supervisor</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item  ">
-                            <a href="{{ route('superadmin.company.index') }}" class='sidebar-link'>
-                                <i class="bi bi-building-fill"></i>
-                                <span>Perusahaan</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item  ">
-                            <a href="{{ route('superadmin.department.index') }}" class='sidebar-link'>
-                                <i class="bi bi-list-nested"></i>
-                                <span>Departemen</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item  ">
-                            <a href="{{ route('superadmin.department.index') }}" class='sidebar-link'>
-                                <i class="bi bi-person-workspace"></i>
-                                <span>Admin Perusahaan</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item  ">
-                            <a href="{{ route('superadmin.operator_type.index') }}" class='sidebar-link'>
-                                <i class="bi bi-people"></i>
-                                <span>Jenis Operator</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item  ">
-                            <a href="{{ route('superadmin.department.index') }}" class='sidebar-link'>
-                                <i class="bi bi-book"></i>
-                                <span>Laporan</span>
-                            </a>
-                        </li>
+                            </li>
+                            <li class="sidebar-item  ">
+                                <a href="{{ route('superadmin.schedule.index') }}" class='sidebar-link'>
+                                    <i class="bi bi-calendar4-week"></i>
+                                    <span>Jadwal</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item  ">
+                                <a href="{{ route('superadmin.shift.index') }}" class='sidebar-link'>
+                                    <i class="bi bi-shift"></i>
+                                    <span>Shift</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item  ">
+                                <a href="{{ route('superadmin.operator.index') }}" class='sidebar-link'>
+                                    <i class="bi bi-people-fill"></i>
+                                    <span>Operator</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item  ">
+                                <a href="{{ route('superadmin.supervisor.index') }}" class='sidebar-link'>
+                                    <i class="bi bi-person"></i>
+                                    <span>Supervisor</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item  ">
+                                <a href="{{ route('superadmin.company.index') }}" class='sidebar-link'>
+                                    <i class="bi bi-building-fill"></i>
+                                    <span>Perusahaan</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item  ">
+                                <a href="{{ route('superadmin.department.index') }}" class='sidebar-link'>
+                                    <i class="bi bi-list-nested"></i>
+                                    <span>Departemen</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item  ">
+                                <a href="{{ route('superadmin.department.index') }}" class='sidebar-link'>
+                                    <i class="bi bi-person-workspace"></i>
+                                    <span>Admin Perusahaan</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item  ">
+                                <a href="{{ route('superadmin.operator_type.index') }}" class='sidebar-link'>
+                                    <i class="bi bi-people"></i>
+                                    <span>Jenis Operator</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item  ">
+                                <a href="{{ route('superadmin.department.index') }}" class='sidebar-link'>
+                                    <i class="bi bi-book"></i>
+                                    <span>Laporan</span>
+                                </a>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -225,7 +226,7 @@
                     <div class="row">
                         <div class="col-8 col-md-10 order-md-1 order-last mb-3">
                             <h3 class="text-muted">Penjadwalan Shift Kerja Operator</h3>
-                            <h5>{{ ucwords($role) }} - {{ optional(Auth::user()->company)->company_name ?? 'N/A' }}</h5>
+                            <h5>{{ ucwords($role) }} - {{ Auth::user()->company->company_name ?? 'N/A' }}</h5>
                         </div>
                         <div class="col-8 col-md-2 order-md-2 order-first">
                             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">

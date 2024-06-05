@@ -43,20 +43,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($viewData['shifts'] as $shift)
+                            @foreach ($viewData['shift'] as $shifts)
                             <tr>
-                                <td class="text-bold-500">{{ $shift->getId() }}</td>
-                                <td>{{ $shift->getShiftName() }}</td>
-                                <td>{{ $shift->department ? $shift->department->department_name : 'N/A' }}</td>
-                                <td>{{ $shift->getStartTime() }}</td>
-                                <td>{{ $shift->getEndTime() }}</td>
-                                <td>{{ $shift->getNotes() }}</td>
-                                <td><button class="btn btn-{{ $shift->getLabelColor() }} px-4"></button></td>
+                                <td class="text-bold-500">{{ $shifts->getId() }}</td>
+                                <td>{{ $shifts->getShiftName() }}</td>
+                                <td>{{ $shifts->department ? $shifts->department->department_name : 'N/A' }}</>
+                                <td>{{ $shifts->getStartTime() }}</td>
+                                <td>{{ $shifts->getEndTime() }}</td>
+                                <td>{{ $shifts->getNotes() }}</td>
+                                <td><button class="btn btn-{{ $shifts->getLabelColor() }} px-4"></button></td>
                                 <td>
-                                    <a class="btn icon btn-primary" href="{{route('admin.shift.edit', ['id'=> $shift->getId()])}}"><i class="bi-pen"></i></a>
+                                    <a class="btn icon btn-primary" href="{{route('admin.shift.edit', ['id'=> $shifts->getId()])}}"><i class="bi-pen"></i></a>
                                 </td>    
                                 <td>
-                                    <form action="{{ route('admin.shift.delete', $shift->getId())}}" method="POST">
+                                    <form action="{{ route('admin.shift.delete', $shifts->getId())}}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn icon btn-danger">

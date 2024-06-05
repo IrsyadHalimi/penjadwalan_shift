@@ -8,6 +8,7 @@ use App\Models\Company;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -68,7 +69,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $companyName = $data['company_name'];
-        $company_id = strtoupper(substr(preg_replace('/[^a-zA-Z]/', '', $companyName), 0, 4));
+        $company_id = strtoupper(substr(preg_replace('/[^a-zA-Z]/', '', $companyName), 0, 3)) . Str::random(3);
 
         $company = Company::create([
             'id' => $company_id,
@@ -76,8 +77,7 @@ class RegisterController extends Controller
             'company_address' => $data['company_address'],
         ]);
 
-        $userCount = User::where('role', 'admin')->count();
-        $id = $company_id . 'adm' . str_pad($userCount + 1, 3, '0', STR_PAD_LEFT);
+        $id = $company_id . 'ADM' . Str::random(3);
 
         return User::create([
             'id' => $id,

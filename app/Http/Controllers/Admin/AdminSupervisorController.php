@@ -7,6 +7,7 @@ use App\Models\Department;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 
 class AdminSupervisorController extends Controller
@@ -31,15 +32,19 @@ class AdminSupervisorController extends Controller
 
   public function store(Request $request)
   {
-    User::validate($request); 
+    $companyId = Auth::user()->company_id;
+    $id = $companyId . 'SPV' . Str::random(3);
+
+    User::validate($request);
     $newUser = new User();
+    $newUser->setId($id);
     $newUser->setName($request->input('full_name'));
     $newUser->setEmployeeId($request->input('employee_id'));
     $newUser->setEmail($request->input('email'));
     $newUser->setPhoneNumber($request->input('phone_number'));
     $newUser->setPassword(Hash::make($request->input('password')));
     $newUser->setDepartmentId($request->input('department_id'));
-    $newUser->setCompanyId(1111);
+    $newUser->setCompanyId($companyId);
     $newUser->setRole('supervisor');
     $newUser->save();
 

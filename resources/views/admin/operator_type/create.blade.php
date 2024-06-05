@@ -29,6 +29,14 @@
                                         <div class="col-md-8 form-group">
                                             <input type="text" name="operator_name_type" id="operator_name_type-name-horizontal" class="form-control">
                                         </div>
+                                        <div class="col-md-8 form-group">  
+                                            <select id="department_id" class="form-select @error('department_id') is-invalid @enderror" name="department_id"  id="basicSelect">
+                                                <option value="" hidden>-- Pilih Departemen --</option>
+                                                @foreach($viewData['department'] as $departments)
+                                                <option value="{{ $departments->getId() }}">{{ $departments->getDepartmentName() }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                         <div class="col-md-4">
                                             <label for="notes-horizontal">Keterangan</label>
                                         </div>

@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 
 class AdminDepartmentController extends Controller
@@ -32,8 +33,7 @@ class AdminDepartmentController extends Controller
     
     $departmentName = $request->input('department_name');
     $companyId = Auth::user()->company_id;
-    $departmentCount = Department::count();
-    $departmentId = $companyId . strtoupper(substr(preg_replace('/[^a-zA-Z]/', '', $departmentName), 0, 3)) . str_pad($departmentCount + 1, 3, '0', STR_PAD_LEFT);
+    $departmentId = $companyId . strtoupper(substr(preg_replace('/[^a-zA-Z]/', '', $departmentName), 0, 3)) . Str::random(2);
     
     $newDepartment = new Department();
     $newDepartment->setId($departmentId);

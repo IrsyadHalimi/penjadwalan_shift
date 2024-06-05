@@ -7,8 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Schedule extends Model
 {
+    protected $primaryKey = 'id';
+
+    public $incrementing = false;
+    
+    protected $keyType = 'string';
+    
     protected $fillable = [
-        'user_id', 'start_date', 'end_date'
+        'id',
+        'user_id', 
+        'start_date', 
+        'end_date'
     ];
 
     public static function validate($request)
