@@ -159,6 +159,7 @@
                             });
                         }
                     })
+                    $('#confirmationModal').modal('hide');
                 })
                 // Menangani tombol "Batal" dalam modal konfirmasi
                 $('#cancelButton').on('click', function() {
@@ -207,6 +208,7 @@
                             });
                         }
                     });
+                    $('#confirmationModal').modal('hide');
                 });
 
                 // Menangani tombol "Batal" dalam modal konfirmasi

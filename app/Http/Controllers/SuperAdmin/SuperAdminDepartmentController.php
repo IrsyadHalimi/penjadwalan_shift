@@ -4,6 +4,9 @@ namespace App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\Controller;
 use App\Models\Department;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+
 
 class SuperAdminDepartmentController extends Controller
 {
@@ -27,11 +30,15 @@ class SuperAdminDepartmentController extends Controller
   public function store(Request $request)
   {
     Department::validate($request); 
-    // $company_id = auth()->user()->company_id;
+
+    $departmentName = $request->input('department_name');
+    $companyId = Auth::user()->company_id;
+    $departmentId = 'DEP' . $companyId . Str::random(4);
+
     $newDepartment = new Department();
-    $newDepartment->setDepartmentName($request->input('department_name'));
-    // $newDepartment->setCompanyId($company_id);
-    $newDepartment->setCompanyId(11111);
+    $newDepartment->setId($departmentId);
+    $newDepartment->setDepartmentName($departmentName);
+    $newDepartment->setCompanyId($companyId);
     $newDepartment->save();
 
     return redirect()->route('superadmin.department.index');

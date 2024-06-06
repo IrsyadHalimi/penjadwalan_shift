@@ -3,8 +3,14 @@
 namespace App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Department;
+use App\Models\Shift;
+use App\Models\OperatorType;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+
 
 class SuperAdminOperatorController extends Controller
 {
@@ -22,20 +28,27 @@ class SuperAdminOperatorController extends Controller
     $viewData = [];
     $viewData["title"] = " Tambah Operator- Penjadwalan Shift";
     $viewData["subtitle"] = "Tambah Operator";
+    $viewData["department"] = Department::all();
+    $viewData["operator_type"] = OperatorType::all();
     return view('superadmin.operator.create')->with("viewData", $viewData);
   }
 
   public function store(Request $request)
   {
+    $companyId = Auth::user()->company_id;
+    $id = $companyId . 'OPR' . Str::random(4);
+
     User::validate($request); 
     $newUser = new User();
+    $newUser->setId($id);
     $newUser->setName($request->input('full_name'));
     $newUser->setEmployeeId($request->input('employee_id'));
     $newUser->setEmail($request->input('email'));
     $newUser->setPhoneNumber($request->input('phone_number'));
     $newUser->setPassword(Hash::make($request->input('password')));
     $newUser->setDepartmentId($request->input('department_id'));
-    $newUser->setCompanyId(1111);
+    $newUser->setOperatorTypeId($request->input('operator_type_id'));
+    $newUser->setCompanyId($companyId);
     $newUser->setRole('operator');
     $newUser->save();
 
@@ -48,6 +61,9 @@ class SuperAdminOperatorController extends Controller
     $viewData["title"] = "SuperAdmin - Edit Operator";
     $viewData["subtitle"] = "Edit Operator";
     $viewData["operator"] = User::findOrFail($id);
+    $viewData["department"] = Department::all();
+    $viewData["shift"] = Shift::all();
+    $viewData["operator_type"] = OperatorType::all();
     return view('superadmin.operator.edit')->with("viewData", $viewData);
   }
 
@@ -61,10 +77,12 @@ class SuperAdminOperatorController extends Controller
     $user->setEmployeeId($request->input('employee_id'));
     $user->setEmail($request->input('email'));
     $user->setPhoneNumber($request->input('phone_number'));
+    $user->setOperatorTypeId($request->input('operator_type_id'));
+    $user->setCompanyId(Auth::user()->company_id);
     $user->setRole($request->input('role'));
     $user->save();
 
-    return redirect()->route('admin.operator.index');
+    return redirect()->route('superadmin.operator.index');
   }
 
   public function delete($id)

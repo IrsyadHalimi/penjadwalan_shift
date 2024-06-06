@@ -7,6 +7,8 @@ use App\Http\Requests\EventRequest;
 use App\Models\Schedule;
 use App\Models\Shift;
 use App\Models\User;
+use Illuminate\Support\Str;
+
 
 class SuperAdminScheduleController extends Controller
 {
@@ -23,7 +25,7 @@ class SuperAdminScheduleController extends Controller
         $start_date = date('Y-m-d', strtotime($request->start));
         $end_date = date('Y-m-d', strtotime($request->end));
         $schedule = Schedule::where('start_date', '>=', $start_date)
-        ->where('end_date', '<=' , $end_date)->where('user_id', '=', 1)->get()
+        ->where('end_date', '<=' , $end_date)->get()
         ->map(function ($item) {
             $shift = Shift::find($item->shift_id);
             $user = User::find($item->user_id);
@@ -58,7 +60,10 @@ class SuperAdminScheduleController extends Controller
 
     public function store(EventRequest $request)
     {
+        $scheduleId = 'SCH' . Str::random(7);
+
         $schedule = new Schedule();
+        $schedule->id = $scheduleId;
         $schedule->start_date = $request->start_date;
         $schedule->end_date = $request->end_date;
         $schedule->user_id = $request->user_id;

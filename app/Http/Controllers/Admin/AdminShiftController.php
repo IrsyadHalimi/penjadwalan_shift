@@ -32,7 +32,6 @@ class AdminShiftController extends Controller
 
   public function store(Request $request)
   {
-    $shiftName = $request->input('shift_name');
     $departmentId = $request->input('department_id');
     $shiftId = 'SHF' . $departmentId . Str::random(2);
     

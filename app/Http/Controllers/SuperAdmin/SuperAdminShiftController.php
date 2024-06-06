@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\Controller;
 use App\Models\Shift;
+use App\Models\User;
+use App\Models\Department;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+
 
 class SuperAdminShiftController extends Controller
 {
@@ -21,15 +26,20 @@ class SuperAdminShiftController extends Controller
     $viewData = [];
     $viewData["title"] = "Shift - Penjadwalan Shift";
     $viewData["subtitle"] = "Tambah Shift Kerja";
+    $viewData["department"] = Department::all();
     return view('superadmin.shift.create')->with("viewData", $viewData);
   }
 
   public function store(Request $request)
   {
-    Shift::validate($request); 
+    $departmentId = $request->input('department_id');
+    $shiftId = 'SHF' . $departmentId . Str::random(2);
+    
+    Shift::validate($request);
     $newShift = new Shift();
+    $newShift->setId($shiftId);
     $newShift->setShiftName($request->input('shift_name'));
-    $newShift->setDepartmentId($request->input('department_id'));
+    $newShift->setDepartmentId($departmentId);
     $newShift->setStartTime($request->input('start_time'));
     $newShift->setEndTime($request->input('end_time'));
     $newShift->setNotes($request->input('notes'));
@@ -45,6 +55,7 @@ class SuperAdminShiftController extends Controller
     $viewData["title"] = "SuperAdmin - Edit Shift";
     $viewData["subtitle"] = "Edit Shift Kerja";
     $viewData["shift"] = Shift::findOrFail($id);
+    $viewData["department"] = Department::all();
     return view('superadmin.shift.edit')->with("viewData", $viewData);
   }
 
