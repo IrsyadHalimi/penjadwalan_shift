@@ -33,7 +33,7 @@ class AdminDepartmentController extends Controller
     
     $departmentName = $request->input('department_name');
     $companyId = Auth::user()->company_id;
-    $departmentId = $companyId . strtoupper(substr(preg_replace('/[^a-zA-Z]/', '', $departmentName), 0, 3)) . Str::random(2);
+    $departmentId = 'DEP' . $companyId . Str::random(4);
     
     $newDepartment = new Department();
     $newDepartment->setId($departmentId);

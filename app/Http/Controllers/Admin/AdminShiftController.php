@@ -34,7 +34,7 @@ class AdminShiftController extends Controller
   {
     $shiftName = $request->input('shift_name');
     $departmentId = $request->input('department_id');
-    $shiftId = $departmentId . strtoupper(substr(preg_replace('/[^a-zA-Z]/', '', $shiftName), 0, 2)) . Str::random(2);
+    $shiftId = 'SHF' . $departmentId . Str::random(2);
     
     Shift::validate($request);
     $newShift = new Shift();

@@ -36,7 +36,7 @@ class AdminOperatorController extends Controller
   public function store(Request $request)
   {
     $companyId = Auth::user()->company_id;
-    $id = $companyId . 'OPR' . Str::random(3);
+    $id = $companyId . 'OPR' . Str::random(4);
 
     User::validate($request); 
     $newUser = new User();

@@ -32,7 +32,7 @@ class AdminOperatorTypeController extends Controller
   {
     $operatorNameType = $request->input('operator_name_type');
     $departmentId = $request->input('department_id');
-    $operatorTypeId = $departmentId . strtoupper(substr(preg_replace('/[^a-zA-Z]/', '', $operatorNameType), 0, 2)) . Str::random(2);
+    $operatorTypeId = 'OPT' . $departmentId . Str::random(2);
    
     OperatorType::validate($request); 
     $newOperatorType = new OperatorType();

@@ -33,7 +33,7 @@ class AdminSupervisorController extends Controller
   public function store(Request $request)
   {
     $companyId = Auth::user()->company_id;
-    $id = $companyId . 'SPV' . Str::random(3);
+    $id = $companyId . 'SPV' . Str::random(4);
 
     User::validate($request);
     $newUser = new User();
