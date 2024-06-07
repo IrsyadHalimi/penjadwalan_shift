@@ -7,6 +7,8 @@ use App\Http\Controllers\FullCalenderController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\Admin\AdminScheduleController;
 use App\Http\Controllers\SuperAdmin\SuperAdminScheduleController;
+use App\Http\Controllers\Supervisor\SupervisorScheduleController;
+use App\Http\Controllers\Operator\OperatorScheduleController;
 
 
 /*
@@ -128,6 +130,26 @@ Route::middleware('superadmin')->prefix('superadmin')->group(function() {
   Route::get('/company/{id}/edit', 'App\Http\Controllers\SuperAdmin\SuperAdminCompanyController@edit')->name("superadmin.company.edit");
   Route::put('/company/{id}/update', 'App\Http\Controllers\SuperAdmin\SuperAdminCompanyController@update')->name("superadmin.company.update");
   Route::delete('/company/{id}/delete', 'App\Http\Controllers\SuperAdmin\SuperAdminCompanyController@delete')->name("superadmin.company.delete");
+});
+
+Route::middleware('supervisor')->prefix('supervisor')->group(function() {
+  Route::get('/schedule', [SupervisorScheduleController::class, 'index'])->name('supervisor.schedule.index');
+  Route::get('/schedule/list', [SupervisorScheduleController::class, 'listSchedule'])->name('supervisor.schedule.list');
+  Route::get('/schedule/create', [SupervisorScheduleController::class, 'create'])->name('supervisor.schedule.create');
+  Route::post('/schedule/store', [SupervisorScheduleController::class, 'store'])->name('supervisor.schedule.store');
+  Route::get('/schedule/{schedule}/edit', [SupervisorScheduleController::class, 'edit'])->name('supervisor.schedule.edit');
+  Route::put('/schedule/{schedule}/update', [SupervisorScheduleController::class, 'update'])->name('supervisor.schedule.update');
+  Route::delete('/schedule/{schedule}/destroy', [SupervisorScheduleController::class, 'destroy'])->name('supervisor.schedule.destroy');
+});
+
+Route::middleware('operator')->prefix('operator')->group(function() {
+  Route::get('/schedule', [OperatorScheduleController::class, 'index'])->name('operator.schedule.index');
+  Route::get('/schedule/list', [OperatorScheduleController::class, 'listSchedule'])->name('operator.schedule.list');
+  Route::get('/schedule/create', [OperatorScheduleController::class, 'create'])->name('operator.schedule.create');
+  Route::post('/schedule/store', [OperatorScheduleController::class, 'store'])->name('operator.schedule.store');
+  Route::get('/schedule/{schedule}/edit', [OperatorScheduleController::class, 'edit'])->name('operator.schedule.edit');
+  Route::put('/schedule/{schedule}/update', [OperatorScheduleController::class, 'update'])->name('operator.schedule.update');
+  Route::delete('/schedule/{schedule}/destroy', [OperatorScheduleController::class, 'destroy'])->name('operator.schedule.destroy');
 });
 
 

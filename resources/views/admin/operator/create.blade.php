@@ -53,7 +53,7 @@
                                             <label for="phone-horizontal">Jenis Operator</label>
                                         </div>
                                         <div class="col-md-8 form-group">  
-                                            <select id="department_id" class="form-select @error('department_id') is-invalid @enderror" name="department_id"  id="basicSelect">
+                                            <select id="operator_type_id" class="form-select @error('operator_type_id') is-invalid @enderror" name="operator_type_id"  id="basicSelect">
                                                 <option value="" hidden>-- Pilih Jenis Operator --</option>
                                                 @foreach($viewData['operator_type'] as $operator_types)
                                                 <option value="{{ $operator_types->getId() }}">{{ $operator_types->getOperatorNameType() }}</option>

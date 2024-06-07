@@ -45,11 +45,11 @@
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
             themeSystem: 'bootstrap5',
-            events: `{{ route('operator.schedule.list') }}`,
+            events: `{{ route('supervisor.schedule.list') }}`,
             editable: true,
             dateClick: function(info) {
                 $.ajax({
-                    url: `{{ route('operator.schedule.create') }}`,
+                    url: `{{ route('supervisor.schedule.create') }}`,
                     data: {
                         start_date: info.dateStr,
                         end_date: info.dateStr
@@ -92,7 +92,7 @@
                 event
             }) {
                 $.ajax({
-                    url: `{{ url('operator/schedule') }}/${event.id}/edit`,
+                    url: `{{ url('supervisor/schedule') }}/${event.id}/edit`,
                     success: function(res) {
                         modal.html(res).modal('show')
 
@@ -129,7 +129,7 @@
                     // Mengirim permintaan AJAX hanya jika pengguna mengonfirmasi
                     const event = info.event
                     $.ajax({
-                        url: `{{ url('operator/schedule') }}/${event.id}/update`,
+                        url: `{{ url('supervisor/schedule') }}/${event.id}/update`,
                         method: 'put',
                         data: {
                             id: event.id,
@@ -178,7 +178,7 @@
                 $('#confirmButton').off('click').on('click', function() {
                     // Mengirim permintaan AJAX hanya jika pengguna mengonfirmasi
                     $.ajax({
-                        url: `{{ url('operator/schedule') }}/${event.id}/update`,
+                        url: `{{ url('supervisor/schedule') }}/${event.id}/update`,
                         method: 'put',
                         data: {
                             id: event.id,

@@ -25,7 +25,7 @@
                         <code class="highlighter-rouge">&lt;tbody&gt;</code>.
                     </p>
                     <div>
-                    <a href="{{ route('admin.department.create') }}"><button class="btn btn-primary">Tambah Departemen Baru</button></a>
+                    <a href="{{ route('superadmin.department.create') }}"><button class="btn btn-primary">Tambah Departemen Baru</button></a>
                     </div>
                 </div>
                 <!-- table hover -->
@@ -43,8 +43,8 @@
                                 <td class="text-bold-500">{{ $departments->getId() }}</td>
                                 <td>{{ $departments->getDepartmentName() }}</td>
                                 <td>
-                                    <a href="{{route('admin.department.edit', ['id'=> $departments->getId()])}}">Edit</a>
-                                    <form action="{{ route('admin.department.delete', $departments->getId())}}" method="POST">
+                                    <a href="{{route('superadmin.department.edit', ['id'=> $departments->getId()])}}">Edit</a>
+                                    <form action="{{ route('superadmin.department.delete', $departments->getId())}}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger">

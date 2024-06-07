@@ -135,16 +135,28 @@
                                 </li>
                                 @elseif ($role === 'operator')
                                 <li class="sidebar-item  ">
-                                    <a href="{{ route('admin.shift.index') }}" class='sidebar-link'>
+                                    <a href="#" class='sidebar-link'>
                                         <i class="bi bi-grid-fill"></i>
-                                        <span>Dasbor Operator</span>
+                                        <span>Dasbor Supervisor</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item  ">
+                                    <a href="{{ route('operator.schedule.index') }}" class='sidebar-link'>
+                                        <i class="bi bi-calendar4-week"></i>
+                                        <span>Jadwal</span>
                                     </a>
                                 </li>
                                 @elseif ($role === 'supervisor')
                                 <li class="sidebar-item  ">
-                                    <a href="{{ route('admin.shift.index') }}" class='sidebar-link'>
+                                    <a href="#" class='sidebar-link'>
                                         <i class="bi bi-grid-fill"></i>
                                         <span>Dasbor Supervisor</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item  ">
+                                    <a href="{{ route('supervisor.schedule.index') }}" class='sidebar-link'>
+                                        <i class="bi bi-calendar4-week"></i>
+                                        <span>Jadwal</span>
                                     </a>
                                 </li>
                                 @elseif ($role === 'superadmin')

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Operator;
+namespace App\Http\Controllers\Supervisor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\EventRequest;
@@ -10,14 +10,14 @@ use App\Models\User;
 use Illuminate\Support\Str;
 
 
-class OperatorScheduleController extends Controller
+class SupervisorScheduleController extends Controller
 {
     public function index()
     {
         $viewData = [];
         $viewData["title"] = "Jadwal - Penjadwalan Shift";
         $viewData["subtitle"] = "Daftar Jadwal Kerja";
-        return view('operator.schedule.index')->with("viewData", $viewData);
+        return view('supervisor.schedule.index')->with("viewData", $viewData);
     }
 
     public function listSchedule(Request $request)
@@ -50,11 +50,11 @@ class OperatorScheduleController extends Controller
     {
         $users = User::all();
         $shifts = Shift::all();
-        return view('operator.schedule.schedule-form', [
+        return view('supervisor.schedule.schedule-form', [
             'data' => $schedule,
             'shifts' => $shifts, 
             'users' => $users, 
-            'action' => route('operator.schedule.store')
+            'action' => route('supervisor.schedule.store')
         ]);
     }
 
@@ -80,11 +80,11 @@ class OperatorScheduleController extends Controller
     {
         $users = User::all();
         $shifts = Shift::all();
-        return view('operator.schedule.schedule-form', [
+        return view('supervisor.schedule.schedule-form', [
             'data' => $schedule, 
             'shifts' => $shifts, 
             'users' => $users, 
-            'action' => route('operator.schedule.update', $schedule->id)
+            'action' => route('supervisor.schedule.update', $schedule->id)
         ]);
     }
 
