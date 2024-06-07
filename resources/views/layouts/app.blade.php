@@ -191,7 +191,7 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item  ">
-                                    <a href="{{ route('superadmin.department.index') }}" class='sidebar-link'>
+                                    <a href="{{ route('superadmin.company_admin.index') }}" class='sidebar-link'>
                                         <i class="bi bi-person-workspace"></i>
                                         <span>Admin Perusahaan</span>
                                     </a>

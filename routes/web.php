@@ -95,6 +95,13 @@ Route::middleware('superadmin')->prefix('superadmin')->group(function() {
   Route::get('/operator/{id}/edit', 'App\Http\Controllers\SuperAdmin\SuperAdminOperatorController@edit')->name("superadmin.operator.edit");
   Route::put('/operator/{id}/update', 'App\Http\Controllers\SuperAdmin\SuperAdminOperatorController@update')->name("superadmin.operator.update");
   Route::delete('/operator/{id}/delete', 'App\Http\Controllers\SuperAdmin\SuperAdminOperatorController@delete')->name("superadmin.operator.delete");
+  
+  Route::get('/company_admin', 'App\Http\Controllers\SuperAdmin\SuperAdminCompanyAdminController@index')->name("superadmin.company_admin.index");
+  Route::get('/company_admin/create', 'App\Http\Controllers\SuperAdmin\SuperAdminCompanyAdminController@create')->name("superadmin.company_admin.create");
+  Route::post('/company_admin/store', 'App\Http\Controllers\SuperAdmin\SuperAdminCompanyAdminController@store')->name("superadmin.company_admin.store");
+  Route::get('/company_admin/{id}/edit', 'App\Http\Controllers\SuperAdmin\SuperAdminCompanyAdminController@edit')->name("superadmin.company_admin.edit");
+  Route::put('/company_admin/{id}/update', 'App\Http\Controllers\SuperAdmin\SuperAdminCompanyAdminController@update')->name("superadmin.company_admin.update");
+  Route::delete('/company_admin/{id}/delete', 'App\Http\Controllers\SuperAdmin\SuperAdminCompanyAdminController@delete')->name("superadmin.company_admin.delete");
 
   Route::get('/supervisor', 'App\Http\Controllers\SuperAdmin\SuperAdminSupervisorController@index')->name("superadmin.supervisor.index");
   Route::get('/supervisor/create', 'App\Http\Controllers\SuperAdmin\SuperAdminSupervisorController@create')->name("superadmin.supervisor.create");

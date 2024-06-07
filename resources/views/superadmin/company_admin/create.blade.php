@@ -10,15 +10,15 @@
   </ul>
   @endif
   <section id="basic-horizontal-layouts">
-    <form method="POST" action="{{ route('admin.operator.store') }}">
+    <form method="POST" action="{{ route('superadmin.company_admin.store') }}">
       @csrf
         <div class="row match-height">
             <div class="col-md-12 col-12">
                 <div class="card">
                     <div class="card-header pb-0">
-                        <h4 class="card-title">Tambah Data Operator Baru</h4>
+                        <h4 class="card-title">Tambah Data Admin Perusahaan Baru</h4>
                         <p>
-                            Formulir dibawah berfungsi untuk menambahkan data Operator baru kedalam salah satu departemen di perusahaan
+                            Formulir dibawah berfungsi untuk menambahkan data Admin Perusahaan baru kedalam salah satu perusahaan
                         </p>
                     </div>
                     <div class="card-content">
@@ -39,28 +39,6 @@
                                             <input type="text" name="employee_id" id="employeeId-horizontal" class="form-control">
                                         </div>
                                         <div class="col-md-4">
-                                            <label for="phone-horizontal">Departemen</label>
-                                        </div>
-                                        <div class="col-md-8 form-group">  
-                                            <select id="department_id" class="form-select @error('department_id') is-invalid @enderror" name="department_id"  id="basicSelect">
-                                                <option value="" hidden>-- Pilih Departemen --</option>
-                                                @foreach($viewData['department'] as $departments)
-                                                <option value="{{ $departments->getId() }}">{{ $departments->getDepartmentName() }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="phone-horizontal">Jenis Operator</label>
-                                        </div>
-                                        <div class="col-md-8 form-group">  
-                                            <select id="department_id" class="form-select @error('department_id') is-invalid @enderror" name="department_id"  id="basicSelect">
-                                                <option value="" hidden>-- Pilih Jenis Operator --</option>
-                                                @foreach($viewData['operator_type'] as $operator_types)
-                                                <option value="{{ $operator_types->getId() }}">{{ $operator_types->getOperatorNameType() }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4">
                                           <label for="phone-horizontal">Nomor Telepon</label>
                                         </div>
                                         <div class="col-md-8 form-group">
@@ -77,6 +55,17 @@
                                         </div>
                                         <div class="col-md-8 form-group">
                                             <input type="password" name="password" id="password-horizontal" class="form-control">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="phone-horizontal">Perusahaan</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">  
+                                            <select id="company_id" class="form-select @error('company_id') is-invalid @enderror" name="company_id"  id="basicSelect">
+                                                <option value="" hidden>-- Pilih Perusahaan --</option>
+                                                @foreach($viewData['company'] as $companies)
+                                                <option value="{{ $companies->getId() }}">{{ $companies->getCompanyName() }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="col-sm-12 d-flex justify-content-end">
                                             <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>

@@ -10,7 +10,6 @@
     @endforeach
   </ul>
   @endif
-
   <section id="basic-horizontal-layouts">
     <form method="POST" action="{{ route('admin.operator.update', ['id'=> $viewData['operator']->getId()]) }}"
     enctype="multipart/form-data">
