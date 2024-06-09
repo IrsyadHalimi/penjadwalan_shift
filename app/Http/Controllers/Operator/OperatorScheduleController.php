@@ -23,7 +23,6 @@ class OperatorScheduleController extends Controller
 
     public function listSchedule(Request $request)
     {
-        $userId = Auth::user()->id;
         $departmentId = Auth::user()->department_id;
         $shiftId = Shift::where('department_id', $departmentId)->pluck('id')->toArray();
 
@@ -32,8 +31,7 @@ class OperatorScheduleController extends Controller
 
         $schedule = Schedule::where('start_date', '>=', $start_date)
             ->where('end_date', '<=', $end_date)
-            ->where('user_id', $userId)
-            ->where('shift_id', $shiftId)
+            ->whereIn('shift_id', $shiftId)
             ->get()
             ->map(function ($item) {
                 $shift = Shift::find($item->shift_id);

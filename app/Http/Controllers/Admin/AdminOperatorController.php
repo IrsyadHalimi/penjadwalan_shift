@@ -68,7 +68,7 @@ class AdminOperatorController extends Controller
     $viewData["title"] = "Admin - Edit Operator";
     $viewData["subtitle"] = "Edit Operator";
     $viewData["operator"] = User::findOrFail($id);
-    $viewData["department"] = Department::where('company_id', $companyId)->get()();
+    $viewData["department"] = Department::where('company_id', $companyId)->get();
     $viewData["shift"] = Shift::whereIn('department_id', $departmentId)->get();
     $viewData["operator_type"] = OperatorType::all();
     return view('admin.operator.edit')->with("viewData", $viewData);
