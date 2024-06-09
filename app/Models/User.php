@@ -36,6 +36,7 @@ class User extends AuthenticatableUser implements Authenticatable
             "department_id" => "required",
             "full_name" => "required",
             "employee_id" => "required",
+            "operator_type_id" => "required",
             "email" => "required",
             "phone_number" => "required",
         ]);

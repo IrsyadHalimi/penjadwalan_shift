@@ -8,26 +8,18 @@ use App\Models\OperatorType;
 
 class DepartmentOperatorDropdown extends Component
 {
-    public $departments;
-    public $operators;
     public $selectedDepartment;
-
-    public function mount()
-    {
-        $this->departments = Department::all();
-    }
-
-    public function updatedSelectedDepartment($value)
-    {
-        if (!empty($value)) {
-            $this->operators = OperatorType::where('department_id', $value)->get();
-        } else {
-            $this->operators = [];
-        }
-    }
+    public $selectedOperator;
 
     public function render()
     {
-        return view('livewire.department-operator-dropdown');
+        // Dapatkan data departemen dan operator dari database atau sumber data lain
+        $departments = Department::all();
+        $operators = OperatorType::where('department_id', $this->selectedDepartment)->get();
+
+        return view('livewire.department-operator-dropdown', [
+            'departments' => $departments,
+            'operators' => $operators,
+        ]);
     }
 }

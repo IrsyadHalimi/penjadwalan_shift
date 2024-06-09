@@ -30,35 +30,13 @@
                                             <label for="first-name-horizontal">Nama Lengkap</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" name="full_name" id="first-name-horizontal" class="form-control">
+                                            <input type="text" name="full_name" id="first-name-horizontal" class="form-control" value="{{ old('full_name') }}" required autocomplete="full_name" autofocus>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="employeeId-horizontal">Nomor Pegawai</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" name="employee_id" id="employeeId-horizontal" class="form-control">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="phone-horizontal">Departemen</label>
-                                        </div>
-                                        <div class="col-md-8 form-group">  
-                                            <select id="department_id" class="form-select @error('department_id') is-invalid @enderror" name="department_id"  id="basicSelect">
-                                                <option value="" hidden>-- Pilih Departemen --</option>
-                                                @foreach($viewData['department'] as $departments)
-                                                <option value="{{ $departments->getId() }}">{{ $departments->getDepartmentName() }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="phone-horizontal">Jenis Operator</label>
-                                        </div>
-                                        <div class="col-md-8 form-group">  
-                                            <select id="operator_type_id" class="form-select @error('operator_type_id') is-invalid @enderror" name="operator_type_id"  id="basicSelect">
-                                                <option value="" hidden>-- Pilih Jenis Operator --</option>
-                                                @foreach($viewData['operator_type'] as $operator_types)
-                                                <option value="{{ $operator_types->getId() }}">{{ $operator_types->getOperatorNameType() }}</option>
-                                                @endforeach
-                                            </select>
+                                            <input type="text" name="employee_id" id="employeeId-horizontal" class="form-control" value="{{ old('employee_id') }}" required autocomplete="employee_id" autofocus>
                                         </div>
                                         <livewire:department-operator-dropdown />
                                         @livewireScripts
@@ -66,13 +44,13 @@
                                           <label for="phone-horizontal">Nomor Telepon</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                          <input type="number" name="phone_number" id="phone-horizontal" class="form-control">
+                                          <input type="number" name="phone_number" id="phone-horizontal" class="form-control" value="{{ old('phone_number') }}" required autocomplete="phone_number" autofocus>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="email-horizontal">Email</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="email" name="email" class="form-control">
+                                            <input type="email" name="email" class="form-control" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="phone-horizontal">Password</label>

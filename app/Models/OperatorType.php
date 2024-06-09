@@ -9,6 +9,12 @@ class OperatorType extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id';
+
+    public $incrementing = false;
+    
+    protected $keyType = 'string';
+
     public static function validate($request)
     {
         $request->validate([
