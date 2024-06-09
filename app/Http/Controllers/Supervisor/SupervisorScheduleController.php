@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\EventRequest;
 use App\Models\Schedule;
 use App\Models\Shift;
+use App\Models\Department;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -63,11 +64,11 @@ class SupervisorScheduleController extends Controller
        
         $users = User::whereIn('id', $userId)->get();
         $shifts = Shift::whereIn('id', $shiftId)->get();
-        return view('admin.schedule.schedule-form', [
+        return view('supervisor.schedule.schedule-form', [
             'data' => $schedule,
             'shifts' => $shifts, 
             'users' => $users, 
-            'action' => route('admin.schedule.store')
+            'action' => route('supervisor.schedule.store')
         ]);
     }
 
