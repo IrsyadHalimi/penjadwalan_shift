@@ -33,6 +33,17 @@
                                         <div class="col-md-8 form-group">
                                             <input type="text" name="operator_name_type" value="{{ $viewData['operator_type']->getOperatorNameType() }}" id="operator_name_type-horizontal" class="form-control">
                                         </div>
+                                        <div class="col-md-4">
+                                            <label for="department-horizontal">Departemen</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">  
+                                            <select id="department_id" class="form-select @error('department_id') is-invalid @enderror" name="department_id"  id="basicSelect">
+                                                <option value="" hidden>-- Pilih Departemen --</option>
+                                                @foreach($viewData['department'] as $departments)
+                                                <option value="{{ $departments->getId() }}" {{ $departments->getId() == $viewData['operator_type']->getDepartmentId() ? 'selected' : null }}>{{ $departments->getDepartmentName() }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                         <div class="col">
                                             <div class="mb-3 row">
                                             <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Keterangan</label>

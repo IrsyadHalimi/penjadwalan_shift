@@ -27,11 +27,13 @@ class AdminOperatorController extends Controller
   public function create()
   {
     $companyId = Auth::user()->company_id;
+    $departmentId = Department::where('company_id', $companyId)->pluck('id')->toArray();
+    
     $viewData = [];
     $viewData["title"] = " Tambah Operator- Penjadwalan Shift";
     $viewData["subtitle"] = "Tambah Operator";
     $viewData["department"] = Department::where('company_id', $companyId)->get();
-    $viewData["operator_type"] = OperatorType::all();
+    $viewData["operator_type"] = OperatorType::whereIn('department_id', $departmentId)->get();
     return view('admin.operator.create')->with("viewData", $viewData);
   }
 

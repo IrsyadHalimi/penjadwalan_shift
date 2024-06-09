@@ -60,6 +60,8 @@
                                                 @endforeach
                                             </select>
                                         </div>
+                                        <livewire:department-operator-dropdown />
+                                        @livewireScripts
                                         <div class="col-md-4">
                                           <label for="phone-horizontal">Nomor Telepon</label>
                                         </div>

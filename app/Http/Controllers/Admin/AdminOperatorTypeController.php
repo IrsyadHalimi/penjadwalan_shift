@@ -6,25 +6,32 @@ use App\Models\OperatorType;
 use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class AdminOperatorTypeController extends Controller
 {
   public function index()
   {
+    $companyId = Auth::user()->company_id;
+    $departmentId = Department::where('company_id', $companyId)->pluck('id')->toArray();
+
     $viewData = [];
     $viewData["title"] = "Jenis Operator - Penjadwalan Shift";
     $viewData["subtitle"] = "Daftar Jenis Operator";
-    $viewData["operator_type"] = OperatorType::all();
+    $viewData["operator_type"] = OperatorType::whereIn('department_id', $departmentId)->get();
     return view('admin.operator_type.index')->with("viewData", $viewData);
   }
 
   public function create()
   {
+    $companyId = Auth::user()->company_id;
+
     $viewData = [];
     $viewData["title"] = "Jenis Operator - Penjadwalan Shift";
     $viewData["subtitle"] = "Tambah Jenis Operator";
-    $viewData["department"] = Department::all();
+    $viewData["department"] = Department::where('company_id', $companyId)->get();
     return view('admin.operator_type.create')->with("viewData", $viewData);
   }
 
@@ -47,10 +54,13 @@ class AdminOperatorTypeController extends Controller
 
   public function edit($id)
   {
+    $companyId = Auth::user()->company_id;
+    
     $viewData = [];
     $viewData["title"] = "Admin - Edit Jenis Operator";
     $viewData["subtitle"] = "Edit Jenis Operator";
     $viewData["operator_type"] = OperatorType::findOrFail($id);
+    $viewData["department"] = Department::where('company_id', $companyId)->get();
     return view('admin.operator_type.edit')->with("viewData", $viewData);
   }
 
@@ -59,6 +69,7 @@ class AdminOperatorTypeController extends Controller
     OperatorType::validate($request); 
     $operatorType = OperatorType::findOrFail($id);
     $operatorType->setOperatorNameType($request->input('operator_name_type'));
+    $operatorType->setDepartmentId($departmentId);
     $operatorType->setNotes($request->input('notes'));
     $operatorType->save();
 

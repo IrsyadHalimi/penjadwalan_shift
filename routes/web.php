@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminScheduleController;
 use App\Http\Controllers\SuperAdmin\SuperAdminScheduleController;
 use App\Http\Controllers\Supervisor\SupervisorScheduleController;
 use App\Http\Controllers\Operator\OperatorScheduleController;
+use App\Http\Livewire\SelectDropdowns;
 
 
 /*
@@ -71,6 +72,9 @@ Route::middleware('admin')->prefix('admin')->group(function() {
   Route::get('/company/{id}/edit', 'App\Http\Controllers\Admin\AdminCompanyController@edit')->name("admin.company.edit");
   Route::put('/company/{id}/update', 'App\Http\Controllers\Admin\AdminCompanyController@update')->name("admin.company.update");
   Route::delete('/company/{id}/delete', 'App\Http\Controllers\Admin\AdminCompanyController@delete')->name("admin.company.delete");
+
+  Route::get('/select-dropdowns', SelectDropdowns::class);
+
 });
 
 Route::get('/', 'App\Http\Controllers\HomeController@index')->name("home.index");

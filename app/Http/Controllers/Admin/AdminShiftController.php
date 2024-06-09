@@ -57,6 +57,7 @@ class AdminShiftController extends Controller
   public function edit($id)
   {
     $companyId = Auth::user()->company_id;
+    
     $viewData = [];
     $viewData["title"] = "Admin - Edit Shift";
     $viewData["subtitle"] = "Edit Shift Kerja";
