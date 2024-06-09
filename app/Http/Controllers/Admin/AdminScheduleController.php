@@ -5,9 +5,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\EventRequest;
 use App\Models\Schedule;
+use App\Models\Department;
 use App\Models\Shift;
 use App\Models\User;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 
 class AdminScheduleController extends Controller
@@ -22,10 +24,15 @@ class AdminScheduleController extends Controller
 
     public function listSchedule(Request $request)
     {
+        $companyId = Auth::user()->company_id;
+        $userId = User::where('company_id', $companyId)->where('role', 'operator')->pluck('id')->toArray();
+
         $start_date = date('Y-m-d', strtotime($request->start));
         $end_date = date('Y-m-d', strtotime($request->end));
         $schedule = Schedule::where('start_date', '>=', $start_date)
-        ->where('end_date', '<=' , $end_date)->get()
+        ->where('end_date', '<=' , $end_date)
+        ->whereIn('user_id', $userId)
+        ->get()
         ->map(function ($item) {
             $shift = Shift::find($item->shift_id);
             $user = User::find($item->user_id);
@@ -48,8 +55,11 @@ class AdminScheduleController extends Controller
 
     public function create(Schedule $schedule)
     {
-        $users = User::all();
-        $shifts = Shift::all();
+        $companyId = Auth::user()->company_id;
+        $departmentId = Department::where('company_id', $companyId)->pluck('id')->toArray();
+        
+        $users = User::where('role', 'operator')->where('company_id', $companyId)->get();
+        $shifts = Shift::whereIn('department_id', $departmentId)->get();
         return view('admin.schedule.schedule-form', [
             'data' => $schedule,
             'shifts' => $shifts, 
@@ -78,8 +88,11 @@ class AdminScheduleController extends Controller
 
     public function edit(Schedule $schedule)
     {
-        $users = User::all();
-        $shifts = Shift::all();
+        $companyId = Auth::user()->company_id;
+        $departmentId = Department::where('company_id', $companyId)->pluck('id')->toArray();
+        
+        $users = User::where('role', 'operator')->where('company_id', $companyId)->get();
+        $shifts = Shift::whereIn('department_id', $departmentId)->get();
         return view('admin.schedule.schedule-form', [
             'data' => $schedule, 
             'shifts' => $shifts, 

@@ -12,10 +12,11 @@ class AdminDepartmentController extends Controller
 {
   public function index()
   {
+    $companyId = Auth::user()->company_id;
     $viewData = [];
     $viewData["title"] = "Departemen - Penjadwalan Shift";
     $viewData["subtitle"] = "Daftar Departemen";
-    $viewData["department"] = Department::all();
+    $viewData["department"] = Department::where('company_id', $companyId)->get();
     return view('admin.department.index')->with("viewData", $viewData);
   }
 

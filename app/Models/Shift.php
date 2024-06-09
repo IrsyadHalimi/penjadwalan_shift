@@ -118,4 +118,9 @@ class Shift extends Model
     {
         return $this->belongsTo(Department::class);
     }
+    
+    public function schedule()
+    {
+        return $this->belongsTo(Schedule::class);
+    }
 }

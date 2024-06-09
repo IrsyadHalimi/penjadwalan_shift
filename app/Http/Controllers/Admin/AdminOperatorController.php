@@ -16,19 +16,21 @@ class AdminOperatorController extends Controller
 {
   public function index()
   {
+    $companyId = Auth::user()->company_id;
     $viewData = [];
     $viewData["title"] = "Operator - Penjadwalan Shift";
     $viewData["subtitle"] = "Daftar Operator";
-    $viewData["operator"] = User::where('role', 'operator')->get();
+    $viewData["operator"] = User::where('company_id', $companyId)->where('role', 'operator')->get();
     return view('admin.operator.index')->with("viewData", $viewData);
   }
   
   public function create()
   {
+    $companyId = Auth::user()->company_id;
     $viewData = [];
     $viewData["title"] = " Tambah Operator- Penjadwalan Shift";
     $viewData["subtitle"] = "Tambah Operator";
-    $viewData["department"] = Department::all();
+    $viewData["department"] = Department::where('company_id', $companyId)->get();
     $viewData["operator_type"] = OperatorType::all();
     return view('admin.operator.create')->with("viewData", $viewData);
   }
@@ -57,12 +59,15 @@ class AdminOperatorController extends Controller
 
   public function edit($id)
   {
+    $companyId = Auth::user()->company_id;
+    $departmentId = Department::where('company_id', $companyId)->pluck('id')->toArray();
+    
     $viewData = [];
     $viewData["title"] = "Admin - Edit Operator";
     $viewData["subtitle"] = "Edit Operator";
     $viewData["operator"] = User::findOrFail($id);
-    $viewData["department"] = Department::all();
-    $viewData["shift"] = Shift::all();
+    $viewData["department"] = Department::where('company_id', $companyId)->get()();
+    $viewData["shift"] = Shift::whereIn('department_id', $departmentId)->get();
     $viewData["operator_type"] = OperatorType::all();
     return view('admin.operator.edit')->with("viewData", $viewData);
   }

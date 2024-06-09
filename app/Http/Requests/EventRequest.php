@@ -24,8 +24,8 @@ class EventRequest extends FormRequest
         return [
             'start_date' => 'required|date_format:Y-m-d',
             'end_date' => 'required|date_format:Y-m-d',
-            'user_id' => 'required',
-            'shift_id' => 'required',
+            'user_id' => 'required|exists:users,id',
+            'shift_id' => 'required|exists:shifts,id',
         ];
     }
 }
