@@ -45,6 +45,10 @@
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
             themeSystem: 'bootstrap5',
+            locale: 'id',
+            buttonText: {
+              today: 'Hari ini',
+            },
             events: `{{ route('admin.schedule.list') }}`,
             editable: true,
             dateClick: function(info) {
