@@ -72,6 +72,11 @@ Route::middleware('admin')->prefix('admin')->group(function() {
   Route::get('/company/{id}/edit', 'App\Http\Controllers\Admin\AdminCompanyController@edit')->name("admin.company.edit");
   Route::put('/company/{id}/update', 'App\Http\Controllers\Admin\AdminCompanyController@update')->name("admin.company.update");
   Route::delete('/company/{id}/delete', 'App\Http\Controllers\Admin\AdminCompanyController@delete')->name("admin.company.delete");
+  
+  Route::get('/profile', 'App\Http\Controllers\Admin\AdminProfileController@index')->name("admin.profile.index");
+  Route::get('/profile/{id}/edit', 'App\Http\Controllers\Admin\AdminProfileController@edit')->name("admin.profile.edit");
+  Route::put('/profile/{id}/update', 'App\Http\Controllers\Admin\AdminProfileController@update')->name("admin.profile.update");
+  Route::delete('/profile/{id}/delete', 'App\Http\Controllers\Admin\AdminProfileController@delete')->name("admin.profile.delete");
 
   Route::get('/select-dropdowns', SelectDropdowns::class);
 

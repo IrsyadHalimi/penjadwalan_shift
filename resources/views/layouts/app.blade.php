@@ -289,11 +289,6 @@
             </div>
         </div>
     </div>
-    <footer>
-        <div class="footer clearfix mb-0 text-muted">
-            
-        </div>
-    </footer>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
