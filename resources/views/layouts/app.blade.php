@@ -137,7 +137,7 @@
                                 <li class="sidebar-item  ">
                                     <a href="#" class='sidebar-link'>
                                         <i class="bi bi-grid-fill"></i>
-                                        <span>Dasbor Supervisor</span>
+                                        <span>Dasbor Operator</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item  ">

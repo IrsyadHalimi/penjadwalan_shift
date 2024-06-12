@@ -24,14 +24,40 @@
                         <div class="card-body">
                             <form class="form form-horizontal">
                                 <div class="form-body">
+                                @foreach ($viewData['profile'] as $admins)
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <label for="shift-name-horizontal">Nama Shift</label>
+                                            <label for="shift-name-horizontal">Nama Admin</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <h6>: Halo</h6>
+                                            <h6>: {{ $admins->getName() }}</h6>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="shift-name-horizontal">Nomor Pegawai</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <h6>: {{ $admins->getEmployeeId() }}</h6>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="shift-name-horizontal">Nama Telepon</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <h6>: {{ $admins->getPhoneNumber() }}</h6>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="shift-name-horizontal">Email</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <h6>: {{ $admins->getEmail() }}</h6>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="shift-name-horizontal"></label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <h6><a class="btn icon btn-primary" href="{{route('admin.profile.edit', ['id'=> $admins->getId()])}}">Edit Profil <i class="bi-pen"></i></a></h6>
                                         </div>
                                     </div>
+                                @endforeach
                                 </div>
                             </form>
                         </div>

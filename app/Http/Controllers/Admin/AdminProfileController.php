@@ -11,11 +11,11 @@ class AdminProfileController extends Controller
 {
   public function index()
   {
-    $userId = Auth::user()->id;
+    $id = Auth::user()->id;
     $viewData = [];
     $viewData["title"] = "Profil - Penjadwalan Shift";
     $viewData["subtitle"] = "Daftar Perusahaan";
-    $viewData["admin"] = User::where('id', $userId)->get();
+    $viewData["profile"] = User::where('id', $id)->get();
     return view('admin.profile.index')->with("viewData", $viewData);
   }
 
@@ -24,7 +24,7 @@ class AdminProfileController extends Controller
     $viewData = [];
     $viewData["title"] = "Admin - Edit Profil";
     $viewData["subtitle"] = "Edit Profil";
-    $viewData["admin"] = User::findOrFail($id);
+    $viewData["profile"] = User::findOrFail($id);
     return view('admin.profile.edit')->with("viewData", $viewData);
   }
 
@@ -38,11 +38,5 @@ class AdminProfileController extends Controller
     $admin->save();
 
     return redirect()->route('admin.profile.index');
-  }
-
-  public function delete($id)
-  {
-    Company::destroy($id);
-    return back();
   }
 }
