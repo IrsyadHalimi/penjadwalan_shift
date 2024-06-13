@@ -9,7 +9,7 @@
     @endforeach
   </ul>
   @endif
-  <form method="POST" action="{{ route('admin.operator.store') }}">
+  <form method="POST" action="{{ route('superadmin.operator.store') }}">
   @csrf
     <div class="row">
       <div class="col">
@@ -28,14 +28,8 @@
           </div>
         </div>
       </div>
-      <div class="col">
-        <div class="mb-3 row">
-        <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Departemen</label>
-          <div class="col-lg-10 col-md-6 col-sm-12">
-              <input name="department_id" type="text" class="form-control">
-          </div>
-        </div>
-      </div>
+      <livewire:superadmin-department-operator-dropdown />
+      @livewireScripts
       <div class="col">
         <div class="mb-3 row">
         <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Nomor Telepon</label>

@@ -11,7 +11,7 @@
   </ul>
   @endif
 
-  <form method="POST" action="{{ route('admin.operator.update', ['id'=> $viewData['operator']->getId()]) }}"
+  <form method="POST" action="{{ route('superadmin.operator.update', ['id'=> $viewData['operator']->getId()]) }}"
   enctype="multipart/form-data">
     @csrf
     @method('PUT')

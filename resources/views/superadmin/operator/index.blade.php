@@ -12,7 +12,7 @@
   @endif
 </div>
 <div class="row">
-<a href="{{ route('admin.operator.create') }}">Tambah Operator Baru</a>
+<a href="{{ route('superadmin.operator.create') }}">Tambah Operator Baru</a>
   @foreach ($viewData["operator"] as $operators)
   ID: {{ $operators->getId() }}
   Nama: {{ $operators->getName() }}
@@ -20,8 +20,8 @@
   Departemen: {{ $operators->getDepartmentId() }}
   Email: {{ $operators->getEmail() }}
   Jabatan: {{ $operators->getRole() }}
-  <a href="{{route('admin.operator.edit', ['id'=> $operators->getId()])}}">Edit</a>
-  <form action="{{ route('admin.operator.delete', $operators->getId())}}" method="POST">
+  <a href="{{route('superadmin.operator.edit', ['id'=> $operators->getId()])}}">Edit</a>
+  <form action="{{ route('superadmin.operator.delete', $operators->getId())}}" method="POST">
     @csrf
     @method('DELETE')
     <button class="btn btn-danger">

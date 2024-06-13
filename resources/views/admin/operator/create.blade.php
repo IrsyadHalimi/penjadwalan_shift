@@ -38,7 +38,7 @@
                                         <div class="col-md-8 form-group">
                                             <input type="text" name="employee_id" id="employeeId-horizontal" class="form-control" value="{{ old('employee_id') }}" required autocomplete="employee_id" autofocus>
                                         </div>
-                                        <livewire:department-operator-dropdown />
+                                        <livewire:admin-department-operator-dropdown />
                                         @livewireScripts
                                         <div class="col-md-4">
                                           <label for="phone-horizontal">Nomor Telepon</label>

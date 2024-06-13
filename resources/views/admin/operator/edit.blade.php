@@ -38,28 +38,8 @@
                                         <div class="col-md-8 form-group">
                                             <input type="text" name="employee_id" value="{{ $viewData['operator']->getEmployeeId() }}" id="employeeId-horizontal" class="form-control">
                                         </div>
-                                        <div class="col-md-4">
-                                            <label for="department-horizontal">Departemen</label>
-                                        </div>
-                                        <div class="col-md-8 form-group">  
-                                            <select id="department_id" class="form-select @error('department_id') is-invalid @enderror" name="department_id"  id="basicSelect">
-                                                <option value="" hidden>-- Pilih Departemen --</option>
-                                                @foreach($viewData['department'] as $departments)
-                                                <option value="{{ $departments->getId() }}" {{ $departments->getId() == $viewData['operator']->getDepartmentId() ? 'selected' : null }}>{{ $departments->getDepartmentName() }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="operator_type-horizontal">Jenis Operator</label>
-                                        </div>
-                                        <div class="col-md-8 form-group">  
-                                            <select id="operator_type_id" class="form-select @error('operator_type_id') is-invalid @enderror" name="operator_type_id"  id="basicSelect">
-                                                <option value="" hidden>-- Pilih Jenis Operator --</option>
-                                                @foreach($viewData['operator_type'] as $operator_types)
-                                                <option value="{{ $operator_types->getId() }}" {{ $operator_types->getId() == $viewData['operator']->getOperatorTypeId() ? 'selected' : null }}>{{ $operator_types->getOperatorNameType() }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                        <livewire:admin-department-operator-dropdown-edit :userId="$viewData['operator']->getId()" />
+                                        @livewireScripts
                                         <div class="col-md-4">
                                             <label for="email-horizontal">Email</label>
                                         </div>
