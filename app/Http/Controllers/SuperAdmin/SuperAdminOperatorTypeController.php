@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\SuperAdmin;
+namespace App\Http\Controllers\Superadmin;
 use App\Http\Controllers\Controller;
 use App\Models\OperatorType;
 use App\Models\Department;
@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 
-class SuperAdminOperatorTypeController extends Controller
+class SuperadminOperatorTypeController extends Controller
 {
   public function index()
   {
@@ -48,7 +48,7 @@ class SuperAdminOperatorTypeController extends Controller
   public function edit($id)
   {
     $viewData = [];
-    $viewData["title"] = "SuperAdmin - Edit Jenis Operator";
+    $viewData["title"] = "Superadmin - Edit Jenis Operator";
     $viewData["subtitle"] = "Edit Jenis Operator";
     $viewData["operator_type"] = OperatorType::findOrFail($id);
     return view('superadmin.operator_type.edit')->with("viewData", $viewData);

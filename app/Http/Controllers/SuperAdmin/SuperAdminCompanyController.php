@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\SuperAdmin;
+namespace App\Http\Controllers\Superadmin;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use Illuminate\Http\Request;
 
-class SuperAdminCompanyController extends Controller
+class SuperadminCompanyController extends Controller
 {
   public function index()
   {

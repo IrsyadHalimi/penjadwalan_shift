@@ -24,37 +24,37 @@
                         <div class="card-body">
                             <form class="form form-horizontal">
                                 <div class="form-body">
-                                @foreach ($viewData['profile'] as $admins)
+                                @foreach ($viewData['profile'] as $supervisor)
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <label for="shift-name-horizontal">Nama Admin</label>
+                                            <label for="shift-name-horizontal">Nama Supervisor</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <h6 class="text-muted">: {{ $admins->getName() }}</h6>
+                                            <h6 class="text-muted">: {{ $supervisor->getName() }}</h6>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="shift-name-horizontal">Nomor Pegawai</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <h6 class="text-muted">: {{ $admins->getEmployeeId() }}</h6>
+                                            <h6 class="text-muted">: {{ $supervisor->getEmployeeId() }}</h6>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="shift-name-horizontal">Nama Telepon</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <h6 class="text-muted">: {{ $admins->getPhoneNumber() }}</h6>
+                                            <h6 class="text-muted">: {{ $supervisor->getPhoneNumber() }}</h6>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="shift-name-horizontal">Email</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <h6 class="text-muted">: {{ $admins->getEmail() }}</h6>
+                                            <h6 class="text-muted">: {{ $supervisor->getEmail() }}</h6>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="shift-name-horizontal"></label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <h6 class="text-muted"><a class="btn icon btn-primary" href="{{route('admin.profile.edit', ['id'=> $admins->getId()])}}">Edit Profil <i class="bi-pen"></i></a></h6>
+                                            <h6 class="text-muted"><a class="btn icon btn-primary" href="{{route('supervisor.profile.edit', ['id'=> $supervisor->getId()])}}">Edit Profil <i class="bi-pen"></i></a></h6>
                                         </div>
                                     </div>
                                 @endforeach

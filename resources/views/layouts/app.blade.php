@@ -163,7 +163,7 @@
                                 <li class="sidebar-item  ">
                                 <a href="{{ route('superadmin.shift.index') }}" class='sidebar-link'>
                                     <i class="bi bi-grid-fill"></i>
-                                    <span>Dasbor SuperAdmin</span>
+                                    <span>Dasbor Superadmin</span>
                                 </a>
                                 </li>
                                 <li class="sidebar-item  ">
@@ -250,6 +250,17 @@
                         <div class="col-8 col-md-2 order-md-2 order-first">
                             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                 <ol class="breadcrumb">
+                                    <li class="breadcrumb-item active" aria-current="page">
+                                        @if (Auth::user()->role == 'admin')
+                                        <a class="nav-link active" href="{{ route('admin.profile.index') }}">Profil</a>
+                                        @elseif (Auth::user()->role == 'operator')
+                                        <a class="nav-link active" href="{{ route('operator.profile.index') }}">Profil</a>
+                                        @elseif (Auth::user()->role == 'supervisor')
+                                        <a class="nav-link active" href="{{ route('supervisor.profile.index') }}">Profil</a>
+                                        @else
+                                        <a class="nav-link active" href="{{ route('superadmin.profile.index') }}">Profil</a>
+                                        @endif
+                                    </li>
                                     <li class="breadcrumb-item">@guest
                                     <a class="nav-link active" href="{{ route('login') }}">Login</a>
                                     <a class="nav-link active" href="{{ route('register') }}">Register</a>

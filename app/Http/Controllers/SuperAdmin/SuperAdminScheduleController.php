@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\SuperAdmin;
+namespace App\Http\Controllers\Superadmin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\EventRequest;
@@ -10,7 +10,7 @@ use App\Models\User;
 use Illuminate\Support\Str;
 
 
-class SuperAdminScheduleController extends Controller
+class SuperadminScheduleController extends Controller
 {
     public function index()
     {

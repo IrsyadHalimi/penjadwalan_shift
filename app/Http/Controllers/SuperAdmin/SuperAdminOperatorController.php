@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\SuperAdmin;
+namespace App\Http\Controllers\Superadmin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Department;
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 
-class SuperAdminOperatorController extends Controller
+class SuperadminOperatorController extends Controller
 {
   public function index()
   {
@@ -58,7 +58,7 @@ class SuperAdminOperatorController extends Controller
   public function edit($id)
   {
     $viewData = [];
-    $viewData["title"] = "SuperAdmin - Edit Operator";
+    $viewData["title"] = "Superadmin - Edit Operator";
     $viewData["subtitle"] = "Edit Operator";
     $viewData["operator"] = User::findOrFail($id);
     $viewData["department"] = Department::all();

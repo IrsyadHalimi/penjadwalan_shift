@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\SuperAdmin;
+namespace App\Http\Controllers\Superadmin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
-class SuperAdminSupervisorController extends Controller
+class SuperadminSupervisorController extends Controller
 {
   public function index()
   {
     $viewData = [];
-    $viewData["title"] = "SuperAdmin - Penjadwalan Shift";
+    $viewData["title"] = "Superadmin - Penjadwalan Shift";
     $viewData["subtitle"] = "Daftar Supervisor";
     $viewData["supervisor"] = User::where('role', 'supervisor')->get();
     return view('superadmin.supervisor.index')->with("viewData", $viewData);
@@ -45,7 +45,7 @@ class SuperAdminSupervisorController extends Controller
   public function edit($id)
   {
     $viewData = [];
-    $viewData["title"] = "SuperAdmin - Edit Supervisor";
+    $viewData["title"] = "Superadmin - Edit Supervisor";
     $viewData["subtitle"] = "Edit Supervisor";
     $viewData["supervisor"] = User::findOrFail($id);
     return view('superadmin.supervisor.edit')->with("viewData", $viewData);

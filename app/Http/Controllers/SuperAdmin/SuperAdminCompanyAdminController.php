@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\SuperAdmin;
+namespace App\Http\Controllers\Superadmin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Company;
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 
-class SuperAdminCompanyAdminController extends Controller
+class SuperadminCompanyAdminController extends Controller
 {
   public function index()
   {
@@ -52,7 +52,7 @@ class SuperAdminCompanyAdminController extends Controller
   public function edit($id)
   {
     $viewData = [];
-    $viewData["title"] = "SuperAdmin - Edit Admin Perusahaan";
+    $viewData["title"] = "Superadmin - Edit Admin Perusahaan";
     $viewData["subtitle"] = "Edit Admin Perusahaan";
     $viewData["company_admin"] = User::findOrFail($id);
     return view('superadmin.company_admin.edit')->with("viewData", $viewData);

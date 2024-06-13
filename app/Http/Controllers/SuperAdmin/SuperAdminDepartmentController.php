@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\SuperAdmin;
+namespace App\Http\Controllers\Superadmin;
 use App\Http\Controllers\Controller;
 use App\Models\Department;
 use Illuminate\Http\Request;
@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 
-class SuperAdminDepartmentController extends Controller
+class SuperadminDepartmentController extends Controller
 {
   public function index()
   {
@@ -47,7 +47,7 @@ class SuperAdminDepartmentController extends Controller
   public function edit($id)
   {
     $viewData = [];
-    $viewData["title"] = "SuperAdmin - Edit Departemen";
+    $viewData["title"] = "Superadmin - Edit Departemen";
     $viewData["subtitle"] = "Edit Departemen";
     $viewData["department"] = Department::findOrFail($id);
     return view('superadmin.department.edit')->with("viewData", $viewData);

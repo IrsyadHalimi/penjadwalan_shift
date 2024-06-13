@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\SuperAdmin;
+namespace App\Http\Controllers\Superadmin;
 use App\Http\Controllers\Controller;
 use App\Models\Shift;
 use App\Models\User;
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 
-class SuperAdminShiftController extends Controller
+class SuperadminShiftController extends Controller
 {
   public function index()
   {
@@ -52,7 +52,7 @@ class SuperAdminShiftController extends Controller
   public function edit($id)
   {
     $viewData = [];
-    $viewData["title"] = "SuperAdmin - Edit Shift";
+    $viewData["title"] = "Superadmin - Edit Shift";
     $viewData["subtitle"] = "Edit Shift Kerja";
     $viewData["shift"] = Shift::findOrFail($id);
     $viewData["department"] = Department::all();
