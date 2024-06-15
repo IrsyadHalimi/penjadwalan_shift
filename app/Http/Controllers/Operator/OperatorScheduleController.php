@@ -7,17 +7,23 @@ use App\Http\Requests\EventRequest;
 use App\Models\Schedule;
 use App\Models\Shift;
 use App\Models\User;
+use App\Models\Department;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 
 class OperatorScheduleController extends Controller
 {
     public function index()
     {
+        $departmentId = Auth::user()->department_id;
+        $shiftId = Shift::where('department_id', $departmentId)->pluck('id')->toArray();
+        
         $viewData = [];
         $viewData["title"] = "Jadwal - Penjadwalan Shift";
         $viewData["subtitle"] = "Daftar Jadwal Kerja";
+        $viewData["shift"] = Shift::whereIn('id', $shiftId)->get();
         return view('operator.schedule.index')->with("viewData", $viewData);
     }
 
@@ -51,5 +57,33 @@ class OperatorScheduleController extends Controller
             });
 
         return response()->json($schedule);
+    }
+
+    public function generatePdf(Request $request)
+    {
+        $request->validate([
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+        ]);
+
+        $departmentId = Auth::user()->department_id;
+        $shiftId = Shift::where('department_id', $departmentId)->pluck('id')->toArray();
+
+        $schedules = Schedule::where('start_date', '>=', $request->start_date)
+        ->where('end_date', '<=' , $request->end_date)
+        ->whereIn('shift_id', $shiftId)
+        ->get()
+        ->map(function ($item) {
+            return [
+                'start_date' => $item->start_date,
+                'end_date' => $item->end_date,
+                'operator' => $item->user_id,
+                'shift' => $item->shift_id,
+            ];
+        });
+
+        $pdf = PDF::loadView('operator.schedule.pdf', compact('schedules'));
+
+        return $pdf->download('jadwal.pdf');
     }
 }

@@ -14,8 +14,16 @@
 <div class="row" id="table-hover-row">
   <div class="col-12">
       <div class="card">
-          <div class="card-header">
-              <h4 class="card-title">Hoverable rows</h4>
+        <div class="card-header">
+            <h4 class="card-title">Jadwal Shift Kerja</h4>
+            <p>Keterangan Label Shift</p>
+            <div class="row">
+                @foreach ($viewData['shift'] as $shifts)
+                <div class="col-6 col-lg-3 col-md-3">{{ $shifts->getShiftName() }}
+                    <button class="btn btn-{{ $shifts->getLabelColor() }} px-4"></button></>
+                </div>
+                @endforeach
+            </div>
           </div>
           <div class="card-content">
               <div class="card-body">

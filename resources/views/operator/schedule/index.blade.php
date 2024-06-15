@@ -15,10 +15,42 @@
   <div class="col-12">
       <div class="card">
           <div class="card-header">
-              <h4 class="card-title">Hoverable rows</h4>
+            <h4 class="card-title">Jadwal Shift Kerja</h4>
+            <p>Keterangan Label Shift</p>
+            <div class="row">
+                @foreach ($viewData['shift'] as $shifts)
+                <div class="col-6 col-lg-3 col-md-3">{{ $shifts->getShiftName() }}
+                    <button class="btn btn-{{ $shifts->getLabelColor() }} px-4"></button></>
+                </div>
+                @endforeach
+            </div>
           </div>
           <div class="card-content">
               <div class="card-body">
+                <form class="form form-horizontal" action="{{ route('operator.schedule.generatePdf') }}" method="post">
+                  @csrf
+                  <div class="form-body">
+                      <div class="row">
+                          <div class="col-md-4">
+                              <label for="start_date-horizontal">Jadwal Dari</label>
+                          </div>
+                          <div class="col-md-8 form-group">
+                              <input type="date" name="start_date" id="start_date-horizontal" class="form-control" required>
+                          </div>
+                          <div class="col-md-4">
+                              <label for="end_date-horizontal">Hingga</label>
+                          </div>
+                          <div class="col-md-8 form-group">
+                              <input type="date" name="end_date" id="end_date-horizontal" class="form-control" required>
+                          </div>
+                          <div class="col-sm-12 d-flex justify-content-end">
+                              <button type="submit" class="btn btn-primary me-1 mb-1">Cetak PDF</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <div id='calendar'></div>

@@ -169,6 +169,8 @@ Route::middleware('operator')->prefix('operator')->group(function() {
   Route::get('/profile', 'App\Http\Controllers\Operator\OperatorProfileController@index')->name("operator.profile.index");
   Route::get('/profile/{id}/edit', 'App\Http\Controllers\Operator\OperatorProfileController@edit')->name("operator.profile.edit");
   Route::put('/profile/{id}/update', 'App\Http\Controllers\Operator\OperatorProfileController@update')->name("operator.profile.update");
+  
+  Route::post('/schedule/generatePdf', 'App\Http\Controllers\Operator\OperatorScheduleController@generatePdf')->name("operator.schedule.generatePdf");
 });
 
 

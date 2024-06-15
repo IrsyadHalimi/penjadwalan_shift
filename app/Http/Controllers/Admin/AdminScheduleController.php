@@ -16,9 +16,13 @@ class AdminScheduleController extends Controller
 {
     public function index()
     {
+        $companyId = Auth::user()->company_id;
+        $departmentId = Department::where('company_id', $companyId)->pluck('id')->toArray();
+        
         $viewData = [];
         $viewData["title"] = "Jadwal - Penjadwalan Shift";
         $viewData["subtitle"] = "Daftar Jadwal Kerja";
+        $viewData["shift"] = Shift::whereIn('department_id', $departmentId)->get();
         return view('admin.schedule.index')->with("viewData", $viewData);
     }
 
