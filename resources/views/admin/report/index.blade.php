@@ -97,6 +97,35 @@
                 </div>
             </div>
         </div>
+        <div class="card">
+            <div class="card-header pb-0">
+                <h4 class="card-title">Data Jadwal Berdasarkan Jenis Operator</h4>
+                <p>
+                    Cetak seluruh jadwal shift kerja operator ke file PDF berdasarkan jenis operator
+                </p>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <div>
+                    <form class="form form-horizontal" action="{{ route('admin.report.generateByOperatorTypePdf') }}" method="post">
+                        @csrf
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="department-horizontal">Departemen</label>
+                                </div>
+                                <livewire:admin-department-operator-dropdown />
+                                        @livewireScripts
+                                <div class="col-sm-12 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary"><i class="bi bi-download"></i> Cetak Jadwal</button>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @endsection

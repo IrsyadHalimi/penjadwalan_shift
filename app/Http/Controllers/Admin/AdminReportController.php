@@ -8,6 +8,7 @@ use App\Models\Schedule;
 use App\Models\Department;
 use App\Models\Shift;
 use App\Models\User;
+use App\Models\OperatorType;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use PDF;
@@ -63,6 +64,39 @@ class AdminReportController extends Controller
         ->get();
 
         $pdf = PDF::loadView('admin.report.generate-by-department-pdf', compact('schedules', 'departmentName'));
+
+        return $pdf->stream('jadwal.pdf');
+    }
+
+    public function generateByOperatorTypePdf(Request $request)
+    {
+        $request->validate([
+            'department_id' => 'required',
+            'operator_type_id' => 'required',
+        ]);
+        
+        $departmentId = $request->department_id;
+        $operatorTypeId = $request->operator_type_id;
+
+        $companyId = Auth::user()->company_id;
+        
+        $departmentData = Department::where('id', $departmentId)->first();
+        $operatorTypeData = OperatorType::where('id', $operatorTypeId)->first();
+        
+        $departmentName = $departmentData->getDepartmentName();
+        $operatorTypeName = $operatorTypeData->getOperatorNameType();
+        
+        $shiftId = Shift::where('department_id', $departmentId)->pluck('id')->toArray();
+        $userId = User::where('company_id', $companyId)->where('role', 'operator')->where('operator_type_id', $operatorTypeId)->pluck('id')->toArray();
+
+        $schedules = Schedule::whereIn('user_id', $userId)
+        ->whereIn('shift_id', $shiftId)
+        ->with('user')
+        ->with('shift')
+        ->orderBy('start_date')
+        ->get();
+
+        $pdf = PDF::loadView('admin.report.generate-by-operator-type-pdf', compact('schedules', 'departmentName', 'operatorTypeName'));
 
         return $pdf->stream('jadwal.pdf');
     }

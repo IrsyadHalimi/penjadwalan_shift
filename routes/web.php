@@ -81,6 +81,7 @@ Route::middleware('admin')->prefix('admin')->group(function() {
   Route::get('/report', 'App\Http\Controllers\Admin\AdminReportController@index')->name("admin.report.index");
   Route::get('/report/generateAllSchedulePdf', 'App\Http\Controllers\Admin\AdminReportController@generateAllSchedulePdf')->name("admin.report.generateAllSchedulePdf");
   Route::post('/report/generateByDepartmentPdf', 'App\Http\Controllers\Admin\AdminReportController@generateByDepartmentPdf')->name("admin.report.generateByDepartmentPdf");
+  Route::post('/report/generateByOperatorTypePdf', 'App\Http\Controllers\Admin\AdminReportController@generateByOperatorTypePdf')->name("admin.report.generateByOperatorTypePdf");
 });
 
 Route::get('/', 'App\Http\Controllers\HomeController@index')->name("home.index");
