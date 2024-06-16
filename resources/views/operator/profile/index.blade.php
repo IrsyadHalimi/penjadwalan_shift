@@ -39,7 +39,19 @@
                                             <h6 class="text-muted">: {{ $operator->getEmployeeId() }}</h6>
                                         </div>
                                         <div class="col-md-4">
-                                            <label for="shift-name-horizontal">Nama Telepon</label>
+                                            <label for="shift-name-horizontal">Departemen</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <h6 class="text-muted">: {{ $operator->department->department_name }}</h6>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="shift-name-horizontal">Jenis Operator</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <h6 class="text-muted">: {{ $operator->operatorType->operator_name_type }}</h6>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="shift-name-horizontal">Nomor Telepon</label>
                                         </div>
                                         <div class="col-md-8 form-group">
                                             <h6 class="text-muted">: {{ $operator->getPhoneNumber() }}</h6>

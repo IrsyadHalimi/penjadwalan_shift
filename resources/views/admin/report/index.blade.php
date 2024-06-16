@@ -15,19 +15,85 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header pb-0">
-                <h4 class="card-title">Data Shift</h4>
+                <h4 class="card-title">Data Jadwal</h4>
                 <p>
-                    Data dalam tabel dibawah merupakan seluruh data shift kerja operator dari berbagai departemen yang terdapat pada perusahaan
+                    Cetak seluruh jadwal shift kerja operator ke file PDF yang terdapat pada perusahaan
+                </p>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <a href="{{ route('admin.report.generateAllSchedulePdf') }}"><button class="btn btn-primary"><i class="bi bi-download"></i> Cetak Seluruh Jadwal</button></a>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header pb-0">
+                <h4 class="card-title">Data Jadwal Berdasarkan Rentang Waktu</h4>
+                <p>
+                    Cetak seluruh jadwal shift kerja operator ke file PDF berdasarkan rentang waktu
                 </p>
             </div>
             <div class="card-content">
                 <div class="card-body">
                     <div>
-                        <a href="{{ route('admin.report.generateAllSchedulePdf') }}"><button class="btn btn-primary">Cetak Seluruh Data Jadwal Operator</button></a>
-                    </div>
+                    <form class="form form-horizontal" action="{{ route('admin.schedule.generatePdf') }}" method="post">
+                        @csrf
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="start_date-horizontal">Jadwal Dari Tanggal</label>
+                                </div>
+                                <div class="col-md-8 form-group">
+                                    <input type="date" name="start_date" id="start_date-horizontal" class="form-control" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="end_date-horizontal">Hingga Tanggal</label>
+                                </div>
+                                <div class="col-md-8 form-group">
+                                    <input type="date" name="end_date" id="end_date-horizontal" class="form-control" required>
+                                </div>
+                                <div class="col-sm-12 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary"><i class="bi bi-download"></i> Cetak Jadwal</button>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <!-- table hover -->
-                <div class="table-responsive">
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header pb-0">
+                <h4 class="card-title">Data Jadwal Berdasarkan Departemen</h4>
+                <p>
+                    Cetak seluruh jadwal shift kerja operator ke file PDF berdasarkan departemen
+                </p>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <div>
+                    <form class="form form-horizontal" action="{{ route('admin.report.generateByDepartmentPdf') }}" method="post">
+                        @csrf
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="department-horizontal">Departemen</label>
+                                </div>
+                                <div class="col-md-8 form-group">  
+                                    <select id="department_id" class="form-select @error('department_id') is-invalid @enderror" name="department_id"  id="basicSelect">
+                                        <option value="" hidden>-- Pilih Departemen --</option>
+                                        @foreach($viewData['department'] as $departments)
+                                        <option value="{{ $departments->getId() }}">{{ $departments->getDepartmentName() }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-sm-12 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary"><i class="bi bi-download"></i> Cetak Jadwal</button>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

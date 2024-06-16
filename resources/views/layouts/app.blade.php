@@ -133,6 +133,20 @@
                                         <span>Laporan</span>
                                     </a>
                                 </li>
+                                <li class="sidebar-item  ">
+                                    <a href="{{ route('admin.profile.index') }}" class='sidebar-link'>
+                                        <i class="bi bi-person-fill"></i>
+                                        <span>Profil</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item  ">
+                                    <form id="logout" action="{{ route('logout') }}" method="POST">
+                                        <a role="button" class='sidebar-link'
+                                        onclick="document.getElementById('logout').submit();"><i class="bi bi-power"></i>
+                                        <span>Logout</span></a>
+                                        @csrf
+                                    </form>
+                                </li>
                                 @elseif ($role === 'operator')
                                 <li class="sidebar-item  ">
                                     <a href="#" class='sidebar-link'>
@@ -146,6 +160,20 @@
                                         <span>Jadwal</span>
                                     </a>
                                 </li>
+                                <li class="sidebar-item  ">
+                                    <a href="{{ route('operator.profile.index') }}" class='sidebar-link'>
+                                        <i class="bi bi-calendar4-week"></i>
+                                        <span>Profil</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item  ">
+                                    <form id="logout" action="{{ route('logout') }}" method="POST">
+                                        <a role="button" class='sidebar-link'
+                                        onclick="document.getElementById('logout').submit();"><i class="bi bi-power"></i>
+                                        <span>Logout</span></a>
+                                        @csrf
+                                    </form>
+                                </li>
                                 @elseif ($role === 'supervisor')
                                 <li class="sidebar-item  ">
                                     <a href="#" class='sidebar-link'>
@@ -158,6 +186,19 @@
                                         <i class="bi bi-calendar4-week"></i>
                                         <span>Jadwal</span>
                                     </a>
+                                </li>
+                                <li class="sidebar-item  ">
+                                    <a href="{{ route('supervisor.profile.index') }}" class='sidebar-link'>
+                                        <i class="bi bi-calendar4-week"></i>
+                                        <span>Profil</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item  ">
+                                    <form id="logout" action="{{ route('logout') }}" method="POST">
+                                        <a role="button" class="nav-link active"
+                                        onclick="document.getElementById('logout').submit();">Logout</a>
+                                        @csrf
+                                    </form>
                                 </li>
                                 @elseif ($role === 'superadmin')
                                 <li class="sidebar-item  ">
@@ -246,33 +287,6 @@
                         <div class="col-8 col-md-10 order-md-1 order-last mb-3">
                             <h3 class="text-muted">Penjadwalan Shift Kerja Operator</h3>
                             <h5>{{ ucwords($role) }} - {{ Auth::user()->company->company_name ?? 'N/A' }}</h5>
-                        </div>
-                        <div class="col-8 col-md-2 order-md-2 order-first">
-                            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item active" aria-current="page">
-                                        @if (Auth::user()->role == 'admin')
-                                        <a class="nav-link active" href="{{ route('admin.profile.index') }}">Profil</a>
-                                        @elseif (Auth::user()->role == 'operator')
-                                        <a class="nav-link active" href="{{ route('operator.profile.index') }}">Profil</a>
-                                        @elseif (Auth::user()->role == 'supervisor')
-                                        <a class="nav-link active" href="{{ route('supervisor.profile.index') }}">Profil</a>
-                                        @else
-                                        <a class="nav-link active" href="{{ route('superadmin.profile.index') }}">Profil</a>
-                                        @endif
-                                    </li>
-                                    <li class="breadcrumb-item">@guest
-                                    <a class="nav-link active" href="{{ route('login') }}">Login</a>
-                                    <a class="nav-link active" href="{{ route('register') }}">Register</a>
-                                    @else
-                                    <form id="logout" action="{{ route('logout') }}" method="POST">
-                                        <a role="button" class="nav-link active"
-                                        onclick="document.getElementById('logout').submit();">Logout</a>
-                                        @csrf
-                                    </form>
-                                    @endguest</li>
-                                </ol>
-                            </nav>
                         </div>
                     </div>
                 </div>

@@ -39,7 +39,13 @@
                                             <h6 class="text-muted">: {{ $supervisor->getEmployeeId() }}</h6>
                                         </div>
                                         <div class="col-md-4">
-                                            <label for="shift-name-horizontal">Nama Telepon</label>
+                                            <label for="shift-name-horizontal">Departemen</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <h6 class="text-muted">: {{ $supervisor->department->department_name }}</h6>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="shift-name-horizontal">Nomor Telepon</label>
                                         </div>
                                         <div class="col-md-8 form-group">
                                             <h6 class="text-muted">: {{ $supervisor->getPhoneNumber() }}</h6>
