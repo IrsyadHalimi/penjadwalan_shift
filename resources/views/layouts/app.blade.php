@@ -188,6 +188,12 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item  ">
+                                    <a href="{{ route('supervisor.report.index') }}" class='sidebar-link'>
+                                        <i class="bi bi-book"></i>
+                                        <span>Laporan</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item  ">
                                     <a href="{{ route('supervisor.profile.index') }}" class='sidebar-link'>
                                         <i class="bi bi-calendar4-week"></i>
                                         <span>Profil</span>
@@ -195,8 +201,9 @@
                                 </li>
                                 <li class="sidebar-item  ">
                                     <form id="logout" action="{{ route('logout') }}" method="POST">
-                                        <a role="button" class="nav-link active"
-                                        onclick="document.getElementById('logout').submit();">Logout</a>
+                                        <a role="button" class='sidebar-link'
+                                        onclick="document.getElementById('logout').submit();"><i class="bi bi-power"></i>
+                                        <span>Logout</span></a>
                                         @csrf
                                     </form>
                                 </li>
@@ -260,6 +267,14 @@
                                         <i class="bi bi-book"></i>
                                         <span>Laporan</span>
                                     </a>
+                                </li>
+                                <li class="sidebar-item  ">
+                                    <form id="logout" action="{{ route('logout') }}" method="POST">
+                                        <a role="button" class='sidebar-link'
+                                        onclick="document.getElementById('logout').submit();"><i class="bi bi-power"></i>
+                                        <span>Logout</span></a>
+                                        @csrf
+                                    </form>
                                 </li>     
                             @endif
                         @else
@@ -286,7 +301,7 @@
                     <div class="row">
                         <div class="col-8 col-md-10 order-md-1 order-last mb-3">
                             <h3 class="text-muted">Penjadwalan Shift Kerja Operator</h3>
-                            <h5>{{ ucwords($role) }} - {{ Auth::user()->company->company_name ?? 'N/A' }}</h5>
+                            <h5>{{ ucwords($role) }} - {{ Auth::user()->company->company_name ?? '' }} - {{ Auth::user()->department->department_name ?? '' }}</h5>
                         </div>
                     </div>
                 </div>

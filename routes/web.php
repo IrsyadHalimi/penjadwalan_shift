@@ -161,6 +161,10 @@ Route::middleware('supervisor')->prefix('supervisor')->group(function() {
   Route::get('/profile', 'App\Http\Controllers\Supervisor\SupervisorProfileController@index')->name("supervisor.profile.index");
   Route::get('/profile/{id}/edit', 'App\Http\Controllers\Supervisor\SupervisorProfileController@edit')->name("supervisor.profile.edit");
   Route::put('/profile/{id}/update', 'App\Http\Controllers\Supervisor\SupervisorProfileController@update')->name("supervisor.profile.update");
+
+  Route::get('/report', 'App\Http\Controllers\Supervisor\SupervisorReportController@index')->name("supervisor.report.index");
+  Route::get('/report/generateAllSchedulePdf', 'App\Http\Controllers\Supervisor\SupervisorReportController@generateAllSchedulePdf')->name("supervisor.report.generateAllSchedulePdf");
+  Route::post('/report/generateByOperatorTypePdf', 'App\Http\Controllers\Supervisor\SupervisorReportController@generateByOperatorTypePdf')->name("supervisor.report.generateByOperatorTypePdf");
 });
 
 Route::middleware('operator')->prefix('operator')->group(function() {
