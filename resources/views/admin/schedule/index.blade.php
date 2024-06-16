@@ -34,6 +34,30 @@
                   </div>
                 </div>
               </div>
+              <form class="form form-horizontal" action="{{ route('admin.schedule.generatePdf') }}" method="post">
+                  @csrf
+                  <div class="form-body">
+                      <div class="row">
+                          <div class="col-md-4">
+                              <label for="start_date-horizontal">Jadwal Dari Tanggal</label>
+                          </div>
+                          <div class="col-md-8 form-group">
+                              <input type="date" name="start_date" id="start_date-horizontal" class="form-control" required>
+                          </div>
+                          <div class="col-md-4">
+                              <label for="end_date-horizontal">Hingga Tanggal</label>
+                          </div>
+                          <div class="col-md-8 form-group">
+                              <input type="date" name="end_date" id="end_date-horizontal" class="form-control" required>
+                          </div>
+                          <div class="col-sm-12 d-flex justify-content-end">
+                              <button type="submit" class="btn btn-primary me-1 mb-1">Cetak PDF</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
             </div>
           </div>
         </div>

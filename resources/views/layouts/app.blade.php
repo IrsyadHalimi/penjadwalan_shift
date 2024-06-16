@@ -128,7 +128,7 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item  ">
-                                    <a href="{{ route('admin.department.index') }}" class='sidebar-link'>
+                                    <a href="{{ route('admin.report.index') }}" class='sidebar-link'>
                                         <i class="bi bi-book"></i>
                                         <span>Laporan</span>
                                     </a>

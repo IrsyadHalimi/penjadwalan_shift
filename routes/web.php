@@ -32,6 +32,7 @@ Route::middleware('admin')->prefix('admin')->group(function() {
   Route::get('/schedule/{schedule}/edit', [AdminScheduleController::class, 'edit'])->name('admin.schedule.edit');
   Route::put('/schedule/{schedule}/update', [AdminScheduleController::class, 'update'])->name('admin.schedule.update');
   Route::delete('/schedule/{schedule}/destroy', [AdminScheduleController::class, 'destroy'])->name('admin.schedule.destroy');
+  Route::post('/schedule/generatePdf', 'App\Http\Controllers\Admin\AdminScheduleController@generatePdf')->name("admin.schedule.generatePdf");
 
   Route::get('/shift', 'App\Http\Controllers\Admin\AdminShiftController@index')->name("admin.shift.index");
   Route::get('/shift/create', 'App\Http\Controllers\Admin\AdminShiftController@create')->name("admin.shift.create");
@@ -76,7 +77,9 @@ Route::middleware('admin')->prefix('admin')->group(function() {
   Route::get('/profile', 'App\Http\Controllers\Admin\AdminProfileController@index')->name("admin.profile.index");
   Route::get('/profile/{id}/edit', 'App\Http\Controllers\Admin\AdminProfileController@edit')->name("admin.profile.edit");
   Route::put('/profile/{id}/update', 'App\Http\Controllers\Admin\AdminProfileController@update')->name("admin.profile.update");
-
+  
+  Route::get('/report', 'App\Http\Controllers\Admin\AdminReportController@index')->name("admin.report.index");
+  Route::get('/report/generateAllSchedulePdf', 'App\Http\Controllers\Admin\AdminReportController@generateAllSchedulePdf')->name("admin.report.generateAllSchedulePdf");
 });
 
 Route::get('/', 'App\Http\Controllers\HomeController@index')->name("home.index");
@@ -151,6 +154,7 @@ Route::middleware('supervisor')->prefix('supervisor')->group(function() {
   Route::get('/schedule/{schedule}/edit', [SupervisorScheduleController::class, 'edit'])->name('supervisor.schedule.edit');
   Route::put('/schedule/{schedule}/update', [SupervisorScheduleController::class, 'update'])->name('supervisor.schedule.update');
   Route::delete('/schedule/{schedule}/destroy', [SupervisorScheduleController::class, 'destroy'])->name('supervisor.schedule.destroy');
+  Route::post('/schedule/generatePdf', 'App\Http\Controllers\Supervisor\SupervisorScheduleController@generatePdf')->name("supervisor.schedule.generatePdf");
 
   Route::get('/profile', 'App\Http\Controllers\Supervisor\SupervisorProfileController@index')->name("supervisor.profile.index");
   Route::get('/profile/{id}/edit', 'App\Http\Controllers\Supervisor\SupervisorProfileController@edit')->name("supervisor.profile.edit");
@@ -165,12 +169,12 @@ Route::middleware('operator')->prefix('operator')->group(function() {
   Route::get('/schedule/{schedule}/edit', [OperatorScheduleController::class, 'edit'])->name('operator.schedule.edit');
   Route::put('/schedule/{schedule}/update', [OperatorScheduleController::class, 'update'])->name('operator.schedule.update');
   Route::delete('/schedule/{schedule}/destroy', [OperatorScheduleController::class, 'destroy'])->name('operator.schedule.destroy');
+  Route::post('/schedule/generatePdf', 'App\Http\Controllers\Operator\OperatorScheduleController@generatePdf')->name("operator.schedule.generatePdf");
 
   Route::get('/profile', 'App\Http\Controllers\Operator\OperatorProfileController@index')->name("operator.profile.index");
   Route::get('/profile/{id}/edit', 'App\Http\Controllers\Operator\OperatorProfileController@edit')->name("operator.profile.edit");
   Route::put('/profile/{id}/update', 'App\Http\Controllers\Operator\OperatorProfileController@update')->name("operator.profile.update");
   
-  Route::post('/schedule/generatePdf', 'App\Http\Controllers\Operator\OperatorScheduleController@generatePdf')->name("operator.schedule.generatePdf");
 });
 
 

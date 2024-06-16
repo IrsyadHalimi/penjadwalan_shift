@@ -69,21 +69,17 @@ class OperatorScheduleController extends Controller
         $departmentId = Auth::user()->department_id;
         $shiftId = Shift::where('department_id', $departmentId)->pluck('id')->toArray();
 
-        $schedules = Schedule::where('start_date', '>=', $request->start_date)
-        ->where('end_date', '<=' , $request->end_date)
-        ->whereIn('shift_id', $shiftId)
-        ->get()
-        ->map(function ($item) {
-            return [
-                'start_date' => $item->start_date,
-                'end_date' => $item->end_date,
-                'operator' => $item->user_id,
-                'shift' => $item->shift_id,
-            ];
-        });
+        $schedules = Schedule::where(function($query) use ($request) {
+            $query->whereBetween('start_date', [$request->start_date, $request->end_date])
+            ->orWhereBetween('end_date', [$request->start_date, $request->end_date]);
+        })->whereIn('shift_id', $shiftId)
+        ->with('user')
+        ->with('shift')
+        ->orderBy('start_date')
+        ->get();
 
         $pdf = PDF::loadView('operator.schedule.pdf', compact('schedules'));
 
-        return $pdf->download('jadwal.pdf');
+        return $pdf->stream('jadwal.pdf');
     }
 }

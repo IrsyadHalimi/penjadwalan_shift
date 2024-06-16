@@ -10,6 +10,7 @@ use App\Models\Department;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 
 class SupervisorScheduleController extends Controller
@@ -135,5 +136,29 @@ class SupervisorScheduleController extends Controller
             'status' => 'success',
             'message' => 'Delete data successfully'
         ]);
+    }
+
+    public function generatePdf(Request $request)
+    {
+        $request->validate([
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+        ]);
+
+        $departmentId = Auth::user()->department_id;
+        $shiftId = Shift::where('department_id', $departmentId)->pluck('id')->toArray();
+
+        $schedules = Schedule::where(function($query) use ($request) {
+            $query->whereBetween('start_date', [$request->start_date, $request->end_date])
+            ->orWhereBetween('end_date', [$request->start_date, $request->end_date]);
+        })->whereIn('shift_id', $shiftId)
+        ->with('user')
+        ->with('shift')
+        ->orderBy('start_date')
+        ->get();
+
+        $pdf = PDF::loadView('operator.schedule.pdf', compact('schedules'));
+
+        return $pdf->stream('jadwal.pdf');
     }
 }
