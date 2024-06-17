@@ -76,11 +76,18 @@
                         @csrf
                         <div class="form-body">
                             <div class="row">
+                                <input type="text" value="{{ Auth::user()->department_id }}" name="department_id" hidden>
                                 <div class="col-md-4">
-                                    <label for="department-horizontal">Departemen</label>
+                                    <label for="department-horizontal">Pilih Jenis Operator</label>
                                 </div>
-                                <livewire:admin-department-operator-dropdown />
-                                        @livewireScripts
+                                <div class="col-md-8 form-group">  
+                                    <select id="operator_type_id" class="form-select @error('operator_type_id') is-invalid @enderror" name="operator_type_id"  id="basicSelect">
+                                        <option value="" hidden>-- Pilih Jenis Operator --</option>
+                                        @foreach($viewData['operator_types'] as $operator_type)
+                                        <option value="{{ $operator_type->getId() }}">{{ $operator_type->getOperatorNameType() }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <div class="col-sm-12 d-flex justify-content-end">
                                     <button type="submit" class="btn btn-primary"><i class="bi bi-download"></i> Cetak Jadwal</button>
                                 </div>
