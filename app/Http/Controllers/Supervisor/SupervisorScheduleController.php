@@ -32,10 +32,9 @@ class SupervisorScheduleController extends Controller
     public function listSchedule(Request $request)
     {
         $departmentId = Auth::user()->department_id;
-        $operatorTypeId = $request->operator_type_id; // Ambil operator_type_id dari request
+        $operatorTypeId = $request->operator_type_id;
         $shiftId = Shift::where('department_id', $departmentId)->pluck('id')->toArray();
 
-        // Ambil userId berdasarkan operator_type_id
         $userId = User::where('department_id', $departmentId)
                     ->where('role', 'operator')
                     ->where('operator_type_id', $operatorTypeId)
@@ -75,9 +74,11 @@ class SupervisorScheduleController extends Controller
     {
         $departmentId = Auth::user()->department_id;
         $shiftId = Shift::where('department_id', $departmentId)->pluck('id')->toArray();
+        $operatorTypeId = OperatorType::where('department_id', $departmentId)->pluck('id')->toArray();
         $userId = User::where('role', 'operator')->where('department_id', $departmentId)->pluck('id')->toArray();
        
         $users = User::whereIn('id', $userId)->get();
+        $operatorTypes = User::whereIn('operator_type_id', $operatorTypeId)->get();
         $shifts = Shift::whereIn('id', $shiftId)->get();
         return view('supervisor.schedule.schedule-form', [
             'data' => $schedule,
@@ -146,31 +147,5 @@ class SupervisorScheduleController extends Controller
             'status' => 'success',
             'message' => 'Delete data successfully'
         ]);
-    }
-
-    public function generatePdf(Request $request)
-    {
-        $request->validate([
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
-        ]);
-
-        $companyId = Auth::user()->company_id;
-        $departmentId = Auth::user()->department_id;
-
-        $userId = User::where('company_id', $companyId)->where('department_id', $departmentId)->where('role', 'operator')->pluck('id')->toArray();
-
-        $schedules = Schedule::where(function($query) use ($request) {
-            $query->whereBetween('start_date', [$request->start_date, $request->end_date])
-            ->orWhereBetween('end_date', [$request->start_date, $request->end_date]);
-        })->whereIn('user_id', $userId)
-        ->with('user')
-        ->with('shift')
-        ->orderBy('start_date')
-        ->get();
-
-        $pdf = PDF::loadView('operator.schedule.pdf', compact('schedules'));
-
-        return $pdf->stream('jadwal.pdf');
     }
 }

@@ -18,7 +18,7 @@
                 <div>
                     <select name="user_id">
                     @foreach($users as $user)
-                        <option value="{{ $user->getId() }}" @if($user->getId() == $data->user_id) selected @endif>{{ $user->getName() }}</option>
+                        <option value="{{ $user->getId() }}" @if($user->getId() == $data->user_id) selected @endif>{{ $user->getName() }} - {{ $user->operatorType->operator_name_type }}</option>
                     @endforeach
                     </select>    
                 </div>
@@ -29,7 +29,7 @@
                 <div>
                     <select name="shift_id">
                     @foreach($shifts as $shift)
-                        <option value="{{ $shift->getId() }}" @if($shift->getId() == $data->shift_id) selected @endif>{{ $shift->getShiftName() }}</option>
+                        <option value="{{ $shift->getId() }}" @if($shift->getId() == $data->shift_id) selected @endif>{{ $shift->getShiftName() }} - {{ $shift->department->department_name }}</option>
                     @endforeach
                     </select>    
                 </div>

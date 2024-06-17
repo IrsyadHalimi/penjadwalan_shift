@@ -36,7 +36,7 @@
             <div class="card-content">
                 <div class="card-body">
                     <div>
-                    <form class="form form-horizontal" action="{{ route('admin.schedule.generatePdf') }}" method="post">
+                    <form class="form form-horizontal" action="{{ route('admin.report.generateByRangePdf') }}" method="post">
                         @csrf
                         <div class="form-body">
                             <div class="row">

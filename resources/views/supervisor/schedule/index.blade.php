@@ -27,42 +27,22 @@
           </div>
           <div class="card-content">
               <div class="card-body">
-              <form class="form form-horizontal" action="{{ route('supervisor.schedule.generatePdf') }}" method="post">
-                  @csrf
-                  <div class="form-body">
-                      <div class="row">
-                          <div class="col-md-4">
-                              <label for="start_date-horizontal">Jadwal Dari</label>
-                          </div>
-                          <div class="col-md-8 form-group">
-                              <input type="date" name="start_date" id="start_date-horizontal" class="form-control" required>
-                          </div>
-                          <div class="col-md-4">
-                              <label for="end_date-horizontal">Hingga</label>
-                          </div>
-                          <div class="col-md-8 form-group">
-                              <input type="date" name="end_date" id="end_date-horizontal" class="form-control" required>
-                          </div>
-                          <div class="col-sm-12 d-flex justify-content-end">
-                              <button type="submit" class="btn btn-primary me-1 mb-1">Cetak PDF</button>
-                          </div>
+                <form class="form form-horizontal">
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="operator_type_id">Pilih Tipe Operator</label>
+                            </div>
+                            <div class="col-md-8 form-group">
+                                <select name="operator_type_id" id="operator_type_id" class="form-control">
+                                    <option value="">Pilih Tipe Operator</option>
+                                    @foreach ($viewData['operator_types'] as $operatorType)
+                                        <option value="{{ $operatorType->getId() }}">{{ $operatorType->getOperatorNameType() }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                      </div>
                     </div>
-                  </div>
-                </form>
-                <div class="col-md-4">
-                    <label for="operator_type_id">Pilih Tipe Operator</label>
-                </div>
-                <div class="col-md-8 form-group">
-                <select name="operator_type_id" id="operator_type_id" class="form-control">
-                    <option value="">Pilih Tipe Operator</option>
-                    @foreach ($viewData['operator_types'] as $operatorType)
-                        <option value="{{ $operatorType->getId() }}">{{ $operatorType->getOperatorNameType() }}</option>
-                    @endforeach
-                </select>
-                </div>
-
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <div id='calendar'></div>
@@ -92,18 +72,23 @@
         });
 
         var calendar = new FullCalendar.Calendar(calendarEl, {
-            // Konfigurasi lainnya...
+            initialView: 'dayGridMonth',
+            themeSystem: 'bootstrap5',
+            locale: 'id',
+            buttonText: {
+              today: 'Hari ini',
+            },
             events: function(info, successCallback, failureCallback) {
                 var start = info.startStr;
                 var end = info.endStr;
-                var operatorTypeId = $('#operator_type_id').val(); // Ambil operator_type_id yang dipilih
+                var operatorTypeId = $('#operator_type_id').val();
 
                 $.ajax({
                     url: '{{ route("supervisor.schedule.list") }}',
                     data: {
                         start: start,
                         end: end,
-                        operator_type_id: operatorTypeId // Sertakan operator_type_id dalam permintaan
+                        operator_type_id: operatorTypeId
                     },
                     success: function(response) {
                         var events = response;
@@ -189,12 +174,8 @@
                 })
             },
             eventDrop: function(info) {
-                // Menampilkan modal konfirmasi sebelum mengirim permintaan AJAX
                 $('#confirmationModal').modal('show');
-
-                // Menangani tombol "Ya" dalam modal konfirmasi
                 $('#confirmButton').off('click').on('click', function() {
-                    // Mengirim permintaan AJAX hanya jika pengguna mengonfirmasi
                     const event = info.event
                     $.ajax({
                         url: `{{ url('supervisor/schedule') }}/${event.id}/update`,
@@ -229,9 +210,7 @@
                     })
                     $('#confirmationModal').modal('hide');
                 })
-                // Menangani tombol "Batal" dalam modal konfirmasi
                 $('#cancelButton').on('click', function() {
-                    // Mengembalikan event seperti semula jika pengguna membatalkan resize
                     info.revert();
                     $('#confirmationModal').modal('hide');
                 });
@@ -239,12 +218,9 @@
             eventResize: function(info) {
                 const event = info.event;
 
-                // Menampilkan modal konfirmasi sebelum mengirim permintaan AJAX
                 $('#confirmationModal').modal('show');
 
-                // Menangani tombol "Ya" dalam modal konfirmasi
                 $('#confirmButton').off('click').on('click', function() {
-                    // Mengirim permintaan AJAX hanya jika pengguna mengonfirmasi
                     $.ajax({
                         url: `{{ url('supervisor/schedule') }}/${event.id}/update`,
                         method: 'put',
@@ -279,9 +255,7 @@
                     $('#confirmationModal').modal('hide');
                 });
 
-                // Menangani tombol "Batal" dalam modal konfirmasi
                 $('#cancelButton').on('click', function() {
-                    // Mengembalikan event seperti semula jika pengguna membatalkan resize
                     info.revert();
                     $('#confirmationModal').modal('hide');
                 });

@@ -36,7 +36,7 @@
             <div class="card-content">
                 <div class="card-body">
                     <div>
-                    <form class="form form-horizontal" action="{{ route('supervisor.schedule.generatePdf') }}" method="post">
+                    <form class="form form-horizontal" action="{{ route('supervisor.report.generateByRangePdf') }}" method="post">
                         @csrf
                         <div class="form-body">
                             <div class="row">
