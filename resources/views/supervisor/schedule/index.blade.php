@@ -51,6 +51,18 @@
                     </div>
                   </div>
                 </form>
+                <div class="col-md-4">
+                    <label for="operator_type_id">Pilih Tipe Operator</label>
+                </div>
+                <div class="col-md-8 form-group">
+                <select name="operator_type_id" id="operator_type_id" class="form-control">
+                    <option value="">Pilih Tipe Operator</option>
+                    @foreach ($viewData['operator_types'] as $operatorType)
+                        <option value="{{ $operatorType->getId() }}">{{ $operatorType->getOperatorNameType() }}</option>
+                    @endforeach
+                </select>
+                </div>
+
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <div id='calendar'></div>
@@ -74,14 +86,34 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
+        $('#operator_type_id').change(function() {
+            var operatorTypeId = $(this).val();
+            calendar.refetchEvents();
+        });
+
         var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            themeSystem: 'bootstrap5',
-            locale: 'id',
-            buttonText: {
-              today: 'Hari ini',
+            // Konfigurasi lainnya...
+            events: function(info, successCallback, failureCallback) {
+                var start = info.startStr;
+                var end = info.endStr;
+                var operatorTypeId = $('#operator_type_id').val(); // Ambil operator_type_id yang dipilih
+
+                $.ajax({
+                    url: '{{ route("supervisor.schedule.list") }}',
+                    data: {
+                        start: start,
+                        end: end,
+                        operator_type_id: operatorTypeId // Sertakan operator_type_id dalam permintaan
+                    },
+                    success: function(response) {
+                        var events = response;
+                        successCallback(events);
+                    },
+                    error: function(error) {
+                        failureCallback(error);
+                    }
+                });
             },
-            events: `{{ route('supervisor.schedule.list') }}`,
             editable: true,
             dateClick: function(info) {
                 $.ajax({
