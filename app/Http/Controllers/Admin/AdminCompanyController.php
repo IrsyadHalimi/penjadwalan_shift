@@ -38,10 +38,4 @@ class AdminCompanyController extends Controller
 
     return redirect()->route('admin.company.index');
   }
-
-  public function delete($id)
-  {
-    Company::destroy($id);
-    return back();
-  }
 }

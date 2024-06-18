@@ -20,7 +20,7 @@ class AdminOperatorController extends Controller
     $viewData = [];
     $viewData["title"] = "Operator - Penjadwalan Shift";
     $viewData["subtitle"] = "Daftar Operator";
-    $viewData["operator"] = User::where('company_id', $companyId)->where('role', 'operator')->get();
+    $viewData["operator"] = User::where('company_id', $companyId)->where('role', 'operator')->paginate(10);
     return view('admin.operator.index')->with("viewData", $viewData);
   }
   

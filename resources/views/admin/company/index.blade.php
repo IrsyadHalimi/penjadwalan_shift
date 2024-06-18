@@ -32,6 +32,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Nama Perusahaan</th>
+                                <th>Alamat Perusahaan</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,16 +40,10 @@
                             <tr>
                                 <td class="text-bold-500">{{ $companies->getId() }}</td>
                                 <td>{{ $companies->getCompanyName() }}</td>
+                                <td>{{ $companies->getCompanyAddress() }}</td>
                                 <td>
                                     <a href="{{route('admin.company.edit', ['id'=> $companies->getId()])}}">Edit</a>
-                                    <form action="{{ route('admin.company.delete', $companies->getId())}}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger">
-                                        <i class="bi-trash">Hapus</i>
-                                        </button>
-                                    </form><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail badge-circle badge-circle-light-secondary font-medium-1"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                                    </td>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

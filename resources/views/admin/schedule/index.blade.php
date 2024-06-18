@@ -36,6 +36,7 @@
                                 <th>Tanggal Selesai</th>
                                 <th>Nama Operator</th>
                                 <th>Shift</th>
+                                <th>Warna Label</th>
                                 <th> </th>
                                 <th> </th>
                             </tr>
@@ -47,7 +48,8 @@
                                 <td>{{ \Carbon\Carbon::parse($schedule->getStartDate())->format('d-m-Y') }}</td>
                                 <td>{{ \Carbon\Carbon::parse($schedule->getEndDate())->format('d-m-Y') }}</td>
                                 <td>{{ $schedule->user->full_name }}</td>
-                                <td>{{ $schedule->shift->shift_name }} ({{ $schedule->shift->start_time }} - {{ $schedule->shift->end_time }})</>
+                                <td>{{ $schedule->shift->shift_name }}</td>
+                                <td><button class="btn btn-{{ $schedule->shift->label_color }} px-4"></button></td>
                                 <td>
                                     <a class="btn icon btn-primary" href="{{route('admin.schedule.edit', ['id'=> $schedule->getId()])}}"><i class="bi-pen"></i></a>
                                 </td>    
@@ -65,6 +67,9 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <div class="d-flex justify-content-center mt-4">
+                {{ $viewData['schedules']->links('pagination::bootstrap-4') }}
             </div>
         </div>
     </div>

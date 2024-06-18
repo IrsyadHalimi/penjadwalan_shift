@@ -16,7 +16,7 @@ class AdminDepartmentController extends Controller
     $viewData = [];
     $viewData["title"] = "Departemen - Penjadwalan Shift";
     $viewData["subtitle"] = "Daftar Departemen";
-    $viewData["department"] = Department::where('company_id', $companyId)->get();
+    $viewData["department"] = Department::where('company_id', $companyId)->paginate(10);
     return view('admin.department.index')->with("viewData", $viewData);
   }
 

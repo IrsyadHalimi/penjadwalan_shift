@@ -62,7 +62,7 @@ class AdminShiftController extends Controller
     $viewData["title"] = "Admin - Edit Shift";
     $viewData["subtitle"] = "Edit Shift Kerja";
     $viewData["shift"] = Shift::findOrFail($id);
-    $viewData["department"] = Department::where('company_id', $companyId)->get();
+    $viewData["department"] = Department::where('company_id', $companyId)->paginate(10);
     return view('admin.shift.edit')->with("viewData", $viewData);
   }
 

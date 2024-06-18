@@ -18,7 +18,7 @@ class AdminSupervisorController extends Controller
     $viewData = [];
     $viewData["title"] = "Admin - Penjadwalan Shift";
     $viewData["subtitle"] = "Daftar Supervisor";
-    $viewData["supervisor"] = User::where('company_id', $companyId)->where('role', 'supervisor')->get();
+    $viewData["supervisor"] = User::where('company_id', $companyId)->where('role', 'supervisor')->paginate(10);
     return view('admin.supervisor.index')->with("viewData", $viewData);
   }
 

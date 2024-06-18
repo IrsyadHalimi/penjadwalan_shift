@@ -20,7 +20,7 @@ class AdminOperatorTypeController extends Controller
     $viewData = [];
     $viewData["title"] = "Jenis Operator - Penjadwalan Shift";
     $viewData["subtitle"] = "Daftar Jenis Operator";
-    $viewData["operator_type"] = OperatorType::whereIn('department_id', $departmentId)->get();
+    $viewData["operator_type"] = OperatorType::whereIn('department_id', $departmentId)->paginate(10);
     return view('admin.operator_type.index')->with("viewData", $viewData);
   }
 

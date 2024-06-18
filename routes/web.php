@@ -70,7 +70,6 @@ Route::middleware('admin')->prefix('admin')->group(function() {
   Route::get('/company', 'App\Http\Controllers\Admin\AdminCompanyController@index')->name("admin.company.index");
   Route::get('/company/{id}/edit', 'App\Http\Controllers\Admin\AdminCompanyController@edit')->name("admin.company.edit");
   Route::put('/company/{id}/update', 'App\Http\Controllers\Admin\AdminCompanyController@update')->name("admin.company.update");
-  Route::delete('/company/{id}/delete', 'App\Http\Controllers\Admin\AdminCompanyController@delete')->name("admin.company.delete");
   
   Route::get('/profile', 'App\Http\Controllers\Admin\AdminProfileController@index')->name("admin.profile.index");
   Route::get('/profile/{id}/edit', 'App\Http\Controllers\Admin\AdminProfileController@edit')->name("admin.profile.edit");

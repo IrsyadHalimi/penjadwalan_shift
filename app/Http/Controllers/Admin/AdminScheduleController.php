@@ -25,7 +25,7 @@ class AdminScheduleController extends Controller
         $viewData["title"] = "Jadwal - Penjadwalan Shift";
         $viewData["subtitle"] = "Daftar Jadwal Kerja";
         $viewData["shift"] = Shift::whereIn('department_id', $departmentId)->get();
-        $viewData["schedules"] = Schedule::whereIn('user_id', $userId)->get();
+        $viewData["schedules"] = Schedule::whereIn('user_id', $userId)->paginate(10);
         return view('admin.schedule.index')->with("viewData", $viewData);
     }
 
