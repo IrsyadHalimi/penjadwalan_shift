@@ -116,4 +116,16 @@ class AdminScheduleController extends Controller
 
         return $pdf->stream('jadwal.pdf');
     }
+
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('search');
+
+        $viewData["schedule"] = Schedule::where('id', 'like', '%'.$searchTerm.'%')
+                            ->orWhere('user_id', 'like', '%'.$searchTerm.'%')
+                            ->with('user')
+                            ->paginate(10);
+        
+        return view('admin.schedule.index')->with("viewData", $viewData);
+    }
 }

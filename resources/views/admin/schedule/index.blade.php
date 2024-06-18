@@ -26,6 +26,8 @@
                         <a href="{{ route('admin.schedule.create') }}"><button class="btn btn-primary">Tambah jadwal Baru</button></a>
                     </div>
                 </div>
+                <livewire:admin-schedule-search/>
+                @livewireScripts
                 <!-- table hover -->
                 <div class="table-responsive">
                     <table class="table table-hover mb-0 mx-4">
