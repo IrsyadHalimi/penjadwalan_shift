@@ -8,10 +8,10 @@
     </select>
 
     <label>Operator:</label>
-    <select wire:model="selectedOperator" name="operator_type_id">
+    <select wire:model="selectedOperatorType" name="operator_type_id">
         <option value="">Pilih Operator</option>
-        @foreach($operators as $operator)
-            <option value="{{ $operator->id }}" {{ $operator->id == $selectedOperator ? 'selected' : null }}>{{ $operator->operator_name_type }}</option>
+        @foreach($operatorTypes as $operatorType)
+            <option value="{{ $operatorType->id }}" {{ $operatorType->id == $selectedOperatorType ? 'selected' : null }}>{{ $operatorType->operator_name_type }}</option>
         @endforeach
     </select>
 </div>

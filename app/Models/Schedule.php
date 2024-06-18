@@ -45,7 +45,7 @@ class Schedule extends Model
         return $this->attributes['user_id'];
     }
 
-    public function setUser($user_id)
+    public function setUserId($user_id)
     {
         $this->attributes['user_id'] = $user_id;
     }
@@ -55,7 +55,7 @@ class Schedule extends Model
         return $this->attributes['shift_id'];
     }
 
-    public function setShift($shift_id)
+    public function setShiftId($shift_id)
     {
         $this->attributes['shift_id'] = $shift_id;
     }

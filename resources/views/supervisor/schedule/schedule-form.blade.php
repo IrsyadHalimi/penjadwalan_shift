@@ -29,7 +29,7 @@
                 <div>
                     <select name="shift_id">
                     @foreach($shifts as $shift)
-                        <option value="{{ $shift->getId() }}" @if($shift->getId() == $data->shift_id) selected @endif>{{ $shift->getShiftName() }} - {{ $shift->department->department_name }}</option>
+                        <option value="{{ $shift->getId() }}" @if($shift->getId() == $data->shift_id) selected @endif>{{ $shift->getShiftName() }}</option>
                     @endforeach
                     </select>    
                 </div>

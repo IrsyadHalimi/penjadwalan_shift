@@ -25,14 +25,12 @@ use App\Http\Livewire\SelectDropdowns;
 
 
 Route::middleware('admin')->prefix('admin')->group(function() {
-  Route::get('/schedule', [AdminScheduleController::class, 'index'])->name('admin.schedule.index');
-  Route::get('/schedule/list', [AdminScheduleController::class, 'listSchedule'])->name('admin.schedule.list');
-  Route::get('/schedule/create', [AdminScheduleController::class, 'create'])->name('admin.schedule.create');
-  Route::post('/schedule/store', [AdminScheduleController::class, 'store'])->name('admin.schedule.store');
-  Route::get('/schedule/{schedule}/edit', [AdminScheduleController::class, 'edit'])->name('admin.schedule.edit');
-  Route::put('/schedule/{schedule}/update', [AdminScheduleController::class, 'update'])->name('admin.schedule.update');
-  Route::delete('/schedule/{schedule}/destroy', [AdminScheduleController::class, 'destroy'])->name('admin.schedule.destroy');
-  Route::post('/schedule/generatePdf', 'App\Http\Controllers\Admin\AdminScheduleController@generatePdf')->name("admin.schedule.generatePdf");
+  Route::get('/schedule', 'App\Http\Controllers\Admin\AdminScheduleController@index')->name('admin.schedule.index');
+  Route::get('/schedule/create', 'App\Http\Controllers\Admin\AdminScheduleController@create')->name('admin.schedule.create');
+  Route::post('/schedule/store', 'App\Http\Controllers\Admin\AdminScheduleController@store')->name('admin.schedule.store');
+  Route::get('/schedule/{id}/edit', 'App\Http\Controllers\Admin\AdminScheduleController@edit')->name('admin.schedule.edit');
+  Route::put('/schedule/{id}/update', 'App\Http\Controllers\Admin\AdminScheduleController@update')->name('admin.schedule.update');
+  Route::delete('/schedule/{id}/delete', 'App\Http\Controllers\Admin\AdminScheduleController@delete')->name('admin.schedule.delete');
 
   Route::get('/shift', 'App\Http\Controllers\Admin\AdminShiftController@index')->name("admin.shift.index");
   Route::get('/shift/create', 'App\Http\Controllers\Admin\AdminShiftController@create')->name("admin.shift.create");

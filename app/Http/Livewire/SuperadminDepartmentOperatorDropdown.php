@@ -9,16 +9,16 @@ use App\Models\OperatorType;
 class SuperadminDepartmentOperatorDropdown extends Component
 {
     public $selectedDepartment;
-    public $selectedOperator;
+    public $selectedOperatorType;
 
     public function render()
     {
         $departments = Department::all();
-        $operators = OperatorType::where('department_id', $this->selectedDepartment)->get();
+        $operatorTypes = OperatorType::where('department_id', $this->selectedDepartment)->get();
 
         return view('livewire.admin-department-operator-dropdown', [
             'departments' => $departments,
-            'operators' => $operators,
+            'operatorTypes' => $operatorTypes,
         ]);
     }
 }

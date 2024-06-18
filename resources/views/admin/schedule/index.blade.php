@@ -31,32 +31,28 @@
                     <table class="table table-hover mb-0 mx-4">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>ID Jadwal</th>
+                                <th>Tanggal Mulai</th>
+                                <th>Tanggal Selesai</th>
                                 <th>Nama Operator</th>
-                                <th>Departemen</th>
-                                <th>Waktu Masuk</th>
-                                <th>Waktu Keluar</th>
-                                <th>Keterangan</th>
-                                <th>Warna Label</th>
+                                <th>Shift</th>
                                 <th> </th>
                                 <th> </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($viewData['shift'] as $shifts)
+                            @foreach ($viewData['schedules'] as $schedule)
                             <tr>
-                                <td class="text-bold-500">{{ $shifts->getId() }}</td>
-                                <td>{{ $shifts->getShiftName() }}</td>
-                                <td>{{ $shifts->department ? $shifts->department->department_name : 'N/A' }}</>
-                                <td>{{ $shifts->getStartTime() }}</td>
-                                <td>{{ $shifts->getEndTime() }}</td>
-                                <td>{{ $shifts->getNotes() }}</td>
-                                <td><button class="btn btn-{{ $shifts->getLabelColor() }} px-4"></button></td>
+                                <td class="text-bold-500">{{ $schedule->getId() }}</td>
+                                <td>{{ \Carbon\Carbon::parse($schedule->getStartDate())->format('d-m-Y') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($schedule->getEndDate())->format('d-m-Y') }}</td>
+                                <td>{{ $schedule->user->full_name }}</td>
+                                <td>{{ $schedule->shift->shift_name }} ({{ $schedule->shift->start_time }} - {{ $schedule->shift->end_time }})</>
                                 <td>
-                                    <a class="btn icon btn-primary" href="{{route('admin.schedule.edit', ['id'=> $shifts->getId()])}}"><i class="bi-pen"></i></a>
+                                    <a class="btn icon btn-primary" href="{{route('admin.schedule.edit', ['id'=> $schedule->getId()])}}"><i class="bi-pen"></i></a>
                                 </td>    
                                 <td>
-                                    <form action="{{ route('admin.schedule.delete', $shifts->getId())}}" method="POST">
+                                    <form action="{{ route('admin.schedule.delete', $schedule->getId())}}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn icon btn-danger">

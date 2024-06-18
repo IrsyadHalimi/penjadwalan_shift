@@ -81,4 +81,9 @@ class Department extends Model
     {
         return $this->hasMany(User::class);
     }
+    
+    public function operatorType()
+    {
+        return $this->hasMany(OperatorType::class);
+    }
 }

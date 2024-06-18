@@ -86,4 +86,9 @@ class OperatorType extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
 }

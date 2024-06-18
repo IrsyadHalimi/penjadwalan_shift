@@ -7,11 +7,27 @@
         @endforeach
     </select>
 
-    <label>Operator:</label>
+    <label>Jenis Operator:</label>
     <select wire:model="selectedOperatorType" name="operator_type_id">
         <option value="">Pilih Operator</option>
         @foreach($operatorTypes as $operatorType)
             <option value="{{ $operatorType->id }}">{{ $operatorType->operator_name_type }}</option>
+        @endforeach
+    </select>
+    
+    <label>Operator:</label>
+    <select wire:model="selectedOperator" name="user_id">
+        <option value="">Pilih Operator</option>
+        @foreach($operators as $operator)
+            <option value="{{ $operator->id }}">{{ $operator->full_name }}</option>
+        @endforeach
+    </select>
+    
+    <label>Shift:</label>
+    <select wire:model="selectedShift" name="shift_id">
+        <option value="">Pilih Shift</option>
+        @foreach($shifts as $shift)
+            <option value="{{ $shift->id }}">{{ $shift->shift_name }}</option>
         @endforeach
     </select>
 </div>

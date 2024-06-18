@@ -18,119 +18,79 @@ class AdminScheduleController extends Controller
     public function index()
     {
         $companyId = Auth::user()->company_id;
+        $userId = User::where('company_id', $companyId)->where('role', 'operator')->pluck('id')->toArray();
         $departmentId = Department::where('company_id', $companyId)->pluck('id')->toArray();
         
         $viewData = [];
         $viewData["title"] = "Jadwal - Penjadwalan Shift";
         $viewData["subtitle"] = "Daftar Jadwal Kerja";
         $viewData["shift"] = Shift::whereIn('department_id', $departmentId)->get();
+        $viewData["schedules"] = Schedule::whereIn('user_id', $userId)->get();
         return view('admin.schedule.index')->with("viewData", $viewData);
     }
 
-    public function listSchedule(Request $request)
-    {
-        $companyId = Auth::user()->company_id;
-        $userId = User::where('company_id', $companyId)->where('role', 'operator')->pluck('id')->toArray();
-
-        $start_date = date('Y-m-d', strtotime($request->start));
-        $end_date = date('Y-m-d', strtotime($request->end));
-        $schedule = Schedule::where('start_date', '>=', $start_date)
-        ->where('end_date', '<=' , $end_date)
-        ->whereIn('user_id', $userId)
-        ->get()
-        ->map(function ($item) {
-            $shift = Shift::find($item->shift_id);
-            $user = User::find($item->user_id);
-            $label_color = $shift ? ['bg-' . $shift->label_color] : []; 
-            $user_label_name = $user ? [$user->full_name] : []; 
-
-            return [
-                'id' => $item->id,
-                'user_id' => $item->user_id,
-                'title' => $user_label_name,
-                'start' => $item->start_date,
-                'end' => date('Y-m-d', strtotime($item->end_date. '+1 days')),
-                'shift_id' => $item->shift_id,
-                'className' => $label_color,
-            ];
-        });
-
-        return response()->json($schedule);
-    }
-
-    public function create(Schedule $schedule)
+    public function create()
     {
         $companyId = Auth::user()->company_id;
         $departmentId = Department::where('company_id', $companyId)->pluck('id')->toArray();
         
-        $users = User::where('role', 'operator')->where('company_id', $companyId)->get();
-        $shifts = Shift::whereIn('department_id', $departmentId)->get();
-        return view('admin.schedule.schedule-form', [
-            'data' => $schedule,
-            'shifts' => $shifts, 
-            'users' => $users, 
-            'action' => route('admin.schedule.store')
-        ]);
+        $viewData = [];
+        $viewData["title"] = " Tambah Jadwal- Penjadwalan Shift";
+        $viewData["subtitle"] = "Tambah Jadwal";
+        $viewData["department"] = Department::where('company_id', $companyId)->get();
+        $viewData["operators"] = User::whereIn('department_id', $departmentId)->get();
+        $viewData["shifts"] = Shift::whereIn('department_id', $departmentId)->get();
+        return view('admin.schedule.create')->with("viewData", $viewData);
     }
 
-    public function store(EventRequest $request)
+    public function store(Request $request)
     {
         $scheduleId = 'SCH' . Str::random(7);
+        
+        Schedule::validate($request);
+        $newSchedule = new Schedule();
+        $newSchedule->setId($scheduleId);
+        $newSchedule->setUserId($request->input('user_id'));
+        $newSchedule->setShiftId($request->input('shift_id'));
+        $newSchedule->setStartDate($request->input('start_date'));
+        $newSchedule->setEndDate($request->input('end_date'));
+        $newSchedule->save();
 
-        $schedule = new Schedule();
-        $schedule->id = $scheduleId;
-        $schedule->start_date = $request->start_date;
-        $schedule->end_date = $request->end_date;
-        $schedule->user_id = $request->user_id;
-        $schedule->shift_id = $request->shift_id;
-        $schedule->save();
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Save data store successfully'
-        ]);
+        return redirect()->route('admin.schedule.index');
     }
 
-    public function edit(Schedule $schedule)
+    public function edit($id)
     {
         $companyId = Auth::user()->company_id;
         $departmentId = Department::where('company_id', $companyId)->pluck('id')->toArray();
+        $viewData["users"] = User::where('role', 'operator')->where('company_id', $companyId)->get();
+        $viewData["shifts"] = Shift::whereIn('department_id', $departmentId)->get();
         
-        $users = User::where('role', 'operator')->where('company_id', $companyId)->get();
-        $shifts = Shift::whereIn('department_id', $departmentId)->get();
-        return view('admin.schedule.schedule-form', [
-            'data' => $schedule, 
-            'shifts' => $shifts, 
-            'users' => $users, 
-            'action' => route('admin.schedule.update', $schedule->id)
-        ]);
+        $viewData = [];
+        $viewData["title"] = "Admin - Edit Jadwal";
+        $viewData["subtitle"] = "Edit Jadwal Kerja";
+        $viewData["schedule"] = Schedule::findOrFail($id);
+        $viewData["department"] = Department::where('company_id', $companyId)->get();
+        return view('admin.schedule.edit')->with("viewData", $viewData);
     }
 
-    public function update(EventRequest $request, Schedule $schedule)
+    public function update(Request $request, $id)
     {
-        if ($request->has('delete')) {
-            return $this->destroy($schedule);
-        }
-        $schedule->start_date = $request->start_date;
-        $schedule->end_date = $request->end_date;
-        $schedule->user_id = $request->user_id;
-        $schedule->shift_id = $request->shift_id;
-
+        Schedule::validate($request); 
+        $schedule = Schedule::findOrFail($id);
+        $schedule->setStartDate($request->input('start_date'));
+        $schedule->setEndDate($request->input('end_date'));
+        $schedule->setUserId($request->input('user_id'));
+        $schedule->setShiftId($request->input('shift_id'));
         $schedule->save();
 
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Save data update successfully'
-        ]);
+        return redirect()->route('admin.schedule.index');
     }
 
-    public function destroy(Schedule $schedule)
+    public function delete($id)
     {
-        $schedule->delete();
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Delete data successfully'
-        ]);
+        Schedule::destroy($id);
+        return back();
     }
 
     public function generatePdf(Request $request)
