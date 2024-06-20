@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('id', 20)->primary();
             $table->string('department_id', 20);
             $table->string('operator_name_type', 50);
-            $table->string('notes', 255);
+            $table->string('description', 255);
             $table->timestamps();
 
             $table->foreign('department_id')->references('id')->on('departments');

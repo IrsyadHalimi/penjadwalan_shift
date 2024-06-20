@@ -17,15 +17,10 @@ class AdminScheduleController extends Controller
 {
     public function index()
     {
-        $companyId = Auth::user()->company_id;
-        $userId = User::where('company_id', $companyId)->where('role', 'operator')->pluck('id')->toArray();
-        $departmentId = Department::where('company_id', $companyId)->pluck('id')->toArray();
         
         $viewData = [];
         $viewData["title"] = "Jadwal - Penjadwalan Shift";
         $viewData["subtitle"] = "Daftar Jadwal Kerja";
-        $viewData["shift"] = Shift::whereIn('department_id', $departmentId)->get();
-        $viewData["schedules"] = Schedule::whereIn('user_id', $userId)->paginate(10);
         return view('admin.schedule.index')->with("viewData", $viewData);
     }
 
@@ -115,17 +110,5 @@ class AdminScheduleController extends Controller
         $pdf = PDF::loadView('admin.schedule.pdf', compact('schedules'));
 
         return $pdf->stream('jadwal.pdf');
-    }
-
-    public function search(Request $request)
-    {
-        $searchTerm = $request->input('search');
-
-        $viewData["schedule"] = Schedule::where('id', 'like', '%'.$searchTerm.'%')
-                            ->orWhere('user_id', 'like', '%'.$searchTerm.'%')
-                            ->with('user')
-                            ->paginate(10);
-        
-        return view('admin.schedule.index')->with("viewData", $viewData);
     }
 }

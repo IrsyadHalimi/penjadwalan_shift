@@ -42,7 +42,7 @@ class SuperadminShiftController extends Controller
     $newShift->setDepartmentId($departmentId);
     $newShift->setStartTime($request->input('start_time'));
     $newShift->setEndTime($request->input('end_time'));
-    $newShift->setNotes($request->input('notes'));
+    $newShift->setDescription($request->input('description'));
     $newShift->setLabelColor($request->input('label_color'));
     $newShift->save();
 
@@ -67,7 +67,7 @@ class SuperadminShiftController extends Controller
     $shift->setDepartmentId($request->input('department_id'));
     $shift->setStartTime($request->input('start_time'));
     $shift->setEndTime($request->input('end_time'));
-    $shift->setNotes($request->input('notes'));
+    $shift->setDescription($request->input('description'));
     $shift->save();
 
     return redirect()->route('superadmin.shift.index');

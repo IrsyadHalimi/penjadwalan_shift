@@ -46,7 +46,7 @@ class AdminOperatorTypeController extends Controller
     $newOperatorType->setId($operatorTypeId);
     $newOperatorType->setOperatorNameType($operatorNameType);
     $newOperatorType->setDepartmentId($departmentId);
-    $newOperatorType->setNotes($request->input('notes'));
+    $newOperatorType->setDescription($request->input('description'));
     $newOperatorType->save();
 
     return redirect()->route('admin.operator_type.index');
@@ -70,7 +70,7 @@ class AdminOperatorTypeController extends Controller
     $operatorType = OperatorType::findOrFail($id);
     $operatorType->setOperatorNameType($request->input('operator_name_type'));
     $operatorType->setDepartmentId($departmentId);
-    $operatorType->setNotes($request->input('notes'));
+    $operatorType->setDescription($request->input('description'));
     $operatorType->save();
 
     return redirect()->route('admin.operator_type.index');

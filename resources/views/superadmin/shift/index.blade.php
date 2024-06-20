@@ -11,7 +11,7 @@
   Nama Shift: {{ $shift->getShiftName() }}
   Jam Masuk: {{ $shift->getStartTime() }}
   Jam Keluar: {{ $shift->getEndTime() }}
-  Keterangan: {{ $shift->getNotes() }}
+  Keterangan: {{ $shift->getDescription() }}
   <a href="{{route('admin.shift.edit', ['id'=> $shift->getId()])}}">Edit</a>
   <form action="{{ route('admin.shift.delete', $shift->getId())}}" method="POST">
     @csrf

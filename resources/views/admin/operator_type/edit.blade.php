@@ -48,7 +48,7 @@
                                             <div class="mb-3 row">
                                             <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Keterangan</label>
                                             <div class="col-lg-10 col-md-6 col-sm-12">
-                                                <textarea id="keterangan" name="notes" class="form-control" rows="4">{{ $viewData['operator_type']->getNotes() }}</textarea>
+                                                <textarea id="keterangan" name="notes" class="form-control" rows="4">{{ $viewData['operator_type']->getDescription() }}</textarea>
                                             </div>
                                             </div>
                                         </div>

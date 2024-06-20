@@ -20,7 +20,7 @@ class AdminShiftController extends Controller
     $viewData = [];
     $viewData["title"] = "Shift - Penjadwalan Shift";
     $viewData["subtitle"] = "Daftar Shift Kerja";
-    $viewData['shift'] = Shift::whereIn('department_id', $departmentId)->get();
+    $viewData['shift'] = Shift::whereIn('department_id', $departmentId)->paginate(10);
     return view('admin.shift.index')->with("viewData", $viewData);
   }
 
@@ -47,7 +47,7 @@ class AdminShiftController extends Controller
     $newShift->setDepartmentId($departmentId);
     $newShift->setStartTime($request->input('start_time'));
     $newShift->setEndTime($request->input('end_time'));
-    $newShift->setNotes($request->input('notes'));
+    $newShift->setDescription($request->input('description'));
     $newShift->setLabelColor($request->input('label_color'));
     $newShift->save();
 
@@ -74,7 +74,7 @@ class AdminShiftController extends Controller
     $shift->setDepartmentId($request->input('department_id'));
     $shift->setStartTime($request->input('start_time'));
     $shift->setEndTime($request->input('end_time'));
-    $shift->setNotes($request->input('notes'));
+    $shift->setDescription($request->input('description'));
     $shift->save();
 
     return redirect()->route('admin.shift.index');

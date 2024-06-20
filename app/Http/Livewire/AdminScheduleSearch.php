@@ -4,6 +4,8 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Schedule;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 
 class AdminScheduleSearch extends Component
@@ -15,11 +17,17 @@ class AdminScheduleSearch extends Component
     protected $queryString = ['searchTerm'];
 
     public function render()
-    {    
-        $schedules = Schedule::where('id', 'like', '%'.$this->searchTerm.'%')
-        ->orWhere('user_id', 'like', '%'.$this->searchTerm.'%')
-        ->paginate(10);
-    
+    {
+        $companyId = Auth::user()->company_id;
+        $userId = User::where('company_id', $companyId)->where('role', 'operator')->pluck('id')->toArray();
+
+        $schedules = Schedule::where(function($query) use ($userId) {
+            $query->whereIn('user_id', $userId);
+        })->where(function($query) {
+            $query->where('id', 'like', '%'.$this->searchTerm.'%')
+                ->orWhere('user_id', 'like', '%'.$this->searchTerm.'%');
+        })->paginate(10);
+
         return view('livewire.admin-schedule-search', [
             'schedules' => $schedules,
         ]);

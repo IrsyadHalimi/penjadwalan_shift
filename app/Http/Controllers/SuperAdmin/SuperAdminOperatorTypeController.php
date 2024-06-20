@@ -39,7 +39,7 @@ class SuperadminOperatorTypeController extends Controller
     $newOperatorType->setId($operatorTypeId);
     $newOperatorType->setOperatorNameType($operatorNameType);
     $newOperatorType->setDepartmentId($departmentId);
-    $newOperatorType->setNotes($request->input('notes'));
+    $newOperatorType->setDescription($request->input('description'));
     $newOperatorType->save();
 
     return redirect()->route('superadmin.operator_type.index');
@@ -59,7 +59,7 @@ class SuperadminOperatorTypeController extends Controller
     OperatorType::validate($request); 
     $operatorType = OperatorType::findOrFail($id);
     $operatorType->setOperatorNameType($request->input('operator_name_type'));
-    $operatorType->setNotes($request->input('notes'));
+    $operatorType->setDescription($request->input('description'));
     $operatorType->save();
 
     return redirect()->route('superadmin.operator_type.index');

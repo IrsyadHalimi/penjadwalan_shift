@@ -52,14 +52,14 @@ class OperatorType extends Model
         $this->attributes['department_id'] = $department_id;
     }
     
-    public function getNotes()
+    public function getDescription()
     {
-        return $this->attributes['notes'];
+        return $this->attributes['description'];
     }
 
-    public function setNotes($notes)
+    public function setDescription($description)
     {
-        $this->attributes['notes'] = $notes;
+        $this->attributes['description'] = $description;
     }
 
     public function getCreatedAt()

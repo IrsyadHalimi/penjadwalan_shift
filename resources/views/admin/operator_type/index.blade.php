@@ -45,7 +45,7 @@
                                 <td class="text-bold-500">{{ $operator_types->getId() }}</td>
                                 <td>{{ $operator_types->getOperatorNameType() }}</td>
                                 <td>{{ $operator_types->department->department_name }}</td>
-                                <td>{{ $operator_types->getNotes() }}</td>
+                                <td>{{ $operator_types->getDescription() }}</td>
                                 <td>
                                     <a href="{{route('admin.operator_type.edit', ['id'=> $operator_types->getId()])}}">Edit</a>
                                     <form action="{{ route('admin.operator_type.delete', $operator_types->getId())}}" method="POST">

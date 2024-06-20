@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('shift_name', 50);
             $table->time('start_time');
             $table->time('end_time');
-            $table->string('notes', 255);
+            $table->string('description', 255);
             $table->timestamps();
 
             $table->foreign('department_id')->references('id')->on('departments');

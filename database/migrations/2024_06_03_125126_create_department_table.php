@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('id', 20)->primary();
             $table->string('company_id', 50);
             $table->string('department_name', 50);
-            $table->string('notes', 255);
+            $table->string('description', 255);
             $table->timestamps();
 
             $table->foreign('company_id')->references('id')->on('companies');

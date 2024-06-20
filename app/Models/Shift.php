@@ -74,14 +74,14 @@ class Shift extends Model
         $this->attributes['end_time'] = $end_time;
     }
 
-    public function getNotes()
+    public function getDescription()
     {
-        return $this->attributes['notes'];
+        return $this->attributes['description'];
     } 
 
-    public function setNotes($notes)
+    public function setDescription($description)
     {
-        $this->attributes['notes'] = $notes;
+        $this->attributes['description'] = $description;
     }
 
     public function getCreatedAt()
