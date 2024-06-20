@@ -36,7 +36,7 @@
                             <div class="col-md-8 form-group">
                                 <select name="operator_type_id" id="operator_type_id" class="form-control">
                                     <option value="">Pilih Tipe Operator</option>
-                                    @foreach ($viewData['operator_types'] as $operatorType)
+                                    @foreach ($viewData['operator_type'] as $operatorType)
                                         <option value="{{ $operatorType->getId() }}">{{ $operatorType->getOperatorNameType() }}</option>
                                     @endforeach
                                 </select>

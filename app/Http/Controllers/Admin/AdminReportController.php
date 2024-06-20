@@ -120,7 +120,7 @@ class AdminReportController extends Controller
         ->orderBy('start_date')
         ->get();
 
-        $pdf = PDF::loadView('admin.schedule.pdf', compact('schedules'));
+        $pdf = PDF::loadView('admin.report.generate-by-range-pdf', compact('schedules'));
 
         return $pdf->stream('jadwal.pdf');
     }

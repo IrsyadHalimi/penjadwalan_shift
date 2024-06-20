@@ -188,6 +188,12 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item  ">
+                                    <a href="{{ route('supervisor.operator.index') }}" class='sidebar-link'>
+                                        <i class="bi bi-calendar4-week"></i>
+                                        <span>Operator</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item  ">
                                     <a href="{{ route('supervisor.report.index') }}" class='sidebar-link'>
                                         <i class="bi bi-book"></i>
                                         <span>Laporan</span>

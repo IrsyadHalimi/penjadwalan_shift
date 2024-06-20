@@ -20,7 +20,7 @@ class AdminAuthMiddleware
         if (Auth::user() && Auth::user()->getRole()=='admin') {
             return $next($request);
         } else {
-            return response()->noContent();
+            abort(404);
         }
     }
 }

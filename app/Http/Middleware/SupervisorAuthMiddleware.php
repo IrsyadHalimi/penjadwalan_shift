@@ -21,7 +21,7 @@ class SupervisorAuthMiddleware
         if (Auth::user() && Auth::user()->getRole()=='supervisor') {
             return $next($request);
         } else {
-            return redirect()->route('home.index');
+            abort(404);
         }
     }
 }

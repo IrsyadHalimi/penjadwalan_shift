@@ -20,7 +20,7 @@ class OperatorAuthMiddleware
         if (Auth::user() && Auth::user()->getRole()=='operator') {
             return $next($request);
         } else {
-            return redirect()->route('home.index');
+            abort(404);
         }
     }
 }

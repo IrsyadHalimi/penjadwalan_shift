@@ -163,6 +163,8 @@ Route::middleware('supervisor')->prefix('supervisor')->group(function() {
   Route::get('/report/generateAllSchedulePdf', 'App\Http\Controllers\Supervisor\SupervisorReportController@generateAllSchedulePdf')->name("supervisor.report.generateAllSchedulePdf");
   Route::post('/report/generateByOperatorTypePdf', 'App\Http\Controllers\Supervisor\SupervisorReportController@generateByOperatorTypePdf')->name("supervisor.report.generateByOperatorTypePdf");
   Route::post('/report/generateByRangePdf', 'App\Http\Controllers\Supervisor\SupervisorReportController@generateByRangePdf')->name("supervisor.report.generateByRangePdf");
+  
+  Route::get('/operator', 'App\Http\Controllers\Supervisor\SupervisorOperatorController@index')->name("supervisor.operator.index");
 });
 
 Route::middleware('operator')->prefix('operator')->group(function() {
@@ -179,6 +181,7 @@ Route::middleware('operator')->prefix('operator')->group(function() {
   Route::get('/profile/{id}/edit', 'App\Http\Controllers\Operator\OperatorProfileController@edit')->name("operator.profile.edit");
   Route::put('/profile/{id}/update', 'App\Http\Controllers\Operator\OperatorProfileController@update')->name("operator.profile.update");
   
+  Route::get('/supervisor', 'App\Http\Controllers\Operator\OperatorSupervisorController@index')->name("operator.supervisor.index");
 });
 
 

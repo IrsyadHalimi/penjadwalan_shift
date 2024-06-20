@@ -83,7 +83,7 @@
                                 <div class="col-md-8 form-group">  
                                     <select id="operator_type_id" class="form-select @error('operator_type_id') is-invalid @enderror" name="operator_type_id"  id="basicSelect">
                                         <option value="" hidden>-- Pilih Jenis Operator --</option>
-                                        @foreach($viewData['operator_types'] as $operator_type)
+                                        @foreach($viewData['operator_type'] as $operator_type)
                                         <option value="{{ $operator_type->getId() }}">{{ $operator_type->getOperatorNameType() }}</option>
                                         @endforeach
                                     </select>
