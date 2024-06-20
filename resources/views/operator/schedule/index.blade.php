@@ -19,8 +19,8 @@
             <p>Keterangan Label Shift</p>
             <div class="row">
                 @foreach ($viewData['shift'] as $shifts)
-                <div class="col-6 col-lg-3 col-md-3">{{ $shifts->getShiftName() }}
-                    <button class="btn btn-{{ $shifts->getLabelColor() }} px-4"></button></>
+                <div class="col-6 col-lg-3 col-md-3">{{ $shifts->getShiftName() }}<br>({{ $shifts->getStartTime() }} - {{ $shifts->getEndTime() }})
+                    <button class="btn btn-{{ $shifts->getLabelColor() }} px-4"></button></br>
                 </div>
                 @endforeach
             </div>
