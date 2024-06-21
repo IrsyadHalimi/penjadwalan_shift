@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('id', 20)->primary();
             $table->string('company_name', 50);
             $table->string('company_address', 50);
-            $table->string('description', 255);
+            $table->string('description', 255)->nullable();
             $table->timestamps();
         });
     }

@@ -80,7 +80,7 @@
                             @endphp
                             @if ($role === 'admin')
                                 <li class="sidebar-item  ">
-                                    <a href="{{ route('admin.shift.index') }}" class='sidebar-link'>
+                                    <a href="{{ route('admin.dashboard.index') }}" class='sidebar-link'>
                                         <i class="bi bi-grid-fill"></i>
                                         <span>Dasbor Admin</span>
                                     </a>

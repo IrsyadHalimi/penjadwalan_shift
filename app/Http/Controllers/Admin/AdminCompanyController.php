@@ -34,6 +34,7 @@ class AdminCompanyController extends Controller
     $company = Company::findOrFail($id);
     $company->setCompanyName($request->input('company_name'));
     $company->setCompanyAddress($request->input('company_address'));
+    $company->setDescription($request->input('description'));
     $company->save();
 
     return redirect()->route('admin.company.index');

@@ -25,6 +25,8 @@ use App\Http\Livewire\SelectDropdowns;
 
 
 Route::middleware('admin')->prefix('admin')->group(function() {
+  Route::get('/dashboard', 'App\Http\Controllers\Admin\AdminDashboardController@index')->name('admin.dashboard.index');
+
   Route::get('/schedule', 'App\Http\Controllers\Admin\AdminScheduleController@index')->name('admin.schedule.index');
   Route::get('/schedule/create', 'App\Http\Controllers\Admin\AdminScheduleController@create')->name('admin.schedule.create');
   Route::post('/schedule/store', 'App\Http\Controllers\Admin\AdminScheduleController@store')->name('admin.schedule.store');

@@ -18,36 +18,47 @@
                 <h4 class="card-title">Hoverable rows</h4>
             </div>
             <div class="card-content">
-                <div class="card-body">
-                    <p>Add <code class="highlighter-rouge">.table-hover</code> to enable a hover state on table
-                        rows
-                        within a
-                        <code class="highlighter-rouge">&lt;tbody&gt;</code>.
-                    </p>
-                </div>
-                <!-- table hover -->
-                <div class="table-responsive">
-                    <table class="table table-hover mb-0 mx-3">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Nama Perusahaan</th>
-                                <th>Alamat Perusahaan</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($viewData['company'] as $companies)
-                            <tr>
-                                <td class="text-bold-500">{{ $companies->getId() }}</td>
-                                <td>{{ $companies->getCompanyName() }}</td>
-                                <td>{{ $companies->getCompanyAddress() }}</td>
-                                <td>
-                                    <a href="{{route('admin.company.edit', ['id'=> $companies->getId()])}}">Edit</a>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                        <div class="card-body">
+                            <form class="form form-horizontal">
+                                <div class="form-body">
+                                @foreach ($viewData['company'] as $companies)
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label for="shift-name-horizontal">ID Perusahaan</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <h6 class="text-muted">: {{ $companies->getId() }}</h6>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="shift-name-horizontal">Nama Perusahaan</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <h6 class="text-muted">: {{ $companies->getCompanyName() }}</h6>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="shift-name-horizontal">Alamat Perusahaan</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <h6 class="text-muted">: {{ $companies->getCompanyAddress() }}</h6>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="shift-name-horizontal">Keterangan</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <h6 class="text-muted">: {{ $companies->getDescription() }}</h6>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="shift-name-horizontal"></label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <h6 class="text-muted"><a class="btn icon btn-primary" href="{{route('admin.company.edit', ['id'=> $companies->getId()])}}">Edit Perusahaan <i class="bi-pen"></i></a></h6>
+                                        </div>
+                                    </div>
+                                @endforeach
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

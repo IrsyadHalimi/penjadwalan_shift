@@ -52,6 +52,16 @@ class Company extends Model
     {
         $this->attributes['company_address'] = $company_address;
     }
+    
+    public function getDescription()
+    {
+        return $this->attributes['description'];
+    }
+
+    public function setDescription($description)
+    {
+        $this->attributes['description'] = $description;
+    }
 
     public function getCreatedAt()
     {
