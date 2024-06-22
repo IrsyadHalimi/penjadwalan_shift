@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('email', 50);
             $table->string('password', 255);
             $table->string('role', 20);
+            $table->string('remember_token', 100)->nullable();
             $table->timestamps();
 
             $table->foreign('company_id')->references('id')->on('companies');

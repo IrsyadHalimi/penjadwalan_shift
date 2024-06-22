@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Supervisor;
+use App\Notifications\ScheduleUpdatedNotification;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\EventRequest;
@@ -133,6 +134,11 @@ class SupervisorScheduleController extends Controller
         $schedule->shift_id = $request->shift_id;
 
         $schedule->save();
+
+        $userId = $request->user_id;
+        $user = User::find($userId);
+
+        $user->notify(new ScheduleUpdatedNotification($userId));
 
         return response()->json([
             'status' => 'success',
