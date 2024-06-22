@@ -128,17 +128,19 @@ class SupervisorScheduleController extends Controller
         if ($request->has('delete')) {
             return $this->destroy($schedule);
         }
+
+        $oldSchedule = clone $schedule;
+
         $schedule->start_date = $request->start_date;
         $schedule->end_date = $request->end_date;
         $schedule->user_id = $request->user_id;
         $schedule->shift_id = $request->shift_id;
-
         $schedule->save();
 
-        $userId = $request->user_id;
-        $user = User::find($userId);
+        $newSchedule = $schedule;
+        $user = User::find($request->user_id);
 
-        $user->notify(new ScheduleUpdatedNotification($userId));
+        $user->notify(new ScheduleUpdatedNotification($oldSchedule, $newSchedule));
 
         return response()->json([
             'status' => 'success',

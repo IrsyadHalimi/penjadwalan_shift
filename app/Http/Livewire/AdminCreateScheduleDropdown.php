@@ -16,6 +16,14 @@ class AdminCreateScheduleDropdown extends Component
     public $selectedOperator;
     public $selectedShift;
 
+    public function mount()
+    {
+        $this->selectedDepartment = old('department_id');
+        $this->selectedOperatorType = old('operator_type_id');
+        $this->selectedOperator = old('user_id');
+        $this->selectedShift = old('shift_id');
+    }
+
     public function render()
     {
         $companyId = Auth::user()->company_id;
