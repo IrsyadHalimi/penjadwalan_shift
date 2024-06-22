@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 
 class Schedule extends Model
@@ -24,14 +26,30 @@ class Schedule extends Model
         'end_date'
     ];
 
-    public static function validate($request)
+    public static function boot()
     {
-        $request->validate([
-            "user_id" => "required",
-            "shift_id" => "required",
-            "start_date" => "required",
-            "end_date" => "required",
-        ]);
+        parent::boot();
+
+        static::saving(function ($model) {
+            $validator = Validator::make($model->attributes, [
+                'user_id' => "required",
+                'shift_id' => "required",
+                'start_date' => "required|date",
+                'end_date' => "required|date|after:start_date",
+            ], [
+                'user_id.required' => 'Operator harus dipilih',
+                'shift_id.required' => 'Shift harus dipilih',
+                'start_date.required' => 'Tanggal mulai wajib diisi.',
+                'start_date.date' => 'Tanggal mulai harus berupa tanggal yang valid.',
+                'end_date.required' => 'Tanggal selesai wajib diisi.',
+                'end_date.date' => 'Tanggal selesai harus berupa tanggal yang valid.',
+                'end_date.after' => 'Tanggal selesai harus setelah tanggal mulai.',
+            ]);
+
+            if ($validator->fails()) {
+                throw new ValidationException($validator);
+            }
+        });
     }
 
     public function getId()

@@ -85,7 +85,7 @@
                                     </button>
 
                                     @if (Route::has('password.request'))
-                                        <a class="btn bg-primary text-white" href="{{ route('password.request') }}">
+                                        <a href="{{ route('password.request') }}">
                                             {{ __('Lupa Password?') }}
                                         </a>
                                     @endif

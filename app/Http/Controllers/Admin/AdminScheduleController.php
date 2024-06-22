@@ -41,8 +41,6 @@ class AdminScheduleController extends Controller
     public function store(Request $request)
     {
         $scheduleId = 'SCH' . Str::random(7);
-        
-        Schedule::validate($request);
         $newSchedule = new Schedule();
         $newSchedule->setId($scheduleId);
         $newSchedule->setUserId($request->input('user_id'));
@@ -71,7 +69,6 @@ class AdminScheduleController extends Controller
 
     public function update(Request $request, $id)
     {
-        Schedule::validate($request); 
         $schedule = Schedule::findOrFail($id);
         $schedule->setStartDate($request->input('start_date'));
         $schedule->setEndDate($request->input('end_date'));
