@@ -23,7 +23,7 @@ class SupervisorReportController extends Controller
         $viewData = [];
         $viewData["title"] = "Laporan - Penjadwalan Shift";
         $viewData["subtitle"] = "Laporan Jadwal Kerja";
-        $viewData["department"] = Department::where('company_id', $companyId)->get();  
+        $viewData["departments"] = Department::where('company_id', $companyId)->get();  
         $viewData["operator_type"] = OperatorType::where('department_id', $departmentId)->get();  
         return view('supervisor.report.index')->with("viewData", $viewData);
     }

@@ -20,15 +20,18 @@
             <div class="col-md-12 col-12">
                 <div class="card">
                     <div class="card-header pb-0">
-                        <h4 class="card-title">Horizontal Form</h4>
+                        <h4 class="card-title">Edit Jadwal</h4>
+                        <p>
+                            Formulir dibawah berfungsi untuk mengubah data jadwal operator
+                        </p>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
                             <form class="form form-horizontal">
                                 <div class="form-body">
+                                    <livewire:admin-edit-schedule-dropdown :scheduleId="$viewData['schedule']->getId()" />
+                                    @livewireScripts
                                     <div class="row">
-                                        <livewire:admin-edit-schedule-dropdown :scheduleId="$viewData['schedule']->getId()" />
-                                        @livewireScripts
                                         <div class="col-md-4">
                                             <label for="start_date-horizontal">Tanggal Mulai</label>
                                         </div>
@@ -42,7 +45,7 @@
                                             <input type="date" name="end_date" id="end_date-horizontal" class="form-control" value="{{ $viewData['schedule']->getEndDate() }}" required>
                                         </div>
                                         <div class="col-sm-12 d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                            <button type="submit" class="btn btn-primary me-1 mb-1">Simpan</button>
                                             <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
                                         </div>
                                     </div>

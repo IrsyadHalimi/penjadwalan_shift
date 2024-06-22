@@ -38,8 +38,10 @@
                                         <div class="col-md-8 form-group">
                                             <input type="text" name="employee_id" value="{{ $viewData['operator']->getEmployeeId() }}" id="employeeId-horizontal" class="form-control">
                                         </div>
+                                    </div>
                                         <livewire:admin-department-operator-dropdown-edit :userId="$viewData['operator']->getId()" />
                                         @livewireScripts
+                                    <div class="row">
                                         <div class="col-md-4">
                                             <label for="email-horizontal">Email</label>
                                         </div>

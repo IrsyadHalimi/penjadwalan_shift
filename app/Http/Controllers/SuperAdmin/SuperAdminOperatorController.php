@@ -28,7 +28,7 @@ class SuperadminOperatorController extends Controller
     $viewData = [];
     $viewData["title"] = " Tambah Operator- Penjadwalan Shift";
     $viewData["subtitle"] = "Tambah Operator";
-    $viewData["department"] = Department::all();
+    $viewData["departments"] = Department::all();
     $viewData["operator_type"] = OperatorType::all();
     return view('superadmin.operator.create')->with("viewData", $viewData);
   }
@@ -61,7 +61,7 @@ class SuperadminOperatorController extends Controller
     $viewData["title"] = "Superadmin - Edit Operator";
     $viewData["subtitle"] = "Edit Operator";
     $viewData["operator"] = User::findOrFail($id);
-    $viewData["department"] = Department::all();
+    $viewData["departments"] = Department::all();
     $viewData["shift"] = Shift::all();
     $viewData["operator_type"] = OperatorType::all();
     return view('superadmin.operator.edit')->with("viewData", $viewData);

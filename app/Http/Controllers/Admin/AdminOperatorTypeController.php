@@ -31,7 +31,7 @@ class AdminOperatorTypeController extends Controller
     $viewData = [];
     $viewData["title"] = "Jenis Operator - Penjadwalan Shift";
     $viewData["subtitle"] = "Tambah Jenis Operator";
-    $viewData["department"] = Department::where('company_id', $companyId)->get();
+    $viewData["departments"] = Department::where('company_id', $companyId)->get();
     return view('admin.operator_type.create')->with("viewData", $viewData);
   }
 
@@ -60,7 +60,7 @@ class AdminOperatorTypeController extends Controller
     $viewData["title"] = "Admin - Edit Jenis Operator";
     $viewData["subtitle"] = "Edit Jenis Operator";
     $viewData["operator_type"] = OperatorType::findOrFail($id);
-    $viewData["department"] = Department::where('company_id', $companyId)->get();
+    $viewData["departments"] = Department::where('company_id', $companyId)->get();
     return view('admin.operator_type.edit')->with("viewData", $viewData);
   }
 
@@ -69,7 +69,7 @@ class AdminOperatorTypeController extends Controller
     OperatorType::validate($request); 
     $operatorType = OperatorType::findOrFail($id);
     $operatorType->setOperatorNameType($request->input('operator_name_type'));
-    $operatorType->setDepartmentId($departmentId);
+    $operatorType->setDepartmentId($request->input('department_id'));
     $operatorType->setDescription($request->input('description'));
     $operatorType->save();
 

@@ -25,28 +25,26 @@
                         <div class="card-body">
                             <form class="form form-horizontal">
                                 <div class="form-body">
+                                    <livewire:admin-create-schedule-dropdown />
+                                    @livewireScripts
                                     <div class="row">
-                                        <div class="col-md-4">
-                                        <livewire:admin-create-schedule-dropdown />
-                                        @livewireScripts
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="start_date-horizontal">Tanggal Mulai</label>
-                                        </div>
-                                        <div class="col-md-8 form-group">
-                                            <input type="date" name="start_date" id="start_date-horizontal" class="form-control" required>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="end_date-horizontal">Tanggal Selesai</label>
-                                        </div>
-                                        <div class="col-md-8 form-group">
-                                            <input type="date" name="end_date" id="end_date-horizontal" class="form-control" required>
-                                        </div>
-                                        <div class="col-sm-12 d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
-                                            <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
-                                        </div>
-                                    </.div>
+                                    <div class="col-md-4">
+                                        <label for="start_date-horizontal">Tanggal Mulai</label>
+                                    </div>
+                                    <div class="col-md-8 form-group">
+                                        <input type="date" name="start_date" id="start_date-horizontal" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="end_date-horizontal">Tanggal Selesai</label>
+                                    </div>
+                                    <div class="col-md-8 form-group">
+                                        <input type="date" name="end_date" id="end_date-horizontal" class="form-control" required>
+                                    </div>
+                                    <div class="col-sm-12 d-flex justify-content-end">
+                                        <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                        <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                    </div>
+                                    </div>
                                 </div>
                             </form>
                         </div>

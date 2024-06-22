@@ -31,7 +31,7 @@ class AdminShiftController extends Controller
     $viewData = [];
     $viewData["title"] = "Shift - Penjadwalan Shift";
     $viewData["subtitle"] = "Tambah Shift Kerja";
-    $viewData["department"] = Department::where('company_id', $companyId)->get();
+    $viewData["departments"] = Department::where('company_id', $companyId)->get();
     return view('admin.shift.create')->with("viewData", $viewData);
   }
 
@@ -40,7 +40,6 @@ class AdminShiftController extends Controller
     $departmentId = $request->input('department_id');
     $shiftId = 'SHF' . $departmentId . Str::random(2);
     
-    Shift::validate($request);
     $newShift = new Shift();
     $newShift->setId($shiftId);
     $newShift->setShiftName($request->input('shift_name'));
@@ -62,13 +61,12 @@ class AdminShiftController extends Controller
     $viewData["title"] = "Admin - Edit Shift";
     $viewData["subtitle"] = "Edit Shift Kerja";
     $viewData["shift"] = Shift::findOrFail($id);
-    $viewData["department"] = Department::where('company_id', $companyId)->paginate(10);
+    $viewData["departments"] = Department::where('company_id', $companyId)->paginate(10);
     return view('admin.shift.edit')->with("viewData", $viewData);
   }
 
   public function update(Request $request, $id)
   {
-    Shift::validate($request); 
     $shift = Shift::findOrFail($id);
     $shift->setShiftName($request->input('shift_name'));
     $shift->setDepartmentId($request->input('department_id'));

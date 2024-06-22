@@ -39,19 +39,19 @@
                                         <div class="col-md-8 form-group">  
                                             <select id="department_id" class="form-select @error('department_id') is-invalid @enderror" name="department_id"  id="basicSelect">
                                                 <option value="" hidden>-- Pilih Departemen --</option>
-                                                @foreach($viewData['department'] as $departments)
+                                                @foreach($viewData['departments'] as $departments)
                                                 <option value="{{ $departments->getId() }}" {{ $departments->getId() == $viewData['shift']->getDepartmentId() ? 'selected' : null }}>{{ $departments->getDepartmentName() }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="col-md-4">
-                                            <label for="start-horizontal">Waktu Masuk</label>
+                                            <label for="start-horizontal">Waktu Mulai</label>
                                         </div>
                                         <div class="col-md-8 form-group">
                                           <input type="time" name="start_time" value="{{ $viewData['shift']->getStartTime() }}" class="form-control flatpickr-time-picker-24h" placeholder="Pilih waktu">
                                         </div>
                                         <div class="col-md-4">
-                                            <label for="start-horizontal">Waktu Keluar</label>
+                                            <label for="start-horizontal">Waktu Selesai</label>
                                         </div>
                                         <div class="col-md-8 form-group">
                                           <input type="time" name="end_time" value="{{ $viewData['shift']->getEndTime() }}" class="form-control flatpickr-time-picker-24h" placeholder="Pilih waktu">

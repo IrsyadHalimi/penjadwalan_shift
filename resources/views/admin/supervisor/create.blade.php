@@ -44,7 +44,7 @@
                                         <div class="col-md-8 form-group">  
                                             <select id="department_id" class="form-select @error('department_id') is-invalid @enderror" name="department_id"  id="basicSelect">
                                                 <option value="" hidden>-- Pilih Departemen --</option>
-                                                @foreach($viewData['department'] as $departments)
+                                                @foreach($viewData['departments'] as $departments)
                                                 <option value="{{ $departments->getId() }}">{{ $departments->getDepartmentName() }}</option>
                                                 @endforeach
                                             </select>

@@ -38,7 +38,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($viewData['department'] as $departments)
+                            @foreach ($viewData['departments'] as $departments)
                             <tr>
                                 <td class="text-bold-500">{{ $departments->getId() }}</td>
                                 <td>{{ $departments->getDepartmentName() }}</td>

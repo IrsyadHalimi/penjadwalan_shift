@@ -24,7 +24,7 @@ class SuperadminOperatorTypeController extends Controller
     $viewData = [];
     $viewData["title"] = "Jenis Operator - Penjadwalan Shift";
     $viewData["subtitle"] = "Tambah Jenis Operator";
-    $viewData["department"] = Department::all();
+    $viewData["departments"] = Department::all();
     return view('superadmin.operator_type.create')->with("viewData", $viewData);
   }
 

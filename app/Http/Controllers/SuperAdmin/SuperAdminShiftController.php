@@ -26,7 +26,7 @@ class SuperadminShiftController extends Controller
     $viewData = [];
     $viewData["title"] = "Shift - Penjadwalan Shift";
     $viewData["subtitle"] = "Tambah Shift Kerja";
-    $viewData["department"] = Department::all();
+    $viewData["departments"] = Department::all();
     return view('superadmin.shift.create')->with("viewData", $viewData);
   }
 
@@ -55,7 +55,7 @@ class SuperadminShiftController extends Controller
     $viewData["title"] = "Superadmin - Edit Shift";
     $viewData["subtitle"] = "Edit Shift Kerja";
     $viewData["shift"] = Shift::findOrFail($id);
-    $viewData["department"] = Department::all();
+    $viewData["departments"] = Department::all();
     return view('superadmin.shift.edit')->with("viewData", $viewData);
   }
 

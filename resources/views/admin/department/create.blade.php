@@ -29,6 +29,12 @@
                                         <div class="col-md-8 form-group">
                                             <input type="text" name="department_name" id="department-name-horizontal" class="form-control">
                                         </div>
+                                        <div class="col-md-4">
+                                        <label for="description-horizontal">Keterangan</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="5">{{ old('description') }}</textarea>
+                                        </div>
                                         <div class="col-sm-12 d-flex justify-content-end">
                                             <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
                                             <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>

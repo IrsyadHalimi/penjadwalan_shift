@@ -12,7 +12,7 @@
   @endif
 
   <section id="basic-horizontal-layouts">
-    <form method="POST" action="{{ route('admin.department.update', ['id'=> $viewData['department']->getId()]) }}"
+    <form method="POST" action="{{ route('admin.department.update', ['id'=> $viewData['departments']->getId()]) }}"
     enctype="multipart/form-data">
       @csrf
       @method('PUT')
@@ -31,7 +31,13 @@
                                             <label for="department-name-horizontal">Nama Departemen</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" name="department_name" value="{{ $viewData['department']->getDepartmentName() }}" id="department-name-horizontal" class="form-control">
+                                            <input type="text" name="department_name" value="{{ $viewData['departments']->getDepartmentName() }}" id="department-name-horizontal" class="form-control">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="department-horizontal">Keterangan</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                          <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="5">{{ $viewData['departments']->getDescription() }}</textarea>
                                         </div>
                                         <div class="col-sm-12 d-flex justify-content-end">
                                             <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>

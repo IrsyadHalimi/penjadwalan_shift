@@ -370,6 +370,19 @@
         
 <script src="{{ asset('assets/extensions/flatpickr/flatpickr.min.js') }}"></script>
 <script src="{{ asset('assets/static/js/pages/date-picker.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            plugins: ['dayGrid'],
+            locale: 'id', // Set locale to Indonesian
+            // Your other options here...
+        });
+
+        calendar.render();
+    });
+</script>
 
 <!-- <script src="{{ asset('js/bootstrap.js') }}"></script> -->
 @stack('scripts')

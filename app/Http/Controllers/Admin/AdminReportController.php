@@ -22,7 +22,7 @@ class AdminReportController extends Controller
         $viewData = [];
         $viewData["title"] = "Laporan - Penjadwalan Shift";
         $viewData["subtitle"] = "Laporan Jadwal Kerja";
-        $viewData["department"] = Department::where('company_id', $companyId)->get();  
+        $viewData["departments"] = Department::where('company_id', $companyId)->get();  
         return view('admin.report.index')->with("viewData", $viewData);
     }
 

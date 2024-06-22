@@ -17,7 +17,6 @@ class AdminScheduleController extends Controller
 {
     public function index()
     {
-        
         $viewData = [];
         $viewData["title"] = "Jadwal - Penjadwalan Shift";
         $viewData["subtitle"] = "Daftar Jadwal Kerja";
@@ -32,7 +31,7 @@ class AdminScheduleController extends Controller
         $viewData = [];
         $viewData["title"] = " Tambah Jadwal- Penjadwalan Shift";
         $viewData["subtitle"] = "Tambah Jadwal";
-        $viewData["department"] = Department::where('company_id', $companyId)->get();
+        $viewData["departments"] = Department::where('company_id', $companyId)->get();
         $viewData["operators"] = User::whereIn('department_id', $departmentId)->get();
         $viewData["shifts"] = Shift::whereIn('department_id', $departmentId)->get();
         return view('admin.schedule.create')->with("viewData", $viewData);
@@ -63,7 +62,7 @@ class AdminScheduleController extends Controller
         $viewData["title"] = "Admin - Edit Jadwal";
         $viewData["subtitle"] = "Edit Jadwal Kerja";
         $viewData["schedule"] = Schedule::findOrFail($id);
-        $viewData["department"] = Department::where('company_id', $companyId)->get();
+        $viewData["departments"] = Department::where('company_id', $companyId)->get();
         return view('admin.schedule.edit')->with("viewData", $viewData);
     }
 

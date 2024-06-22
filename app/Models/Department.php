@@ -52,6 +52,16 @@ class Department extends Model
         $this->attributes['company_id'] = $company_id;
     }
 
+    public function getDescription()
+    {
+        return $this->attributes['description'];
+    } 
+    
+    public function setDescription($description)
+    {
+        $this->attributes['description'] = $description;
+    } 
+    
     public function getCreatedAt()
     {
         return $this->attributes['created_at'];

@@ -16,11 +16,9 @@ class AdminOperatorController extends Controller
 {
   public function index()
   {
-    $companyId = Auth::user()->company_id;
     $viewData = [];
     $viewData["title"] = "Operator - Penjadwalan Shift";
     $viewData["subtitle"] = "Daftar Operator";
-    $viewData["operator"] = User::where('company_id', $companyId)->where('role', 'operator')->paginate(10);
     return view('admin.operator.index')->with("viewData", $viewData);
   }
   
@@ -32,7 +30,7 @@ class AdminOperatorController extends Controller
     $viewData = [];
     $viewData["title"] = " Tambah Operator- Penjadwalan Shift";
     $viewData["subtitle"] = "Tambah Operator";
-    $viewData["department"] = Department::where('company_id', $companyId)->get();
+    $viewData["departments"] = Department::where('company_id', $companyId)->get();
     $viewData["operator_type"] = OperatorType::whereIn('department_id', $departmentId)->get();
     return view('admin.operator.create')->with("viewData", $viewData);
   }
@@ -68,7 +66,7 @@ class AdminOperatorController extends Controller
     $viewData["title"] = "Admin - Edit Operator";
     $viewData["subtitle"] = "Edit Operator";
     $viewData["operator"] = User::findOrFail($id);
-    $viewData["department"] = Department::where('company_id', $companyId)->get();
+    $viewData["departments"] = Department::where('company_id', $companyId)->get();
     $viewData["shift"] = Shift::whereIn('department_id', $departmentId)->get();
     $viewData["operator_type"] = OperatorType::all();
     return view('admin.operator.edit')->with("viewData", $viewData);

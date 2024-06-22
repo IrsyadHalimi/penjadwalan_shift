@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
+
 
 class Shift extends Model
 {
@@ -15,13 +18,32 @@ class Shift extends Model
     
     protected $keyType = 'string';
 
-    public static function validate($request)
+    public static function boot()
     {
-        $request->validate([
-            "shift_name" => "required",
-            "start_time" => "required",
-            "end_time" => "required",
-        ]);
+        parent::boot();
+
+        static::saving(function ($model) {
+            $validator = Validator::make($model->attributes, [
+                'shift_name' => "required|string|max:50",
+                'department_id' => "required",
+                'start_time' => "required|date_format:H:i",
+                'end_time' => "required|date_format:H:i|after:start_time",
+            ], [
+                'shift_name.required' => 'Nama shift harus diisi.',
+                'shift_name.string' => 'Nama shift harus berupa teks.',
+                'shift_name.max' => 'Nama shift tidak boleh lebih dari 50 karakter.',
+                'start_time.required' => 'Waktu mulai harus diisi.',
+                'start_time.date_format' => 'Format waktu mulai tidak valid.',
+                'end_time.required' => 'Waktu selesai harus diisi.',
+                'end_time.date_format' => 'Format waktu selesai tidak valid.',
+                'end_time.after' => 'Waktu selesai harus setelah waktu mulai.',
+                'department_id.required' => 'Departemen harus diisi.',
+            ]);
+
+            if ($validator->fails()) {
+                throw new ValidationException($validator);
+            }
+        });
     }
 
     public function getId()

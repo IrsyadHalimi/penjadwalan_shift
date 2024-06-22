@@ -16,7 +16,7 @@ class AdminDepartmentController extends Controller
     $viewData = [];
     $viewData["title"] = "Departemen - Penjadwalan Shift";
     $viewData["subtitle"] = "Daftar Departemen";
-    $viewData["department"] = Department::where('company_id', $companyId)->paginate(10);
+    $viewData["departments"] = Department::where('company_id', $companyId)->paginate(10);
     return view('admin.department.index')->with("viewData", $viewData);
   }
 
@@ -40,6 +40,7 @@ class AdminDepartmentController extends Controller
     $newDepartment->setId($departmentId);
     $newDepartment->setDepartmentName($departmentName);
     $newDepartment->setCompanyId($companyId);
+    $newDepartment->setDescription($request->input('description'));
     $newDepartment->save();
 
     return redirect()->route('admin.department.index');
@@ -50,7 +51,7 @@ class AdminDepartmentController extends Controller
     $viewData = [];
     $viewData["title"] = "Admin - Edit Departemen";
     $viewData["subtitle"] = "Edit Departemen";
-    $viewData["department"] = Department::findOrFail($id);
+    $viewData["departments"] = Department::findOrFail($id);
     return view('admin.department.edit')->with("viewData", $viewData);
   }
 
@@ -59,6 +60,7 @@ class AdminDepartmentController extends Controller
     Department::validate($request); 
     $department = Department::findOrFail($id);
     $department->setDepartmentName($request->input('department_name'));
+    $department->setDescription($request->input('description'));
     $department->save();
 
     return redirect()->route('admin.department.index');
