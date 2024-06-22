@@ -19,6 +19,7 @@ class AdminDashboardController extends Controller
   {
     $companyId = Auth::user()->company_id;
     $departmentId = Department::where('company_id', $companyId)->pluck('id')->toArray();
+    $userId = User::where('company_id', $companyId)->pluck('id')->toArray();
 
     $viewData = [];
     $viewData["title"] = "Dasbor - Penjadwalan Shift";
@@ -26,10 +27,11 @@ class AdminDashboardController extends Controller
     
     $viewData["company"] = Company::where('id', $companyId)->get();
     $viewData["department"] = Department::where('company_id', $companyId)->get();
-    $viewData["users"] = User::where('role', 'operator')->where('company_id', $companyId)->get();
-    $viewData["shifts"] = Shift::whereIn('department_id', $departmentId)->get();
+    $viewData["operator"] = User::where('role', 'operator')->where('company_id', $companyId)->count();
+    $viewData["supervisor"] = User::where('role', 'supervisor')->where('company_id', $companyId)->count();
+    $viewData["shift"] = Shift::whereIn('department_id', $departmentId)->count();
     $viewData["operator_type"] = Company::where('id', $companyId)->get();
-    $viewData["schedule"] = Company::where('id', $companyId)->get();
+    $viewData["schedule"] = Schedule::whereIn('user_id', $userId)->count();
     
     return view('admin.dashboard.index')->with("viewData", $viewData);
   }

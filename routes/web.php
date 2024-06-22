@@ -85,7 +85,6 @@ Route::middleware('admin')->prefix('admin')->group(function() {
 });
 
 Route::get('/', 'App\Http\Controllers\HomeController@index')->name("home.index");
-Route::get('/error', 'App\Http\Controllers\HomeController@error')->name("home.error");
 
 Route::middleware('superadmin')->prefix('superadmin')->group(function() {
   Route::get('/schedule', [SuperadminScheduleController::class, 'index'])->name('superadmin.schedule.index');
