@@ -44,7 +44,7 @@
                             <tr>
                                 <td class="text-bold-500">{{ $operator_types->getId() }}</td>
                                 <td>{{ $operator_types->getOperatorNameType() }}</td>
-                                <td>{{ $operator_types->department ? $operator_types->department->department_name : 'N/A' }}</td>
+                                <td>{{ optional($operator_types->department)->department_name ?? 'N/A'}}</td>
                                 <td>{{ $operator_types->getDescription() }}</td>
                                 <td>
                                     <a class="btn icon btn-primary" href="{{route('admin.operator_type.edit', ['id'=> $operator_types->getId()])}}"><i class="bi-pen"></i></a>

@@ -42,7 +42,7 @@
                                             <label for="shift-name-horizontal">Departemen</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <h6 class="text-muted">: {{ $operator->department->department_name }}</h6>
+                                            <h6 class="text-muted">: {{ optional($operator->department)->department_name ?? N/A }}</h6>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="shift-name-horizontal">Jenis Operator</label>

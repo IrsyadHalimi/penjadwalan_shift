@@ -27,7 +27,7 @@
                     <td class="text-bold-500">{{ $supervisor->id }}</td>
                     <td>{{ $supervisor->full_name }}</td>
                     <td>{{ $supervisor->employee_id }}</td>
-                    <td>{{ $supervisor->department->department_name }}</td>
+                    <td>{{ optional($supervisor->department)->department_name ?? 'N/A' }}</td>
                     <td>{{ $supervisor->email }}</td>
                     <td>{{ $supervisor->phone_number }}</td>
                     <td>

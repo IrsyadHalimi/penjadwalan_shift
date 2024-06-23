@@ -28,7 +28,7 @@
                     <td class="text-bold-500">{{ $operator->id }}</td>
                     <td>{{ $operator->full_name }}</td>
                     <td>{{ $operator->employee_id }}</td>
-                    <td>{{ $operator->department->department_name }}</td>
+                    <td>{{ optional($operator->department)->department_name ?? 'N/A'  }}</td>
                     <td>{{ optional($operator->operatorType)->operator_name_type ?? 'N/A' }}</td>
                     <td>{{ $operator->email }}</td>
                     <td>{{ $operator->phone_number }}</td>

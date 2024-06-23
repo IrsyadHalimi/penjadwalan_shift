@@ -47,7 +47,7 @@
                             <tr>
                                 <td class="text-bold-500">{{ $shifts->getId() }}</td>
                                 <td>{{ $shifts->getShiftName() }}</td>
-                                <td>{{ $shifts->department ? $shifts->department->department_name : 'N/A' }}</>
+                                <td>{{ optional($shifts->department)->department_name ?? 'N/A' }}</td>
                                 <td>{{ $shifts->getStartTime() }}</td>
                                 <td>{{ $shifts->getEndTime() }}</td>
                                 <td><button class="btn btn-{{ $shifts->getLabelColor() }} px-4"></button></td>
