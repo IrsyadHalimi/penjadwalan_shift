@@ -12,7 +12,7 @@ Parsley.addMessages('ms', {
     alphanum:     "Hanya alfanumerik dibenarkan."
   },
   notblank:       "Nilai ini tidak boleh kosong.",
-  required:       "Nilai ini wajib diisi.",
+  required:       "Nilai ini harus diisi.",
   pattern:        "Bentuk nilai ini tidak sah.",
   min:            "Nilai perlu lebih besar atau sama dengan %s.",
   max:            "Nilai perlu lebih kecil atau sama dengan %s.",

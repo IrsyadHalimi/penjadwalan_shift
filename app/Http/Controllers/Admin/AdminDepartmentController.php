@@ -30,8 +30,6 @@ class AdminDepartmentController extends Controller
 
   public function store(Request $request)
   {
-    Department::validate($request); 
-    
     $departmentName = $request->input('department_name');
     $companyId = Auth::user()->company_id;
     $departmentId = 'DEP' . $companyId . Str::random(4);
@@ -57,7 +55,6 @@ class AdminDepartmentController extends Controller
 
   public function update(Request $request, $id)
   {
-    Department::validate($request); 
     $department = Department::findOrFail($id);
     $department->setDepartmentName($request->input('department_name'));
     $department->setDescription($request->input('description'));

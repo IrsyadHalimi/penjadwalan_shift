@@ -29,17 +29,6 @@ class User extends AuthenticatableUser implements Authenticatable
         'phone_number',
         'role',
     ];
-
-    public static function validate($request)
-    {
-        $request->validate([
-            "department_id" => "required",
-            "full_name" => "required",
-            "employee_id" => "required",
-            "email" => "required",
-            "phone_number" => "required",
-        ]);
-    }
     
     public function getId()
     {

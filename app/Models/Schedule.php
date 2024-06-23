@@ -39,9 +39,9 @@ class Schedule extends Model
             ], [
                 'user_id.required' => 'Operator harus dipilih',
                 'shift_id.required' => 'Shift harus dipilih',
-                'start_date.required' => 'Tanggal mulai wajib diisi.',
+                'start_date.required' => 'Tanggal mulai harus diisi.',
                 'start_date.date' => 'Tanggal mulai harus berupa tanggal yang valid.',
-                'end_date.required' => 'Tanggal selesai wajib diisi.',
+                'end_date.required' => 'Tanggal selesai harus diisi.',
                 'end_date.date' => 'Tanggal selesai harus berupa tanggal yang valid.',
                 'end_date.after' => 'Tanggal selesai harus setelah tanggal mulai.',
             ]);

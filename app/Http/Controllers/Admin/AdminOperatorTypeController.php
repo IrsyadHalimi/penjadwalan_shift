@@ -41,7 +41,6 @@ class AdminOperatorTypeController extends Controller
     $departmentId = $request->input('department_id');
     $operatorTypeId = 'OPT' . $departmentId . Str::random(2);
    
-    OperatorType::validate($request); 
     $newOperatorType = new OperatorType();
     $newOperatorType->setId($operatorTypeId);
     $newOperatorType->setOperatorNameType($operatorNameType);
@@ -66,7 +65,6 @@ class AdminOperatorTypeController extends Controller
 
   public function update(Request $request, $id)
   {
-    OperatorType::validate($request); 
     $operatorType = OperatorType::findOrFail($id);
     $operatorType->setOperatorNameType($request->input('operator_name_type'));
     $operatorType->setDepartmentId($request->input('department_id'));
@@ -78,7 +76,7 @@ class AdminOperatorTypeController extends Controller
 
   public function delete($id)
   {
-    Company::destroy($id);
+    OperatorType::destroy($id);
     return back();
   }
 }

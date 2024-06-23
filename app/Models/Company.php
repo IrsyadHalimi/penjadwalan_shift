@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
+
 
 class Company extends Model
 {
@@ -20,6 +23,29 @@ class Company extends Model
         'company_name',
         'company_address',
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::saving(function ($model) {
+            $validator = Validator::make($model->attributes, [
+                'company_name' => "required|string|max:50",
+                'company_address' => "required|string|max:50",
+            ], [
+                'company_name.required' => 'Nama perusahaan harus diisi.',
+                'company_name.string' => 'Nama perusahaan harus berupa teks.',
+                'company_name.max' => 'Nama perusahaan tidak boleh lebih dari 50 karakter.',
+                'company_address.required' => 'Alamat perusahaan harus diisi.',
+                'company_address.string' => 'Alamat perusahaan harus berupa teks.',
+                'company_address.max' => 'Alamat perusahaan tidak boleh lebih dari 50 karakter.',
+            ]);
+
+            if ($validator->fails()) {
+                throw new ValidationException($validator);
+            }
+        });
+    }
 
     public static function validate($request)
     {

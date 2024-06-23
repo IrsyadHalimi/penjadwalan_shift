@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class Department extends Model
 {
@@ -15,11 +17,23 @@ class Department extends Model
     
     protected $keyType = 'string';
 
-    public static function validate($request)
+    public static function boot()
     {
-        $request->validate([
-            "department_name" => "required",
-        ]);
+        parent::boot();
+
+        static::saving(function ($model) {
+            $validator = Validator::make($model->attributes, [
+                'department_name' => "required|string|max:50",
+            ], [
+                'department_name.required' => 'Nama departemen harus diisi.',
+                'department_name.string' => 'Nama departemen harus berupa teks.',
+                'department_name.max' => 'Nama departemen tidak boleh lebih dari 50 karakter.',
+            ]);
+
+            if ($validator->fails()) {
+                throw new ValidationException($validator);
+            }
+        });
     }
 
     public function getId()

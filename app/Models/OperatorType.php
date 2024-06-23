@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class OperatorType extends Model
 {
@@ -15,12 +17,27 @@ class OperatorType extends Model
     
     protected $keyType = 'string';
 
-    public static function validate($request)
+    public static function boot()
     {
-        $request->validate([
-            "operator_name_type" => "required",
-        ]);
+        parent::boot();
+
+        static::saving(function ($model) {
+            $validator = Validator::make($model->attributes, [
+                'operator_name_type' => "required|string|max:50",
+                'department_id' => "required",
+            ], [
+                'operator_name_type.required' => 'Nama jenis operator harus diisi.',
+                'operator_name_type.string' => 'Nama jenis operator harus berupa teks.',
+                'operator_name_type.max' => 'Nama jenis operator tidak boleh lebih dari 50 karakter.',
+                'department_id.required' => 'Departemen harus dipilih.',
+            ]);
+
+            if ($validator->fails()) {
+                throw new ValidationException($validator);
+            }
+        });
     }
+
 
     public function getId()
     {

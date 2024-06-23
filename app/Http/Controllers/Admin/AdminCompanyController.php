@@ -30,7 +30,6 @@ class AdminCompanyController extends Controller
 
   public function update(Request $request, $id)
   {
-    Company::validate($request); 
     $company = Company::findOrFail($id);
     $company->setCompanyName($request->input('company_name'));
     $company->setCompanyAddress($request->input('company_address'));
