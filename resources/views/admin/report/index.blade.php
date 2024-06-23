@@ -52,22 +52,12 @@
                                 <div class="col-md-8 form-group">
                                     <input type="date" name="end_date" id="end_date-horizontal" class="form-control" required>
                                 </div>
-                                <div class="col-md-4">
-                                    <label for="department-horizontal">Departemen</label>
-                                </div>
-                                <div class="col-md-8 form-group">  
-                                    <select id="department_id" class="form-select" name="department_id"  id="basicSelect">
-                                        <option value="" hidden>-- Pilih Departemen --</option>
-                                        @foreach($viewData['departments'] as $departments)
-                                        <option value="{{ $departments->getId() }}">{{ $departments->getDepartmentName() }}</option>
-                                        @endforeach
-                                    </select>
                                 </div>
                                 <livewire:admin-department-operator-dropdown />
                                         @livewireScripts
                                 <div class="col-sm-12 d-flex justify-content-end">
+                                    <button type="reset" class="btn btn-light-secondary me-1">Reset</button>
                                     <button type="submit" class="btn btn-primary"><i class="bi bi-download"></i> Cetak Jadwal</button>
-                                </div>
                                 </div>
                             </div>
                         </div>

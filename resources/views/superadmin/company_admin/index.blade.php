@@ -42,6 +42,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            
                             @foreach ($viewData['company_admin'] as $companies_admin)
                             <tr>
                                 <td class="text-bold-500">{{ $companies_admin->getId() }}</td>

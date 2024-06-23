@@ -31,6 +31,7 @@
                     <table class="table table-hover mb-0 mx-4">
                         <thead>
                             <tr>
+                                <th>No</th>
                                 <th>ID</th>
                                 <th>Nama Departemen</th>
                                 <th>Keterangan</th>
@@ -39,8 +40,12 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                            $i = 0;
+                            @endphp
                             @foreach ($viewData['departments'] as $department)
                             <tr>
+                                <td>{{ ++$i }}</td>
                                 <td class="text-bold-500">{{ $department->getId() }}</td>
                                 <td>{{ $department->getDepartmentName() }}</td>
                                 <td>{{ $department->getDescription() }}</td>

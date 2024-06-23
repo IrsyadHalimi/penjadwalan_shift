@@ -31,6 +31,7 @@
                     <table class="table table-hover mb-0 mx-4">
                         <thead>
                             <tr>
+                                <th>No</th>
                                 <th>ID</th>
                                 <th>Nama Jenis Operator</th>
                                 <th>Departemen</th>
@@ -40,8 +41,12 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                            $i = 0;
+                            @endphp
                             @foreach ($viewData['operator_type'] as $operator_types)
                             <tr>
+                                <td>{{ ++$i }}</td>
                                 <td class="text-bold-500">{{ $operator_types->getId() }}</td>
                                 <td>{{ $operator_types->getOperatorNameType() }}</td>
                                 <td>{{ optional($operator_types->department)->department_name ?? 'N/A'}}</td>

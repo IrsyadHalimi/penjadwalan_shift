@@ -11,6 +11,7 @@
             <table class="table table-hover mb-0 mx-4">
                 <thead>
                     <tr>
+                        <th>No</th>
                         <th>ID Jadwal</th>
                         <th>Tanggal Mulai</th>
                         <th>Tanggal Selesai</th>
@@ -22,8 +23,12 @@
                     </tr>
                 </thead>
             <tbody>
+            @php
+            $i = 0;
+            @endphp
             @foreach ($schedules as $schedule)
                 <tr>
+                    <td>{{ ++$i }}</td>
                     <td class="text-bold-500">{{ $schedule->id }}</td>
                     <td>{{ \Carbon\Carbon::parse($schedule->start_date)->format('d-m-Y') }}</td>
                     <td>{{ \Carbon\Carbon::parse($schedule->end_date)->format('d-m-Y') }}</td>

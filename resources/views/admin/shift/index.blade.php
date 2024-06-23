@@ -31,6 +31,7 @@
                     <table class="table table-hover mb-0 mx-4">
                         <thead>
                             <tr>
+                                <th>No</th>
                                 <th>ID</th>
                                 <th>Nama Shift</th>
                                 <th>Departemen</th>
@@ -43,8 +44,12 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                            $i = 0;
+                            @endphp
                             @foreach ($viewData['shift'] as $shifts)
                             <tr>
+                                <td>{{ ++$i }}</td>
                                 <td class="text-bold-500">{{ $shifts->getId() }}</td>
                                 <td>{{ $shifts->getShiftName() }}</td>
                                 <td>{{ optional($shifts->department)->department_name ?? 'N/A' }}</td>

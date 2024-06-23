@@ -57,7 +57,7 @@ class LoginController extends Controller
         } elseif ($user->role == 'operator') {
             return '/operator/schedule';
         } elseif ($user->role == 'supervisor') {
-            return '/supervisor/dashboard';
+            return '/supervisor/schedule';
         } elseif ($user->role == 'superadmin') {
             return '/superadmin/dashboard';
         }

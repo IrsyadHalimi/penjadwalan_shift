@@ -26,6 +26,7 @@
                     <table class="table table-hover mb-0 mx-4">
                         <thead>
                             <tr>
+                                <th>No</th>
                                 <th>ID</th>
                                 <th>Nama Supervisor</th>
                                 <th>Nomor Pegawai</th>
@@ -34,8 +35,12 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                            $i = 0;
+                            @endphp
                             @foreach ($viewData['supervisor'] as $supervisors)
                             <tr>
+                                <td>{{ ++$i }}</td>
                                 <td class="text-bold-500">{{ $supervisors->getId() }}</td>
                                 <td>{{ $supervisors->getName() }}</td>
                                 <td>{{ $supervisors->getEmployeeId() }}</td>
