@@ -85,7 +85,39 @@
               today: 'Hari ini',
             },
             events: `{{ route('operator.schedule.list') }}`,
-            editable: false, // Mengubah editable menjadi false agar tidak dapat dilakukan resize atau drop event
+            editable: false,
+            eventClick: function({
+                event
+            }) {
+                $.ajax({
+                    url: `{{ url('operator/schedule') }}/${event.id}/edit`,
+                    success: function(res) {
+                        modal.html(res).modal('show')
+
+                        $('#form-action').on('submit', function(e) {
+                            e.preventDefault()
+                            const form = this
+                            const formData = new FormData(form)
+                            $.ajax({
+                                url: form.action,
+                                method: form.method,
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+                                success: function(res) {
+                                  modal.modal('hide')
+                                  calendar.refetchEvents()
+                                  iziToast.success({
+                                    title: 'Success',
+                                    message: res.message,
+                                    position: 'topRight'
+                                  });
+                                }
+                            })
+                        })
+                    }
+                })
+            },
         });
         calendar.render();
     });

@@ -63,6 +63,22 @@ class OperatorScheduleController extends Controller
         return response()->json($schedule);
     }
 
+    public function edit(Schedule $schedule)
+    {
+        $departmentId = Auth::user()->department_id;
+        $shiftId = Shift::where('department_id', $departmentId)->pluck('id')->toArray();
+        $userId = User::where('role', 'operator')->where('department_id', $departmentId)->pluck('id')->toArray();
+       
+        $users = User::whereIn('id', $userId)->get();
+        $shifts = Shift::whereIn('id', $shiftId)->get();
+        return view('operator.schedule.schedule-form', [
+            'data' => $schedule, 
+            'shifts' => $shifts, 
+            'users' => $users, 
+            'action' => route('operator.schedule.update', $schedule->id)
+        ]);
+    }
+
     public function generatePdf(Request $request)
     {
         $request->validate([

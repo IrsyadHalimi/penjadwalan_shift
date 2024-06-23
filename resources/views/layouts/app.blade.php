@@ -22,23 +22,6 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
     integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        #loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.8);
-            z-index: 9999;
-            transition: opacity 0.5s ease;
-            opacity: 1;
-        }
-        .d-none {
-            opacity: 0;
-            pointer-events: none;
-        }
-    </style>
     @livewireStyles
 </head>
 
@@ -347,7 +330,6 @@
         </div>
     </div>
 </div>
-@include('components.loader')
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
     integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
@@ -382,10 +364,6 @@
         
 <script src="{{ asset('assets/extensions/flatpickr/flatpickr.min.js') }}"></script>
 <script src="{{ asset('assets/static/js/pages/date-picker.js') }}"></script>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="{{ asset('js/loader.js') }}"></script>
 
 @stack('scripts')
 </body>

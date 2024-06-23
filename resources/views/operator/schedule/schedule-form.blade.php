@@ -1,4 +1,4 @@
-<x-modal-action action="{{ $action }}">
+<x-modal-action-operator action="{{ $action }}">
     @if ($data->id)
         @method('put')
     @endif
@@ -35,13 +35,5 @@
                 </div>
             </div>
         </div>
-        <div class="col-12">
-            <div class="mb-3">
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" name="delete" role="switch" id="flexSwitchCheckDefault">
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Delete</label>
-                  </div>
-            </div>
-        </div>
     </div>
-</x-modal-action>
+</x-modal-action-operator>

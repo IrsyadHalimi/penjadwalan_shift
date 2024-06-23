@@ -31,11 +31,11 @@
                     <div class="form-body">
                         <div class="row">
                             <div class="col-md-4">
-                                <h6 class="card-title" for="operator_type_id">Pilih Tipe Operator Untuk Menampilkan Data Jadwal</h6>
+                                <h6 class="card-title" for="operator_type_id">Pilih Jenis Operator Untuk Menampilkan Data Jadwal</h6>
                             </div>
                             <div class="col-md-8 form-group">
                                 <select name="operator_type_id" id="operator_type_id" class="form-control">
-                                    <option value="">Pilih Tipe Operator</option>
+                                    <option value="">Pilih Jenis Operator</option>
                                     @foreach ($viewData['operator_type'] as $operatorType)
                                         <option value="{{ $operatorType->getId() }}">{{ $operatorType->getOperatorNameType() }}</option>
                                     @endforeach
