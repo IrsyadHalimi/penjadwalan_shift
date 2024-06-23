@@ -36,8 +36,8 @@
                                 <th>Departemen</th>
                                 <th>Waktu Mulai</th>
                                 <th>Waktu Selesai</th>
-                                <th>Keterangan</th>
                                 <th>Warna Label</th>
+                                <th>Keterangan</th>
                                 <th> </th>
                                 <th> </th>
                             </tr>
@@ -50,8 +50,8 @@
                                 <td>{{ $shifts->department ? $shifts->department->department_name : 'N/A' }}</>
                                 <td>{{ $shifts->getStartTime() }}</td>
                                 <td>{{ $shifts->getEndTime() }}</td>
-                                <td>{{ $shifts->getDescription() }}</td>
                                 <td><button class="btn btn-{{ $shifts->getLabelColor() }} px-4"></button></td>
+                                <td>{{ $shifts->getDescription() }}</td>
                                 <td>
                                     <a class="btn icon btn-primary" href="{{route('admin.shift.edit', ['id'=> $shifts->getId()])}}"><i class="bi-pen"></i></a>
                                 </td>    

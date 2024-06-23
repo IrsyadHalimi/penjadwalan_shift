@@ -16,21 +16,14 @@
       <div class="card">
           <div class="card-header">
             <h4 class="card-title">Jadwal Shift Kerja</h4>
-            <p>Keterangan Label Shift</p>
-            <div class="row">
-                @foreach ($viewData['shift'] as $shifts)
-                <div class="col-8 col-lg-4 col-md-4">{{ $shifts->getShiftName() }} ({{ $shifts->getStartTime() }} - {{ $shifts->getEndTime() }})
-                    <button class="btn btn-{{ $shifts->getLabelColor() }} px-4"></button></>
-                </div>
-                @endforeach
-            </div>
           </div>
           <div class="card-content">
-              <div class="card-body">
+              <div class="card-body py-0 my-0">
                 <form class="form form-horizontal" action="{{ route('operator.schedule.generatePdf') }}" method="post">
                   @csrf
                   <div class="form-body">
                       <div class="row">
+                          <h6 class="card-title">Cetak PDF jadwal shift kerja</h6>
                           <div class="col-md-4">
                               <label for="start_date-horizontal">Jadwal Dari</label>
                           </div>
@@ -51,8 +44,18 @@
                     </div>
                   </div>
                 </form>
+                <div class="card-body mb-3 pb-3">
+                  <p>Keterangan Label Shift</p>
+                  <div class="row">
+                      @foreach ($viewData['shift'] as $shifts)
+                      <div class="col-8 col-lg-4 col-md-4">{{ $shifts->getShiftName() }} ({{ $shifts->getStartTime() }} - {{ $shifts->getEndTime() }})
+                          <button class="btn btn-{{ $shifts->getLabelColor() }} px-4"></button></>
+                      </div>
+                      @endforeach
+                  </div>
+                </div>
                 <div class="row justify-content-center">
-                    <div class="col-md-8">
+                    <div class="col-md-8 mb-5">
                         <div id='calendar'></div>
                     </div>
                   </div>

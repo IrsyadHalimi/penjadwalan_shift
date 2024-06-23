@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 
 
 class AdminOperatorController extends Controller
@@ -20,6 +21,69 @@ class AdminOperatorController extends Controller
     $viewData["title"] = "Operator - Penjadwalan Shift";
     $viewData["subtitle"] = "Daftar Operator";
     return view('admin.operator.index')->with("viewData", $viewData);
+  }
+
+  public function validateCreateData(Request $request)
+  {
+    $rules = [
+        'full_name' => 'required|string|max:50',
+        'employee_id' => 'required',
+        'department_id' => 'required',
+        'operator_type_id' => 'required',
+        'phone_number' => 'required|max:20',
+        'email' => 'required|string|email|max:50|unique:users',
+        'password' => 'required|string|min:8',
+    ];
+
+    $messages = [
+        'full_name.required' => 'Nama lengkap harus diisi.',
+        'full_name.string' => 'Nama harus berupa string.',
+        'full_name.max' => 'Nama tidak boleh lebih dari 50 karakter.',
+        'employee_id.required' => 'Nomor pegawai harus diisi.',
+        'department_id.required' => 'Departemen harus dipilih.',
+        'operator_type_id.required' => 'Jenis operator harus dipilih.',
+        'phone_number.required' => 'Nomor telepon harus diisi.',
+        'phone_number.max' => 'Nomor telepon tidak boleh lebih dari 20 karakter.',
+        'email.required' => 'Email harus diisi.',
+        'email.string' => 'Email harus berupa string.',
+        'email.email' => 'Format email tidak valid.',
+        'email.max' => 'Email tidak boleh lebih dari 50 karakter.',
+        'email.unique' => 'Email sudah terdaftar.',
+        'password.required' => 'Password harus diisi.',
+        'password.string' => 'Password harus berupa string.',
+        'password.min' => 'Password minimal harus terdiri dari 8 karakter.',
+    ];
+
+    return Validator::make($request->all(), $rules, $messages);
+  }
+  
+  public function validateEditData(Request $request)
+  {
+    $rules = [
+        'full_name' => 'required|string|max:50',
+        'employee_id' => 'required',
+        'department_id' => 'required',
+        'operator_type_id' => 'required',
+        'phone_number' => 'required|max:20',
+        'email' => 'required|string|email|max:50',
+    ];
+
+    $messages = [
+        'full_name.required' => 'Nama lengkap harus diisi.',
+        'full_name.string' => 'Nama harus berupa string.',
+        'full_name.max' => 'Nama tidak boleh lebih dari 50 karakter.',
+        'employee_id.required' => 'Nomor pegawai harus diisi.',
+        'department_id.required' => 'Departemen harus dipilih.',
+        'operator_type_id.required' => 'Jenis operator harus dipilih.',
+        'phone_number.required' => 'Nomor telepon harus diisi.',
+        'phone_number.max' => 'Nomor telepon tidak boleh lebih dari 20 karakter.',
+        'email.required' => 'Email harus diisi.',
+        'email.string' => 'Email harus berupa string.',
+        'email.email' => 'Format email tidak valid.',
+        'email.max' => 'Email tidak boleh lebih dari 50 karakter.',
+    ];
+
+    return Validator::make($request->all(), $rules, $messages);
   }
   
   public function create()
@@ -37,10 +101,15 @@ class AdminOperatorController extends Controller
 
   public function store(Request $request)
   {
+    $validator = $this->validateCreateData($request);
+
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator)->withInput();
+    }
+    
     $companyId = Auth::user()->company_id;
     $id = $companyId . 'OPR' . Str::random(4);
 
-    User::validate($request); 
     $newUser = new User();
     $newUser->setId($id);
     $newUser->setName($request->input('full_name'));
@@ -74,7 +143,12 @@ class AdminOperatorController extends Controller
 
   public function update(Request $request, $id)
   {
-    User::validate($request); 
+    $validator = $this->validateEditData($request);
+
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator)->withInput();
+    }
+
     $user = User::findOrFail($id);
     $user->setCompanyId($request->input('company_id'));
     $user->setDepartmentId($request->input('department_id'));
@@ -84,7 +158,7 @@ class AdminOperatorController extends Controller
     $user->setPhoneNumber($request->input('phone_number'));
     $user->setOperatorTypeId($request->input('operator_type_id'));
     $user->setCompanyId(Auth::user()->company_id);
-    $user->setRole($request->input('role'));
+    $user->setRole('operator');
     $user->save();
 
     return redirect()->route('admin.operator.index');

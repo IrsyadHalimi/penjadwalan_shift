@@ -51,12 +51,29 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'full_name' => ['required', 'string', 'max:255'],
-            'employee_id' => ['required', 'string', 'unique:users'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'full_name' => ['required', 'string', 'max:50'],
+            'employee_id' => ['required', 'string'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'phone_number' => ['required', 'string', 'max:15'],
-            'role' => ['required', 'string'],
+            'phone_number' => ['required', 'string', 'max:20'],
+        ], [
+            'full_name.required' => 'Nama lengkap harus diisi.',
+            'full_name.string' => 'Nama lengkap harus berupa string.',
+            'full_name.max' => 'Nama lengkap tidak boleh lebih dari 50 karakter.',
+            'employee_id.required' => 'Nomor Pegawai harus diisi.',
+            'employee_id.string' => 'Nomor pegawai harus berupa string.',
+            'email.required' => 'Email harus diisi.',
+            'email.string' => 'Email harus berupa string.',
+            'email.email' => 'Format email tidak valid.',
+            'email.max' => 'Email tidak boleh lebih dari 50 karakter.',
+            'email.unique' => 'Email sudah terdaftar.',
+            'password.required' => 'Password harus diisi.',
+            'password.string' => 'Password harus berupa string.',
+            'password.min' => 'Password minimal harus terdiri dari 8 karakter.',
+            'password.confirmed' => 'Konfirmasi password tidak sesuai.',
+            'phone_number.required' => 'Nomor telepon harus diisi.',
+            'phone_number.string' => 'Nomor telepon harus berupa string.',
+            'phone_number.max' => 'Nomor telepon tidak boleh lebih dari 20 karakter.',
         ]);
     }
 

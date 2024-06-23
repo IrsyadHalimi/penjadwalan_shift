@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failed' => 'Kredensial ini tidak cocok dengan catatan kami.',
+    'failed' => 'Akun yang anda masukkan salah.',
     'password' => 'Kata sandi yang diberikan tidak benar.',
     'throttle' => 'Terlalu banyak upaya masuk. Silakan coba lagi dalam :seconds detik.',
 

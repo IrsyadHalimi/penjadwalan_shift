@@ -54,16 +54,6 @@
                                         <div class="col-md-8 form-group">
                                             <input type="number" name="phone_number" value="{{ $viewData['operator']->getPhoneNumber() }}" id="phone-horizontal" class="form-control">
                                         </div>
-                                        <div class="col-md-4">
-                                            <label for="role-horizontal">Role (Jabatan)</label>
-                                        </div>
-                                        <div class="col-md-8 form-group">  
-                                          <select id="role" class="form-select @error('role') is-invalid @enderror" name="role"  id="basicSelect">
-                                            <option value="" hidden>-- Pilih Role --</option>
-                                            <option value="supervisor">Supervisor</option>
-                                            <option value="operator" selected>Operator</option>
-                                          </select>
-                                        </div>
                                         <div class="col-sm-12 d-flex justify-content-end">
                                             <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
                                             <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>

@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+
 
 class LoginController extends Controller
 {
@@ -52,7 +55,7 @@ class LoginController extends Controller
         if ($user->role == 'admin') {
             return '/admin/dashboard';
         } elseif ($user->role == 'operator') {
-            return '/operator/dashboard';
+            return '/operator/schedule';
         } elseif ($user->role == 'supervisor') {
             return '/supervisor/dashboard';
         } elseif ($user->role == 'superadmin') {
@@ -61,5 +64,13 @@ class LoginController extends Controller
 
         // Default redirect path if no role matches
         return '/home';
+    }
+
+    protected function attemptLogin(Request $request)
+    {
+        return Auth::attempt(
+            $this->credentials($request),
+            $request->filled('remember')
+        );
     }
 }

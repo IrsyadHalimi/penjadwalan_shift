@@ -30,7 +30,7 @@
                                             <label for="first-name-horizontal">Nama Lengkap</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" name="full_name" id="first-name-horizontal" class="form-control" value="{{ old('full_name') }}" required autocomplete="full_name" autofocus>
+                                            <input type="text" name="full_name" class="form-select @error('department_id') is-invalid @enderror" id="basicSelect" value="{{ old('full_name') }}" required autocomplete="full_name" autofocus>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="employeeId-horizontal">Nomor Pegawai</label>
@@ -38,8 +38,10 @@
                                         <div class="col-md-8 form-group">
                                             <input type="text" name="employee_id" id="employeeId-horizontal" class="form-control" value="{{ old('employee_id') }}" required autocomplete="employee_id" autofocus>
                                         </div>
-                                        <livewire:admin-department-operator-dropdown />
-                                        @livewireScripts
+                                    </div>
+                                    <livewire:admin-department-operator-dropdown />
+                                    @livewireScripts
+                                    <div class="row">    
                                         <div class="col-md-4">
                                           <label for="phone-horizontal">Nomor Telepon</label>
                                         </div>

@@ -31,7 +31,7 @@
                     <div class="form-body">
                         <div class="row">
                             <div class="col-md-4">
-                                <label for="operator_type_id">Pilih Tipe Operator</label>
+                                <h6 class="card-title" for="operator_type_id">Pilih Tipe Operator Untuk Menampilkan Data Jadwal</h6>
                             </div>
                             <div class="col-md-8 form-group">
                                 <select name="operator_type_id" id="operator_type_id" class="form-control">
@@ -43,9 +43,12 @@
                             </div>
                         </div>
                     </div>
-                <div class="row justify-content-center">
-                    <div class="col-md-8">
-                        <div id='calendar'></div>
+                </div>
+                <div class="card-body">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div id='calendar'></div>
+                        </div>
                     </div>
                   </div>
                 </div>

@@ -25,8 +25,7 @@ class AdminOperatorSearch extends Component
         })->where(function($query) {
             $query->where('id', 'like', '%'.$this->searchTerm.'%')
                 ->orWhere('full_name', 'like', '%'.$this->searchTerm.'%')
-                ->orWhere('department_id', 'like', '%'.$this->searchTerm.'%')
-                ->orWhere('operator_type_id', 'like', '%'.$this->searchTerm.'%');
+                ->orWhere('department_id', 'like', '%'.$this->searchTerm.'%');
         })->paginate(10);
 
         return view('livewire.admin-operator-search', [

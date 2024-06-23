@@ -158,7 +158,7 @@ class User extends AuthenticatableUser implements Authenticatable
 
     public function company()
     {
-        return $this->belongsTo(Company::class, 'company_id', 'id');
+        return $this->belongsTo(Company::class);
     }
 
     public function operatorType()

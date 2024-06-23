@@ -1,4 +1,4 @@
-<div>
+<div class="row">
     <div class="col-md-4">
         <label for="department-horizontal">Departemen</label>
     </div>

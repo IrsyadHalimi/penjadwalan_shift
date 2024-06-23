@@ -33,8 +33,8 @@
             <div class="sidebar-wrapper active">
                 <div class="sidebar-header position-relative">
                     <div class="d-flex justify-content-between align-items-center">
-                        <div class="logo">
-                            <a href="index.html"><img src="./assets/compiled/svg/logo.svg" alt="Logo" srcset=""></a>
+                        <div class="theme-toggle d-flex gap-2 align-items-center mt-2 logo">
+                            <h1>Shift</h1>
                         </div>
                         <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -149,20 +149,20 @@
                                 </li>
                                 @elseif ($role === 'operator')
                                 <li class="sidebar-item  ">
-                                    <a href="#" class='sidebar-link'>
-                                        <i class="bi bi-grid-fill"></i>
-                                        <span>Dasbor Operator</span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item  ">
                                     <a href="{{ route('operator.schedule.index') }}" class='sidebar-link'>
                                         <i class="bi bi-calendar4-week"></i>
                                         <span>Jadwal</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item  ">
+                                    <a href="{{ route('operator.supervisor.index') }}" class='sidebar-link'>
+                                        <i class="bi bi-people"></i>
+                                        <span>Supervisor</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item  ">
                                     <a href="{{ route('operator.profile.index') }}" class='sidebar-link'>
-                                        <i class="bi bi-calendar4-week"></i>
+                                        <i class="bi bi-person-fill"></i>
                                         <span>Profil</span>
                                     </a>
                                 </li>
@@ -189,7 +189,7 @@
                                 </li>
                                 <li class="sidebar-item  ">
                                     <a href="{{ route('supervisor.operator.index') }}" class='sidebar-link'>
-                                        <i class="bi bi-calendar4-week"></i>
+                                        <i class="bi bi-people-fill"></i>
                                         <span>Operator</span>
                                     </a>
                                 </li>
@@ -201,7 +201,7 @@
                                 </li>
                                 <li class="sidebar-item  ">
                                     <a href="{{ route('supervisor.profile.index') }}" class='sidebar-link'>
-                                        <i class="bi bi-calendar4-week"></i>
+                                        <i class="bi bi-person"></i>
                                         <span>Profil</span>
                                     </a>
                                 </li>
@@ -370,19 +370,6 @@
         
 <script src="{{ asset('assets/extensions/flatpickr/flatpickr.min.js') }}"></script>
 <script src="{{ asset('assets/static/js/pages/date-picker.js') }}"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            plugins: ['dayGrid'],
-            locale: 'id', // Set locale to Indonesian
-            // Your other options here...
-        });
-
-        calendar.render();
-    });
-</script>
 
 <!-- <script src="{{ asset('js/bootstrap.js') }}"></script> -->
 @stack('scripts')
