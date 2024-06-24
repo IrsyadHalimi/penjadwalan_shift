@@ -9,8 +9,7 @@ use Illuminate\Notifications\Notification;
 use App\Models\Schedule;
 use App\Models\Shift;
 
-
-class ScheduleUpdatedNotification extends Notification
+class ScheduleUpdatedNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -51,9 +50,7 @@ class ScheduleUpdatedNotification extends Notification
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
-    {
-        \Log::info('Attempting to send email notification.');
-        
+    {   
         return (new MailMessage)
                     ->subject('Perubahan Jadwal Shift Kerja')
                     ->line('Jadwal Shift Kerja Anda Telah Diperbarui oleh Supervisor. Berikut adalah detail perubahan:')
@@ -78,8 +75,8 @@ class ScheduleUpdatedNotification extends Notification
         return [
             'old_schedule' => $this->oldSchedule,
             'new_schedule' => $this->newSchedule,
-            'old_shift_name' => $oldShiftName,
-            'new_shift_name' => $newShiftName,
+            'old_shift_name' => $this->oldShiftName,
+            'new_shift_name' => $this->newShiftName,
         ];
     }
 }

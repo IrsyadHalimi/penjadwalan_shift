@@ -66,8 +66,9 @@ class OperatorScheduleController extends Controller
     public function edit(Schedule $schedule)
     {
         $departmentId = Auth::user()->department_id;
+        $operatorTypeId = Auth::user()->operator_type_id;
         $shiftId = Shift::where('department_id', $departmentId)->pluck('id')->toArray();
-        $userId = User::where('role', 'operator')->where('department_id', $departmentId)->pluck('id')->toArray();
+        $userId = User::where('role', 'operator')->where('department_id', $departmentId)->where('operator_type_id', $operatorTypeId)->pluck('id')->toArray();
        
         $users = User::whereIn('id', $userId)->get();
         $shifts = Shift::whereIn('id', $shiftId)->get();

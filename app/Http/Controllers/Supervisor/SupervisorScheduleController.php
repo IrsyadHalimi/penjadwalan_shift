@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\OperatorType;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use PDF;
 
 
@@ -140,7 +141,8 @@ class SupervisorScheduleController extends Controller
         $newSchedule = $schedule;
         $user = User::find($request->user_id);
 
-        $user->notify(new ScheduleUpdatedNotification($oldSchedule, $newSchedule));
+        // Menggunakan queue untuk mengirim notifikasi
+        Notification::send($user, new ScheduleUpdatedNotification($oldSchedule, $newSchedule));
 
         return response()->json([
             'status' => 'success',
