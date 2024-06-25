@@ -3,12 +3,13 @@
 @section('subtitle', $viewData["subtitle"])
 @section('content')
   @if($errors->any())
-  <ul class="alert alert-danger list-unstyled">
+    <div class="alert alert-danger alert-dismissible show fade">
     @foreach($errors->all() as $error)
-    <li>- {{ $error }}</li>
+        {{ $error }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     @endforeach
-  </ul>
-  @endif
+    </div>
+    @endif
   <section id="basic-horizontal-layouts">
     <form method="POST" action="{{ route('admin.operator.store') }}">
       @csrf
@@ -61,7 +62,7 @@
                                             <input type="password" name="password" id="password-horizontal" class="form-control">
                                         </div>
                                         <div class="col-sm-12 d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                            <button type="submit" class="btn btn-primary me-1 mb-1">Simpan</button>
                                             <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
                                         </div>
                                     </div>

@@ -39,6 +39,6 @@ class SuperadminCompanyController extends Controller
   public function delete($id)
   {
     Company::destroy($id);
-    return back();
+    return back()->with('success', 'Data berhasil dihapus.');
   }
 }

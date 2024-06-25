@@ -114,7 +114,7 @@ class AdminSupervisorController extends Controller
     $newUser->setRole('supervisor');
     $newUser->save();
 
-    return redirect()->route('admin.supervisor.index');
+    return redirect()->route('admin.supervisor.index')->with('success', 'Data berhasil ditambahkan.');
   }
 
   public function edit($id)
@@ -148,12 +148,12 @@ class AdminSupervisorController extends Controller
     $user->setRole('supervisor');
     $user->save();
 
-    return redirect()->route('admin.supervisor.index');
+    return redirect()->route('admin.supervisor.index')->with('success', 'Data berhasil diperbarui.');
   }
 
   public function delete($id)
   {
     User::destroy($id);
-    return back();
+    return back()->with('success', 'Data berhasil dihapus.');
   }
 }

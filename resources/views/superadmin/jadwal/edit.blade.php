@@ -4,12 +4,13 @@
 @section('content')
 <div>
   @if($errors->any())
-  <ul class="alert alert-danger list-unstyled">
+    <div class="alert alert-danger alert-dismissible show fade">
     @foreach($errors->all() as $error)
-    <li>- {{ $error }}</li>
+        {{ $error }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     @endforeach
-  </ul>
-  @endif
+    </div>
+    @endif
 
   <form method="POST" action="{{ route('admin.jadwal.update', ['id_jadwal'=> $viewData['jadwal']->getId()]) }}"
   enctype="multipart/form-data">

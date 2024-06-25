@@ -48,7 +48,7 @@ class AdminOperatorTypeController extends Controller
     $newOperatorType->setDescription($request->input('description'));
     $newOperatorType->save();
 
-    return redirect()->route('admin.operator_type.index');
+    return redirect()->route('admin.operator_type.index')->with('success', 'Data berhasil ditambahkan.');
   }
 
   public function edit($id)
@@ -71,12 +71,12 @@ class AdminOperatorTypeController extends Controller
     $operatorType->setDescription($request->input('description'));
     $operatorType->save();
 
-    return redirect()->route('admin.operator_type.index');
+    return redirect()->route('admin.operator_type.index')->with('success', 'Data berhasil diperbarui.');
   }
 
   public function delete($id)
   {
     OperatorType::destroy($id);
-    return back();
+    return back()->with('success', 'Data berhasil dihapus.');
   }
 }

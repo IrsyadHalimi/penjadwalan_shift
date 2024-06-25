@@ -76,6 +76,6 @@ class SuperadminShiftController extends Controller
   public function delete($id)
   {
     Shift::destroy($id);
-    return back();
+    return back()->with('success', 'Data berhasil dihapus.');
   }
 }

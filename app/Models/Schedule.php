@@ -35,7 +35,7 @@ class Schedule extends Model
                 'user_id' => "required",
                 'shift_id' => "required",
                 'start_date' => "required|date",
-                'end_date' => "required|date|after:start_date",
+                'end_date' => "required|date|after_or_equal:start_date",
             ], [
                 'user_id.required' => 'Operator harus dipilih',
                 'shift_id.required' => 'Shift harus dipilih',
@@ -43,7 +43,7 @@ class Schedule extends Model
                 'start_date.date' => 'Tanggal mulai harus berupa tanggal yang valid.',
                 'end_date.required' => 'Tanggal selesai harus diisi.',
                 'end_date.date' => 'Tanggal selesai harus berupa tanggal yang valid.',
-                'end_date.after' => 'Tanggal selesai harus setelah tanggal mulai.',
+                'end_date.after_or_equal' => 'Tanggal selesai harus sama atau setelah tanggal mulai.',
             ]);
 
             if ($validator->fails()) {

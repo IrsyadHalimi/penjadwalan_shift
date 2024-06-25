@@ -104,7 +104,7 @@ class SupervisorScheduleController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Save data store successfully'
+            'message' => 'Berhasil menyimpan data'
         ]);
     }
 
@@ -116,7 +116,7 @@ class SupervisorScheduleController extends Controller
        
         $users = User::whereIn('id', $userId)->get();
         $shifts = Shift::whereIn('id', $shiftId)->get();
-        return view('supervisor.schedule.schedule-form', [
+        return view('supervisor.schedule.schedule-form-edit', [
             'data' => $schedule, 
             'shifts' => $shifts, 
             'users' => $users, 
@@ -146,7 +146,7 @@ class SupervisorScheduleController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Save data update successfully'
+            'message' => 'Berhasil memperbarui data'
         ]);
     }
 

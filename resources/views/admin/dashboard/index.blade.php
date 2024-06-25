@@ -2,15 +2,6 @@
 @section('title', $viewData["title"])
 @section('subtitle', $viewData["subtitle"])
 @section('content')
-<div>
-  @if($errors->any())
-  <ul class="alert alert-danger list-unstyled">
-    @foreach($errors->all() as $error)
-    <li>- {{ $error }}</li>
-    @endforeach
-  </ul>
-  @endif
-</div>
 <section class="row">
         <div class="col-12 col-lg-12">
             <div class="row">

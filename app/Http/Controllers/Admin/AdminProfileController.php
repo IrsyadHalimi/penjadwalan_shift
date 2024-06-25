@@ -37,6 +37,6 @@ class AdminProfileController extends Controller
     $admin->setPhoneNumber($request->input('phone_number'));
     $admin->save();
 
-    return redirect()->route('admin.profile.index');
+    return redirect()->route('admin.profile.index')->with('success', 'Data berhasil diperbarui.');
   }
 }

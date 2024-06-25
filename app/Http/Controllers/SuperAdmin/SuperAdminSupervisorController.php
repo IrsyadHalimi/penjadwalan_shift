@@ -70,6 +70,6 @@ class SuperadminSupervisorController extends Controller
   public function delete($id)
   {
     User::destroy($id);
-    return back();
+    return back()->with('success', 'Data berhasil dihapus.');
   }
 }

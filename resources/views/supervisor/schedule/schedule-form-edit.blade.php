@@ -35,5 +35,13 @@
                 </div>
             </div>
         </div>
+        <div class="col-12">
+            <div class="mb-3">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" name="delete" role="switch" id="flexSwitchCheckDefault">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Hapus</label>
+                  </div>
+            </div>
+        </div>
     </div>
 </x-modal-action>

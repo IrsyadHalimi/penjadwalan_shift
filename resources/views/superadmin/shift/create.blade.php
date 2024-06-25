@@ -3,12 +3,13 @@
 @section('subtitle', $viewData["subtitle"])
 @section('content')
   @if($errors->any())
-  <ul class="alert alert-danger list-unstyled">
+    <div class="alert alert-danger alert-dismissible show fade">
     @foreach($errors->all() as $error)
-    <li>- {{ $error }}</li>
+        {{ $error }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     @endforeach
-  </ul>
-  @endif
+    </div>
+    @endif
   <form method="POST" action="{{ route('admin.shift.store') }}">
   @csrf
     <div class="row">
@@ -72,6 +73,6 @@
         </div>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Simpan</button>
   </form>
 @endsection

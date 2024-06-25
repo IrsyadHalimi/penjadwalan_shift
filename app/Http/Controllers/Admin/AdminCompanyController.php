@@ -36,6 +36,6 @@ class AdminCompanyController extends Controller
     $company->setDescription($request->input('description'));
     $company->save();
 
-    return redirect()->route('admin.company.index');
+    return redirect()->route('admin.company.index')->with('success', 'Data berhasil diperbarui.');
   }
 }

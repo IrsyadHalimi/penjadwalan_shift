@@ -72,7 +72,7 @@ class SuperadminScheduleController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Save data store successfully'
+            'message' => 'Berhasil menyimpan data'
         ]);
     }
 
@@ -102,7 +102,7 @@ class SuperadminScheduleController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Save data update successfully'
+            'message' => 'Berhasil memperbarui data'
         ]);
     }
 

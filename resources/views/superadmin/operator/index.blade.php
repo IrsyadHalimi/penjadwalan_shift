@@ -2,15 +2,18 @@
 @section('title', $viewData["title"])
 @section('subtitle', $viewData["subtitle"])
 @section('content')
-<div>
-  @if($errors->any())
-  <ul class="alert alert-danger list-unstyled">
-    @foreach($errors->all() as $error)
-    <li>- {{ $error }}</li>
-    @endforeach
-  </ul>
-  @endif
-</div>
+@if(session('success'))
+    <div class="alert alert-light-success alert-dismissible show fade">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+@if(session('fail'))
+    <div class="alert alert-light-danger alert-dismissible show fade">
+        {{ session('fail') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
 <div class="row">
 <a href="{{ route('superadmin.operator.create') }}">Tambah Operator Baru</a>
   @foreach ($viewData["operator"] as $operators)

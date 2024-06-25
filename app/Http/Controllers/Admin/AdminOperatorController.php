@@ -123,7 +123,7 @@ class AdminOperatorController extends Controller
     $newUser->setRole('operator');
     $newUser->save();
 
-    return redirect()->route('admin.operator.index');
+    return redirect()->route('admin.operator.index')->with('success', 'Data berhasil ditambahkan.');
   }
 
   public function edit($id)
@@ -161,12 +161,12 @@ class AdminOperatorController extends Controller
     $user->setRole('operator');
     $user->save();
 
-    return redirect()->route('admin.operator.index');
+    return redirect()->route('admin.operator.index')->with('success', 'Data berhasil diperbarui.');
   }
 
   public function delete($id)
   {
     User::destroy($id);
-    return back();
+    return back()->with('success', 'Data berhasil dihapus.');
   }
 }

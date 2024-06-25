@@ -123,7 +123,7 @@
                     },
                     success: function (res) {
                         iziToast.success({
-                            title: 'Success',
+                            title: 'Sukses',
                             message: res.message,
                             position: 'topRight'
                         });
@@ -132,7 +132,7 @@
                         const message = res.responseJSON.message
                         info.revert()
                         iziToast.error({
-                            title: 'Error',
+                            title: 'Gagal, terjadi kesalahan',
                             message: message ?? 'Something wrong',
                             position: 'topRight'
                         });
@@ -157,7 +157,7 @@
                     },
                     success: function (res) {
                         iziToast.success({
-                            title: 'Success',
+                            title: 'Sukses',
                             message: res.message,
                             position: 'topRight'
                         });
@@ -166,7 +166,7 @@
                         const message = res.responseJSON.message
                         info.revert()
                         iziToast.error({
-                            title: 'Error',
+                            title: 'Gagal, terjadi kesalahan',
                             message: message ?? 'Something wrong',
                             position: 'topRight'
                         });

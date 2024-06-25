@@ -48,7 +48,7 @@ class AdminScheduleController extends Controller
         $newSchedule->setEndDate($request->input('end_date'));
         $newSchedule->save();
 
-        return redirect()->route('admin.schedule.index');
+        return redirect()->route('admin.schedule.index')->with('success', 'Data berhasil ditambahkan.');
     }
 
     public function edit($id)
@@ -75,12 +75,12 @@ class AdminScheduleController extends Controller
         $schedule->setShiftId($request->input('shift_id'));
         $schedule->save();
 
-        return redirect()->route('admin.schedule.index');
+        return redirect()->route('admin.schedule.index')->with('success', 'Data berhasil diperbarui.');
     }
 
     public function delete($id)
     {
         Schedule::destroy($id);
-        return back();
+        return back()->with('success', 'Data berhasil dihapus.');
     }
 }

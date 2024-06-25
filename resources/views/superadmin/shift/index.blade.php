@@ -2,6 +2,18 @@
 @section('title', $viewData["title"])
 @section('subtitle', $viewData["subtitle"])
 @section('content')
+@if(session('success'))
+    <div class="alert alert-light-success alert-dismissible show fade">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+@if(session('fail'))
+    <div class="alert alert-light-danger alert-dismissible show fade">
+        {{ session('fail') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
 <div>
   <a href="{{ route('admin.shift.create') }}">Create Shift</a>
 </div>

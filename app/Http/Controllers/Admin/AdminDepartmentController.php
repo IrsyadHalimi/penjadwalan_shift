@@ -41,7 +41,7 @@ class AdminDepartmentController extends Controller
     $newDepartment->setDescription($request->input('description'));
     $newDepartment->save();
 
-    return redirect()->route('admin.department.index');
+    return redirect()->route('admin.department.index')->with('success', 'Data berhasil ditambahkan.');
   }
 
   public function edit($id)
@@ -60,12 +60,12 @@ class AdminDepartmentController extends Controller
     $department->setDescription($request->input('description'));
     $department->save();
 
-    return redirect()->route('admin.department.index');
+    return redirect()->route('admin.department.index')->with('success', 'Data berhasil diperbarui.');
   }
 
   public function delete($id)
   {
     Department::destroy($id);
-    return back();
+    return back()->with('success', 'Data berhasil dihapus.');
   }
 }

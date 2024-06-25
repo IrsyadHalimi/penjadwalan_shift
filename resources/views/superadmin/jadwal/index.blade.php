@@ -6,13 +6,18 @@
   Create Product
 </div>
 <div>
-  @if($errors->any())
-  <ul class="alert alert-danger list-unstyled">
-    @foreach($errors->all() as $error)
-    <li>- {{ $error }}</li>
-    @endforeach
-  </ul>
-  @endif
+@if(session('success'))
+    <div class="alert alert-light-success alert-dismissible show fade">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+@if(session('fail'))
+    <div class="alert alert-light-danger alert-dismissible show fade">
+        {{ session('fail') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
   <form method="POST" action="{{ route('admin.jadwal.store') }}">
   @csrf
     <div class="row">
@@ -49,7 +54,7 @@
         </div>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Simpan</button>
   </form>
 </div>
 <div class="row">

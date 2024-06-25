@@ -50,7 +50,7 @@ class AdminShiftController extends Controller
     $newShift->setLabelColor($request->input('label_color'));
     $newShift->save();
 
-    return redirect()->route('admin.shift.index');
+    return redirect()->route('admin.shift.index')->with('success', 'Data berhasil ditambahkan.');
   }
 
   public function edit($id)
@@ -75,12 +75,12 @@ class AdminShiftController extends Controller
     $shift->setDescription($request->input('description'));
     $shift->save();
 
-    return redirect()->route('admin.shift.index');
+    return redirect()->route('admin.shift.index')->with('success', 'Data berhasil diperbarui.');
   }
 
   public function delete($id)
   {
     Shift::destroy($id);
-    return back();
+    return back()->with('success', 'Data berhasil dihapus.');
   }
 }

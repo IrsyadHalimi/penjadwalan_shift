@@ -5,15 +5,18 @@
 <div>
   <a href="{{ route('admin.supervisor.create') }}">Tambah Supervisor baru</a>
 </div>
-<div>
-  @if($errors->any())
-  <ul class="alert alert-danger list-unstyled">
-    @foreach($errors->all() as $error)
-    <li>- {{ $error }}</li>
-    @endforeach
-  </ul>
-  @endif
-</div>
+@if(session('success'))
+    <div class="alert alert-light-success alert-dismissible show fade">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+@if(session('fail'))
+    <div class="alert alert-light-danger alert-dismissible show fade">
+        {{ session('fail') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
 <div class="row">
   @foreach ($viewData["supervisor"] as $supervisors)
   ID: {{ $supervisors->getId() }}
