@@ -85,6 +85,8 @@ Route::middleware('admin')->prefix('admin')->group(function() {
 Route::get('/', 'App\Http\Controllers\HomeController@index')->name("home.index");
 
 Route::middleware('superadmin')->prefix('superadmin')->group(function() {
+  Route::get('/dashboard', 'App\Http\Controllers\Superadmin\SuperadminDashboardController@index')->name('superadmin.dashboard.index');
+  
   Route::get('/schedule', 'App\Http\Controllers\Superadmin\SuperadminScheduleController@index')->name('superadmin.schedule.index');
   Route::get('/schedule/create', 'App\Http\Controllers\Superadmin\SuperadminScheduleController@create')->name('superadmin.schedule.create');
   Route::post('/schedule/store', 'App\Http\Controllers\Superadmin\SuperadminScheduleController@store')->name('superadmin.schedule.store');

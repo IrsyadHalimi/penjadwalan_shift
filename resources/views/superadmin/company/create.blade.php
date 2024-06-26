@@ -2,8 +2,7 @@
 @section('title', $viewData["title"])
 @section('subtitle', $viewData["subtitle"])
 @section('content')
-<div>
-  @if($errors->any())
+@if($errors->any())
 <ul class="alert alert-danger alert-dismissible show fade list-unstyled">
     @foreach($errors->all() as $error)
     <li>- {{ $error }}</li>
@@ -11,12 +10,9 @@
     @endforeach
 </ul>
 @endif
-
   <section id="basic-horizontal-layouts">
-    <form method="POST" action="{{ route('superadmin.department.update', ['id'=> $viewData['departments']->getId()]) }}"
-    enctype="multipart/form-data">
+    <form method="POST" action="{{ route('superadmin.department.store') }}">
       @csrf
-      @method('PUT')
         <div class="row match-height">
             <div class="col-md-12 col-12">
                 <div class="card">
@@ -32,7 +28,7 @@
                                             <label for="department-name-horizontal">Nama Departemen</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" name="department_name" value="{{ $viewData['departments']->getDepartmentName() }}" id="department-name-horizontal" class="form-control">
+                                            <input type="text" name="department_name" id="department-name-horizontal" class="form-control">
                                         </div>
                                         <div class="col-sm-12 d-flex justify-content-end">
                                             <button type="submit" class="btn btn-primary me-1 mb-1">Simpan</button>
