@@ -2,16 +2,6 @@
 @section('title', $viewData["title"])
 @section('subtitle', $viewData["subtitle"])
 @section('content')
-<div>
-    @if($errors->any())
-    <div class="alert alert-danger alert-dismissible show fade">
-    @foreach($errors->all() as $error)
-        {{ $error }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    @endforeach
-    </div>
-    @endif
-</div>
 <div class="row" id="table-hover-row">
   <div class="col-12">
       <div class="card">

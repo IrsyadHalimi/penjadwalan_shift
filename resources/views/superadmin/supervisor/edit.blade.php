@@ -4,13 +4,13 @@
 @section('content')
 <div>
   @if($errors->any())
-    <div class="alert alert-danger alert-dismissible show fade">
+<ul class="alert alert-danger alert-dismissible show fade list-unstyled">
     @foreach($errors->all() as $error)
-        {{ $error }}
+    <li>- {{ $error }}</li>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     @endforeach
-    </div>
-    @endif
+</ul>
+@endif
 
   <form method="POST" action="{{ route('admin.supervisor.update', ['id_user'=> $viewData['supervisor']->getId()]) }}"
   enctype="multipart/form-data">

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Superadmin;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
+
 
 class SuperadminCompanyController extends Controller
 {
@@ -38,7 +40,16 @@ class SuperadminCompanyController extends Controller
 
   public function delete($id)
   {
-    Company::destroy($id);
-    return back()->with('success', 'Data berhasil dihapus.');
+    try {
+      $company = Company::findOrFail($id);
+      $company->delete();
+
+      return redirect()->route('superadmin.company.index')->with('success', 'Data berhasil dihapus.');
+    } catch (QueryException $e) {
+      if($e->getCode() == 1451) {
+          return redirect()->route('superadmin.company.index')->with('fail', 'Tidak dapat menghapus data, karena masih memiliki keterkaitan dengan data lain!');
+      }
+      return redirect()->route('superadmin.company.index')->with('fail', 'Tidak dapat menghapus data, karena masih memiliki keterkaitan dengan data lain!');
+    }
   }
 }

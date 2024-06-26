@@ -8,6 +8,7 @@ use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Database\QueryException;
 
 
 class SuperadminShiftController extends Controller
@@ -17,7 +18,7 @@ class SuperadminShiftController extends Controller
     $viewData = [];
     $viewData["title"] = "Shift - Penjadwalan Shift";
     $viewData["subtitle"] = "Daftar Shift Kerja";
-    $viewData["shift"] = Shift::all();
+    $viewData['shift'] = Shift::paginate(10);
     return view('superadmin.shift.index')->with("viewData", $viewData);
   }
 
@@ -26,7 +27,6 @@ class SuperadminShiftController extends Controller
     $viewData = [];
     $viewData["title"] = "Shift - Penjadwalan Shift";
     $viewData["subtitle"] = "Tambah Shift Kerja";
-    $viewData["departments"] = Department::all();
     return view('superadmin.shift.create')->with("viewData", $viewData);
   }
 
@@ -35,7 +35,6 @@ class SuperadminShiftController extends Controller
     $departmentId = $request->input('department_id');
     $shiftId = 'SHF' . $departmentId . Str::random(2);
     
-    Shift::validate($request);
     $newShift = new Shift();
     $newShift->setId($shiftId);
     $newShift->setShiftName($request->input('shift_name'));
@@ -46,22 +45,21 @@ class SuperadminShiftController extends Controller
     $newShift->setLabelColor($request->input('label_color'));
     $newShift->save();
 
-    return redirect()->route('superadmin.shift.index');
+    return redirect()->route('superadmin.shift.index')->with('success', 'Data berhasil ditambahkan.');
   }
 
   public function edit($id)
   {
+
     $viewData = [];
     $viewData["title"] = "Superadmin - Edit Shift";
     $viewData["subtitle"] = "Edit Shift Kerja";
     $viewData["shift"] = Shift::findOrFail($id);
-    $viewData["departments"] = Department::all();
     return view('superadmin.shift.edit')->with("viewData", $viewData);
   }
 
   public function update(Request $request, $id)
   {
-    Shift::validate($request); 
     $shift = Shift::findOrFail($id);
     $shift->setShiftName($request->input('shift_name'));
     $shift->setDepartmentId($request->input('department_id'));
@@ -70,12 +68,21 @@ class SuperadminShiftController extends Controller
     $shift->setDescription($request->input('description'));
     $shift->save();
 
-    return redirect()->route('superadmin.shift.index');
+    return redirect()->route('superadmin.shift.index')->with('success', 'Data berhasil diperbarui.');
   }
 
   public function delete($id)
   {
-    Shift::destroy($id);
-    return back()->with('success', 'Data berhasil dihapus.');
+    try {
+      $shift = Shift::findOrFail($id);
+      $shift->delete();
+
+      return redirect()->route('superadmin.shift.index')->with('success', 'Data berhasil dihapus.');
+    } catch (QueryException $e) {
+      if($e->getCode() == 1451) {
+          return redirect()->route('superadmin.shift.index')->with('fail', 'Tidak dapat menghapus data, karena masih memiliki keterkaitan dengan data lain!');
+      }
+      return redirect()->route('superadmin.shift.index')->with('fail', 'Tidak dapat menghapus data, karena masih memiliki keterkaitan dengan data lain!');
+    }
   }
 }

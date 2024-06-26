@@ -25,7 +25,7 @@ class AdminSupervisorController extends Controller
   {
     $rules = [
         'full_name' => 'required|string|max:50',
-        'employee_id' => 'required',
+        'employee_id' => 'required|max:20',
         'department_id' => 'required',
         'phone_number' => 'required|max:20',
         'email' => 'required|string|email|max:50|unique:users',
@@ -37,6 +37,7 @@ class AdminSupervisorController extends Controller
         'full_name.string' => 'Nama harus berupa string.',
         'full_name.max' => 'Nama tidak boleh lebih dari 50 karakter.',
         'employee_id.required' => 'Nomor pegawai harus diisi.',
+        'employee_id.max' => 'Nomor pegawai tidak boleh lebih dari 20 karakter.',
         'department_id.required' => 'Departemen harus dipilih.',
         'phone_number.required' => 'Nomor telepon harus diisi.',
         'phone_number.max' => 'Nomor telepon tidak boleh lebih dari 20 karakter.',
@@ -57,7 +58,7 @@ class AdminSupervisorController extends Controller
   {
     $rules = [
         'full_name' => 'required|string|max:50',
-        'employee_id' => 'required',
+        'employee_id' => 'required|max:20',
         'department_id' => 'required',
         'phone_number' => 'required|max:20',
         'email' => 'required|string|email|max:50',
@@ -68,6 +69,7 @@ class AdminSupervisorController extends Controller
         'full_name.string' => 'Nama harus berupa string.',
         'full_name.max' => 'Nama tidak boleh lebih dari 50 karakter.',
         'employee_id.required' => 'Nomor pegawai harus diisi.',
+        'employee_id.max' => 'Nomor pegawai tidak boleh lebih dari 20 karakter.',
         'department_id.required' => 'Departemen harus dipilih.',
         'phone_number.required' => 'Nomor telepon harus diisi.',
         'phone_number.max' => 'Nomor telepon tidak boleh lebih dari 20 karakter.',

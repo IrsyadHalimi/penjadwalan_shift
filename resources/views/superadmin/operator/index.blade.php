@@ -14,24 +14,25 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 @endif
-<div class="row">
-<a href="{{ route('superadmin.operator.create') }}">Tambah Operator Baru</a>
-  @foreach ($viewData["operator"] as $operators)
-  ID: {{ $operators->getId() }}
-  Nama: {{ $operators->getName() }}
-  Perusahaan: {{ $operators->getCompanyId() }}
-  Departemen: {{ $operators->getDepartmentId() }}
-  Email: {{ $operators->getEmail() }}
-  Jabatan: {{ $operators->getRole() }}
-  <a href="{{route('superadmin.operator.edit', ['id'=> $operators->getId()])}}">Edit</a>
-  <form action="{{ route('superadmin.operator.delete', $operators->getId())}}" method="POST">
-    @csrf
-    @method('DELETE')
-    <button class="btn btn-danger">
-      <i class="bi-trash">Hapus</i>
-    </button>
-  </form>
-  <br>
-  @endforeach
+<div class="row" id="table-hover-row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header pb-0">
+                <h4 class="card-title">Data Operator</h4>
+                <p>
+                    Data dalam tabel dibawah merupakan seluruh data operator dari berbagai departemen yang terdapat pada perusahaan
+                </p>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <div>
+                        <a href="{{ route('superadmin.operator.create') }}"><button class="btn btn-primary">Tambah Operator Baru</button></a>
+                    </div>
+                </div>
+                <livewire:superadmin-operator-search/>
+                @livewireScripts
+            </div>
+        </div>
+    </div>
 </div>
 @endsection

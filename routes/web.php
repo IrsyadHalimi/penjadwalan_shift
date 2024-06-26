@@ -85,13 +85,13 @@ Route::middleware('admin')->prefix('admin')->group(function() {
 Route::get('/', 'App\Http\Controllers\HomeController@index')->name("home.index");
 
 Route::middleware('superadmin')->prefix('superadmin')->group(function() {
-  Route::get('/schedule', [SuperadminScheduleController::class, 'index'])->name('superadmin.schedule.index');
-  Route::get('/schedule/list', [SuperadminScheduleController::class, 'listSchedule'])->name('superadmin.schedule.list');
-  Route::get('/schedule/create', [SuperadminScheduleController::class, 'create'])->name('superadmin.schedule.create');
-  Route::post('/schedule/store', [SuperadminScheduleController::class, 'store'])->name('superadmin.schedule.store');
-  Route::get('/schedule/{schedule}/edit', [SuperadminScheduleController::class, 'edit'])->name('superadmin.schedule.edit');
-  Route::put('/schedule/{schedule}/update', [SuperadminScheduleController::class, 'update'])->name('superadmin.schedule.update');
-  Route::delete('/schedule/{schedule}/destroy', [SuperadminScheduleController::class, 'destroy'])->name('superadmin.schedule.destroy');
+  Route::get('/schedule', 'App\Http\Controllers\Superadmin\SuperadminScheduleController@index')->name('superadmin.schedule.index');
+  Route::get('/schedule/create', 'App\Http\Controllers\Superadmin\SuperadminScheduleController@create')->name('superadmin.schedule.create');
+  Route::post('/schedule/store', 'App\Http\Controllers\Superadmin\SuperadminScheduleController@store')->name('superadmin.schedule.store');
+  Route::get('/schedule/{id}/edit', 'App\Http\Controllers\Superadmin\SuperadminScheduleController@edit')->name('superadmin.schedule.edit');
+  Route::put('/schedule/{id}/update', 'App\Http\Controllers\Superadmin\SuperadminScheduleController@update')->name('superadmin.schedule.update');
+  Route::delete('/schedule/{id}/delete', 'App\Http\Controllers\Superadmin\SuperadminScheduleController@delete')->name('superadmin.schedule.delete');
+  
   Route::get('/shift', 'App\Http\Controllers\Superadmin\SuperadminShiftController@index')->name("superadmin.shift.index");
   Route::get('/shift/create', 'App\Http\Controllers\Superadmin\SuperadminShiftController@create')->name("superadmin.shift.create");
   Route::get('/shift/{id}/edit', 'App\Http\Controllers\Superadmin\SuperadminShiftController@edit')->name("superadmin.shift.edit");

@@ -4,13 +4,13 @@
 @section('content')
 <div>
   @if($errors->any())
-    <div class="alert alert-danger alert-dismissible show fade">
+<ul class="alert alert-danger alert-dismissible show fade list-unstyled">
     @foreach($errors->all() as $error)
-        {{ $error }}
+    <li>- {{ $error }}</li>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     @endforeach
-    </div>
-    @endif
+</ul>
+@endif
 
   <section id="basic-horizontal-layouts">
     <form method="POST" action="{{ route('admin.shift.update', ['id'=> $viewData['shift']->getId()]) }}"
@@ -34,17 +34,7 @@
                                         <div class="col-md-8 form-group">
                                             <input type="text" name="shift_name" value="{{ $viewData['shift']->getShiftName() }}" id="shift-name-horizontal" class="form-control">
                                         </div>
-                                        <div class="col-md-4">
-                                            <label for="department-horizontal">Departemen</label>
-                                        </div>
-                                        <div class="col-md-8 form-group">  
-                                            <select id="department_id" class="form-select @error('department_id') is-invalid @enderror" name="department_id"  id="basicSelect">
-                                                <option value="" hidden>-- Pilih Departemen --</option>
-                                                @foreach($viewData['departments'] as $departments)
-                                                <option value="{{ $departments->getId() }}" {{ $departments->getId() == $viewData['shift']->getDepartmentId() ? 'selected' : null }}>{{ $departments->getDepartmentName() }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                        <input type="text" name="department_id" value="{{ $viewData['shift']->getDepartmentId() }}" hidden>
                                         <div class="col-md-4">
                                             <label for="start-horizontal">Waktu Mulai</label>
                                         </div>

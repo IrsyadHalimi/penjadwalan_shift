@@ -7,7 +7,7 @@ use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Database\QueryException;
 
 
 class AdminOperatorTypeController extends Controller
@@ -76,7 +76,16 @@ class AdminOperatorTypeController extends Controller
 
   public function delete($id)
   {
-    OperatorType::destroy($id);
-    return back()->with('success', 'Data berhasil dihapus.');
+    try {
+      $operatorType = OperatorType::findOrFail($id);
+      $operatorType->delete();
+
+      return redirect()->route('admin.operator_type.index')->with('success', 'Data berhasil dihapus.');
+    } catch (QueryException $e) {
+      if($e->getCode() == 1451) {
+          return redirect()->route('admin.operator_type.index')->with('fail', 'Tidak dapat menghapus data, karena masih memiliki keterkaitan dengan data lain!');
+      }
+      return redirect()->route('admin.operator_type.index')->with('fail', 'Tidak dapat menghapus data, karena masih memiliki keterkaitan dengan data lain!');
+    }
   }
 }

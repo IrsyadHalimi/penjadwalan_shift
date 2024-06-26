@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\QueryException;
 
 
 class AdminOperatorController extends Controller
@@ -27,7 +28,7 @@ class AdminOperatorController extends Controller
   {
     $rules = [
         'full_name' => 'required|string|max:50',
-        'employee_id' => 'required',
+        'employee_id' => 'required|max:20',
         'department_id' => 'required',
         'operator_type_id' => 'required',
         'phone_number' => 'required|max:20',
@@ -40,6 +41,7 @@ class AdminOperatorController extends Controller
         'full_name.string' => 'Nama harus berupa string.',
         'full_name.max' => 'Nama tidak boleh lebih dari 50 karakter.',
         'employee_id.required' => 'Nomor pegawai harus diisi.',
+        'employee_id.max' => 'Nomor pegawai tidak boleh lebih dari 20 karakter.',
         'department_id.required' => 'Departemen harus dipilih.',
         'operator_type_id.required' => 'Jenis operator harus dipilih.',
         'phone_number.required' => 'Nomor telepon harus diisi.',
@@ -61,7 +63,7 @@ class AdminOperatorController extends Controller
   {
     $rules = [
         'full_name' => 'required|string|max:50',
-        'employee_id' => 'required',
+        'employee_id' => 'required|max:20',
         'department_id' => 'required',
         'operator_type_id' => 'required',
         'phone_number' => 'required|max:20',
@@ -73,6 +75,7 @@ class AdminOperatorController extends Controller
         'full_name.string' => 'Nama harus berupa string.',
         'full_name.max' => 'Nama tidak boleh lebih dari 50 karakter.',
         'employee_id.required' => 'Nomor pegawai harus diisi.',
+        'employee_id.max' => 'Nomor pegawai tidak boleh lebih dari 20 karakter.',
         'department_id.required' => 'Departemen harus dipilih.',
         'operator_type_id.required' => 'Jenis operator harus dipilih.',
         'phone_number.required' => 'Nomor telepon harus diisi.',

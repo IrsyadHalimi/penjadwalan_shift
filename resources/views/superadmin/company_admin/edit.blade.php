@@ -3,14 +3,16 @@
 @section('subtitle', $viewData["subtitle"])
 @section('content')
 <div>
-  @if($errors->any())
+@if($errors->any())
     <div class="alert alert-danger alert-dismissible show fade">
     @foreach($errors->all() as $error)
-        {{ $error }}
+        <ul>
+            {{ $error }}    
+        </ul>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     @endforeach
     </div>
-    @endif
+@endif
 
   <section id="basic-horizontal-layouts">
     <form method="POST" action="{{ route('superadmin.company_admin.update', ['id'=> $viewData['company_admin']->getId()]) }}"

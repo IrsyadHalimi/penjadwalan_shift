@@ -2,14 +2,14 @@
 @section('title', $viewData["title"])
 @section('subtitle', $viewData["subtitle"])
 @section('content')
-  @if($errors->any())
-    <div class="alert alert-danger alert-dismissible show fade">
+@if($errors->any())
+<ul class="alert alert-danger alert-dismissible show fade list-unstyled">
     @foreach($errors->all() as $error)
-        {{ $error }}
+    <li>- {{ $error }}</li>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     @endforeach
-    </div>
-    @endif
+</ul>
+@endif
   <section id="basic-horizontal-layouts">
     <form method="POST" action="{{ route('superadmin.company_admin.store') }}">
       @csrf
@@ -31,25 +31,25 @@
                                             <label for="first-name-horizontal">Nama Lengkap</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" name="full_name" id="first-name-horizontal" class="form-control">
+                                            <input type="text" name="full_name" id="first-name-horizontal" class="form-control @error('full_name') is-invalid @enderror" value="{{ old('full_name') }}" required>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="employeeId-horizontal">Nomor Pegawai</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" name="employee_id" id="employeeId-horizontal" class="form-control">
+                                            <input type="text" name="employee_id" id="employeeId-horizontal" class="form-control @error('employee_id') is-invalid @enderror" value="{{ old('employee_id') }}" required>
                                         </div>
                                         <div class="col-md-4">
                                           <label for="phone-horizontal">Nomor Telepon</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                          <input type="number" name="phone_number" id="phone-horizontal" class="form-control">
+                                          <input type="number" name="phone_number" id="phone-horizontal" class="form-control @error('phone_number') is-invalid @enderror" value="{{ old('phone_number') }}" required>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="email-horizontal">Email</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="email" name="email" class="form-control">
+                                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" required>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="phone-horizontal">Password</label>
@@ -64,7 +64,7 @@
                                             <select id="company_id" class="form-select @error('company_id') is-invalid @enderror" name="company_id"  id="basicSelect">
                                                 <option value="" hidden>-- Pilih Perusahaan --</option>
                                                 @foreach($viewData['company'] as $companies)
-                                                <option value="{{ $companies->getId() }}">{{ $companies->getCompanyName() }}</option>
+                                                <option value="{{ $companies->getId() }}" {{ old('company_id') == $companies->getId() ? 'selected' : '' }}>{{ $companies->getCompanyName() }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

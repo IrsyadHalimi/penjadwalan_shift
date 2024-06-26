@@ -8,6 +8,7 @@ use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Database\QueryException;
 
 
 class AdminShiftController extends Controller
@@ -61,7 +62,6 @@ class AdminShiftController extends Controller
     $viewData["title"] = "Admin - Edit Shift";
     $viewData["subtitle"] = "Edit Shift Kerja";
     $viewData["shift"] = Shift::findOrFail($id);
-    $viewData["departments"] = Department::where('company_id', $companyId)->paginate(10);
     return view('admin.shift.edit')->with("viewData", $viewData);
   }
 
@@ -80,7 +80,16 @@ class AdminShiftController extends Controller
 
   public function delete($id)
   {
-    Shift::destroy($id);
-    return back()->with('success', 'Data berhasil dihapus.');
+    try {
+      $shift = Shift::findOrFail($id);
+      $shift->delete();
+
+      return redirect()->route('admin.shift.index')->with('success', 'Data berhasil dihapus.');
+    } catch (QueryException $e) {
+      if($e->getCode() == 1451) {
+          return redirect()->route('admin.shift.index')->with('fail', 'Tidak dapat menghapus data, karena masih memiliki keterkaitan dengan data lain!');
+      }
+      return redirect()->route('admin.shift.index')->with('fail', 'Tidak dapat menghapus data, karena masih memiliki keterkaitan dengan data lain!');
+    }
   }
 }

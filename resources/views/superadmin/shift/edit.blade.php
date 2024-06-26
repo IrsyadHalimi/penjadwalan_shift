@@ -4,81 +4,83 @@
 @section('content')
 <div>
   @if($errors->any())
-    <div class="alert alert-danger alert-dismissible show fade">
+<ul class="alert alert-danger alert-dismissible show fade list-unstyled">
     @foreach($errors->all() as $error)
-        {{ $error }}
+    <li>- {{ $error }}</li>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     @endforeach
-    </div>
-    @endif
+</ul>
+@endif
 
-  <form method="POST" action="{{ route('admin.shift.update', ['id'=> $viewData['shift']->getId()]) }}"
-  enctype="multipart/form-data">
-    @csrf
-    @method('PUT')
-    <div class="row">
-      <div class="col">
-        <div class="mb-3 row">
-          <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Nama Shift</label>
-          <div class="col-lg-10 col-md-6 col-sm-12">
-              <input name="shift_name" value="{{ $viewData['shift']->getShiftName() }}" type="text" class="form-control">
-          </div>
+  <section id="basic-horizontal-layouts">
+    <form method="POST" action="{{ route('superadmin.shift.update', ['id'=> $viewData['shift']->getId()]) }}"
+    enctype="multipart/form-data">
+      @csrf
+      @method('PUT')
+        <div class="row match-height">
+            <div class="col-md-12 col-12">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h4 class="card-title">Horizontal Form</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form class="form form-horizontal">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label for="shift-name-horizontal">Nama Shift</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <input type="text" name="shift_name" value="{{ $viewData['shift']->getShiftName() }}" id="shift-name-horizontal" class="form-control">
+                                        </div>
+                                        <input type="text" name="department_id" value="{{ $viewData['shift']->getDepartmentId() }}" hidden>
+                                        <div class="col-md-4">
+                                            <label for="start-horizontal">Waktu Mulai</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                          <input type="time" name="start_time" value="{{ $viewData['shift']->getStartTime() }}" class="form-control flatpickr-time-picker-24h" placeholder="Pilih waktu">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="start-horizontal">Waktu Selesai</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                          <input type="time" name="end_time" value="{{ $viewData['shift']->getEndTime() }}" class="form-control flatpickr-time-picker-24h" placeholder="Pilih waktu">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="label-color-horizontal">Warna Label Shift</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">  
+                                          <select id="label_color" class="form-select @error('label_color') is-invalid @enderror" name="label_color"  id="basicSelect">
+                                            <option value="" hidden>-- Pilih Warna Label --</option>
+                                            <option class="text-primary" value="primary" {{ $viewData['shift']->getLabelColor() == 'primary' ? 'selected' : null }} >Biru</option>
+                                            <option class="text-success" value="success" {{ $viewData['shift']->getLabelColor() == 'success' ? 'selected' : null }} >Hijau</option>
+                                            <option class="text-warning" value="warning" {{ $viewData['shift']->getLabelColor() == 'warning' ? 'selected' : null }} >Kuning</option>
+                                            <option class="text-dark" value="dark" {{ $viewData['shift']->getLabelColor() == 'success' ? 'dark' : null }} >Hitam</option>
+                                            <option class="text-danger" value="danger" {{ $viewData['shift']->getLabelColor() == 'danger' ? 'selected' : null }} >Merah</option>
+                                            <option class="text-secondary" value="secondary" {{ $viewData['shift']->getLabelColor() == 'secondary' ? 'selected' : null }} >Abu-abu</option>
+                                            <option class="text-info" value="info" {{ $viewData['shift']->getLabelColor() == 'info' ? 'selected' : null }} >Biru Muda</option>
+                                          </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="department-horizontal">Keterangan</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                          <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="5">{{ $viewData['shift']->getDescription() }}</textarea>
+                                        </div>
+                                        <div class="col-sm-12 d-flex justify-content-end">
+                                            <button type="submit" class="btn btn-primary me-1 mb-1">Simpan</button>
+                                            <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col">
-        <div class="mb-3 row">
-          <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Jam Masuk</label>
-          <div class="col-lg-10 col-md-6 col-sm-12">
-            <input class="form-control" type="time" name="start_time" value="{{ $viewData['shift']->getStartTime() }}">
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="mb-3 row">
-          <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Jam Keluar</label>
-          <div class="col-lg-10 col-md-6 col-sm-12">
-          <input class="form-control" type="time" name="end_time" value="{{ $viewData['shift']->getEndTime() }}">
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="mb-3 row">
-        <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Warna Label Shift</label>
-          <div>
-            <input class="form-check-input" {{ $viewData['shift']->getLabelColor() == 'success' ? 'checked' : null }} type="radio" name="label_color" id="category-success" value="success">
-            <label class="form-check-label" for="category-success">Hijau</label>
-          </div>
-          <div>
-            <input class="form-check-input" {{ $viewData['shift']->getLabelColor() == 'danger' ? 'checked' : null }} type="radio" name="label_color" id="category-danger" value="danger">
-            <label class="form-check-label" for="category-danger">Merah</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" {{ $viewData['shift']->getLabelColor() == 'warning' ? 'checked' : null }} type="radio" name="label_color" id="category-warning" value="warning">
-            <label class="form-check-label" for="category-warning">Kuning</label>
-          </div>
-          <div>
-            <input class="form-check-input" {{ $viewData['shift']->getLabelColor() == 'primary' ? 'checked' : null }} type="radio" name="label_color" id="category-primary" value="primary">
-            <label class="form-check-label" for="category-primary">Biru</label>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="mb-3 row">
-          <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Keterangan</label>
-          <div class="col-lg-10 col-md-6 col-sm-12">
-              <textarea id="keterangan" name="description" class="form-control" rows="4">{{ $viewData['shift']->getDescription() }}</textarea>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      &nbsp;
-    </div>
-  </div>
-  <div>
-    Klik tombol Perbarui untuk menyimpan perubahan
-  </div>
-  <button type="submit" class="btn btn-primary">Perbarui</button>
-  </form>
+      </form>
+    </section>
 </div>
 @endsection

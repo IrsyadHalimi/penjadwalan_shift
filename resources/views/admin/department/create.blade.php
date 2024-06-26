@@ -2,14 +2,14 @@
 @section('title', $viewData["title"])
 @section('subtitle', $viewData["subtitle"])
 @section('content')
-  @if($errors->any())
-    <div class="alert alert-danger alert-dismissible show fade">
+@if($errors->any())
+<ul class="alert alert-danger alert-dismissible show fade list-unstyled">
     @foreach($errors->all() as $error)
-        {{ $error }}
+    <li>- {{ $error }}</li>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     @endforeach
-    </div>
-    @endif
+</ul>
+@endif
   <section id="basic-horizontal-layouts">
     <form method="POST" action="{{ route('admin.department.store') }}">
       @csrf

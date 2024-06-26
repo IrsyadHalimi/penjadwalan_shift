@@ -3,13 +3,13 @@
 @section('subtitle', $viewData["subtitle"])
 @section('content')
   @if($errors->any())
-    <div class="alert alert-danger alert-dismissible show fade">
+<ul class="alert alert-danger alert-dismissible show fade list-unstyled">
     @foreach($errors->all() as $error)
-        {{ $error }}
+    <li>- {{ $error }}</li>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     @endforeach
-    </div>
-    @endif
+</ul>
+@endif
   <form method="POST" action="{{ route('admin.supervisor.store') }}">
   @csrf
     <div class="row">

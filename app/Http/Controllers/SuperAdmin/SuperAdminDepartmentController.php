@@ -6,6 +6,7 @@ use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Database\QueryException;
 
 
 class SuperadminDepartmentController extends Controller
@@ -65,7 +66,16 @@ class SuperadminDepartmentController extends Controller
 
   public function delete($id)
   {
-    Company::destroy($id);
-    return back()->with('success', 'Data berhasil dihapus.');
+    try {
+      $department = Department::findOrFail($id);
+      $department->delete();
+
+      return redirect()->route('superadmin.department.index')->with('success', 'Data berhasil dihapus.');
+    } catch (QueryException $e) {
+      if($e->getCode() == 1451) {
+          return redirect()->route('superadmin.department.index')->with('fail', 'Tidak dapat menghapus data, karena masih memiliki keterkaitan dengan data lain!');
+      }
+      return redirect()->route('superadmin.department.index')->with('fail', 'Tidak dapat menghapus data, karena masih memiliki keterkaitan dengan data lain!');
+    }
   }
 }

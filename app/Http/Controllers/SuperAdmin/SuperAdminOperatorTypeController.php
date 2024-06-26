@@ -6,6 +6,7 @@ use App\Models\OperatorType;
 use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Database\QueryException;
 
 
 class SuperadminOperatorTypeController extends Controller
@@ -67,7 +68,16 @@ class SuperadminOperatorTypeController extends Controller
 
   public function delete($id)
   {
-    Company::destroy($id);
-    return back()->with('success', 'Data berhasil dihapus.');
+    try {
+      $operatorType = OperatorType::findOrFail($id);
+      $operatorType->delete();
+
+      return redirect()->route('superadmin.operator_type.index')->with('success', 'Data berhasil dihapus.');
+    } catch (QueryException $e) {
+      if($e->getCode() == 1451) {
+          return redirect()->route('superadmin.operator_type.index')->with('fail', 'Tidak dapat menghapus data, karena masih memiliki keterkaitan dengan data lain!');
+      }
+      return redirect()->route('superadmin.operator_type.index')->with('fail', 'Tidak dapat menghapus data, karena masih memiliki keterkaitan dengan data lain!');
+    }
   }
 }

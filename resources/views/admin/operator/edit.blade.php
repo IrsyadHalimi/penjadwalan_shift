@@ -4,13 +4,13 @@
 @section('content')
 <div>
   @if($errors->any())
-    <div class="alert alert-danger alert-dismissible show fade">
+<ul class="alert alert-danger alert-dismissible show fade list-unstyled">
     @foreach($errors->all() as $error)
-        {{ $error }}
+    <li>- {{ $error }}</li>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     @endforeach
-    </div>
-    @endif
+</ul>
+@endif
   <section id="basic-horizontal-layouts">
     <form method="POST" action="{{ route('admin.operator.update', ['id'=> $viewData['operator']->getId()]) }}"
     enctype="multipart/form-data">
