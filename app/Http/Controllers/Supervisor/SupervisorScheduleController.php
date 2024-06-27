@@ -130,23 +130,18 @@ class SupervisorScheduleController extends Controller
             return $this->destroy($schedule);
         }
 
-        // Simpan data asli sebelum perubahan
-        $oldSchedule = $schedule->replicate()->toArray();
+        $oldSchedule = $schedule->replicate();
 
-        // Memperbarui data schedule
-        $schedule->update([
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
-            'user_id' => $request->user_id,
-            'shift_id' => $request->shift_id,
-        ]);
+        $schedule->start_date = $request->start_date;
+        $schedule->end_date = $request->end_date;
+        $schedule->user_id = $request->user_id;
+        $schedule->shift_id = $request->shift_id;
+        $schedule->save();
 
-        // Ambil data baru setelah perubahan
         $newSchedule = $schedule->fresh();
         $user = User::find($request->user_id);
-
-        // Menggunakan queue untuk mengirim notifikasi
-        Notification::send($user, new ScheduleUpdatedNotification($oldSchedule, $newSchedule->toArray()));
+        
+        Notification::send($user, new ScheduleUpdatedNotification($oldSchedule->toArray(), $newSchedule->toArray()));
 
         return response()->json([
             'status' => 'success',
