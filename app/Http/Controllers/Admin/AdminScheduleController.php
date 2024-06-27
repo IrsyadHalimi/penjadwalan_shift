@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+use App\Notifications\ScheduleUpdatedNotification;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Http\Request;
 use App\Http\Requests\EventRequest;
 use App\Models\Schedule;
@@ -68,11 +70,20 @@ class AdminScheduleController extends Controller
     public function update(Request $request, $id)
     {
         $schedule = Schedule::findOrFail($id);
+
+        $oldSchedule = $schedule->replicate();
+
         $schedule->setStartDate($request->input('start_date'));
         $schedule->setEndDate($request->input('end_date'));
         $schedule->setUserId($request->input('user_id'));
         $schedule->setShiftId($request->input('shift_id'));
         $schedule->save();
+
+        $newSchedule = $schedule->fresh();
+        $user = User::find($request->user_id);
+        $sender = Auth::user();
+
+        Notification::send($user, new ScheduleUpdatedNotification($sender->toArray(), $oldSchedule->toArray(), $newSchedule->toArray()));
 
         return redirect()->route('admin.schedule.index')->with('success', 'Data berhasil diperbarui.');
     }
