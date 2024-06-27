@@ -23,13 +23,13 @@ class ScheduleUpdatedNotification extends Notification implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(Schedule $oldSchedule, Schedule $newSchedule)
+    public function __construct(array $oldSchedule, array $newSchedule)
     {
         $this->oldSchedule = $oldSchedule;
         $this->newSchedule = $newSchedule;
 
-        $this->oldShiftName = Shift::where('id', $this->oldSchedule->shift_id)->first();
-        $this->newShiftName = Shift::where('id', $this->newSchedule->shift_id)->first();
+        $this->oldShiftName = Shift::find($this->oldSchedule['shift_id'])->shift_name;
+        $this->newShiftName = Shift::find($this->newSchedule['shift_id'])->shift_name;
     }
 
     /**
@@ -50,16 +50,16 @@ class ScheduleUpdatedNotification extends Notification implements ShouldQueue
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
-    {   
+    {
         return (new MailMessage)
                     ->subject('Perubahan Jadwal Shift Kerja')
                     ->line('Jadwal Shift Kerja Anda Telah Diperbarui oleh Supervisor. Berikut adalah detail perubahan:')
-                    ->line('Shift (Lama): ' . $this->oldShiftName->shift_name)
-                    ->line('Shift (Baru): ' . $this->newShiftName->shift_name)
-                    ->line('Tanggal Mulai (Lama): ' . $this->oldSchedule->start_date)
-                    ->line('Tanggal Mulai (Baru): ' . $this->newSchedule->start_date)
-                    ->line('Tanggal Selesai (Lama): ' . $this->oldSchedule->end_date)
-                    ->line('Tanggal Selesai (Baru): ' . $this->newSchedule->end_date)
+                    ->line('Shift (Lama): ' . $this->oldShiftName)
+                    ->line('Shift (Baru): ' . $this->newShiftName)
+                    ->line('Tanggal Mulai (Lama): ' . $this->oldSchedule['start_date'])
+                    ->line('Tanggal Mulai (Baru): ' . $this->newSchedule['start_date'])
+                    ->line('Tanggal Selesai (Lama): ' . $this->oldSchedule['end_date'])
+                    ->line('Tanggal Selesai (Baru): ' . $this->newSchedule['end_date'])
                     ->action('Notification Action', url('/'))
                     ->line('Terima Kasih Telah Menggunakan Layanan Kami!');
     }
