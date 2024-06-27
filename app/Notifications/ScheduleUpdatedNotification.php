@@ -8,6 +8,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Models\Schedule;
 use App\Models\Shift;
+use App\Models\User;
 
 class ScheduleUpdatedNotification extends Notification implements ShouldQueue
 {
@@ -17,16 +18,29 @@ class ScheduleUpdatedNotification extends Notification implements ShouldQueue
     protected $newSchedule;
     protected $oldShiftName;
     protected $newShiftName;
+    protected $sender;
+    protected $role;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(array $oldSchedule, array $newSchedule)
+    public function __construct(array $sender, array $oldSchedule, array $newSchedule)
     {
         $this->oldSchedule = $oldSchedule;
         $this->newSchedule = $newSchedule;
+        $this->sender = $sender;
+
+        // Ambil role dari sender
+        $user = User::find($this->sender['id']);
+        if ($user) {
+            $this->role = $user->role;
+            $this->sender = $user->full_name;
+        } else {
+            $this->role = 'Pengguna tidak ditemukan';
+            $this->sender = 'Pengguna tidak ditemukan';
+        }
 
         $this->oldShiftName = Shift::find($this->oldSchedule['shift_id'])->shift_name;
         $this->newShiftName = Shift::find($this->newSchedule['shift_id'])->shift_name;
@@ -53,7 +67,7 @@ class ScheduleUpdatedNotification extends Notification implements ShouldQueue
     {
         return (new MailMessage)
                     ->subject('Perubahan Jadwal Shift Kerja')
-                    ->line('Jadwal Shift Kerja Anda Telah Diperbarui oleh Supervisor. Berikut adalah detail perubahan:')
+                    ->line('Jadwal Shift Kerja Anda Telah Diperbarui oleh '. $this->sender .' ('.$this->role.'). Berikut adalah detail perubahan:')
                     ->line('Shift (Lama): ' . $this->oldShiftName)
                     ->line('Shift (Baru): ' . $this->newShiftName)
                     ->line('Tanggal Mulai (Lama): ' . $this->oldSchedule['start_date'])
@@ -77,6 +91,7 @@ class ScheduleUpdatedNotification extends Notification implements ShouldQueue
             'new_schedule' => $this->newSchedule,
             'old_shift_name' => $this->oldShiftName,
             'new_shift_name' => $this->newShiftName,
+            'sender' => $this->sender,
         ];
     }
 }
