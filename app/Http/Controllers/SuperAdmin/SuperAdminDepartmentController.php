@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Superadmin;
 use App\Http\Controllers\Controller;
 use App\Models\Department;
+use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -16,7 +17,6 @@ class SuperadminDepartmentController extends Controller
     $viewData = [];
     $viewData["title"] = "Departemen - Penjadwalan Shift";
     $viewData["subtitle"] = "Daftar Departemen";
-    $viewData["departments"] = Department::all();
     return view('superadmin.department.index')->with("viewData", $viewData);
   }
 
@@ -25,15 +25,14 @@ class SuperadminDepartmentController extends Controller
     $viewData = [];
     $viewData["title"] = "Departemen - Penjadwalan Shift";
     $viewData["subtitle"] = "Tambah Departemen";
+    $viewData["company"] = Company::all();
     return view('superadmin.department.create')->with("viewData", $viewData);
   }
 
   public function store(Request $request)
   {
-    Department::validate($request); 
-
     $departmentName = $request->input('department_name');
-    $companyId = Auth::user()->company_id;
+    $companyId = $request->input('company_id');
     $departmentId = 'DEP' . $companyId . Str::random(4);
 
     $newDepartment = new Department();
@@ -42,7 +41,7 @@ class SuperadminDepartmentController extends Controller
     $newDepartment->setCompanyId($companyId);
     $newDepartment->save();
 
-    return redirect()->route('superadmin.department.index');
+    return redirect()->route('superadmin.department.index')->with('success', 'Data berhasil ditambahkan.');
   }
 
   public function edit($id)
@@ -56,12 +55,12 @@ class SuperadminDepartmentController extends Controller
 
   public function update(Request $request, $id)
   {
-    Department::validate($request); 
     $department = Department::findOrFail($id);
     $department->setDepartmentName($request->input('department_name'));
+    $department->setDescription($request->input('description'));
     $department->save();
 
-    return redirect()->route('superadmin.department.index');
+    return redirect()->route('superadmin.department.index')->with('success', 'Data berhasil diperbarui.');
   }
 
   public function delete($id)

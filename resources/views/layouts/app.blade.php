@@ -263,7 +263,7 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item  ">
-                                    <a href="{{ route('superadmin.department.index') }}" class='sidebar-link'>
+                                    <a href="{{ route('superadmin.report.index') }}" class='sidebar-link'>
                                         <i class="bi bi-book"></i>
                                         <span>Laporan</span>
                                     </a>
@@ -351,15 +351,6 @@
 <script src="{{ asset('assets/static/js/components/dark.js') }}"></script>
 <script src="{{ asset('assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
 <script src="{{ asset('assets/compiled/js/app.js') }}"></script>
-<!-- Need: Apexcharts -->
-<script src="{{ asset('assets/extensions/apexcharts/apexcharts.min.js') }}"></script>
-<script src="{{ asset('assets/static/js/pages/dashboard.js') }}"></script>
-
-
-<script src="{{ asset('assets/static/js/components/dark.js') }}"></script>
-<script src="{{ asset('assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
-<script src="{{ asset('assets/compiled/js/app.js') }}"></script>
-<script src="{{ asset('assets/extensions/apexcharts/apexcharts.min.js') }}"></script>
 <script src="{{ asset('assets/static/js/pages/dashboard.js') }}"></script>
         
 <script src="{{ asset('assets/extensions/flatpickr/flatpickr.min.js') }}"></script>

@@ -110,4 +110,9 @@ class Department extends Model
     {
         return $this->hasMany(OperatorType::class);
     }
+    
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
 }

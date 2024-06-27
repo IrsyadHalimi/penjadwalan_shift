@@ -3,17 +3,19 @@
 @section('subtitle', $viewData["subtitle"])
 @section('content')
 <div>
-  @if($errors->any())
-<ul class="alert alert-danger alert-dismissible show fade list-unstyled">
+@if($errors->any())
+    <div class="alert alert-danger alert-dismissible show fade">
     @foreach($errors->all() as $error)
-    <li>- {{ $error }}</li>
+        <ul>
+            {{ $error }}    
+        </ul>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     @endforeach
-</ul>
+    </div>
 @endif
 
   <section id="basic-horizontal-layouts">
-    <form method="POST" action="{{ route('superadmin.department.update', ['id'=> $viewData['departments']->getId()]) }}"
+    <form method="POST" action="{{ route('superadmin.company.update', ['id'=> $viewData['company']->getId()]) }}"
     enctype="multipart/form-data">
       @csrf
       @method('PUT')
@@ -29,10 +31,22 @@
                                 <div class="form-body">
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <label for="department-name-horizontal">Nama Departemen</label>
+                                            <label for="company-name-horizontal">Nama Perusahaan</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" name="department_name" value="{{ $viewData['departments']->getDepartmentName() }}" id="department-name-horizontal" class="form-control">
+                                            <input type="text" name="company_name" value="{{ $viewData['company']->getCompanyName() }}" id="company-name-horizontal" class="form-control">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="company-address-horizontal">Alamat Perusahaan</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <input type="text" name="company_address" value="{{ $viewData['company']->getCompanyAddress() }}" id="company-address-horizontal" class="form-control">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="department-horizontal">Keterangan</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                          <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="5">{{ $viewData['company']->getDescription() }}</textarea>
                                         </div>
                                         <div class="col-sm-12 d-flex justify-content-end">
                                             <button type="submit" class="btn btn-primary me-1 mb-1">Simpan</button>

@@ -17,19 +17,19 @@
 <div class="row" id="table-hover-row">
     <div class="col-12">
         <div class="card">
-        <div class="card-header pb-0">
-                <h4 class="card-title">Data Admin Perusahaan</h4>
+            <div class="card-header pb-0">
+                <h4 class="card-title">Data Perusahaan</h4>
                 <p>
-                    Data dalam tabel dibawah merupakan seluruh data admin perusahaan
+                    Data dalam tabel dibawah merupakan seluruh data perusahaan
                 </p>
             </div>
             <div class="card-content">
                 <div class="card-body">
                     <div>
-                        <a href="{{ route('superadmin.company_admin.create') }}"><button class="btn btn-primary">Tambah Admin Perusahaan Baru</button></a>
+                        <a href="{{ route('superadmin.company.create') }}"><button class="btn btn-primary">Tambah Perusahaan Baru</button></a>
                     </div>
                 </div>
-                <livewire:superadmin-company-admin-search/>
+                <livewire:superadmin-company-search/>
                 @livewireScripts
             </div>
         </div>

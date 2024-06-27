@@ -1,10 +1,10 @@
 <div>
     <div class="card-body">
         <div>
-            <h5>Cari Operator</h5>    
+            <h5>Cari Perusahaan</h5>    
         </div>
         <div>
-            <input type="text" class="form-control" wire:model="searchTerm" placeholder="Cari dengan Nama, ID Operator, ID Departemen, atau ID Jenis Operator..">
+            <input type="text" class="form-control" wire:model="searchTerm" placeholder="Cari dengan Nama Perusahaan atau ID Perusahaan..">
         </div>
     </div>
         <div class="table-responsive">
@@ -13,12 +13,9 @@
                     <tr>
                         <th>No</th>
                         <th>ID</th>
-                        <th>Nama Lengkap</th>
-                        <th>Nomor Pegawai</th>
-                        <th>Departemen</th>
-                        <th>Jenis Operator</th>
-                        <th>Email</th>
-                        <th>Nomor Telepon</th>
+                        <th>Nama Perusahaan</th>
+                        <th>Alamat Perusahaan</th>
+                        <th>Keterangan</th>
                         <th> </th>
                         <th> </th>
                     </tr>
@@ -27,21 +24,18 @@
             @php
             $i = 0;
             @endphp
-            @foreach ($operators as $operator)
+            @foreach ($companies as $company)
                 <tr>
                     <td>{{ ++$i }}</td>
-                    <td class="text-bold-500">{{ $operator->id }}</td>
-                    <td>{{ $operator->full_name }}</td>
-                    <td>{{ $operator->employee_id }}</td>
-                    <td>{{ optional($operator->department)->department_name ?? 'N/A'  }}</td>
-                    <td>{{ optional($operator->operatorType)->operator_name_type ?? 'N/A' }}</td>
-                    <td>{{ $operator->email }}</td>
-                    <td>{{ $operator->phone_number }}</td>
+                    <td class="text-bold-500">{{ $company->id }}</td>
+                    <td>{{ $company->company_name }}</td>
+                    <td>{{ $company->company_address }}</td>
+                    <td>{{ $company->description }}</td>
                     <td>
-                        <a class="btn icon btn-primary" href="{{route('superadmin.operator.edit', ['id'=> $operator->id])}}"><i class="bi-pen"></i></a>
+                        <a class="btn icon btn-primary" href="{{route('superadmin.company.edit', ['id'=> $company->id])}}"><i class="bi-pen"></i></a>
                     </td>    
                     <td>
-                        <form action="{{ route('superadmin.operator.delete', $operator->id)}}" method="POST">
+                        <form action="{{ route('superadmin.company.delete', $company->id)}}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button class="btn icon btn-danger">
@@ -54,6 +48,6 @@
             </tbody>
             </table>
     <div class="d-flex justify-content-center mt-4">
-        {{ $operators->links('pagination::bootstrap-4') }}
+        {{ $companies->links('pagination::bootstrap-4') }}
     </div>
 </div>

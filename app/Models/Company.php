@@ -47,16 +47,14 @@ class Company extends Model
         });
     }
 
-    public static function validate($request)
-    {
-        $request->validate([
-            "company_name" => "required",
-        ]);
-    }
-
     public function getId()
     {
         return $this->attributes['id'];
+    } 
+    
+    public function setId($id)
+    {
+        $this->attributes['id'] = $id;
     } 
     
     public function getCompanyName()
@@ -112,5 +110,10 @@ class Company extends Model
     public function users()
     {
         return $this->hasMany(User::class, 'company_id', 'id');
+    }
+    
+    public function departments()
+    {
+        return $this->hasMany(Department::class, 'department_id', 'id');
     }
 }

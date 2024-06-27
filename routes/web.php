@@ -137,6 +137,8 @@ Route::middleware('superadmin')->prefix('superadmin')->group(function() {
   Route::delete('/department/{id}/delete', 'App\Http\Controllers\Superadmin\SuperadminDepartmentController@delete')->name("superadmin.department.delete");
 
   Route::get('/company', 'App\Http\Controllers\Superadmin\SuperadminCompanyController@index')->name("superadmin.company.index");
+  Route::get('/company/create', 'App\Http\Controllers\Superadmin\SuperadminCompanyController@create')->name("superadmin.company.create");
+  Route::post('/company/store', 'App\Http\Controllers\Superadmin\SuperadminCompanyController@store')->name("superadmin.company.store");
   Route::get('/company/{id}/edit', 'App\Http\Controllers\Superadmin\SuperadminCompanyController@edit')->name("superadmin.company.edit");
   Route::put('/company/{id}/update', 'App\Http\Controllers\Superadmin\SuperadminCompanyController@update')->name("superadmin.company.update");
   Route::delete('/company/{id}/delete', 'App\Http\Controllers\Superadmin\SuperadminCompanyController@delete')->name("superadmin.company.delete");
@@ -145,6 +147,9 @@ Route::middleware('superadmin')->prefix('superadmin')->group(function() {
   Route::get('/profile/{id}/edit', 'App\Http\Controllers\Superadmin\SuperadminProfileController@edit')->name("superadmin.profile.edit");
   Route::put('/profile/{id}/update', 'App\Http\Controllers\Superadmin\SuperadminProfileController@update')->name("superadmin.profile.update");
 
+  Route::get('/report', 'App\Http\Controllers\Superadmin\SuperadminReportController@index')->name("superadmin.report.index");
+  Route::get('/report/generateAllSchedulePdf', 'App\Http\Controllers\Superadmin\SuperadminReportController@generateAllSchedulePdf')->name("superadmin.report.generateAllSchedulePdf");
+  Route::post('/report/generatePdf', 'App\Http\Controllers\Superadmin\SuperadminReportController@generatePdf')->name("superadmin.report.generatePdf");
 });
 
 Route::middleware('supervisor')->prefix('supervisor')->group(function() {

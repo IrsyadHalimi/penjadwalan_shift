@@ -17,18 +17,14 @@ class SuperadminDepartmentSearch extends Component
 
     public function render()
     {
-        $userId = User::where('role', 'operator')->pluck('id')->toArray();
-
-        $operators = User::where(function($query) use ($userId) {
-            $query->whereIn('id', $userId);
-        })->where(function($query) {
+        $departments = Department::where(function($query) {
             $query->where('id', 'like', '%'.$this->searchTerm.'%')
-                ->orWhere('full_name', 'like', '%'.$this->searchTerm.'%')
-                ->orWhere('department_id', 'like', '%'.$this->searchTerm.'%');
+                ->orWhere('department_name', 'like', '%'.$this->searchTerm.'%')
+                ->orWhere('company_id', 'like', '%'.$this->searchTerm.'%');
         })->paginate(10);
 
         return view('livewire.superadmin-department-search', [
-            'operators' => $operators,
+            'departments' => $departments,
         ]);
     }
 

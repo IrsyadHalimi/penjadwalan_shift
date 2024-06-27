@@ -17,18 +17,14 @@ class SuperadminShiftSearch extends Component
 
     public function render()
     {
-        $userId = User::where('role', 'operator')->pluck('id')->toArray();
-
-        $operators = User::where(function($query) use ($userId) {
-            $query->whereIn('id', $userId);
-        })->where(function($query) {
+        $shifts = Shift::where(function($query) {
             $query->where('id', 'like', '%'.$this->searchTerm.'%')
-                ->orWhere('full_name', 'like', '%'.$this->searchTerm.'%')
+                ->orWhere('shift_name', 'like', '%'.$this->searchTerm.'%')
                 ->orWhere('department_id', 'like', '%'.$this->searchTerm.'%');
         })->paginate(10);
 
         return view('livewire.superadmin-shift-search', [
-            'operators' => $operators,
+            'shifts' => $shifts,
         ]);
     }
 

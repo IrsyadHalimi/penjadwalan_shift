@@ -35,7 +35,6 @@ class SuperadminOperatorTypeController extends Controller
     $departmentId = $request->input('department_id');
     $operatorTypeId = 'OPT' . $departmentId . Str::random(2);
    
-    OperatorType::validate($request); 
     $newOperatorType = new OperatorType();
     $newOperatorType->setId($operatorTypeId);
     $newOperatorType->setOperatorNameType($operatorNameType);
@@ -57,13 +56,12 @@ class SuperadminOperatorTypeController extends Controller
 
   public function update(Request $request, $id)
   {
-    OperatorType::validate($request); 
     $operatorType = OperatorType::findOrFail($id);
     $operatorType->setOperatorNameType($request->input('operator_name_type'));
     $operatorType->setDescription($request->input('description'));
     $operatorType->save();
 
-    return redirect()->route('superadmin.operator_type.index');
+    return redirect()->route('superadmin.operator_type.index')->with('success', 'Data berhasil ditambahkan.');
   }
 
   public function delete($id)

@@ -1,10 +1,10 @@
 <div>
     <div class="card-body">
         <div>
-            <h5>Cari Operator</h5>    
+            <h5>Cari Departemen</h5>    
         </div>
         <div>
-            <input type="text" class="form-control" wire:model="searchTerm" placeholder="Cari dengan Nama, ID Operator, ID Departemen, atau ID Jenis Operator..">
+            <input type="text" class="form-control" wire:model="searchTerm" placeholder="Cari dengan Nama Departemen, ID Departemen atau ID Perusahaan..">
         </div>
     </div>
         <div class="table-responsive">
@@ -13,12 +13,9 @@
                     <tr>
                         <th>No</th>
                         <th>ID</th>
-                        <th>Nama Lengkap</th>
-                        <th>Nomor Pegawai</th>
-                        <th>Departemen</th>
-                        <th>Jenis Operator</th>
-                        <th>Email</th>
-                        <th>Nomor Telepon</th>
+                        <th>Nama Departemen</th>
+                        <th>ID Perusahaan</th>
+                        <th>Keterangan</th>
                         <th> </th>
                         <th> </th>
                     </tr>
@@ -27,21 +24,18 @@
             @php
             $i = 0;
             @endphp
-            @foreach ($operators as $operator)
+            @foreach ($departments as $department)
                 <tr>
                     <td>{{ ++$i }}</td>
-                    <td class="text-bold-500">{{ $operator->id }}</td>
-                    <td>{{ $operator->full_name }}</td>
-                    <td>{{ $operator->employee_id }}</td>
-                    <td>{{ optional($operator->department)->department_name ?? 'N/A'  }}</td>
-                    <td>{{ optional($operator->operatorType)->operator_name_type ?? 'N/A' }}</td>
-                    <td>{{ $operator->email }}</td>
-                    <td>{{ $operator->phone_number }}</td>
+                    <td class="text-bold-500">{{ $department->id }}</td>
+                    <td>{{ $department->department_name }}</td>
+                    <td>{{ optional($department->company)->company_name ?? 'N/A'  }}</td>
+                    <td>{{ $department->description }}</td>
                     <td>
-                        <a class="btn icon btn-primary" href="{{route('superadmin.operator.edit', ['id'=> $operator->id])}}"><i class="bi-pen"></i></a>
+                        <a class="btn icon btn-primary" href="{{route('superadmin.department.edit', ['id'=> $department->id])}}"><i class="bi-pen"></i></a>
                     </td>    
                     <td>
-                        <form action="{{ route('superadmin.operator.delete', $operator->id)}}" method="POST">
+                        <form action="{{ route('superadmin.department.delete', $department->id)}}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button class="btn icon btn-danger">
@@ -54,6 +48,6 @@
             </tbody>
             </table>
     <div class="d-flex justify-content-center mt-4">
-        {{ $operators->links('pagination::bootstrap-4') }}
+        {{ $departments->links('pagination::bootstrap-4') }}
     </div>
 </div>

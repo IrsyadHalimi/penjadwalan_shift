@@ -34,7 +34,7 @@
                                         <input type="text" name="shift_name" id="shift-name-horizontal" class="form-control @error('shift_name') is-invalid @enderror" value="{{ old('shift_name') }}" required>
                                     </div>
                                     </div>
-                                    <livewire:superadmin-create-shift-dropdown />
+                                    <livewire:superadmin-company-department-dropdown />
                                     @livewireScripts
                                     <div class="row">
                                     <div class="col-md-4">

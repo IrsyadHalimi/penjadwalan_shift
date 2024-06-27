@@ -30,6 +30,23 @@
                                         <div class="col-md-8 form-group">
                                             <input type="text" name="department_name" id="department-name-horizontal" class="form-control">
                                         </div>
+                                        <div class="col-md-4">
+                                            <label for="company-id-horizontal">Perusahaan</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">  
+                                            <select id="company_id" class="form-select @error('label_color') is-invalid @enderror" name="company_id"  id="basicSelect">
+                                                <option value="" hidden>-- Pilih Perusahaan --</option>
+                                                @foreach($viewData['company'] as $companies)
+                                                <option value="{{ $companies->getId() }}" {{ old('company_id') == $companies->getId() ? 'selected' : '' }}>{{ $companies->getCompanyName() }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="description-horizontal">Keterangan</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="5">{{ old('description') }}</textarea>
+                                        </div>
                                         <div class="col-sm-12 d-flex justify-content-end">
                                             <button type="submit" class="btn btn-primary me-1 mb-1">Simpan</button>
                                             <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>

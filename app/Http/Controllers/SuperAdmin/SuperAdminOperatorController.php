@@ -28,6 +28,7 @@ class SuperadminOperatorController extends Controller
     $rules = [
         'full_name' => 'required|string|max:50',
         'employee_id' => 'required|max:20',
+        'company_id' => 'required',
         'department_id' => 'required',
         'operator_type_id' => 'required',
         'phone_number' => 'required|max:20',
@@ -41,6 +42,7 @@ class SuperadminOperatorController extends Controller
         'full_name.max' => 'Nama tidak boleh lebih dari 50 karakter.',
         'employee_id.required' => 'Nomor pegawai harus diisi.',
         'employee_id.max' => 'Nomor pegawai tidak boleh lebih dari 20 karakter.',
+        'company_id.required' => 'Perusahaan harus dipilih.',
         'department_id.required' => 'Departemen harus dipilih.',
         'operator_type_id.required' => 'Jenis operator harus dipilih.',
         'phone_number.required' => 'Nomor telepon harus diisi.',
@@ -63,6 +65,7 @@ class SuperadminOperatorController extends Controller
     $rules = [
         'full_name' => 'required|string|max:50',
         'employee_id' => 'required|max:20',
+        'company_id' => 'required',
         'department_id' => 'required',
         'operator_type_id' => 'required',
         'phone_number' => 'required|max:20',
@@ -75,6 +78,7 @@ class SuperadminOperatorController extends Controller
         'full_name.max' => 'Nama tidak boleh lebih dari 50 karakter.',
         'employee_id.required' => 'Nomor pegawai harus diisi.',
         'employee_id.max' => 'Nomor pegawai tidak boleh lebih dari 20 karakter.',
+        'company_id.required' => 'Perusahaan harus dipilih.',
         'department_id.required' => 'Departemen harus dipilih.',
         'operator_type_id.required' => 'Jenis operator harus dipilih.',
         'phone_number.required' => 'Nomor telepon harus diisi.',

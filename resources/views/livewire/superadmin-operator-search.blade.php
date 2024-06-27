@@ -4,7 +4,7 @@
             <h5>Cari Operator</h5>    
         </div>
         <div>
-            <input type="text" class="form-control" wire:model="searchTerm" placeholder="Cari dengan Nama, ID Operator, ID Departemen, atau ID Jenis Operator..">
+            <input type="text" class="form-control" wire:model="searchTerm" placeholder="Cari dengan Nama, ID Perusahaan, ID Operator, atau ID Departemen..">
         </div>
     </div>
         <div class="table-responsive">
@@ -15,6 +15,7 @@
                         <th>ID</th>
                         <th>Nama Lengkap</th>
                         <th>Nomor Pegawai</th>
+                        <th>Perusahaan</th>
                         <th>Departemen</th>
                         <th>Jenis Operator</th>
                         <th>Email</th>
@@ -33,6 +34,7 @@
                     <td class="text-bold-500">{{ $operator->id }}</td>
                     <td>{{ $operator->full_name }}</td>
                     <td>{{ $operator->employee_id }}</td>
+                    <td>{{ optional($operator->company)->company_name ?? 'N/A'  }}</td>
                     <td>{{ optional($operator->department)->department_name ?? 'N/A'  }}</td>
                     <td>{{ optional($operator->operatorType)->operator_name_type ?? 'N/A' }}</td>
                     <td>{{ $operator->email }}</td>
