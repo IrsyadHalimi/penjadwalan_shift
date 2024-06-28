@@ -89,7 +89,7 @@ class ScheduleUpdatedNotification extends Notification implements ShouldQueue
                     ->line('Perusahaan: ' . $this->company)
                     ->line('Departemen: ' . $this->department)
                     ->line('Jenis Operator: ' . $this->operatorType)
-                    ->line('Jadwal Shift Kerja Anda Telah Diperbarui oleh '. $this->sender .' ('.$this->role.'). Berikut adalah detail perubahan:')
+                    ->line('Jadwal Shift Kerja Anda TELAH DIPERBARUI oleh '. $this->sender .' ('.$this->role.'). Berikut adalah detail perubahan:')
                     ->line('Shift (Lama): ' . $this->oldShiftName)
                     ->line('Shift (Baru): ' . $this->newShiftName)
                     ->line('Tanggal Mulai (Lama): ' . $this->oldSchedule['start_date'])
