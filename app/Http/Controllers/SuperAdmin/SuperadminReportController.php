@@ -17,8 +17,8 @@ class SuperadminReportController extends Controller
     public function index()
     {
         $viewData = [];
-        $viewData["title"] = "Laporan - Penjadwalan Shift";
-        $viewData["subtitle"] = "Laporan Jadwal Kerja";
+        $viewData["title"] = "Laporan - Penjadwalan Shift Kerja Operator";
+        $viewData["subtitle"] = "Laporan Jadwal Shift Kerja Operator";
         $viewData["departments"] = Department::all();
         $viewData["operatorTypes"] = OperatorType::all();
         return view('superadmin.report.index')->with("viewData", $viewData);

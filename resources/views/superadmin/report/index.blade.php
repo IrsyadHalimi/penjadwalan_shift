@@ -16,7 +16,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header pb-0">
-                <h4 class="card-title">Data Jadwal</h4>
+                <h4 class="card-title">{{ $viewData['subtitle'] }}</h4>
                 <p>
                     Cetak seluruh jadwal shift kerja operator ke file PDF yang terdapat pada perusahaan
                 </p>

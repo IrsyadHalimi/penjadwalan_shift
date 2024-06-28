@@ -13,8 +13,8 @@ class SuperadminProfileController extends Controller
   {
     $id = Auth::user()->id;
     $viewData = [];
-    $viewData["title"] = "Profil - Penjadwalan Shift";
-    $viewData["subtitle"] = "Daftar Perusahaan";
+    $viewData["title"] = "Profil - Penjadwalan Shift Kerja Operator";
+    $viewData["subtitle"] = "Profil";
     $viewData["profile"] = User::where('id', $id)->get();
     return view('superadmin.profile.index')->with("viewData", $viewData);
   }
@@ -22,7 +22,7 @@ class SuperadminProfileController extends Controller
   public function edit($id)
   {
     $viewData = [];
-    $viewData["title"] = "Superadmin - Edit Profil";
+    $viewData["title"] = "Profil - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Edit Profil";
     $viewData["profile"] = User::findOrFail($id);
     return view('superadmin.profile.edit')->with("viewData", $viewData);

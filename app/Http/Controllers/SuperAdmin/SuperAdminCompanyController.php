@@ -13,7 +13,7 @@ class SuperadminCompanyController extends Controller
   public function index()
   {
     $viewData = [];
-    $viewData["title"] = "Perusahaan - Penjadwalan Shift";
+    $viewData["title"] = "Perusahaan - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Daftar Perusahaan";
     $viewData["company"] = Company::paginate(10);
     return view('superadmin.company.index')->with("viewData", $viewData);
@@ -22,7 +22,7 @@ class SuperadminCompanyController extends Controller
   public function create()
   {
     $viewData = [];
-    $viewData["title"] = "Perusahaan - Penjadwalan Shift";
+    $viewData["title"] = "Perusahaan - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Tambah Perusahaan";
     return view('superadmin.company.create')->with("viewData", $viewData);
   }
@@ -45,7 +45,7 @@ class SuperadminCompanyController extends Controller
   public function edit($id)
   {
     $viewData = [];
-    $viewData["title"] = "Admin - Edit Perusahaan";
+    $viewData["title"] = "Perusahaan - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Edit Perusahaan";
     $viewData["company"] = Company::findOrFail($id);
     return view('superadmin.company.edit')->with("viewData", $viewData);

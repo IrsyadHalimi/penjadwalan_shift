@@ -17,7 +17,7 @@
             <div class="col-md-12 col-12">
                 <div class="card">
                     <div class="card-header pb-0">
-                        <h4 class="card-title">Tambah Data Supervisor Baru</h4>
+                        <h4 class="card-title">{{ $viewData['subtitle'] }}</h4>
                         <p>
                             Formulir dibawah berfungsi untuk menambahkan data supervisor baru kedalam salah satu departemen di perusahaan
                         </p>

@@ -16,7 +16,7 @@ class AdminSupervisorController extends Controller
   public function index()
   {
     $viewData = [];
-    $viewData["title"] = "Admin - Penjadwalan Shift";
+    $viewData["title"] = "Supervisor - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Daftar Supervisor";
     return view('admin.supervisor.index')->with("viewData", $viewData);
   }
@@ -87,7 +87,7 @@ class AdminSupervisorController extends Controller
     $companyId = Auth::user()->company_id;
 
     $viewData = [];
-    $viewData["title"] = " Tambah Supervisor- Penjadwalan Shift";
+    $viewData["title"] = " Supervisor - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Tambah Supervisor";
     $viewData["departments"] = Department::where('company_id', $companyId)->get();
     return view('admin.supervisor.create')->with("viewData", $viewData);
@@ -124,7 +124,7 @@ class AdminSupervisorController extends Controller
     $companyId = Auth::user()->company_id;
 
     $viewData = [];
-    $viewData["title"] = "Admin - Edit Supervisor";
+    $viewData["title"] = "Supervisor - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Edit Supervisor";
     $viewData["supervisor"] = User::findOrFail($id);
     $viewData["departments"] = Department::where('company_id', $companyId)->get();

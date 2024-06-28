@@ -19,7 +19,7 @@ class AdminOperatorController extends Controller
   public function index()
   {
     $viewData = [];
-    $viewData["title"] = "Operator - Penjadwalan Shift";
+    $viewData["title"] = "Operator - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Daftar Operator";
     return view('admin.operator.index')->with("viewData", $viewData);
   }
@@ -95,7 +95,7 @@ class AdminOperatorController extends Controller
     $departmentId = Department::where('company_id', $companyId)->pluck('id')->toArray();
     
     $viewData = [];
-    $viewData["title"] = " Tambah Operator- Penjadwalan Shift";
+    $viewData["title"] = " Tambah Operator - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Tambah Operator";
     $viewData["departments"] = Department::where('company_id', $companyId)->get();
     $viewData["operator_type"] = OperatorType::whereIn('department_id', $departmentId)->get();
@@ -135,7 +135,7 @@ class AdminOperatorController extends Controller
     $departmentId = Department::where('company_id', $companyId)->pluck('id')->toArray();
     
     $viewData = [];
-    $viewData["title"] = "Admin - Edit Operator";
+    $viewData["title"] = "Operator - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Edit Operator";
     $viewData["operator"] = User::findOrFail($id);
     $viewData["departments"] = Department::where('company_id', $companyId)->get();

@@ -18,7 +18,7 @@ class SuperadminCompanyAdminController extends Controller
   public function index()
   {
     $viewData = [];
-    $viewData["title"] = "Admin Perusahaan - Penjadwalan Shift";
+    $viewData["title"] = "Admin Perusahaan - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Daftar Admin Perusahaan";
     $viewData["company"] = Company::all();
     $viewData["company_admin"] = User::where('role', 'admin')->get();
@@ -88,7 +88,7 @@ class SuperadminCompanyAdminController extends Controller
     $departmentId = Department::where('company_id', $companyId)->pluck('id')->toArray();
     
     $viewData = [];
-    $viewData["title"] = " Tambah Admin Perusahaan- Penjadwalan Shift";
+    $viewData["title"] = " Admin Perusahaan - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Tambah Admin Perusahaan";
     $viewData["company"] = Company::all();
     return view('superadmin.company_admin.create')->with("viewData", $viewData);
@@ -122,7 +122,7 @@ class SuperadminCompanyAdminController extends Controller
   public function edit($id)
   {
     $viewData = [];
-    $viewData["title"] = "Superadmin - Edit Admin Perusahaan";
+    $viewData["title"] = "Admin Perusahaan - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Edit Admin Perusahaan";
     $viewData["company_admin"] = User::findOrFail($id);
     return view('superadmin.company_admin.edit')->with("viewData", $viewData);

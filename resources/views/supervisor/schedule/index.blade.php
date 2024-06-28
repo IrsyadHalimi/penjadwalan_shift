@@ -6,7 +6,7 @@
   <div class="col-12">
       <div class="card">
         <div class="card-header">
-            <h4 class="card-title">Jadwal Shift Kerja</h4>
+            <h4 class="card-title">{{ $viewData['subtitle'] }}</h4>
             <p>Keterangan Label Shift</p>
             <div class="row">
                 @foreach ($viewData['shift'] as $shifts)

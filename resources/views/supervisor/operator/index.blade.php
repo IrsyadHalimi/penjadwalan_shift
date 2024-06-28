@@ -6,7 +6,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header pb-0">
-                <h4 class="card-title">Data Operator</h4>
+                <h4 class="card-title">{{ $viewData['subtitle'] }}</h4>
                 <p>
                     Data dalam tabel dibawah merupakan seluruh data operator kerja operator dari departemen {{ $viewData['department_data']->getDepartmentName() }}
                 </p>

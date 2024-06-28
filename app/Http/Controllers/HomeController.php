@@ -11,20 +11,12 @@ class HomeController extends Controller
     public function index()
     {
         $viewData = [];
-        $viewData["title"] = "Home - Penjadwalan Shift";
+        $viewData["title"] = "Login - Penjadwalan Shift Kerja Operator";
         $viewData["subtitle"] = "Home";
         if (Auth::user()) {
             return response()->noContent();
         } else {
             return view('auth.login')->with("viewData", $viewData);
         }
-    }
-    
-    public function error()
-    {
-        $viewData = [];
-        $viewData["title"] = "Home - Penjadwalan Shift";
-        $viewData["subtitle"] = "Home";
-        return view('error.error404')->with("viewData", $viewData);
     }
 }

@@ -22,8 +22,8 @@ class OperatorScheduleController extends Controller
         $shiftId = Shift::where('department_id', $departmentId)->pluck('id')->toArray();
         
         $viewData = [];
-        $viewData["title"] = "Jadwal - Penjadwalan Shift";
-        $viewData["subtitle"] = "Daftar Jadwal Kerja";
+        $viewData["title"] = "Jadwal - Penjadwalan Shift Kerja Operator";
+        $viewData["subtitle"] = "Jadwal";
         $viewData["shift"] = Shift::whereIn('id', $shiftId)->get();
         return view('operator.schedule.index')->with("viewData", $viewData);
     }

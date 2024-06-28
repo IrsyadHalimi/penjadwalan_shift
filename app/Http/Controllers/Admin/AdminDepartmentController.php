@@ -15,7 +15,7 @@ class AdminDepartmentController extends Controller
   {
     $companyId = Auth::user()->company_id;
     $viewData = [];
-    $viewData["title"] = "Departemen - Penjadwalan Shift";
+    $viewData["title"] = "Departemen - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Daftar Departemen";
     $viewData["departments"] = Department::where('company_id', $companyId)->paginate(10);
     return view('admin.department.index')->with("viewData", $viewData);
@@ -24,7 +24,7 @@ class AdminDepartmentController extends Controller
   public function create()
   {
     $viewData = [];
-    $viewData["title"] = "Departemen - Penjadwalan Shift";
+    $viewData["title"] = "Departemen - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Tambah Departemen";
     return view('admin.department.create')->with("viewData", $viewData);
   }
@@ -48,7 +48,7 @@ class AdminDepartmentController extends Controller
   public function edit($id)
   {
     $viewData = [];
-    $viewData["title"] = "Admin - Edit Departemen";
+    $viewData["title"] = "Departemen - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Edit Departemen";
     $viewData["departments"] = Department::findOrFail($id);
     return view('admin.department.edit')->with("viewData", $viewData);

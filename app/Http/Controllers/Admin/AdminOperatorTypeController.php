@@ -18,7 +18,7 @@ class AdminOperatorTypeController extends Controller
     $departmentId = Department::where('company_id', $companyId)->pluck('id')->toArray();
 
     $viewData = [];
-    $viewData["title"] = "Jenis Operator - Penjadwalan Shift";
+    $viewData["title"] = "Jenis Operator - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Daftar Jenis Operator";
     $viewData["operator_type"] = OperatorType::whereIn('department_id', $departmentId)->paginate(10);
     return view('admin.operator_type.index')->with("viewData", $viewData);
@@ -29,7 +29,7 @@ class AdminOperatorTypeController extends Controller
     $companyId = Auth::user()->company_id;
 
     $viewData = [];
-    $viewData["title"] = "Jenis Operator - Penjadwalan Shift";
+    $viewData["title"] = "Jenis Operator - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Tambah Jenis Operator";
     $viewData["departments"] = Department::where('company_id', $companyId)->get();
     return view('admin.operator_type.create')->with("viewData", $viewData);
@@ -56,7 +56,7 @@ class AdminOperatorTypeController extends Controller
     $companyId = Auth::user()->company_id;
     
     $viewData = [];
-    $viewData["title"] = "Admin - Edit Jenis Operator";
+    $viewData["title"] = "Jenis Operator - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Edit Jenis Operator";
     $viewData["operator_type"] = OperatorType::findOrFail($id);
     $viewData["departments"] = Department::where('company_id', $companyId)->get();

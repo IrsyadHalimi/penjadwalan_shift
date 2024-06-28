@@ -14,7 +14,7 @@ class SuperadminSupervisorController extends Controller
   public function index()
   {
     $viewData = [];
-    $viewData["title"] = "Supervisor - Penjadwalan Shift";
+    $viewData["title"] = "Supervisor - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Daftar Supervisor";
     return view('superadmin.supervisor.index')->with("viewData", $viewData);
   }
@@ -87,7 +87,7 @@ class SuperadminSupervisorController extends Controller
   public function create()
   {
     $viewData = [];
-    $viewData["title"] = " Tambah Supervisor- Penjadwalan Shift";
+    $viewData["title"] = "Supervisor - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Tambah Supervisor";
     return view('superadmin.supervisor.create')->with("viewData", $viewData);
   }
@@ -121,7 +121,7 @@ class SuperadminSupervisorController extends Controller
   public function edit($id)
   {
     $viewData = [];
-    $viewData["title"] = "Admin - Edit Supervisor";
+    $viewData["title"] = "Supervisor - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Edit Supervisor";
     $viewData["supervisor"] = User::findOrFail($id);
     return view('superadmin.supervisor.edit')->with("viewData", $viewData);

@@ -19,8 +19,8 @@ class AdminShiftController extends Controller
     $departmentId = Department::where('company_id', $companyId)->pluck('id')->toArray();
 
     $viewData = [];
-    $viewData["title"] = "Shift - Penjadwalan Shift";
-    $viewData["subtitle"] = "Daftar Shift Kerja";
+    $viewData["title"] = "Shift - Penjadwalan Shift Kerja Operator";
+    $viewData["subtitle"] = "Daftar Shift";
     $viewData['shift'] = Shift::whereIn('department_id', $departmentId)->paginate(10);
     return view('admin.shift.index')->with("viewData", $viewData);
   }
@@ -30,8 +30,8 @@ class AdminShiftController extends Controller
     $companyId = Auth::user()->company_id;
 
     $viewData = [];
-    $viewData["title"] = "Shift - Penjadwalan Shift";
-    $viewData["subtitle"] = "Tambah Shift Kerja";
+    $viewData["title"] = "Shift - Penjadwalan Shift Kerja Operator";
+    $viewData["subtitle"] = "Tambah Shift";
     $viewData["departments"] = Department::where('company_id', $companyId)->get();
     return view('admin.shift.create')->with("viewData", $viewData);
   }
@@ -59,8 +59,8 @@ class AdminShiftController extends Controller
     $companyId = Auth::user()->company_id;
     
     $viewData = [];
-    $viewData["title"] = "Admin - Edit Shift";
-    $viewData["subtitle"] = "Edit Shift Kerja";
+    $viewData["title"] = "Shift - Penjadwalan Shift Kerja Operator";
+    $viewData["subtitle"] = "Edit Shift";
     $viewData["shift"] = Shift::findOrFail($id);
     return view('admin.shift.edit')->with("viewData", $viewData);
   }

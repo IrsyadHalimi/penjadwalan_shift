@@ -17,7 +17,7 @@
             <div class="col-md-12 col-12">
                 <div class="card">
                     <div class="card-header pb-0">
-                        <h4 class="card-title">Tambah Data Jadwal Baru</h4>
+                        <h4 class="card-title">{{ $viewData['subtitle'] }}</h4>
                         <p>
                             Formulir dibawah mfjkabfa untuk menambahkan data jadwal baru kedalam salah satu departemen di perusahaan
                         </p>

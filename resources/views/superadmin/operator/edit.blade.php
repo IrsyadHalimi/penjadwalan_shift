@@ -20,7 +20,7 @@
             <div class="col-md-12 col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Horizontal Form</h4>
+                        <h4 class="card-title">{{ $viewData['subtitle'] }}</h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">

@@ -18,8 +18,8 @@ class AdminReportController extends Controller
     {
         $companyId = Auth::user()->company_id;
         $viewData = [];
-        $viewData["title"] = "Laporan - Penjadwalan Shift";
-        $viewData["subtitle"] = "Laporan Jadwal Kerja";
+        $viewData["title"] = "Laporan - Penjadwalan Shift Kerja Operator";
+        $viewData["subtitle"] = "Laporan Jadwal Shift Kerja Operator";
         $viewData["departments"] = Department::where('company_id', $companyId)->get();
         $viewData["operatorTypes"] = OperatorType::all();
         return view('admin.report.index')->with("viewData", $viewData);

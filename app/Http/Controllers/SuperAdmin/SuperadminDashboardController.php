@@ -18,7 +18,7 @@ class SuperadminDashboardController extends Controller
   public function index()
   {
     $viewData = [];
-    $viewData["title"] = "Dasbor - Penjadwalan Shift";
+    $viewData["title"] = "Dasbor - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Dasbor Superadmin";
     
     $viewData["company"] = Company::count();

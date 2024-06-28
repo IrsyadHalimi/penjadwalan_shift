@@ -14,8 +14,8 @@ class SupervisorProfileController extends Controller
   {
     $id = Auth::user()->id;
     $viewData = [];
-    $viewData["title"] = "Profil - Penjadwalan Shift";
-    $viewData["subtitle"] = "Daftar Perusahaan";
+    $viewData["title"] = "Profil - Penjadwalan Shift Kerja Operator";
+    $viewData["subtitle"] = "Profil";
     $viewData["profile"] = User::where('id', $id)->get();
     return view('supervisor.profile.index')->with("viewData", $viewData);
   }

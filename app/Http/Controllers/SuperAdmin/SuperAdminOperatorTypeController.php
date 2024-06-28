@@ -14,7 +14,7 @@ class SuperadminOperatorTypeController extends Controller
   public function index()
   {
     $viewData = [];
-    $viewData["title"] = "Jenis Operator - Penjadwalan Shift";
+    $viewData["title"] = "Jenis Operator - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Daftar Jenis Operator";
     $viewData["operator_type"] = OperatorType::all();
     return view('superadmin.operator_type.index')->with("viewData", $viewData);
@@ -23,7 +23,7 @@ class SuperadminOperatorTypeController extends Controller
   public function create()
   {
     $viewData = [];
-    $viewData["title"] = "Jenis Operator - Penjadwalan Shift";
+    $viewData["title"] = "Jenis Operator - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Tambah Jenis Operator";
     $viewData["departments"] = Department::all();
     return view('superadmin.operator_type.create')->with("viewData", $viewData);
@@ -48,7 +48,7 @@ class SuperadminOperatorTypeController extends Controller
   public function edit($id)
   {
     $viewData = [];
-    $viewData["title"] = "Superadmin - Edit Jenis Operator";
+    $viewData["title"] = "Jenis Operator - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Edit Jenis Operator";
     $viewData["operator_type"] = OperatorType::findOrFail($id);
     return view('superadmin.operator_type.edit')->with("viewData", $viewData);

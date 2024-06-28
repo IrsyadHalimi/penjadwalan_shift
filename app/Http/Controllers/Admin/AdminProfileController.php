@@ -13,8 +13,8 @@ class AdminProfileController extends Controller
   {
     $id = Auth::user()->id;
     $viewData = [];
-    $viewData["title"] = "Profil - Penjadwalan Shift";
-    $viewData["subtitle"] = "Daftar Perusahaan";
+    $viewData["title"] = "Profil - Penjadwalan Shift Kerja Operator";
+    $viewData["subtitle"] = "Profil";
     $viewData["profile"] = User::where('id', $id)->get();
     return view('admin.profile.index')->with("viewData", $viewData);
   }
@@ -22,7 +22,7 @@ class AdminProfileController extends Controller
   public function edit($id)
   {
     $viewData = [];
-    $viewData["title"] = "Admin - Edit Profil";
+    $viewData["title"] = "Profil - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Edit Profil";
     $viewData["profile"] = User::findOrFail($id);
     return view('admin.profile.edit')->with("viewData", $viewData);

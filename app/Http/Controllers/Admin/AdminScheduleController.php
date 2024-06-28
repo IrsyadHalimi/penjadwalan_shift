@@ -20,8 +20,8 @@ class AdminScheduleController extends Controller
     public function index()
     {
         $viewData = [];
-        $viewData["title"] = "Jadwal - Penjadwalan Shift";
-        $viewData["subtitle"] = "Daftar Jadwal Kerja";
+        $viewData["title"] = "Jadwal - Penjadwalan Shift Kerja Operator";
+        $viewData["subtitle"] = "Daftar Jadwal";
         return view('admin.schedule.index')->with("viewData", $viewData);
     }
 
@@ -31,7 +31,7 @@ class AdminScheduleController extends Controller
         $departmentId = Department::where('company_id', $companyId)->pluck('id')->toArray();
         
         $viewData = [];
-        $viewData["title"] = " Tambah Jadwal- Penjadwalan Shift";
+        $viewData["title"] = " Jadwal - Penjadwalan Shift Kerja Operator";
         $viewData["subtitle"] = "Tambah Jadwal";
         $viewData["departments"] = Department::where('company_id', $companyId)->get();
         $viewData["operators"] = User::whereIn('department_id', $departmentId)->get();
@@ -61,8 +61,8 @@ class AdminScheduleController extends Controller
         $viewData["shifts"] = Shift::whereIn('department_id', $departmentId)->get();
         
         $viewData = [];
-        $viewData["title"] = "Admin - Edit Jadwal";
-        $viewData["subtitle"] = "Edit Jadwal Kerja";
+        $viewData["title"] = "Jadwal - Penjadwalan Shift Kerja Operator";
+        $viewData["subtitle"] = "Edit Jadwal";
         $viewData["schedule"] = Schedule::findOrFail($id);
         $viewData["departments"] = Department::where('company_id', $companyId)->get();
         return view('admin.schedule.edit')->with("viewData", $viewData);

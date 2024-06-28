@@ -15,7 +15,7 @@ class SuperadminDepartmentController extends Controller
   public function index()
   {
     $viewData = [];
-    $viewData["title"] = "Departemen - Penjadwalan Shift";
+    $viewData["title"] = "Departemen - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Daftar Departemen";
     return view('superadmin.department.index')->with("viewData", $viewData);
   }
@@ -23,7 +23,7 @@ class SuperadminDepartmentController extends Controller
   public function create()
   {
     $viewData = [];
-    $viewData["title"] = "Departemen - Penjadwalan Shift";
+    $viewData["title"] = "Departemen - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Tambah Departemen";
     $viewData["company"] = Company::all();
     return view('superadmin.department.create')->with("viewData", $viewData);
@@ -47,7 +47,7 @@ class SuperadminDepartmentController extends Controller
   public function edit($id)
   {
     $viewData = [];
-    $viewData["title"] = "Superadmin - Edit Departemen";
+    $viewData["title"] = "Departemen - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Edit Departemen";
     $viewData["departments"] = Department::findOrFail($id);
     return view('superadmin.department.edit')->with("viewData", $viewData);

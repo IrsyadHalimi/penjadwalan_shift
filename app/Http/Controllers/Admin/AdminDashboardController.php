@@ -22,7 +22,7 @@ class AdminDashboardController extends Controller
     $userId = User::where('company_id', $companyId)->pluck('id')->toArray();
 
     $viewData = [];
-    $viewData["title"] = "Dasbor - Penjadwalan Shift";
+    $viewData["title"] = "Dasbor - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Dasbor Admin";
     
     $viewData["company"] = Company::where('id', $companyId)->get();

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Superadmin;
 use App\Notifications\ScheduleUpdatedNotification;
+use App\Notifications\ScheduleChangedNotification;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Http\Request;
@@ -19,15 +21,15 @@ class SuperadminScheduleController extends Controller
     public function index()
     {
         $viewData = [];
-        $viewData["title"] = "Jadwal - Penjadwalan Shift";
-        $viewData["subtitle"] = "Daftar Jadwal Kerja";
+        $viewData["title"] = "Jadwal - Penjadwalan Shift Kerja Operator";
+        $viewData["subtitle"] = "Daftar Jadwal";
         return view('superadmin.schedule.index')->with("viewData", $viewData);
     }
 
     public function create()
     {
         $viewData = [];
-        $viewData["title"] = " Tambah Jadwal- Penjadwalan Shift";
+        $viewData["title"] = "Jadwal - Penjadwalan Shift Kerja Operator";
         $viewData["subtitle"] = "Tambah Jadwal";
         $viewData["departments"] = Department::all();
         $viewData["operators"] = User::all();
@@ -52,8 +54,8 @@ class SuperadminScheduleController extends Controller
     public function edit($id)
     {
         $viewData = [];
-        $viewData["title"] = "Admin - Edit Jadwal";
-        $viewData["subtitle"] = "Edit Jadwal Kerja";
+        $viewData["title"] = "Jadwal - Penjadwalan Shift Kerja Operator";
+        $viewData["subtitle"] = "Edit Jadwal";
         $viewData["schedule"] = Schedule::findOrFail($id);
         return view('superadmin.schedule.edit')->with("viewData", $viewData);
     }
@@ -64,17 +66,57 @@ class SuperadminScheduleController extends Controller
 
         $oldSchedule = $schedule->replicate();
 
+        $changedUserNotification = false;
+
+        if ($id != $request->user_id) {
+            $changedUserNotification = true;
+        }
+
         $schedule->setStartDate($request->input('start_date'));
         $schedule->setEndDate($request->input('end_date'));
         $schedule->setUserId($request->input('user_id'));
         $schedule->setShiftId($request->input('shift_id'));
         $schedule->save();
 
-        $newSchedule = $schedule->fresh();
-        $user = User::find($request->user_id);
-        $sender = Auth::user();
+        if ($changedUserNotification) {
+            $newSchedule = $schedule->fresh();
+            $sender = auth()->user();
+            $oldUser = User::find($oldSchedule->user_id);
+            $newUser = User::find($request->user_id);
+            
+            if ($oldUser) {
+                Notification::send($oldUser, new ScheduleChangedNotification(
+                    $sender->toArray(),
+                    $oldSchedule->toArray(),
+                    $newSchedule->toArray(),
+                    $oldUser->id,
+                    $newUser ? $newUser->id : null
+                ));
+            }
 
-        Notification::send($user, new ScheduleUpdatedNotification($sender->toArray(), $oldSchedule->toArray(), $newSchedule->toArray()));
+            if ($newUser) {
+                Notification::send($newUser, new ScheduleChangedNotification(
+                    $sender->toArray(),
+                    $oldSchedule->toArray(),
+                    $newSchedule->toArray(),
+                    $oldUser ? $oldUser->id : null,
+                    $newUser->id
+                ));
+            }
+        }else {
+            $newSchedule = $schedule->fresh();
+            $user = User::find($request->user_id);
+            $sender = Auth::user();
+            $operator = User::find($request->user_id);
+            
+            Notification::send($user, new ScheduleUpdatedNotification(
+                $sender->toArray(), 
+                $operator->toArray(), 
+                $oldSchedule->toArray(), 
+                $newSchedule->toArray()
+            ));
+        
+        }
 
         return redirect()->route('superadmin.schedule.index')->with('success', 'Data berhasil diperbarui.');
     }

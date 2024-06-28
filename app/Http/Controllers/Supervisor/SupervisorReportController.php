@@ -21,8 +21,8 @@ class SupervisorReportController extends Controller
         $companyId = Auth::user()->company_id;
         $departmentId = Auth::user()->department_id;
         $viewData = [];
-        $viewData["title"] = "Laporan - Penjadwalan Shift";
-        $viewData["subtitle"] = "Laporan Jadwal Kerja";
+        $viewData["title"] = "Laporan - Penjadwalan Shift Kerja Operator";
+        $viewData["subtitle"] = "Laporan Jadwal Shift Kerja Operator";
         $viewData["departments"] = Department::where('company_id', $companyId)->get();  
         $viewData["operator_type"] = OperatorType::where('department_id', $departmentId)->get();  
         return view('supervisor.report.index')->with("viewData", $viewData);

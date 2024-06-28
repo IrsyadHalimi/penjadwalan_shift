@@ -13,8 +13,8 @@ class AdminCompanyController extends Controller
   {
     $companyId = Auth::user()->company_id;
     $viewData = [];
-    $viewData["title"] = "Perusahaan - Penjadwalan Shift";
-    $viewData["subtitle"] = "Daftar Perusahaan";
+    $viewData["title"] = "Perusahaan - Penjadwalan Shift Kerja Operator";
+    $viewData["subtitle"] = "Data Perusahaan";
     $viewData["company"] = Company::where('id', $companyId)->get();
     return view('admin.company.index')->with("viewData", $viewData);
   }
@@ -22,7 +22,7 @@ class AdminCompanyController extends Controller
   public function edit($id)
   {
     $viewData = [];
-    $viewData["title"] = "Admin - Edit Perusahaan";
+    $viewData["title"] = "Perusahaan - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Edit Perusahaan";
     $viewData["company"] = Company::findOrFail($id);
     return view('admin.company.edit')->with("viewData", $viewData);
