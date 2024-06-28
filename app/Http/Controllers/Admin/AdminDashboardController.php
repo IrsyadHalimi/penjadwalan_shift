@@ -26,11 +26,11 @@ class AdminDashboardController extends Controller
     $viewData["subtitle"] = "Dasbor Admin";
     
     $viewData["company"] = Company::where('id', $companyId)->get();
-    $viewData["departments"] = Department::where('company_id', $companyId)->get();
+    $viewData["department"] = Department::where('company_id', $companyId)->count();
     $viewData["operator"] = User::where('role', 'operator')->where('company_id', $companyId)->count();
     $viewData["supervisor"] = User::where('role', 'supervisor')->where('company_id', $companyId)->count();
     $viewData["shift"] = Shift::whereIn('department_id', $departmentId)->count();
-    $viewData["operator_type"] = Company::where('id', $companyId)->get();
+    $viewData["operator_type"] = OperatorType::whereIn('department_id', $departmentId)->count();
     $viewData["schedule"] = Schedule::whereIn('user_id', $userId)->count();
     
     return view('admin.dashboard.index')->with("viewData", $viewData);
