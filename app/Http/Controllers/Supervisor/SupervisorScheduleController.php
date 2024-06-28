@@ -126,70 +126,70 @@ class SupervisorScheduleController extends Controller
     }
 
     public function update(Request $request, Schedule $schedule)
-{
-    if ($request->has('delete')) {
-        return $this->destroy($schedule);
-    }
-
-    $oldSchedule = $schedule->replicate();
-
-    $changedUserNotification = false;
-
-    if ($schedule->user_id != $request->user_id) {
-        $changedUserNotification = true;
-    }
-
-    $schedule->start_date = $request->start_date;
-    $schedule->end_date = $request->end_date;
-    $schedule->user_id = $request->user_id;
-    $schedule->shift_id = $request->shift_id;
-    $schedule->save();
-
-    if ($changedUserNotification) {
-        $newSchedule = $schedule->fresh();
-        $sender = auth()->user();
-        $oldUser = User::find($oldSchedule->user_id);
-        $newUser = User::find($request->user_id);
-
-        if ($oldUser) {
-            Notification::send($oldUser, new ScheduleChangedNotification(
-                $sender->toArray(),
-                $oldSchedule->toArray(),
-                $newSchedule->toArray(),
-                $oldUser->id,
-                $newUser ? $newUser->id : null
-            ));
+    {
+        if ($request->has('delete')) {
+            return $this->destroy($schedule);
         }
 
-        if ($newUser) {
-            Notification::send($newUser, new ScheduleChangedNotification(
-                $sender->toArray(),
-                $oldSchedule->toArray(),
-                $newSchedule->toArray(),
-                $oldUser ? $oldUser->id : null,
-                $newUser->id
-            ));
+        $oldSchedule = $schedule->replicate();
+
+        $changedUserNotification = false;
+
+        if ($schedule->user_id != $request->user_id) {
+            $changedUserNotification = true;
         }
-    } else {
-        $newSchedule = $schedule->fresh();
-        $user = User::find($request->user_id);
-        $sender = Auth::user();
-        $operator = User::find($request->user_id);
+
+        $schedule->start_date = $request->start_date;
+        $schedule->end_date = $request->end_date;
+        $schedule->user_id = $request->user_id;
+        $schedule->shift_id = $request->shift_id;
+        $schedule->save();
+
+        if ($changedUserNotification) {
+            $newSchedule = $schedule->fresh();
+            $sender = auth()->user();
+            $oldUser = User::find($oldSchedule->user_id);
+            $newUser = User::find($request->user_id);
+
+            if ($oldUser) {
+                Notification::send($oldUser, new ScheduleChangedNotification(
+                    $sender->toArray(),
+                    $oldSchedule->toArray(),
+                    $newSchedule->toArray(),
+                    $oldUser->id,
+                    $newUser ? $newUser->id : null
+                ));
+            }
+
+            if ($newUser) {
+                Notification::send($newUser, new ScheduleChangedNotification(
+                    $sender->toArray(),
+                    $oldSchedule->toArray(),
+                    $newSchedule->toArray(),
+                    $oldUser ? $oldUser->id : null,
+                    $newUser->id
+                ));
+            }
+        } else {
+            $newSchedule = $schedule->fresh();
+            $user = User::find($request->user_id);
+            $sender = Auth::user();
+            $operator = User::find($request->user_id);
+            
+            Notification::send($user, new ScheduleUpdatedNotification(
+                $sender->toArray(), 
+                $operator->toArray(), 
+                $oldSchedule->toArray(), 
+                $newSchedule->toArray()
+            ));
         
-        Notification::send($user, new ScheduleUpdatedNotification(
-            $sender->toArray(), 
-            $operator->toArray(), 
-            $oldSchedule->toArray(), 
-            $newSchedule->toArray()
-        ));
-    
-    }
+        }
 
-    return response()->json([
-        'status' => 'success',
-        'message' => 'Berhasil memperbarui data'
-    ]);
-}
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Berhasil memperbarui data'
+        ]);
+    }
 
     public function destroy(Schedule $schedule)
     {

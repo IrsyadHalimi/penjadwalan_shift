@@ -21,6 +21,8 @@ class ScheduleChangedNotification extends Notification implements ShouldQueue
     protected $role;
     protected $oldUserEmail;
     protected $newUserEmail;
+    protected $oldUserName;
+    protected $newUserName;
 
     /**
      * Create a new notification instance.
@@ -48,6 +50,8 @@ class ScheduleChangedNotification extends Notification implements ShouldQueue
 
         $this->oldUserEmail = $oldUser ? $oldUser->email : null;
         $this->newUserEmail = $newUser ? $newUser->email : null;
+        $this->oldUserName = $oldUser ? $oldUser->full_name : null;
+        $this->newUserName = $newUser ? $newUser->full_name : null;
 
         // Ambil informasi shift
         $this->oldShiftName = Shift::find($this->oldSchedule['shift_id'])->shift_name ?? 'Shift lama tidak ditemukan';
@@ -76,6 +80,8 @@ class ScheduleChangedNotification extends Notification implements ShouldQueue
         return (new MailMessage)
             ->subject('Perubahan Jadwal Shift Kerja Operator')
             ->line('Jadwal Shift Kerja Anda TELAH DIGANTI dengan Operator Lain oleh ' . $this->sender . ' (' . $this->role . '). Berikut adalah detail jadwal yang diganti:')
+            ->line('Operator Awal: ' . $this->oldUserName)
+            ->line('Operator Pengganti: ' . $this->newUserName)
             ->line('Shift (Lama): ' . $this->oldShiftName)
             ->line('Shift (Baru): ' . $this->newShiftName)
             ->line('Tanggal Mulai (Lama): ' . $this->oldSchedule['start_date'])
