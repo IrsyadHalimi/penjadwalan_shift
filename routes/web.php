@@ -167,8 +167,7 @@ Route::middleware('supervisor')->prefix('supervisor')->group(function() {
 
   Route::get('/report', 'App\Http\Controllers\Supervisor\SupervisorReportController@index')->name("supervisor.report.index");
   Route::get('/report/generateAllSchedulePdf', 'App\Http\Controllers\Supervisor\SupervisorReportController@generateAllSchedulePdf')->name("supervisor.report.generateAllSchedulePdf");
-  Route::post('/report/generateByOperatorTypePdf', 'App\Http\Controllers\Supervisor\SupervisorReportController@generateByOperatorTypePdf')->name("supervisor.report.generateByOperatorTypePdf");
-  Route::post('/report/generateByRangePdf', 'App\Http\Controllers\Supervisor\SupervisorReportController@generateByRangePdf')->name("supervisor.report.generateByRangePdf");
+  Route::post('/report/generatePdf', 'App\Http\Controllers\Supervisor\SupervisorReportController@generatePdf')->name("supervisor.report.generatePdf");
   
   Route::get('/operator', 'App\Http\Controllers\Supervisor\SupervisorOperatorController@index')->name("supervisor.operator.index");
 });

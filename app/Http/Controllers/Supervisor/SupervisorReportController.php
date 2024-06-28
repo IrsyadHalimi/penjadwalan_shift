@@ -23,7 +23,6 @@ class SupervisorReportController extends Controller
         $viewData = [];
         $viewData["title"] = "Laporan - Penjadwalan Shift Kerja Operator";
         $viewData["subtitle"] = "Laporan Jadwal Shift Kerja Operator";
-        $viewData["departments"] = Department::where('company_id', $companyId)->get();  
         $viewData["operator_type"] = OperatorType::where('department_id', $departmentId)->get();  
         return view('supervisor.report.index')->with("viewData", $viewData);
     }
@@ -51,62 +50,41 @@ class SupervisorReportController extends Controller
         return $pdf->stream('jadwal.pdf');
     }
 
-    public function generateByOperatorTypePdf(Request $request)
+    public function generatePdf(Request $request)
     {
         $request->validate([
-            'department_id' => 'required',
-            'operator_type_id' => 'required',
-        ]);
-        
-        $departmentId = $request->department_id;
-        $operatorTypeId = $request->operator_type_id;
-
-        $companyId = Auth::user()->company_id;
-        
-        $departmentData = Department::where('id', $departmentId)->first();
-        $operatorTypeData = OperatorType::where('id', $operatorTypeId)->first();
-        
-        $departmentName = $departmentData->getDepartmentName();
-        $operatorTypeName = $operatorTypeData->getOperatorNameType();
-        
-        $shiftId = Shift::where('department_id', $departmentId)->pluck('id')->toArray();
-        $userId = User::where('company_id', $companyId)->where('role', 'operator')->where('operator_type_id', $operatorTypeId)->pluck('id')->toArray();
-
-        $schedules = Schedule::whereIn('user_id', $userId)
-        ->whereIn('shift_id', $shiftId)
-        ->with('user')
-        ->with('shift')
-        ->orderBy('start_date')
-        ->get();
-
-        $pdf = PDF::loadView('supervisor.report.generate-by-operator-type-pdf', compact('schedules', 'departmentName', 'operatorTypeName'));
-
-        return $pdf->stream('jadwal.pdf');
-    }
-
-    public function generateByRangePdf(Request $request)
-    {
-        $request->validate([
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
+            'operator_type_id' => 'nullable|exists:operator_types,id',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
         ]);
 
         $companyId = Auth::user()->company_id;
         $departmentId = Auth::user()->department_id;
+        $userQuery = User::where('company_id', $companyId)->where('role', 'operator');
 
-        $userId = User::where('company_id', $companyId)->where('department_id', $departmentId)->where('role', 'operator')->pluck('id')->toArray();
+        if ($request->filled('operator_type_id')) {
+            $userQuery->where('operator_type_id', $request->operator_type_id);
+        }
 
-        $schedules = Schedule::where(function($query) use ($request) {
-            $query->whereBetween('start_date', [$request->start_date, $request->end_date])
-            ->orWhereBetween('end_date', [$request->start_date, $request->end_date]);
-        })->whereIn('user_id', $userId)
-        ->with('user')
-        ->with('shift')
-        ->orderBy('start_date')
-        ->get();
+        $userId = $userQuery->pluck('id')->toArray();
+        $scheduleQuery = Schedule::whereIn('user_id', $userId)->with('user', 'shift');
 
-        $pdf = PDF::loadView('operator.schedule.pdf', compact('schedules'));
+        $shiftId = Shift::where('department_id', $departmentId)->pluck('id')->toArray();
+        $scheduleQuery->whereIn('shift_id', $shiftId);
 
-        return $pdf->stream('jadwal.pdf');
+        if ($request->filled('start_date') && $request->filled('end_date')) {
+            $scheduleQuery->where(function ($query) use ($request) {
+                $query->whereBetween('start_date', [$request->start_date, $request->end_date])
+                    ->orWhereBetween('end_date', [$request->start_date, $request->end_date]);
+            });
+        }
+
+        $schedules = $scheduleQuery->orderBy('start_date')->get();
+        $departmentName = Department::find($departmentId)->getDepartmentName();
+        $operatorTypeName = $request->filled('operator_type_id') ? OperatorType::find($request->operator_type_id)->getOperatorNameType() : 'Seluruh jenis operator';
+
+        $pdf = PDF::loadView('supervisor.report.generate-by-range-pdf', compact('schedules', 'departmentName', 'operatorTypeName'));
+
+        return $pdf->stream('jadwal.pdf'); 
     }
 }

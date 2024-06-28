@@ -43,11 +43,14 @@
 </head>
 <body>
   <div class="date">
-    Dicetak pada {{ \Carbon\Carbon::now()->format('d-m-Y') }}
+    Dicetak pada {{ \Carbon\Carbon::now()->format('H:i:s d-m-Y') }}
   </div>
   <h2>Penjadwalan Shift Kerja Operator</h2>
   <h1>{{ Auth::user()->company->company_name ?? 'N/A' }}</h1>
-  <h2>Seluruh Data Jadwal Shift Kerja Jenis Operator {{ $operatorTypeName }} Dalam Departemen {{ $departmentName }}</h2>
+  <h2>Data Jadwal Shift Kerja Operator<br>
+  Departemen: {{ $departmentName }}<br>
+  Jenis Operator: {{ $operatorTypeName }}<br>
+  Berdasarkan rentang waktu dari {{ \Carbon\Carbon::parse(request('start_date'))->format('d-m-Y') }} hingga {{ \Carbon\Carbon::parse(request('end_date'))->format('d-m-Y') }}</h2>
   <table class="table table-bordered">
     <thead>
       <tr>
