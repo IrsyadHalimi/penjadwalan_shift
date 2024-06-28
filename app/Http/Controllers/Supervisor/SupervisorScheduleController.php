@@ -141,8 +141,9 @@ class SupervisorScheduleController extends Controller
         $newSchedule = $schedule->fresh();
         $user = User::find($request->user_id);
         $sender = Auth::user();
+        $operator = User::find($request->user_id);
         
-        Notification::send($user, new ScheduleUpdatedNotification($sender->toArray(), $oldSchedule->toArray(), $newSchedule->toArray()));
+        Notification::send($user, new ScheduleUpdatedNotification($sender->toArray(), $operator->toArray(), $oldSchedule->toArray(), $newSchedule->toArray()));
 
         return response()->json([
             'status' => 'success',
