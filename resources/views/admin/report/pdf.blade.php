@@ -55,6 +55,7 @@
         <th>Tanggal Mulai</th>
         <th>Tanggal Selesai</th>
         <th>Operator</th>
+        <th>ID Departemen</th>
         <th>Shift</th>
       </tr>
     </thead>
@@ -67,6 +68,7 @@
         <td>{{ \Carbon\Carbon::parse($schedule->start_date)->format('d-m-Y') }}</td>
         <td>{{ \Carbon\Carbon::parse($schedule->end_date)->format('d-m-Y') }}</td>
         <td>{{ $schedule->user->full_name }}</td>
+        <td>{{ $schedule->user->department_id }}</td>
         <td>{{ $schedule->shift->shift_name }}</td>
       </tr>
       @endforeach

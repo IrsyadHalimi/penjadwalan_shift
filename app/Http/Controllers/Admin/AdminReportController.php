@@ -73,11 +73,11 @@ class AdminReportController extends Controller
         }
 
         $schedules = $scheduleQuery->orderBy('start_date')->get();
-        $departmentName = $request->filled('department_id') ? Department::find($request->department_id)->getDepartmentName() : null;
-        $operatorTypeName = $request->filled('operator_type_id') ? OperatorType::find($request->operator_type_id)->getOperatorNameType() : null;
+        $departmentName = $request->filled('department_id') ? Department::find($request->department_id)->getDepartmentName() : 'Seluruh departemen';
+        $operatorTypeName = $request->filled('operator_type_id') ? OperatorType::find($request->operator_type_id)->getOperatorNameType() : 'Seluruh jenis operator';
 
-        $pdf = PDF::loadView('admin.report.pdf', compact('schedules', 'departmentName', 'operatorTypeName'));
+        $pdf = PDF::loadView('admin.report.generate-by-range-pdf', compact('schedules', 'departmentName', 'operatorTypeName'));
 
-        return $pdf->stream('jadwal.pdf');
+        return $pdf->stream('jadwal.pdf'); 
     }
 }

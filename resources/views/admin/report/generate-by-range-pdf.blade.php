@@ -47,7 +47,10 @@
   </div>
   <h2>Penjadwalan Shift Kerja Operator</h2>
   <h1>{{ Auth::user()->company->company_name ?? 'N/A' }}</h1>
-  <h2>Data Jadwal Shift Kerja Seluruh Operator dari {{ \Carbon\Carbon::parse(request('start_date'))->format('d-m-Y') }} hingga {{ \Carbon\Carbon::parse(request('end_date'))->format('d-m-Y') }}</h2>
+  <h2>Data Jadwal Shift Kerja Operator<br>
+  Departemen: {{ $departmentName }}<br>
+  Jenis Operator: {{ $operatorTypeName }}<br>
+  Berdasarkan rentang waktu dari {{ \Carbon\Carbon::parse(request('start_date'))->format('d-m-Y') }} hingga {{ \Carbon\Carbon::parse(request('end_date'))->format('d-m-Y') }}</h2>
   <table class="table table-bordered">
     <thead>
       <tr>
