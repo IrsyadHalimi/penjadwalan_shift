@@ -187,7 +187,7 @@ class SupervisorScheduleController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Berhasil memperbarui data'
+            'message' => 'Data berhasil diperbarui'
         ]);
     }
 

@@ -55,16 +55,18 @@
                                 <td>{{ optional($operator_types->department)->department_name ?? 'N/A'}}</td>
                                 <td>{{ $operator_types->getDescription() }}</td>
                                 <td>
-                                    <a class="btn icon btn-primary" href="{{route('admin.operator_type.edit', ['id'=> $operator_types->getId()])}}"><i class="bi-pen"></i></a>
-                                </td>    
+                                    <a class="btn icon btn-primary" href="#" data-url="{{route('admin.operator_type.edit', ['id'=> $operator_types->getId()]) }}" onclick="showConfirmationModal(event, 'edit')">
+                                        <i class="bi-pen"></i>
+                                    </a>
+                                </td>
                                 <td>
-                                    <form action="{{ route('admin.operator_type.delete', $operator_types->getId())}}" method="POST">
+                                    <form id="deleteForm-{{ $operator_types->getId() }}" action="{{ route('admin.operator_type.delete', $operator_types->getId())}}" method="POST" style="display: none;">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn icon btn-danger">
-                                            <i class="bi-trash"></i>
-                                        </button>
                                     </form>
+                                    <button class="btn icon btn-danger" data-form-id="deleteForm-{{ $operator_types->getId() }}" onclick="showConfirmationModal(event, 'delete')">
+                                        <i class="bi-trash"></i>
+                                    </button>
                                 </td>
                             </tr>
                             @endforeach

@@ -37,16 +37,18 @@
                     <td>{{ $company_admin->email }}</td>
                     <td>{{ $company_admin->phone_number }}</td>
                     <td>
-                        <a class="btn icon btn-primary" href="{{route('superadmin.company_admin.edit', ['id'=> $company_admin->id])}}"><i class="bi-pen"></i></a>
-                    </td>    
+                        <a class="btn icon btn-primary" href="#" data-url="{{ route('superadmin.company_admin.edit', ['id' => $company_admin->getId()]) }}" onclick="showConfirmationModal(event, 'edit')">
+                            <i class="bi-pen"></i>
+                        </a>
+                    </td>
                     <td>
-                        <form action="{{ route('superadmin.company_admin.delete', $company_admin->id)}}" method="POST">
+                        <form id="deleteForm-{{ $company_admin->getId() }}" action="{{ route('superadmin.company_admin.delete', $company_admin->getId())}}" method="POST" style="display: none;">
                             @csrf
                             @method('DELETE')
-                            <button class="btn icon btn-danger">
-                                <i class="bi-trash"></i>
-                            </button>
                         </form>
+                        <button class="btn icon btn-danger" data-form-id="deleteForm-{{ $company_admin->getId() }}" onclick="showConfirmationModal(event, 'delete')">
+                            <i class="bi-trash"></i>
+                        </button>
                     </td>
                 </tr>
             @endforeach

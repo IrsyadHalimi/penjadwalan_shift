@@ -18,7 +18,7 @@
             <div class="card-header pb-0">
                 <h4 class="card-title">{{ $viewData['subtitle'] }}</h4>
                 <p>
-                    Cetak seluruh jadwal shift kerja operator ke file PDF yang terdapat pada perusahaan
+                    Cetak seluruh jadwal shift kerja operator ke file PDF yang terdapat pada sistem
                 </p>
             </div>
             <div class="card-content">

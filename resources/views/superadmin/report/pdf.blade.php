@@ -46,15 +46,17 @@
     Dicetak pada {{ \Carbon\Carbon::now()->format('d-m-Y') }}
   </div>
   <h2>Penjadwalan Shift Kerja Operator</h2>
-  <h1>{{ Auth::user()->company->company_name ?? 'N/A' }}</h1>
-  <h2>Seluruh Data Jadwal Shift Kerja Operator</h2>
+  <h1>Superadmin</h1>
+  <h2>Seluruh Data Jadwal Shift Kerja Operator Pada Sistem</h2>
   <table class="table table-bordered">
     <thead>
       <tr>
         <th>No</th>
+        <th>ID Jadwal</th>
         <th>Tanggal Mulai</th>
         <th>Tanggal Selesai</th>
         <th>Operator</th>
+        <th>ID Shift</th>
         <th>Shift</th>
       </tr>
     </thead>
@@ -64,9 +66,11 @@
       @foreach($schedules as $schedule)
       <tr>
         <td>{{ ++$i }}</td>
+        <td>{{ $schedule->id }}</td>
         <td>{{ \Carbon\Carbon::parse($schedule->start_date)->format('d-m-Y') }}</td>
         <td>{{ \Carbon\Carbon::parse($schedule->end_date)->format('d-m-Y') }}</td>
         <td>{{ $schedule->user->full_name }}</td>
+        <td>{{ $schedule->shift_id }}</td>
         <td>{{ $schedule->shift->shift_name }}</td>
       </tr>
       @endforeach

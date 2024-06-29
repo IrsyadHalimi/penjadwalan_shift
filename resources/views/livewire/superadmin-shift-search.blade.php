@@ -32,16 +32,18 @@
                     <td>{{ optional($shift->department)->department_name ?? 'N/A'  }}</td>
                     <td>{{ $shift->description }}</td>
                     <td>
-                        <a class="btn icon btn-primary" href="{{route('superadmin.shift.edit', ['id'=> $shift->id])}}"><i class="bi-pen"></i></a>
-                    </td>    
+                        <a class="btn icon btn-primary" href="#" data-url="{{ route('superadmin.shift.edit', ['id' => $shift->getId()]) }}" onclick="showConfirmationModal(event, 'edit')">
+                            <i class="bi-pen"></i>
+                        </a>
+                    </td>
                     <td>
-                        <form action="{{ route('superadmin.shift.delete', $shift->id)}}" method="POST">
+                        <form id="deleteForm-{{ $shift->getId() }}" action="{{ route('superadmin.shift.delete', $shift->getId())}}" method="POST" style="display: none;">
                             @csrf
                             @method('DELETE')
-                            <button class="btn icon btn-danger">
-                                <i class="bi-trash"></i>
-                            </button>
                         </form>
+                        <button class="btn icon btn-danger" data-form-id="deleteForm-{{ $shift->getId() }}" onclick="showConfirmationModal(event, 'delete')">
+                            <i class="bi-trash"></i>
+                        </button>
                     </td>
                 </tr>
             @endforeach

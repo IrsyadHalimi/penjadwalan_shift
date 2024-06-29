@@ -36,16 +36,18 @@
                     <td>{{ $schedule->shift->shift_name }}</td>
                     <td><button class="btn btn-{{ $schedule->shift->label_color }} px-4"></button></td>
                     <td>
-                        <a class="btn icon btn-primary" href="{{route('admin.schedule.edit', ['id'=> $schedule->id])}}"><i class="bi-pen"></i></a>
-                    </td>    
+                        <a class="btn icon btn-primary" href="#" data-url="{{ route('admin.schedule.edit', ['id' => $schedule->getId()]) }}" onclick="showConfirmationModal(event, 'edit')">
+                            <i class="bi-pen"></i>
+                        </a>
+                    </td>
                     <td>
-                        <form action="{{ route('admin.schedule.delete', $schedule->id)}}" method="POST">
+                        <form id="deleteForm-{{ $schedule->getId() }}" action="{{ route('admin.schedule.delete', $schedule->getId())}}" method="POST" style="display: none;">
                             @csrf
                             @method('DELETE')
-                            <button class="btn icon btn-danger">
-                                <i class="bi-trash"></i>
-                            </button>
                         </form>
+                        <button class="btn icon btn-danger" data-form-id="deleteForm-{{ $schedule->getId() }}" onclick="showConfirmationModal(event, 'delete')">
+                            <i class="bi-trash"></i>
+                        </button>
                     </td>
                 </tr>
             @endforeach

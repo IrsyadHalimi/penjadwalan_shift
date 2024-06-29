@@ -32,16 +32,18 @@
                     <td>{{ $company->company_address }}</td>
                     <td>{{ $company->description }}</td>
                     <td>
-                        <a class="btn icon btn-primary" href="{{route('superadmin.company.edit', ['id'=> $company->id])}}"><i class="bi-pen"></i></a>
-                    </td>    
+                        <a class="btn icon btn-primary" href="#" data-url="{{ route('superadmin.company.edit', ['id' => $company->getId()]) }}" onclick="showConfirmationModal(event, 'edit')">
+                            <i class="bi-pen"></i>
+                        </a>
+                    </td>
                     <td>
-                        <form action="{{ route('superadmin.company.delete', $company->id)}}" method="POST">
+                        <form id="deleteForm-{{ $company->getId() }}" action="{{ route('superadmin.company.delete', $company->getId())}}" method="POST" style="display: none;">
                             @csrf
                             @method('DELETE')
-                            <button class="btn icon btn-danger">
-                                <i class="bi-trash"></i>
-                            </button>
                         </form>
+                        <button class="btn icon btn-danger" data-form-id="deleteForm-{{ $company->getId() }}" onclick="showConfirmationModal(event, 'delete')">
+                            <i class="bi-trash"></i>
+                        </button>
                     </td>
                 </tr>
             @endforeach

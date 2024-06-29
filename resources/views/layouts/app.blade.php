@@ -209,7 +209,7 @@
                                 </li>
                                 @elseif ($role === 'superadmin')
                                 <li class="sidebar-item  ">
-                                <a href="{{ route('superadmin.shift.index') }}" class='sidebar-link'>
+                                <a href="{{ route('superadmin.dashboard.index') }}" class='sidebar-link'>
                                     <i class="bi bi-grid-fill"></i>
                                     <span>Dasbor Superadmin</span>
                                 </a>
@@ -313,7 +313,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Apakah Anda yakin ingin menyimpan perubahan ini?
+                        Apakah Anda yakin ingin melanjutkan tindakan?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" id="cancelButton" data-bs-dismiss="modal">Batal</button>
@@ -322,7 +322,6 @@
                     </div>
                 </div>
                 </div>
-
                 <section class="section">
                     @yield('content')
                 </section>
@@ -343,8 +342,30 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
     integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    function showConfirmationModal(event, action) {
+        event.preventDefault();
+        var url, formId;
+
+        if (action === 'edit') {
+            url = event.currentTarget.getAttribute('data-url');
+        } else if (action === 'delete') {
+            formId = event.currentTarget.getAttribute('data-form-id');
+        }
+
+        $('#confirmationModal').modal('show');
+
+        document.getElementById('confirmButton').onclick = function () {
+            if (action === 'edit') {
+                window.location.href = url;
+            } else if (action === 'delete') {
+                document.getElementById(formId).submit();
+            }
+        }
+    }
+</script>
 @hasSection('inline-script')
-    @yield('inline-script')
+@yield('inline-script')
 @endif
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
 </script>
