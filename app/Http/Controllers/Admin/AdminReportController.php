@@ -36,7 +36,10 @@ class AdminReportController extends Controller
         ->orderBy('start_date')
         ->get();
 
-        $pdf = PDF::loadView('admin.report.pdf', compact('schedules'));
+        $scheduleCount = $schedules->count();
+        $operatorCount = Schedule::whereIn('user_id', $userId)->distinct('user_id')->count('user_id');
+
+        $pdf = PDF::loadView('admin.report.pdf', compact('schedules', 'scheduleCount', 'operatorCount'));
 
         return $pdf->stream('jadwal.pdf');
     }
@@ -75,8 +78,11 @@ class AdminReportController extends Controller
         $schedules = $scheduleQuery->orderBy('start_date')->get();
         $departmentName = $request->filled('department_id') ? Department::find($request->department_id)->getDepartmentName() : 'Seluruh departemen';
         $operatorTypeName = $request->filled('operator_type_id') ? OperatorType::find($request->operator_type_id)->getOperatorNameType() : 'Seluruh jenis operator';
+        
+        $scheduleCount = $scheduleQuery->count();
+        $operatorCount = $scheduleQuery->distinct('user_id')->count('user_id');
 
-        $pdf = PDF::loadView('admin.report.generate-by-range-pdf', compact('schedules', 'departmentName', 'operatorTypeName'));
+        $pdf = PDF::loadView('admin.report.generate-by-range-pdf', compact('schedules', 'departmentName', 'operatorTypeName', 'scheduleCount', 'operatorCount'));
 
         return $pdf->stream('jadwal.pdf'); 
     }

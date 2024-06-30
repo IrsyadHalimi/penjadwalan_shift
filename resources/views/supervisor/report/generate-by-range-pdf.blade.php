@@ -43,14 +43,17 @@
 </head>
 <body>
   <div class="date">
-    Dicetak pada {{ \Carbon\Carbon::now()->format('H:i:s d-m-Y') }}
+    Dicetak oleh {{ Auth::user()->full_name }} (supervisor) pada {{ \Carbon\Carbon::now()->format('H:i:s d-m-Y') }}
   </div>
   <h2>Penjadwalan Shift Kerja Operator</h2>
   <h1>{{ Auth::user()->company->company_name ?? 'N/A' }}</h1>
   <h2>Data Jadwal Shift Kerja Operator<br>
   Departemen: {{ $departmentName }}<br>
   Jenis Operator: {{ $operatorTypeName }}<br>
-  Berdasarkan rentang waktu dari {{ \Carbon\Carbon::parse(request('start_date'))->format('d-m-Y') }} hingga {{ \Carbon\Carbon::parse(request('end_date'))->format('d-m-Y') }}</h2>
+  Jumlah Jadwal: {{ $scheduleCount }}<br>
+  Jumlah Operator: {{ $operatorCount }}<br>
+  Berdasarkan rentang waktu dari {{ \Carbon\Carbon::parse(request('start_date'))->format('d-m-Y') }} hingga {{ \Carbon\Carbon::parse(request('end_date'))->format('d-m-Y') }}</h2><br>
+  * Data jadwal ini diurutkan dari tanggal mulai
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -58,6 +61,7 @@
         <th>Tanggal Mulai</th>
         <th>Tanggal Selesai</th>
         <th>Operator</th>
+        <th>ID Jenis Operator</th>
         <th>Shift</th>
       </tr>
     </thead>
@@ -70,12 +74,11 @@
         <td>{{ \Carbon\Carbon::parse($schedule->start_date)->format('d-m-Y') }}</td>
         <td>{{ \Carbon\Carbon::parse($schedule->end_date)->format('d-m-Y') }}</td>
         <td>{{ $schedule->user->full_name }}</td>
+        <td>{{ $schedule->user->operator_type_id }}</td>
         <td>{{ $schedule->shift->shift_name }}</td>
       </tr>
       @endforeach
     </tbody>
   </table>
-  <br>
-  * Data jadwal ini diurutkan dari tanggal mulai
 </body>
 </html>

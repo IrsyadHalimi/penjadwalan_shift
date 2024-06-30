@@ -34,7 +34,10 @@ class SuperadminReportController extends Controller
         ->orderBy('start_date')
         ->get();
 
-        $pdf = PDF::loadView('superadmin.report.pdf', compact('schedules'));
+        $scheduleCount = $schedules->count();
+        $operatorCount = Schedule::whereIn('user_id', $userId)->distinct('user_id')->count('user_id');
+
+        $pdf = PDF::loadView('superadmin.report.pdf', compact('schedules', 'operatorCount', 'scheduleCount'));
 
         return $pdf->stream('jadwal.pdf');
     }
@@ -49,8 +52,7 @@ class SuperadminReportController extends Controller
             'end_date' => 'nullable|date|after_or_equal:start_date',
         ]);
 
-        $companyId = $request->company_id;
-        $userQuery = User::where('company_id', $companyId)->where('role', 'operator');
+        $userQuery = User::where('role', 'operator');
 
         if ($request->filled('operator_type_id')) {
             $userQuery->where('operator_type_id', $request->operator_type_id);
@@ -77,11 +79,16 @@ class SuperadminReportController extends Controller
 
         $schedules = $scheduleQuery->orderBy('start_date')->get();
         
-        $departmentName = $request->filled('department_id') ? Department::find($request->department_id)->getDepartmentName() : null;
-        
-        $operatorTypeName = $request->filled('operator_type_id') ? OperatorType::find($request->operator_type_id)->getOperatorNameType() : null;
+        $companyName = $request->filled('company_id') ? Company::find($request->company_id)->getCompanyName() : 'Seluruh perusahaan';
 
-        $pdf = PDF::loadView('superadmin.report.pdf', compact('schedules', 'departmentName', 'operatorTypeName'));
+        $departmentName = $request->filled('department_id') ? Department::find($request->department_id)->getDepartmentName() : 'Seluruh departemen';
+        
+        $operatorTypeName = $request->filled('operator_type_id') ? OperatorType::find($request->operator_type_id)->getOperatorNameType() : 'Seluruh jenis operator';
+
+        $scheduleCount = $scheduleQuery->count();
+        $operatorCount = $scheduleQuery->distinct('user_id')->count('user_id');
+
+        $pdf = PDF::loadView('superadmin.report.generate-by-range-pdf', compact('schedules', 'companyName', 'departmentName', 'operatorTypeName', 'scheduleCount', 'operatorCount'));
 
         return $pdf->stream('jadwal.pdf');
     }

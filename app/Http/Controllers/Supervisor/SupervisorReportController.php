@@ -45,7 +45,11 @@ class SupervisorReportController extends Controller
         ->orderBy('start_date')
         ->get();
 
-        $pdf = PDF::loadView('supervisor.report.pdf', compact('schedules', 'departmentName'));
+        $scheduleCount = $schedules->count();
+        $operatorCount = Schedule::whereIn('user_id', $userId)->whereIn('shift_id', $shiftId)->distinct('user_id')->count('user_id');
+
+
+        $pdf = PDF::loadView('supervisor.report.pdf', compact('schedules', 'departmentName', 'scheduleCount', 'operatorCount'));
 
         return $pdf->stream('jadwal.pdf');
     }
@@ -83,7 +87,10 @@ class SupervisorReportController extends Controller
         $departmentName = Department::find($departmentId)->getDepartmentName();
         $operatorTypeName = $request->filled('operator_type_id') ? OperatorType::find($request->operator_type_id)->getOperatorNameType() : 'Seluruh jenis operator';
 
-        $pdf = PDF::loadView('supervisor.report.generate-by-range-pdf', compact('schedules', 'departmentName', 'operatorTypeName'));
+        $scheduleCount = $scheduleQuery->count();
+        $operatorCount = $scheduleQuery->distinct('user_id')->count('user_id');
+
+        $pdf = PDF::loadView('supervisor.report.generate-by-range-pdf', compact('schedules', 'departmentName', 'operatorTypeName', 'scheduleCount', 'operatorCount'));
 
         return $pdf->stream('jadwal.pdf'); 
     }

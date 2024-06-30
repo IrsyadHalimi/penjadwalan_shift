@@ -43,24 +43,26 @@
 </head>
 <body>
   <div class="date">
-    Dicetak oleh {{ Auth::user()->full_name }} (operator) pada {{ \Carbon\Carbon::now()->format('H:i:s d-m-Y') }}
+    Dicetak oleh {{ Auth::user()->full_name }} (superadmin) pada {{ \Carbon\Carbon::now()->format('H:i:s d-m-Y') }}
   </div>
+  <h1>Superadmin</h1>
   <h2>Penjadwalan Shift Kerja Operator</h2>
-  <h1>{{ Auth::user()->company->company_name ?? 'N/A' }}</h1>
-  <h2>Data Jadwal Shift Kerja Operator<br>
-  Jenis Operator: {{ Auth::user()->operatorType->operator_name_type }}<br>
-  Departemen: {{ Auth::user()->department->department_name ?? 'N/A' }}<br>
-  Jumlah Jadwal: {{ $scheduleCount }}<br>
-  Jumlah Operator: {{ $operatorCount }}<br>
-  Berdasarkan rentang waktu dari {{ \Carbon\Carbon::parse(request('start_date'))->format('d-m-Y') }} hingga {{ \Carbon\Carbon::parse(request('end_date'))->format('d-m-Y') }}</h2><br>
+  <h2>Data Jadwal Shift Kerja Operator berdasarkan rentang waktu dari {{ \Carbon\Carbon::parse(request('start_date'))->format('d-m-Y') }} hingga {{ \Carbon\Carbon::parse(request('end_date'))->format('d-m-Y') }}</h2>
+  <h3>Perusahaan: {{ $companyName }}<br>
+  Departemen: {{ $departmentName }}<br>
+  Jenis Operator: {{ $operatorTypeName }}<br>
+  Jumlah Jadwal: {{ $scheduleCount }} <br>
+  Jumlah Operator: {{ $operatorCount }}</h3> <br>
   * Data jadwal ini diurutkan dari tanggal mulai
   <table class="table table-bordered">
     <thead>
       <tr>
         <th>No</th>
+        <th>ID Jadwal</th>
         <th>Tanggal Mulai</th>
         <th>Tanggal Selesai</th>
         <th>Operator</th>
+        <th>ID Departemen</th>
         <th>Shift</th>
       </tr>
     </thead>
@@ -70,13 +72,16 @@
       @foreach($schedules as $schedule)
       <tr>
         <td>{{ ++$i }}</td>
+        <td>{{ $schedule->id }}</td>
         <td>{{ \Carbon\Carbon::parse($schedule->start_date)->format('d-m-Y') }}</td>
         <td>{{ \Carbon\Carbon::parse($schedule->end_date)->format('d-m-Y') }}</td>
         <td>{{ $schedule->user->full_name }}</td>
+        <td>{{ $schedule->user->department_id }}</td>
         <td>{{ $schedule->shift->shift_name }}</td>
       </tr>
       @endforeach
     </tbody>
   </table>
+  <br>
 </body>
 </html>
