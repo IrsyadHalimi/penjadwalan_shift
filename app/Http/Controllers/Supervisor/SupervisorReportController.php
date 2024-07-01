@@ -12,6 +12,7 @@ use App\Models\OperatorType;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use PDF;
+use Carbon\Carbon;
 
 
 class SupervisorReportController extends Controller
@@ -58,8 +59,8 @@ class SupervisorReportController extends Controller
     {
         $request->validate([
             'operator_type_id' => 'nullable|exists:operator_types,id',
-            'start_date' => 'nullable|date',
-            'end_date' => 'nullable|date|after_or_equal:start_date',
+            'start_date' => 'nullable|date_format:m-d-Y',
+            'end_date' => 'nullable|date_format:m-d-Y|after_or_equal:start_date',
         ]);
 
         $companyId = Auth::user()->company_id;
@@ -76,22 +77,24 @@ class SupervisorReportController extends Controller
         $shiftId = Shift::where('department_id', $departmentId)->pluck('id')->toArray();
         $scheduleQuery->whereIn('shift_id', $shiftId);
 
-        if ($request->filled('start_date') && $request->filled('end_date')) {
-            $scheduleQuery->where(function ($query) use ($request) {
-                $query->whereBetween('start_date', [$request->start_date, $request->end_date])
-                    ->orWhereBetween('end_date', [$request->start_date, $request->end_date]);
-            });
-        }
+        $startDate = Carbon::createFromFormat('m-d-Y', $request->start_date)->startOfDay()->toDateString();
+        $endDate = Carbon::createFromFormat('m-d-Y', $request->end_date)->endOfDay()->toDateString();
+
+        $scheduleQuery->where(function ($query) use ($startDate, $endDate) {
+            $query->whereBetween('start_date', [$startDate, $endDate])
+                ->orWhereBetween('end_date', [$startDate, $endDate]);
+        });
 
         $schedules = $scheduleQuery->orderBy('start_date')->get();
+
         $departmentName = Department::find($departmentId)->getDepartmentName();
         $operatorTypeName = $request->filled('operator_type_id') ? OperatorType::find($request->operator_type_id)->getOperatorNameType() : 'Seluruh jenis operator';
 
         $scheduleCount = $scheduleQuery->count();
         $operatorCount = $scheduleQuery->distinct('user_id')->count('user_id');
 
-        $pdf = PDF::loadView('supervisor.report.generate-by-range-pdf', compact('schedules', 'departmentName', 'operatorTypeName', 'scheduleCount', 'operatorCount'));
+        $pdf = PDF::loadView('supervisor.report.generate-by-range-pdf', compact('schedules', 'departmentName', 'operatorTypeName', 'scheduleCount', 'operatorCount', 'startDate', 'endDate'));
 
         return $pdf->stream('jadwal.pdf'); 
-    }
+    } 
 }

@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Superadmin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Schedule;
+use App\Models\Company;
 use App\Models\Department;
 use App\Models\Shift;
 use App\Models\User;
 use App\Models\OperatorType;
 use Illuminate\Support\Facades\Auth;
 use PDF;
+use Carbon\Carbon;
+
 
 class SuperadminReportController extends Controller
 {
@@ -48,12 +51,16 @@ class SuperadminReportController extends Controller
             'company_id' => 'nullable|exists:companies,id',
             'department_id' => 'nullable|exists:departments,id',
             'operator_type_id' => 'nullable|exists:operator_types,id',
-            'start_date' => 'nullable|date',
-            'end_date' => 'nullable|date|after_or_equal:start_date',
+            'start_date' => 'nullable|date_format:m-d-Y',
+            'end_date' => 'nullable|date_format:m-d-Y|after_or_equal:start_date',
         ]);
 
         $userQuery = User::where('role', 'operator');
 
+        if ($request->filled('company_id')) {
+            $userQuery->where('company_id', $request->company_id);
+        }
+        
         if ($request->filled('operator_type_id')) {
             $userQuery->where('operator_type_id', $request->operator_type_id);
         }
@@ -65,17 +72,14 @@ class SuperadminReportController extends Controller
             $shiftId = Shift::where('department_id', $request->department_id)->pluck('id')->toArray();
             $scheduleQuery->whereIn('shift_id', $shiftId);
         }
-        
-        if ($request->filled('company_id')) {
-            $userQuery->where('company_id', $request->company_id);
-        }
 
-        if ($request->filled('start_date') && $request->filled('end_date')) {
-            $scheduleQuery->where(function ($query) use ($request) {
-                $query->whereBetween('start_date', [$request->start_date, $request->end_date])
-                    ->orWhereBetween('end_date', [$request->start_date, $request->end_date]);
-            });
-        }
+        $startDate = Carbon::createFromFormat('m-d-Y', $request->start_date)->startOfDay()->toDateString();
+        $endDate = Carbon::createFromFormat('m-d-Y', $request->end_date)->endOfDay()->toDateString();
+
+        $scheduleQuery->where(function ($query) use ($startDate, $endDate) {
+            $query->whereBetween('start_date', [$startDate, $endDate])
+                ->orWhereBetween('end_date', [$startDate, $endDate]);
+        });
 
         $schedules = $scheduleQuery->orderBy('start_date')->get();
         
@@ -88,7 +92,7 @@ class SuperadminReportController extends Controller
         $scheduleCount = $scheduleQuery->count();
         $operatorCount = $scheduleQuery->distinct('user_id')->count('user_id');
 
-        $pdf = PDF::loadView('superadmin.report.generate-by-range-pdf', compact('schedules', 'companyName', 'departmentName', 'operatorTypeName', 'scheduleCount', 'operatorCount'));
+        $pdf = PDF::loadView('superadmin.report.generate-by-range-pdf', compact('schedules', 'companyName', 'departmentName', 'operatorTypeName', 'scheduleCount', 'operatorCount', 'startDate', 'endDate'));
 
         return $pdf->stream('jadwal.pdf');
     }

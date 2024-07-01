@@ -15,7 +15,7 @@
 </div>
 <div class="col-md-8 form-group">  
     <select wire:model="selectedDepartment" name="department_id" class="form-select @error('department_id') is-invalid @enderror" id="basicSelect">
-        <option value="" hidden>-- Pilih Departen --</option>
+        <option value="" hidden>-- Pilih Departemen --</option>
         @foreach($departments as $department)
             <option value="{{ $department->id }}" {{ old('department_id') == $department->id ? 'selected' : '' }}>{{ $department->getDepartmentName() }}</option>
         @endforeach

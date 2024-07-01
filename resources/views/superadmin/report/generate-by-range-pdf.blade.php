@@ -47,7 +47,7 @@
   </div>
   <h1>Superadmin</h1>
   <h2>Penjadwalan Shift Kerja Operator</h2>
-  <h2>Data Jadwal Shift Kerja Operator berdasarkan rentang waktu dari {{ \Carbon\Carbon::parse(request('start_date'))->format('d-m-Y') }} hingga {{ \Carbon\Carbon::parse(request('end_date'))->format('d-m-Y') }}</h2>
+  <h2>Data Jadwal Shift Kerja Operator berdasarkan rentang waktu dari {{ \Carbon\Carbon::parse($startDate)->format('d-m-Y') }} hingga {{ \Carbon\Carbon::parse($endDate)->format('d-m-Y') }}</h2>
   <h3>Perusahaan: {{ $companyName }}<br>
   Departemen: {{ $departmentName }}<br>
   Jenis Operator: {{ $operatorTypeName }}<br>

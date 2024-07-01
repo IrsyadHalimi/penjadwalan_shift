@@ -45,7 +45,6 @@ class AdminScheduleController extends Controller
         $startDate = Carbon::createFromFormat('m-d-Y', $request->start_date)->startOfDay()->format('Y-m-d');
         $endDate = Carbon::createFromFormat('m-d-Y', $request->end_date)->endOfDay()->format('Y-m-d');
 
-
         $scheduleId = 'SCH' . Str::random(7);
         $newSchedule = new Schedule();
         $newSchedule->setId($scheduleId);
@@ -85,8 +84,11 @@ class AdminScheduleController extends Controller
             $changedUserNotification = true;
         }
 
-        $schedule->setStartDate($request->input('start_date'));
-        $schedule->setEndDate($request->input('end_date'));
+        $startDate = Carbon::createFromFormat('m-d-Y', $request->start_date)->startOfDay()->format('Y-m-d');
+        $endDate = Carbon::createFromFormat('m-d-Y', $request->end_date)->endOfDay()->format('Y-m-d');
+
+        $schedule->setStartDate($startDate);
+        $schedule->setEndDate($endDate);
         $schedule->setUserId($request->input('user_id'));
         $schedule->setShiftId($request->input('shift_id'));
         $schedule->save();

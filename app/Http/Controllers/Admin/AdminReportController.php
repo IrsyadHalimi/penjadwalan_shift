@@ -78,7 +78,9 @@ class AdminReportController extends Controller
         });
 
         $schedules = $scheduleQuery->orderBy('start_date')->get();
+
         $departmentName = $request->filled('department_id') ? Department::find($request->department_id)->getDepartmentName() : 'Seluruh departemen';
+        
         $operatorTypeName = $request->filled('operator_type_id') ? OperatorType::find($request->operator_type_id)->getOperatorNameType() : 'Seluruh jenis operator';
         
         $scheduleCount = $scheduleQuery->count();

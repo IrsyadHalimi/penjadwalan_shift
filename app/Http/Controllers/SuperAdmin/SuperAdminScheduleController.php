@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Superadmin;
 use App\Notifications\ScheduleUpdatedNotification;
 use App\Notifications\ScheduleChangedNotification;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Http\Request;
@@ -14,6 +13,8 @@ use App\Models\Shift;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+
 
 
 class SuperadminScheduleController extends Controller
@@ -39,13 +40,16 @@ class SuperadminScheduleController extends Controller
 
     public function store(Request $request)
     {
+        $startDate = Carbon::createFromFormat('m-d-Y', $request->start_date)->startOfDay()->format('Y-m-d');
+        $endDate = Carbon::createFromFormat('m-d-Y', $request->end_date)->endOfDay()->format('Y-m-d');
+
         $scheduleId = 'SCH' . Str::random(7);
         $newSchedule = new Schedule();
         $newSchedule->setId($scheduleId);
         $newSchedule->setUserId($request->input('user_id'));
         $newSchedule->setShiftId($request->input('shift_id'));
-        $newSchedule->setStartDate($request->input('start_date'));
-        $newSchedule->setEndDate($request->input('end_date'));
+        $newSchedule->setStartDate($startDate);
+        $newSchedule->setEndDate($endDate);
         $newSchedule->save();
 
         return redirect()->route('superadmin.schedule.index')->with('success', 'Data berhasil ditambahkan.');
@@ -72,8 +76,11 @@ class SuperadminScheduleController extends Controller
             $changedUserNotification = true;
         }
 
-        $schedule->setStartDate($request->input('start_date'));
-        $schedule->setEndDate($request->input('end_date'));
+        $startDate = Carbon::createFromFormat('m-d-Y', $request->start_date)->startOfDay()->format('Y-m-d');
+        $endDate = Carbon::createFromFormat('m-d-Y', $request->end_date)->endOfDay()->format('Y-m-d');
+
+        $schedule->setStartDate($startDate);
+        $schedule->setEndDate($endDate);
         $schedule->setUserId($request->input('user_id'));
         $schedule->setShiftId($request->input('shift_id'));
         $schedule->save();
