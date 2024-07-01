@@ -21,7 +21,9 @@ class SuperadminOperatorTypeSearch extends Component
             $query->where('id', 'like', '%'.$this->searchTerm.'%')
                 ->orWhere('operator_name_type', 'like', '%'.$this->searchTerm.'%')
                 ->orWhere('department_id', 'like', '%'.$this->searchTerm.'%');
-        })->paginate(10);
+        })
+        ->orderBy('operator_name_type')
+        ->paginate(10);
 
         return view('livewire.superadmin-operator-type-search', [
             'operator_types' => $operatorTypes,

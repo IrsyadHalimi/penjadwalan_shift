@@ -61,3 +61,20 @@
     </section>
 </div>
 @endsection
+@section('inline-script')
+<script>
+    $(document).ready(function() {
+        $('.datepicker').datepicker({
+            format: 'mm-dd-yyyy',
+            language: 'id'
+        });
+
+        $('.monthpicker').datepicker({
+            format: 'yyyy-mm',
+            viewMode: 'months', 
+            minViewMode: 'months',
+            language: 'id'
+        });
+    });
+</script>
+@endsection

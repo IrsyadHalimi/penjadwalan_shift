@@ -83,7 +83,6 @@
                                 </div>
                                 <div class="col-md-8 form-group">
                                     <input type="text" class="form-control monthpicker" id="month" name="month" required>
-                                    <input type="text" class="form-control datepicker" id="date" name="date" required>
                                 </div>
                             </div>
                             <livewire:admin-department-operator-dropdown />

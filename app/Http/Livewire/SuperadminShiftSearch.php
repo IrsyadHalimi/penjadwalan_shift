@@ -21,7 +21,9 @@ class SuperadminShiftSearch extends Component
             $query->where('id', 'like', '%'.$this->searchTerm.'%')
                 ->orWhere('shift_name', 'like', '%'.$this->searchTerm.'%')
                 ->orWhere('department_id', 'like', '%'.$this->searchTerm.'%');
-        })->paginate(10);
+        })
+        ->orderBy('shift_name')
+        ->paginate(10);
 
         return view('livewire.superadmin-shift-search', [
             'shifts' => $shifts,

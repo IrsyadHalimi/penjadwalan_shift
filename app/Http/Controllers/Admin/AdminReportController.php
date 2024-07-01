@@ -89,8 +89,6 @@ class AdminReportController extends Controller
         return $pdf->stream('jadwal.pdf'); 
     }
 
-
-
     public function generateByMonth(Request $request)
     {
         $request->validate([

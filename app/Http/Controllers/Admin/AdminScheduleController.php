@@ -13,6 +13,7 @@ use App\Models\Shift;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 
 class AdminScheduleController extends Controller
@@ -41,13 +42,17 @@ class AdminScheduleController extends Controller
 
     public function store(Request $request)
     {
+        $startDate = Carbon::createFromFormat('m-d-Y', $request->start_date)->startOfDay()->format('Y-m-d');
+        $endDate = Carbon::createFromFormat('m-d-Y', $request->end_date)->endOfDay()->format('Y-m-d');
+
+
         $scheduleId = 'SCH' . Str::random(7);
         $newSchedule = new Schedule();
         $newSchedule->setId($scheduleId);
         $newSchedule->setUserId($request->input('user_id'));
         $newSchedule->setShiftId($request->input('shift_id'));
-        $newSchedule->setStartDate($request->input('start_date'));
-        $newSchedule->setEndDate($request->input('end_date'));
+        $newSchedule->setStartDate($startDate);
+        $newSchedule->setEndDate($endDate);
         $newSchedule->save();
 
         return redirect()->route('admin.schedule.index')->with('success', 'Data berhasil ditambahkan.');

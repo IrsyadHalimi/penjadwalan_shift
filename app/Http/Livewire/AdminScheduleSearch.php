@@ -26,7 +26,9 @@ class AdminScheduleSearch extends Component
         })->where(function($query) {
             $query->where('id', 'like', '%'.$this->searchTerm.'%')
                 ->orWhere('user_id', 'like', '%'.$this->searchTerm.'%');
-        })->paginate(10);
+        })
+        ->orderBy('start_date')
+        ->paginate(10);
 
         return view('livewire.admin-schedule-search', [
             'schedules' => $schedules,

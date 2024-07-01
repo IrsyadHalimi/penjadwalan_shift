@@ -19,7 +19,7 @@ class SupervisorOperatorController extends Controller
     $viewData["department_data"] = Department::where('id', $departmentId)->first();
     $viewData["title"] = "Operator - Penjadwalan Shift Kerja Operator";
     $viewData["subtitle"] = "Daftar Operator";
-    $viewData["operator"] = User::where('company_id', $companyId)->where('department_id', $departmentId)->where('role', 'operator')->paginate(10);
+    $viewData["operator"] = User::where('company_id', $companyId)->where('department_id', $departmentId)->where('role', 'operator')->orderBy('full_name')->paginate(10);
     return view('supervisor.operator.index')->with("viewData", $viewData);
   }
 }

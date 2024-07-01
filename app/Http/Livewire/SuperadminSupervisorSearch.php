@@ -24,7 +24,9 @@ class SuperadminSupervisorSearch extends Component
             $query->where('id', 'like', '%'.$this->searchTerm.'%')
                 ->orWhere('full_name', 'like', '%'.$this->searchTerm.'%')
                 ->orWhere('department_id', 'like', '%'.$this->searchTerm.'%');
-        })->paginate(10);
+        })
+        ->orderBy('full_name')
+        ->paginate(10);
 
         return view('livewire.superadmin-supervisor-search', [
             'supervisors' => $supervisors,

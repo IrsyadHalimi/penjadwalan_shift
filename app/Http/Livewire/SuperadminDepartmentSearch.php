@@ -21,7 +21,9 @@ class SuperadminDepartmentSearch extends Component
             $query->where('id', 'like', '%'.$this->searchTerm.'%')
                 ->orWhere('department_name', 'like', '%'.$this->searchTerm.'%')
                 ->orWhere('company_id', 'like', '%'.$this->searchTerm.'%');
-        })->paginate(10);
+        })
+        ->orderBy('department_name')
+        ->paginate(10);
 
         return view('livewire.superadmin-department-search', [
             'departments' => $departments,
