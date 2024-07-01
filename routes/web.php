@@ -80,6 +80,7 @@ Route::middleware('admin')->prefix('admin')->group(function() {
   Route::get('/report', 'App\Http\Controllers\Admin\AdminReportController@index')->name("admin.report.index");
   Route::get('/report/generateAllSchedulePdf', 'App\Http\Controllers\Admin\AdminReportController@generateAllSchedulePdf')->name("admin.report.generateAllSchedulePdf");
   Route::post('/report/generatePdf', 'App\Http\Controllers\Admin\AdminReportController@generatePdf')->name("admin.report.generatePdf");
+  Route::post('/report/generateByMonth', 'App\Http\Controllers\Admin\AdminReportController@generateByMonth')->name("admin.report.generateByMonth");
 });
 
 Route::get('/', 'App\Http\Controllers\HomeController@index')->name("home.index");

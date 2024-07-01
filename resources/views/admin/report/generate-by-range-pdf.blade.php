@@ -52,7 +52,7 @@
   Jenis Operator: {{ $operatorTypeName }}<br>
   Jumlah Jadwal: {{ $scheduleCount }} <br>
   Jumlah Operator: {{ $operatorCount }} <br>
-  Berdasarkan rentang waktu dari {{ \Carbon\Carbon::parse(request('start_date'))->format('d-m-Y') }} hingga {{ \Carbon\Carbon::parse(request('end_date'))->format('d-m-Y') }}</h2><br>
+  Berdasarkan rentang waktu dari {{ \Carbon\Carbon::parse($startDate)->format('d-m-Y') }} hingga {{ \Carbon\Carbon::parse($endDate)->format('d-m-Y') }}</h2><br>
   * Data jadwal ini diurutkan dari tanggal mulai
   <table class="table table-bordered">
     <thead>
