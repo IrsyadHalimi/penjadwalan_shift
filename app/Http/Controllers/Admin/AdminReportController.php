@@ -137,4 +137,35 @@ class AdminReportController extends Controller
     
         return $pdf->stream('jadwal.pdf'); 
     }
+
+    public function generateOperatorPdf(Request $request)
+    {
+        $request->validate([
+            'operator_type_id' => 'nullable|exists:operator_types,id',
+            'department_id' => 'nullable|exists:departments,id',
+        ]);
+
+        $companyId = Auth::user()->company_id;
+        $userQuery = User::where('company_id', $companyId)->where('role', 'operator');
+
+        if ($request->filled('operator_type_id')) {
+            $userQuery->where('operator_type_id', $request->operator_type_id);
+        }
+
+        if ($request->filled('department_id')) {
+            $userQuery->where('department_id', $request->department_id);
+        }
+
+        $operators = $userQuery->orderBy('full_name')->get();
+
+        $operatorTypeName = $request->filled('operator_type_id') ? OperatorType::find($request->operator_type_id)->getOperatorNameType() : 'Seluruh jenis operator';
+        
+        $departmentName = $request->filled('department_id') ? Department::find($request->department_id)->getDepartmentName() : 'Seluruh departemen';
+
+        $operatorCount = $userQuery->count();
+
+        $pdf = PDF::loadView('admin.report.generate-operator-by-range-pdf', compact('operators', 'operatorCount', 'operatorTypeName', 'departmentName'))->setPaper('a4');
+
+        return $pdf->stream('jadwal.pdf'); 
+    }
 }

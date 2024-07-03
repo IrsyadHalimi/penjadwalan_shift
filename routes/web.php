@@ -80,6 +80,7 @@ Route::middleware('admin')->prefix('admin')->group(function() {
   Route::get('/report', 'App\Http\Controllers\Admin\AdminReportController@index')->name("admin.report.index");
   Route::get('/report/generateAllSchedulePdf', 'App\Http\Controllers\Admin\AdminReportController@generateAllSchedulePdf')->name("admin.report.generateAllSchedulePdf");
   Route::post('/report/generatePdf', 'App\Http\Controllers\Admin\AdminReportController@generatePdf')->name("admin.report.generatePdf");
+  Route::post('/report/generateOperatorPdf', 'App\Http\Controllers\Admin\AdminReportController@generateOperatorPdf')->name("admin.report.generateOperatorPdf");
   Route::post('/report/generateByMonth', 'App\Http\Controllers\Admin\AdminReportController@generateByMonth')->name("admin.report.generateByMonth");
 });
 
@@ -151,6 +152,7 @@ Route::middleware('superadmin')->prefix('superadmin')->group(function() {
   Route::get('/report', 'App\Http\Controllers\Superadmin\SuperadminReportController@index')->name("superadmin.report.index");
   Route::get('/report/generateAllSchedulePdf', 'App\Http\Controllers\Superadmin\SuperadminReportController@generateAllSchedulePdf')->name("superadmin.report.generateAllSchedulePdf");
   Route::post('/report/generatePdf', 'App\Http\Controllers\Superadmin\SuperadminReportController@generatePdf')->name("superadmin.report.generatePdf");
+  Route::post('/report/generateOperatorPdf', 'App\Http\Controllers\Superadmin\SuperadminReportController@generateOperatorPdf')->name("superadmin.report.generateOperatorPdf");
 });
 
 Route::middleware('supervisor')->prefix('supervisor')->group(function() {

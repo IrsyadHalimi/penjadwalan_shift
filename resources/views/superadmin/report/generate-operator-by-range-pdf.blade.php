@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-  <title>Jadwal</title>
+  <title>Operator</title>
   <style>
     @font-face {
       font-family: 'Calibri';
@@ -39,7 +39,7 @@
       padding: 8px;
       text-align: left;
     }
-    
+
     .blue-line {
       width: 100%;
       height: 10px;
@@ -53,39 +53,36 @@
   <div class="date">
     Dicetak oleh {{ Auth::user()->full_name }} (superadmin) pada {{ \Carbon\Carbon::now()->format('H:i:s d-m-Y') }}
   </div>
-  <h1>Superadmin</h1>
   <h2>Penjadwalan Shift Kerja Operator</h2>
-  <h2>Data Jadwal Shift Kerja Operator berdasarkan rentang waktu dari {{ \Carbon\Carbon::parse($startDate)->format('d-m-Y') }} hingga {{ \Carbon\Carbon::parse($endDate)->format('d-m-Y') }}</h2>
-  <h3>Perusahaan: {{ $companyName }}<br>
+  <h1>Superadmin</h1>
+  <h2>Data Operator<br>
+  Perusahaan: {{ $companyName }}<br>
   Departemen: {{ $departmentName }}<br>
   Jenis Operator: {{ $operatorTypeName }}<br>
-  Jumlah Jadwal: {{ $scheduleCount }} <br>
-  Jumlah Operator: {{ $operatorCount }}</h3> <br>
-  * Data jadwal ini diurutkan dari tanggal mulai
+  Jumlah Operator: {{ $operatorCount }}</h2><br>
+  * Data operator ini diurutkan dari nama lengkap
   <table class="table table-bordered">
     <thead>
       <tr>
         <th>No</th>
-        <th>ID Jadwal</th>
-        <th>Tanggal Mulai</th>
-        <th>Tanggal Selesai</th>
-        <th>Operator</th>
+        <th>Nama Lengkap</th>
         <th>Nomor Pegawai</th>
-        <th>Shift</th>
+        <th>Email</th>
+        <th>Nomor Telepon</th>
+        <th>Jenis Operator</th>
       </tr>
     </thead>
     <tbody>
       @php $i = 0;
       @endphp
-      @foreach($schedules as $schedule)
+      @foreach($operators as $operator)
       <tr>
         <td>{{ ++$i }}</td>
-        <td>{{ $schedule->id }}</td>
-        <td>{{ \Carbon\Carbon::parse($schedule->start_date)->format('d-m-Y') }}</td>
-        <td>{{ \Carbon\Carbon::parse($schedule->end_date)->format('d-m-Y') }}</td>
-        <td>{{ $schedule->user->full_name }}</td>
-        <td>{{ $schedule->user->employee_id }}</td>
-        <td>{{ $schedule->shift->shift_name }}</td>
+        <td>{{ $operator->full_name }}</td>
+        <td>{{ $operator->employee_id }}</td>
+        <td>{{ $operator->email }}</td>
+        <td>{{ $operator->phone_number }}</td>
+        <td>{{ $operator->operatorType->operator_name_type }}</td>
       </tr>
       @endforeach
     </tbody>

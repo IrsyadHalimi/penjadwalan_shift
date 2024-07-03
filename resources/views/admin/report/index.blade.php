@@ -99,6 +99,34 @@
             </div> 
         </div>
     </div>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header pb-0">
+                <h4 class="card-title">Data Operator</h4>
+                <p>
+                    Cetak seluruh operator ke file PDF
+                </p>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <div>
+                    <form class="form form-horizontal" action="{{ route('admin.report.generateOperatorPdf') }}" method="post">
+                        @csrf
+                        <div class="form-body">
+                            <livewire:admin-department-operator-dropdown />
+                            @livewireScripts
+                            <div class="row">
+                                <div class="col-sm-12 d-flex justify-content-end">
+                                    <button type="reset" class="btn btn-light-secondary me-1">Reset</button>
+                                    <button type="submit" class="btn btn-primary"><i class="bi bi-download"></i> Cetak Operator</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
 @section('inline-script')

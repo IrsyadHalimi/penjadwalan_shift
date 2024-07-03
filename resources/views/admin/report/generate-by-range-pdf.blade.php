@@ -46,16 +46,6 @@
       background-color: #8dc6ff;
       margin-bottom: 10px;
     }
-    
-    .footer {
-        width: 100%;
-        text-align: center;
-        position: fixed;
-        bottom: 0px;
-    }
-    .pagenum:before {
-        content: counter(page);
-    }
   </style>
 </head>
 <body>
@@ -98,9 +88,5 @@
       @endforeach
     </tbody>
   </table>
-  <div class="footer">
-        <p><span class="pagenum"></span></p>
-    <div class="blue-line"></div>
-    </div>
 </body>
 </html>
