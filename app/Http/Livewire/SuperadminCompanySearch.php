@@ -21,7 +21,7 @@ class SuperadminCompanySearch extends Component
             $query->where('id', 'like', '%'.$this->searchTerm.'%')
                 ->orWhere('company_name', 'like', '%'.$this->searchTerm.'%');
         })
-        ->orderBy('company_nameS')
+        ->orderBy('company_name')
         ->paginate(10);
 
         return view('livewire.superadmin-company-search', [

@@ -40,7 +40,7 @@
                                             <input type="text" name="employee_id" value="{{ $viewData['supervisor']->getEmployeeId() }}" id="employeeId-horizontal" class="form-control">
                                         </div>
                                     </div>
-                                        <livewire:superadmin-department-supervisor-dropdown-edit :userId="$viewData['supervisor']->getId()" />
+                                    <livewire:superadmin-department-supervisor-dropdown-edit :userId="$viewData['supervisor']->getId()" />
                                         @livewireScripts
                                     <div class="row">
                                         <div class="col-md-4">

@@ -27,7 +27,7 @@ class Shift extends Model
                 'shift_name' => "required|string|max:50",
                 'department_id' => "required",
                 'start_time' => "required|date_format:H:i",
-                'end_time' => "required|date_format:H:i|after:start_time",
+                'end_time' => "required|date_format:H:i",
             ], [
                 'shift_name.required' => 'Nama shift harus diisi.',
                 'shift_name.string' => 'Nama shift harus berupa teks.',

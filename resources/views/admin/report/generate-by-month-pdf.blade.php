@@ -4,77 +4,105 @@
     <meta charset="utf-8">
     <title>Laporan Jadwal</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 8px;
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .header, .footer {
-            width: 100%;
-            text-align: center;
-            position: fixed;
-        }
-        .header {
-            top: 0px;
-        }
-        .footer {
-            bottom: 0px;
-        }
-        .pagenum:before {
-            content: counter(page);
-        }
-    </style>
+    @font-face {
+      font-family: 'Calibri';
+      src: url('{{ storage_path('fonts/Calibri.ttf') }}') format('truetype');
+    }
+
+    body {
+      font-family: 'Calibri', sans-serif;
+      font-size: 12px;
+    }
+
+    h1 {
+      font-size: 18px;
+    }
+
+    .date {
+      font-size: 12px;
+      float: right;
+      margin-top: 5px;
+    }
+    
+    h2 {
+      font-size: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+    
+    .blue-line {
+      width: 100%;
+      height: 10px;
+      background-color: #8dc6ff;
+      margin-bottom: 10px;
+    }
+
+    .footer {
+        width: 100%;
+        text-align: center;
+        position: fixed;
+        bottom: 0px;
+    }
+    .pagenum:before {
+        content: counter(page);
+    }
+  </style>
 </head>
 <body>
-
-    <div>
-        <h1>Laporan Jadwal Bulanan</h1>
-        <h1>Bulan: {{ $selectedMonth }}</h1>
-        <p>Departemen: {{ $departmentName }}</p>
-        <p>Jenis Operator: {{ $operatorTypeName }}</p>
-        <p>Total Jadwal: {{ $scheduleCount }}</p>
-        <p>Total Operator: {{ $operatorCount }}</p>
+    <div class="blue-line"></div>
+    <div class="date">
+        Dicetak oleh {{ Auth::user()->full_name }} (admin) pada {{ \Carbon\Carbon::now()->format('H:i:s d-m-Y') }}
     </div>
-
-    <div class="content">
-        <table>
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Nama Operator</th>
-                    <th>Shift</th>
-                    <th>Tanggal Mulai</th>
-                    <th>Tanggal Selesai</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($schedules as $index => $schedule)
-                    <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td>{{ $schedule->user->full_name }}</td>
-                        <td>{{ $schedule->shift->shift_name }}</td>
-                        <td>{{ \Carbon\Carbon::parse($schedule->start_date)->format('d-m-Y') }}</td>
-                        <td>{{ \Carbon\Carbon::parse($schedule->end_date)->format('d-m-Y') }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-
+    <h2>Penjadwalan Shift Kerja Operator</h2>
+    <h1>{{ Auth::user()->company->company_name ?? 'N/A' }}</h1>
+    <h2>Data Jadwal Bulanan<br>
+    Bulan: {{ $selectedMonth }}<br>
+    Departemen: {{ $departmentName }}<br>
+    Jenis Operator: {{ $operatorTypeName }}<br>
+    Jumlah Jadwal: {{ $scheduleCount }} <br>
+    Jumlah Operator: {{ $operatorCount }}</h2><br>
+    * Data jadwal ini diurutkan dari tanggal mulai
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>No</th>
+            <th>Tanggal Mulai</th>
+            <th>Tanggal Selesai</th>
+            <th>Nama Operator</th>
+            <th>Nomor Pegawai</th>
+            <th>Shift</th>
+        </tr>
+        </thead>
+        <tbody>
+        @php $i = 0;
+        @endphp
+        @foreach($schedules as $schedule)
+        <tr>
+            <td>{{ ++$i }}</td>
+            <td>{{ \Carbon\Carbon::parse($schedule->start_date)->format('d-m-Y') }}</td>
+            <td>{{ \Carbon\Carbon::parse($schedule->end_date)->format('d-m-Y') }}</td>
+            <td>{{ $schedule->user->full_name }}</td>
+            <td>{{ $schedule->user->employee_id }}</td>
+            <td>{{ $schedule->shift->shift_name }}</td>
+        </tr>
+        @endforeach
+        </tbody>
+    </table>
     <div class="footer">
-        <p>Halaman <span class="pagenum"></span></p>
+        <p><span class="pagenum"></span></p>
+    <div class="blue-line"></div>
     </div>
-
 </body>
 </html>

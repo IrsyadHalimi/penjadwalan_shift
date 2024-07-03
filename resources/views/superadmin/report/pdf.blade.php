@@ -39,9 +39,27 @@
       padding: 8px;
       text-align: left;
     }
+    
+    .blue-line {
+      width: 100%;
+      height: 10px;
+      background-color: #8dc6ff;
+      margin-bottom: 10px;
+    }
+
+    .footer {
+        width: 100%;
+        text-align: center;
+        position: fixed;
+        bottom: 0px;
+    }
+    .pagenum:before {
+        content: counter(page);
+    }
   </style>
 </head>
 <body>
+  <div class="blue-line"></div>
   <div class="date">
     Dicetak oleh {{ Auth::user()->full_name }} (superadmin) pada {{ \Carbon\Carbon::now()->format('d-m-Y') }}
   </div>
@@ -57,8 +75,7 @@
         <th>Tanggal Mulai</th>
         <th>Tanggal Selesai</th>
         <th>Operator</th>
-        <th>ID Perusahaan</th>
-        <th>ID Departemen</th>
+        <th>Nomor Pegawai</th>
         <th>Shift</th>
       </tr>
     </thead>
@@ -72,12 +89,15 @@
         <td>{{ \Carbon\Carbon::parse($schedule->start_date)->format('d-m-Y') }}</td>
         <td>{{ \Carbon\Carbon::parse($schedule->end_date)->format('d-m-Y') }}</td>
         <td>{{ $schedule->user->full_name }}</td>
-        <td>{{ $schedule->user->company_id }}</td>
-        <td>{{ $schedule->user->department_id }}</td>
+        <td>{{ $schedule->user->employee_id }}</td>
         <td>{{ $schedule->shift->shift_name }}</td>
       </tr>
       @endforeach
     </tbody>
   </table>
+    <div class="footer">
+        <p><span class="pagenum"></span></p>
+    <div class="blue-line"></div>
+    </div>
 </body>
 </html>

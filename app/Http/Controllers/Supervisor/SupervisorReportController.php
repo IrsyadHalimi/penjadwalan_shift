@@ -97,4 +97,29 @@ class SupervisorReportController extends Controller
 
         return $pdf->stream('jadwal.pdf'); 
     } 
+
+    public function generateOperatorPdf(Request $request)
+    {
+        $request->validate([
+            'operator_type_id' => 'nullable|exists:operator_types,id',
+        ]);
+
+        $companyId = Auth::user()->company_id;
+        $departmentId = Auth::user()->department_id;
+        $userQuery = User::where('company_id', $companyId)->where('department_id', $departmentId)->where('role', 'operator');
+
+        if ($request->filled('operator_type_id')) {
+            $userQuery->where('operator_type_id', $request->operator_type_id);
+        }
+
+        $operators = $userQuery->orderBy('full_name')->get();
+
+        $operatorTypeName = $request->filled('operator_type_id') ? OperatorType::find($request->operator_type_id)->getOperatorNameType() : 'Seluruh jenis operator';
+
+        $operatorCount = $userQuery->count();
+
+        $pdf = PDF::loadView('supervisor.report.generate-operator-by-range-pdf', compact('operators', 'operatorCount', 'operatorTypeName'))->setPaper('a4');
+
+        return $pdf->stream('jadwal.pdf'); 
+    } 
 }

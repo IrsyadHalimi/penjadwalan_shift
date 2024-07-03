@@ -31,7 +31,7 @@
                                             <label for="first-name-horizontal">Nama Lengkap</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" name="full_name" class="form-select @error('department_id') is-invalid @enderror" id="basicSelect" value="{{ old('full_name') }}" required autocomplete="full_name" autofocus>
+                                            <input type="text" name="full_name" class="form-control @error('department_id') is-invalid @enderror" value="{{ old('full_name') }}" required autocomplete="full_name" autofocus>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="employeeId-horizontal">Nomor Pegawai</label>

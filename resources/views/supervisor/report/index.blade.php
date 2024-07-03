@@ -77,6 +77,43 @@
             </div>
         </div>
     </div>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header pb-0">
+                <h4 class="card-title">Data Operator</h4>
+                <p>
+                    Cetak seluruh operator ke file PDF
+                </p>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <div>
+                    <form class="form form-horizontal" action="{{ route('supervisor.report.generateOperatorPdf') }}" method="post">
+                        @csrf
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="department-horizontal">Pilih Jenis Operator</label>
+                                </div>
+                                <div class="col-md-8 form-group">  
+                                    <select id="operator_type_id" class="form-select @error('operator_type_id') is-invalid @enderror" name="operator_type_id"  id="basicSelect">
+                                        <option value="" hidden>-- Pilih Jenis Operator --</option>
+                                        @foreach($viewData['operator_type'] as $operator_type)
+                                        <option value="{{ $operator_type->getId() }}">{{ $operator_type->getOperatorNameType() }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-sm-12 d-flex justify-content-end">
+                                    <button type="reset" class="btn btn-light-secondary me-1">Reset</button>
+                                    <button type="submit" class="btn btn-primary"><i class="bi bi-download"></i> Cetak Operator</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
 @section('inline-script')
