@@ -25,7 +25,7 @@ class AdminOperatorSearch extends Component
         })->where(function($query) {
             $query->where('id', 'like', '%'.$this->searchTerm.'%')
                 ->orWhere('full_name', 'like', '%'.$this->searchTerm.'%')
-                ->orWhere('department_id', 'like', '%'.$this->searchTerm.'%');
+                ->orWhere('employee_id', 'like', '%'.$this->searchTerm.'%');
         })
         ->orderBy('full_name')
         ->paginate(10);

@@ -18,7 +18,6 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>ID</th>
                                 <th>Nama Operator</th>
                                 <th>Nomor Pegawai</th>
                                 <th>Jenis Operator</th>
@@ -33,7 +32,6 @@
                             @foreach ($viewData['operator'] as $operators)
                             <tr>
                                 <td>{{ ++$i }}</td>
-                                <td class="text-bold-500">{{ $operators->getId() }}</td>
                                 <td>{{ $operators->getName() }}</td>
                                 <td>{{ $operators->getEmployeeId() }}</td>
                                 <td>{{ $operators->operatorType ? $operators->operatorType->operator_name_type : 'N/A' }}</td>

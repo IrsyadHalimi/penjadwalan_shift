@@ -18,7 +18,6 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>ID</th>
                                 <th>Nama Supervisor</th>
                                 <th>Nomor Pegawai</th>
                                 <th>Email</th>
@@ -32,7 +31,6 @@
                             @foreach ($viewData['supervisor'] as $supervisors)
                             <tr>
                                 <td>{{ ++$i }}</td>
-                                <td class="text-bold-500">{{ $supervisors->getId() }}</td>
                                 <td>{{ $supervisors->getName() }}</td>
                                 <td>{{ $supervisors->getEmployeeId() }}</td>
                                 <td>{{ $supervisors->getEmail() }}</td>
