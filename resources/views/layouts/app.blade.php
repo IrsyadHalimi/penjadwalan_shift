@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf_token" content="{{ csrf_token() }}">
     <title>{{ $viewData['title'] }}</title>
-    <link rel="shortcut icon" href="{{ asset('assets/static/images/logo/favicon.png') }}" type="icon">
-    <link rel="stylesheet" href="{{ asset('assets/compiled/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/compiled/css/app-dark.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/compiled/css/iconly.css') }}">
+    <link rel="shortcut icon" href="{{ secure_asset('assets/static/images/logo/favicon.png') }}" type="icon">
+    <link rel="stylesheet" href="{{ secure_asset('assets/compiled/css/app.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('assets/compiled/css/app-dark.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('assets/compiled/css/iconly.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('assets/extensions/flatpickr/flatpickr.min.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('assets/extensions/flatpickr/flatpickr.min.css') }}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css"
         integrity="sha512-O03ntXoVqaGUTAeAmvQ2YSzkCvclZEcPQu1eqloPaHfJ5RuNGiS4l+3duaidD801P50J28EHyonCV06CUlTSag=="
@@ -24,7 +24,7 @@
 </head>
 
 <body>
-    <script src="{{ asset('assets/static/js/initTheme.js') }}"></script>
+    <script src="{{ secure_asset('assets/static/js/initTheme.js') }}"></script>
     <!-- header -->
     <div id="app">
         <div id="sidebar">
@@ -371,13 +371,13 @@
 @endif
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
 </script>
-<script src="{{ asset('assets/static/js/components/dark.js') }}"></script>
-<script src="{{ asset('assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
-<script src="{{ asset('assets/compiled/js/app.js') }}"></script>
-<script src="{{ asset('assets/static/js/pages/dashboard.js') }}"></script>
+<script src="{{ secure_asset('assets/static/js/components/dark.js') }}"></script>
+<script src="{{ secure_asset('assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+<script src="{{ secure_asset('assets/compiled/js/app.js') }}"></script>
+<script src="{{ secure_asset('assets/static/js/pages/dashboard.js') }}"></script>
         
-<script src="{{ asset('assets/extensions/flatpickr/flatpickr.min.js') }}"></script>
-<script src="{{ asset('assets/static/js/pages/date-picker.js') }}"></script>
+<script src="{{ secure_asset('assets/extensions/flatpickr/flatpickr.min.js') }}"></script>
+<script src="{{ secure_asset('assets/static/js/pages/date-picker.js') }}"></script>
 
 @stack('scripts')
 </body>
