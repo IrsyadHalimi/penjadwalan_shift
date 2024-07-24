@@ -33,13 +33,13 @@
                                         <label for="start_date-horizontal">Tanggal Mulai</label>
                                     </div>
                                     <div class="col-md-8 form-group">
-                                        <input type="text" class="form-control datepicker" id="date" name="start_date" required>
+                                        <input type="text" class="form-control datepicker" id="date" name="start_date" placeholder="--" required>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="end_date-horizontal">Tanggal Selesai</label>
                                     </div>
                                     <div class="col-md-8 form-group">
-                                        <input type="text" class="form-control datepicker" id="date" name="end_date" required>
+                                        <input type="text" class="form-control datepicker" id="date" name="end_date" placeholder="--" required>
                                     </div>
                                     <div class="col-sm-12 d-flex justify-content-end">
                                         <button type="submit" class="btn btn-primary me-1 mb-1">Simpan</button>

@@ -100,6 +100,13 @@
                 <a class="nav-link active" href="{{ route('register') }}"><p class='text-gray-600'>Daftarkan Perusahaan Anda <strong>Disini!</strong></p></a>
                 </div>
             </div>
+            <footer>
+                <div class="footer clearfix mb-0 text-muted">
+                    <div class="align-item-center">
+                        <p>Crafted with love by <a href="https://saugi.me">Saugi</a></p>
+                    </div>
+                </div>
+            </footer>
         </div>
     </div>
 </body>

@@ -47,13 +47,13 @@
                                     <label for="start_date-horizontal">Jadwal Dari Tanggal</label>
                                 </div>
                                 <div class="col-md-8 form-group">
-                                    <input type="text" class="form-control datepicker" id="date" name="start_date" required>
+                                    <input type="text" class="form-control datepicker" id="date" name="start_date" placeholder="--" required>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="end_date-horizontal">Hingga Tanggal</label>
                                 </div>
                                 <div class="col-md-8 form-group">
-                                    <input type="text" class="form-control datepicker" id="date" name="end_date" required>
+                                    <input type="text" class="form-control datepicker" id="date" name="end_date" placeholder="--" required>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="department-horizontal">Pilih Jenis Operator</label>

@@ -12,6 +12,7 @@ use App\Models\OperatorType;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use PDF;
+use Carbon\Carbon;
 
 
 class OperatorScheduleController extends Controller
@@ -83,8 +84,8 @@ class OperatorScheduleController extends Controller
     public function generatePdf(Request $request)
     {
         $request->validate([
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
+            'start_date' => 'nullable|date_format:m-d-Y',
+            'end_date' => 'nullable|date_format:m-d-Y|after_or_equal:start_date',
         ]);
 
         $departmentId = Auth::user()->department_id;
@@ -92,9 +93,12 @@ class OperatorScheduleController extends Controller
         $userId = User::where('operator_type_id', $operatorTypeId)->pluck('id')->toArray();
         $shiftId = Shift::where('department_id', $departmentId)->pluck('id')->toArray();
 
-        $schedules = Schedule::where(function($query) use ($request) {
-            $query->whereBetween('start_date', [$request->start_date, $request->end_date])
-            ->orWhereBetween('end_date', [$request->start_date, $request->end_date]);
+        $startDate = Carbon::createFromFormat('m-d-Y', $request->start_date)->startOfDay()->toDateString();
+        $endDate = Carbon::createFromFormat('m-d-Y', $request->end_date)->endOfDay()->toDateString();
+
+        $schedules = Schedule::where(function($query) use ($startDate, $endDate) {
+            $query->whereBetween('start_date', [$startDate, $endDate])
+            ->orWhereBetween('end_date', [$startDate, $endDate]);
         })->whereIn('shift_id', $shiftId)
         ->whereIn('user_id', $userId)
         ->with('user')
@@ -103,15 +107,15 @@ class OperatorScheduleController extends Controller
         ->get();
 
         $scheduleCount = $schedules->count();
-        $operatorCount = Schedule::where(function($query) use ($request) {
-            $query->whereBetween('start_date', [$request->start_date, $request->end_date])
-            ->orWhereBetween('end_date', [$request->start_date, $request->end_date]);
+        $operatorCount = Schedule::where(function($query) use ($startDate, $endDate) {
+            $query->whereBetween('start_date', [$startDate, $endDate])
+            ->orWhereBetween('end_date', [$startDate, $endDate]);
         })->whereIn('shift_id', $shiftId)
         ->whereIn('user_id', $userId)
         ->distinct('user_id')
         ->count('user_id');
 
-        $pdf = PDF::loadView('operator.schedule.pdf', compact('schedules', 'scheduleCount', 'operatorCount'));
+        $pdf = PDF::loadView('operator.schedule.pdf', compact('schedules', 'scheduleCount', 'operatorCount', 'startDate', 'endDate'));
 
         return $pdf->stream('jadwal.pdf');
     }

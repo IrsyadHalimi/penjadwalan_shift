@@ -44,13 +44,13 @@
                                     <label for="start_date-horizontal">Jadwal Dari Tanggal</label>
                                 </div>
                                 <div class="col-md-8 form-group">
-                                    <input type="text" class="form-control datepicker" id="date" name="start_date" required>
+                                    <input type="text" class="form-control datepicker" id="date" name="start_date" placeholder="--" required>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="end_date-horizontal">Hingga Tanggal</label>
                                 </div>
                                 <div class="col-md-8 form-group">
-                                    <input type="text" class="form-control datepicker" id="date" name="end_date" required>
+                                    <input type="text" class="form-control datepicker" id="date" name="end_date" placeholder="--" required>
 
                                 </div>
                                 </div>
@@ -82,7 +82,7 @@
                                     <label for="month-horizontal">Pilih Bulan</label>
                                 </div>
                                 <div class="col-md-8 form-group">
-                                    <input type="text" class="form-control monthpicker" id="month" name="month" required>
+                                    <input type="text" class="form-control monthpicker" id="month" name="month" placeholder="--" required>
                                 </div>
                             </div>
                             <livewire:admin-department-operator-dropdown />
