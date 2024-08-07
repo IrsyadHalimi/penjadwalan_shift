@@ -156,6 +156,8 @@ Route::middleware('superadmin')->prefix('superadmin')->group(function() {
 });
 
 Route::middleware('supervisor')->prefix('supervisor')->group(function() {
+  Route::get('/dashboard', 'App\Http\Controllers\Supervisor\SupervisorDashboardController@index')->name('supervisor.dashboard.index');
+  
   Route::get('/schedule', [SupervisorScheduleController::class, 'index'])->name('supervisor.schedule.index');
   Route::get('/schedule/list', [SupervisorScheduleController::class, 'listSchedule'])->name('supervisor.schedule.list');
   Route::get('/schedule/create', [SupervisorScheduleController::class, 'create'])->name('supervisor.schedule.create');

@@ -174,6 +174,12 @@
                                 </li>
                                 @elseif ($role === 'supervisor')
                                 <li class="sidebar-item  ">
+                                    <a href="{{ route('supervisor.dashboard.index') }}" class='sidebar-link'>
+                                        <i class="bi bi-grid-fill"></i>
+                                        <span>Dasbor Supervisor</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item  ">
                                     <a href="{{ route('supervisor.schedule.index') }}" class='sidebar-link'>
                                         <i class="bi bi-calendar4-week"></i>
                                         <span>Jadwal</span>
