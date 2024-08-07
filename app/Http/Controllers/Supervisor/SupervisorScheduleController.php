@@ -80,7 +80,7 @@ class SupervisorScheduleController extends Controller
         $operatorTypeId = OperatorType::where('department_id', $departmentId)->pluck('id')->toArray();
         $userId = User::where('role', 'operator')->where('department_id', $departmentId)->pluck('id')->toArray();
        
-        $users = User::whereIn('id', $userId)->get();
+        $users = User::whereIn('id', $userId)->orderBy('operator_type_id')->orderBy('full_name')->get();
         $operatorTypes = User::whereIn('operator_type_id', $operatorTypeId)->get();
         $shifts = Shift::whereIn('id', $shiftId)->get();
         return view('supervisor.schedule.schedule-form', [
@@ -196,7 +196,7 @@ class SupervisorScheduleController extends Controller
         $schedule->delete();
         return response()->json([
             'status' => 'success',
-            'message' => 'Delete data successfully'
+            'message' => 'Data berhasil dihapus'
         ]);
     }
 }
