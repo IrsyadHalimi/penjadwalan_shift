@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf_token" content="{{ csrf_token() }}">
     <title>Penjadwalan Shift Kerja Operator</title>
-    <!-- <link href="{{ secure_asset('css/bootstrap.min.css') }}" rel="stylesheet"> -->
+    <!-- <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet"> -->
     <!-- <link href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css' rel='stylesheet'> -->
-    <link rel="shortcut icon" href="{{ secure_asset('assets/compiled/svg/favicon.svg') }}" type="image/x-icon">
-    <link rel="stylesheet" href="{{ secure_asset('assets/compiled/css/app.css') }}">
-    <link rel="stylesheet" href="{{ secure_asset('assets/compiled/css/app-dark.css') }}">
-    <link rel="stylesheet" href="{{ secure_asset('assets/compiled/css/iconly.css') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/compiled/svg/favicon.svg') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ asset('assets/compiled/css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/compiled/css/app-dark.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/compiled/css/iconly.css') }}">
 
-    <link rel="stylesheet" href="{{ secure_asset('assets/extensions/flatpickr/flatpickr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/extensions/flatpickr/flatpickr.min.css') }}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css"
         integrity="sha512-O03ntXoVqaGUTAeAmvQ2YSzkCvclZEcPQu1eqloPaHfJ5RuNGiS4l+3duaidD801P50J28EHyonCV06CUlTSag=="
