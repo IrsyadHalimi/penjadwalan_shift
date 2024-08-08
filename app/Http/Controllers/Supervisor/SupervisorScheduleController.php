@@ -115,7 +115,7 @@ class SupervisorScheduleController extends Controller
         $shiftId = Shift::where('department_id', $departmentId)->pluck('id')->toArray();
         $userId = User::where('role', 'operator')->where('department_id', $departmentId)->pluck('id')->toArray();
        
-        $users = User::whereIn('id', $userId)->get();
+        $users = User::whereIn('id', $userId)->orderBy('operator_type_id')->orderBy('full_name')->get();
         $shifts = Shift::whereIn('id', $shiftId)->get();
         return view('supervisor.schedule.schedule-form-edit', [
             'data' => $schedule, 
